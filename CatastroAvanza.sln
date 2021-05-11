@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatastroAvanza.Site", "CatastroAvanza\CatastroAvanza.Site.csproj", "{CAD25AF1-4982-4C3E-9B39-434A6C7EBCFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgreSQL.AspNet.Identity.EntityFramework", "PostgreSQL.AspNet.Identity.EntityFramework\PostgreSQL.AspNet.Identity.EntityFramework.csproj", "{C77DF7FF-9BBE-4860-BB86-02BB9A7ED65F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAD25AF1-4982-4C3E-9B39-434A6C7EBCFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD25AF1-4982-4C3E-9B39-434A6C7EBCFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD25AF1-4982-4C3E-9B39-434A6C7EBCFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD25AF1-4982-4C3E-9B39-434A6C7EBCFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C77DF7FF-9BBE-4860-BB86-02BB9A7ED65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C77DF7FF-9BBE-4860-BB86-02BB9A7ED65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C77DF7FF-9BBE-4860-BB86-02BB9A7ED65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C77DF7FF-9BBE-4860-BB86-02BB9A7ED65F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9E83C94D-9402-47AA-A01F-C086ED3AC543}
+	EndGlobalSection
+EndGlobal
