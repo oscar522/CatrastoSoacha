@@ -14,6 +14,9 @@ namespace CatastroAvanza.Mapeadores
             ICollection<R2_2021_69295_CONSTRUCCIONES> construcciones2021, 
             ICollection<R1_2020_66069_PREDIOS> predios2020)
         {
+            if (predio2021 == null)
+                return new DataForm1Model();
+
             DataForm1Model result = new DataForm1Model
             {
                 id = predio2021.id,
