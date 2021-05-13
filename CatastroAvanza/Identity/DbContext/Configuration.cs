@@ -9,7 +9,7 @@ namespace CatastroAvanza.Identity.DbContext
     /// Para realizar modificaciones en la estructura de la base de datos
     /// Add-Migration {Nombre de la nueva migracion} -ConfigurationTypeName CatastroAvanza.Identity.DbContext.Configuration -ProjectName CatastroAvanza.Site
     /// Para actualizar la estructura de la base de datos
-    /// Update-Database
+    /// Update-Database -ConfigurationTypeName CatastroAvanza.Identity.DbContext.Configuration
     /// </summary>
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationIdentityDbContext>
     {

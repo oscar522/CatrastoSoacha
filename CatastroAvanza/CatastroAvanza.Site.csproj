@@ -47,6 +47,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=6.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.6.2.0\lib\netstandard2.0\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=6.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.6.0.0\lib\net472\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -72,26 +78,26 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.4.1.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.1.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.4.1.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.2.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.1.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.2.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.1.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.2.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql, Version=5.0.4.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.5.0.4\lib\netstandard2.0\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=5.0.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.5.0.5\lib\netstandard2.0\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -101,6 +107,9 @@
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
@@ -195,6 +204,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Global.asax.cs">
@@ -207,6 +217,8 @@
       <DependentUpon>202105050434313_Inicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Identity\Model\ApplicationUser.cs" />
+    <Compile Include="Mapeadores\IMapeadoresApplicacion.cs" />
+    <Compile Include="Mapeadores\MapeadoresApplicacion.cs" />
     <Compile Include="Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\AccountViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\AccountViewModels\RegisterViewModel.cs" />
@@ -214,12 +226,39 @@
     <Compile Include="Models\AccountViewModels\SendCodeViewModel.cs" />
     <Compile Include="Models\AccountViewModels\VerifyCodeViewModel.cs" />
     <Compile Include="Models\AccountViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\Dashboard\DataForm1Model.cs" />
+    <Compile Include="Models\Dashboard\R1_2020_66069_PREDIOSModel.cs" />
+    <Compile Include="Models\Dashboard\R2_2021_69295_CONSTRUCCIONESModel.cs" />
     <Compile Include="Models\GeneralConfigurations.cs" />
     <Compile Include="Models\SidebarItem.cs" />
     <Compile Include="Models\SidebarUserLevel.cs" />
+    <Compile Include="Negocio\Contratos\IDataForm1Logic.cs" />
+    <Compile Include="Negocio\Implementaciones\DataForm1Logic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\NpgSqlConfiguration.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctciudad_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctdepto_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctpais_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\R1_2020_66069_PREDIOS_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\R1_2021_69295_PREDIOS_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\R2_2021_69295_CONSTRUCCIONES_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ApplicationDbContext.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\ctciudad.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\ctdepto.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\ctpais.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\R1_2020_66069_PREDIOS.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\R1_2021_69295_PREDIOS.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\R2_2021_69295_CONSTRUCCIONES.cs" />
+    <Compile Include="Repositorio\DBContexto\Interface\IApplicationDbContext.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202105120406305_Inicial.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202105120406305_Inicial.designer.cs">
+      <DependentUpon>202105120406305_Inicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202105120530063_Add_tbls_pais_departamento_ciudad.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202105120530063_Add_tbls_pais_departamento_ciudad.designer.cs">
+      <DependentUpon>202105120530063_Add_tbls_pais_departamento_ciudad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1092,11 +1131,11 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Layout\Navbar.cshtml" />
     <Content Include="Views\Layout\Sidebar.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="Repositorio\Entidades\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -1118,6 +1157,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Identity\DbContext\Migraciones\202105050434313_Inicial.resx">
       <DependentUpon>202105050434313_Inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202105120406305_Inicial.resx">
+      <DependentUpon>202105120406305_Inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202105120530063_Add_tbls_pais_departamento_ciudad.resx">
+      <DependentUpon>202105120530063_Add_tbls_pais_departamento_ciudad.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

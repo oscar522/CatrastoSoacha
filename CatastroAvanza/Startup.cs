@@ -13,11 +13,11 @@ namespace CatastroAvanza
             ConfigureAuth(app);
 
             // CreateDatabaseIfNotExists is the default initializer if not specified
-            Database.SetInitializer<ApplicationIdentityDbContext>(new CreateDatabaseIfNotExists<ApplicationIdentityDbContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<ApplicationIdentityDbContext>());
 
             // NullDatabaseInitializer will turn off migration. 
             // You need to manually create the data tables
-            //Database.SetInitializer<ApplicationDbContext>(new NullDatabaseInitializer<ApplicationDbContext>());
+            Database.SetInitializer(new NullDatabaseInitializer<ApplicationIdentityDbContext>());
         }
     }
 }
