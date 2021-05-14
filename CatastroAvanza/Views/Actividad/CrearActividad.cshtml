@@ -1,0 +1,251 @@
+﻿@model ActividadGeneralViewModel
+@{
+    ViewBag.Title = "CrearActividad";
+}
+
+<h2>CrearActividad</h2>
+<hr />
+<div class="form-horizontal">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h5>General</h5>  </div>
+                <div class="card-body">
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.NumeroPredial)
+                        @Html.EditorFor(m => m.NumeroPredial, new { htmlAttributes = new { @class = "form-control" } })                                              
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Ejecutor)
+                        @Html.DropDownListFor(m => m.Ejecutor, Model.Ejecutores, new { @class = "form-control" } )
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Coordinador)
+                        @Html.DropDownListFor(m => m.Ejecutor, Model.Coordinadores, new { @class = "form-control" } )
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Fecha)
+                        @Html.EditorFor(m => m.Fecha, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h5>Geograficas</h5>  </div>
+                <div class="card-body">
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Geografica.Omision)
+                        @Html.RadioButtonFor(m => m.Geografica.Omision, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Geografica.DuplicadoGeograficamente)
+                        @Html.RadioButtonFor(m => m.Geografica.DuplicadoGeograficamente, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Geografica.NumeroDuplicados)
+                        @Html.EditorFor(m => m.Geografica.NumeroDuplicados, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Geografica.RequiereVisitaGeografica)
+                        @Html.RadioButtonFor(m => m.Geografica.RequiereVisitaGeografica, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Geografica.Observacion)
+                        @Html.TextAreaFor(m => m.Geografica.Observacion, new { @class = "form-control"  })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h5>Folio</h5>  </div>
+                <div class="card-body">
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Folio.Fmi)
+                        @Html.EditorFor(m => m.Folio.Fmi, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Folio.FmiCorrecto)
+                        @Html.EditorFor(m => m.Folio.FmiCorrecto, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Folio.FmiDuplicados)
+                        @Html.RadioButtonFor(m => m.Folio.FmiDuplicados, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Folio.NumeroFmiDuplicados)
+                        @Html.RadioButtonFor(m => m.Folio.NumeroFmiDuplicados, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Folio.VerificacionFmi)
+                        @Html.RadioButtonFor(m => m.Folio.VerificacionFmi, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h5>Nomenclatura</h5>  </div>
+                <div class="card-body">
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Nomenclatura.CertificadoNomenclatura)
+                        @Html.EditorFor(m => m.Nomenclatura.CertificadoNomenclatura, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Nomenclatura.NomenclaturaAActualizar)
+                        @Html.EditorFor(m => m.Nomenclatura.NomenclaturaAActualizar, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Nomenclatura.NomenclaturaPredio)
+                        @Html.RadioButtonFor(m => m.Nomenclatura.NomenclaturaPredio, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h5>Tramites</h5>  </div>
+                <div class="card-body">
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Tramite.Desenglobe)
+                        @Html.RadioButtonFor(m => m.Tramite.Desenglobe, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Tramite.Englobe)
+                        @Html.RadioButtonFor(m => m.Tramite.Englobe, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Tramite.ReglamentoPH)
+                        @Html.RadioButtonFor(m => m.Tramite.ReglamentoPH, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Tramite.UnidadesReglamento)
+                        @Html.EditorFor(m => m.Tramite.UnidadesReglamento, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Tramite.Unidadestramite)
+                        @Html.EditorFor(m => m.Tramite.Unidadestramite, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h5>Terreno</h5>  </div>
+                <div class="card-body">
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.AreaTerreno)
+                        @Html.EditorFor(m => m.Terreno.AreaTerreno, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.AreaTerrenoEnMetros)
+                        @Html.EditorFor(m => m.Terreno.AreaTerrenoEnMetros, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.EscrituraLinderos)
+                        @Html.TextAreaFor(m => m.Terreno.EscrituraLinderos, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.IdentificacionPredio)
+                        @Html.RadioButtonFor(m => m.Terreno.IdentificacionPredio, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.Linderos)
+                        @Html.RadioButtonFor(m => m.Terreno.Linderos, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.LinderosArcifinios)
+                        @Html.RadioButtonFor(m => m.Terreno.LinderosArcifinios, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.LinderosFmi)
+                        @Html.EditorFor(m => m.Terreno.LinderosFmi, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.LinderosVerificablesTerreno)
+                        @Html.RadioButtonFor(m => m.Terreno.LinderosVerificablesTerreno, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.ObservacionVisita)
+                        @Html.TextAreaFor(m => m.Terreno.ObservacionVisita, new {  @class = "form-control" } )
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.PorcentajeAreaJudicialAreaCatastral)
+                        @Html.EditorFor(m => m.Terreno.PorcentajeAreaJudicialAreaCatastral, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.RequiereVisita)
+                        @Html.EditorFor(m => m.Terreno.RequiereVisita, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.UnidadArea)
+                        @Html.EditorFor(m => m.Terreno.UnidadArea, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Terreno.TieneArea)
+                        @Html.RadioButtonFor(m => m.Terreno.TieneArea, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"><h5>Construccion</h5>  </div>
+                <div class="card-body">
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Construccion.DetalleIncorporacionArea)
+                        @Html.EditorFor(m => m.Construccion.DetalleIncorporacionArea, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Construccion.FotoFachada)
+                        @Html.EditorFor(m => m.Construccion.FotoFachada, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Construccion.ObservacionUsosDestino)
+                        @Html.TextAreaFor(m => m.Construccion.ObservacionUsosDestino, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Construccion.Destino)
+                        @Html.RadioButtonFor(m => m.Construccion.Destino, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Construccion.IncorporacioArea)
+                        @Html.RadioButtonFor(m => m.Construccion.IncorporacioArea, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Construccion.RequiereVisitaConstruccion)
+                        @Html.RadioButtonFor(m => m.Construccion.RequiereVisitaConstruccion, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Construccion.Uso)
+                        @Html.RadioButtonFor(m => m.Construccion.Uso, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12 text-right">            
+            <input type="submit" name="name" value="Salvar Actividad" class="btn btn-default" />
+        </div>
+
+    </div>
+</div>
+
+
