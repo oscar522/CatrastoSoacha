@@ -2,6 +2,8 @@
 using CatastroAvanza.Repositorio.DBContexto.Entidades;
 using CatastroAvanza.Repositorio.DBContexto.Interface;
 using System.Data.Entity;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CatastroAvanza.Repositorio.DBContexto
 {

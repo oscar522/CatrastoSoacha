@@ -1,5 +1,7 @@
 ﻿using CatastroAvanza.Repositorio.DBContexto.Entidades;
 using System.Data.Entity;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CatastroAvanza.Repositorio.DBContexto.Interface
 {
@@ -13,5 +15,11 @@ namespace CatastroAvanza.Repositorio.DBContexto.Interface
         DbSet<R1_2020_66069_PREDIOS> R1202066069Predios { get; set; }
         DbSet<R1_2021_69295_PREDIOS> R1202169295Predios { get; set; }
         DbSet<R2_2021_69295_CONSTRUCCIONES> R2202169295Construcciones { get; set; }
+
+        DbSet<Actividad> Actividad { get; set; }
+
+        int SaveChanges();
+        
+        Task<int> SaveChangesAsync( CancellationToken cancellationToken = default);
     }
 }

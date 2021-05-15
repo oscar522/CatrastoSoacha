@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using CatastroAvanza.Infraestructura.ContratosServicios;
+using CatastroAvanza.Infraestructura.ImplementacionesServicios;
 using CatastroAvanza.Mapeadores;
 using CatastroAvanza.Negocio.Contratos;
 using CatastroAvanza.Negocio.Implementaciones;
@@ -42,9 +44,25 @@ namespace CatastroAvanza
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
+            builder.RegisterType<Catalogo>()
+                .As<ICatalogo>()
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+
+            builder.RegisterType<ActividadLogic>()
+                .As<IActividadLogic>()
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+
             //Mappers
             builder.RegisterType<MapeadoresApplicacion>()
                 .As<IMapeadoresApplicacion>()
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+
+            //Servicios
+            builder.RegisterType<AlmacenamientoArchivos>()
+                .As<IAlmacenamientoArchivos>()
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 

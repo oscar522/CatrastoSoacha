@@ -1,5 +1,6 @@
-﻿using CatastroAvanza.Models.ActividadViewModels;
-using System.Collections.Generic;
+﻿using CatastroAvanza.Enumerations;
+using CatastroAvanza.Models.ActividadViewModels;
+using CatastroAvanza.Negocio.Contratos;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -7,27 +8,45 @@ namespace CatastroAvanza.Controllers
 {
     public class ActividadController : BaseController
     {
+        public ActividadController(ICatalogo catalogos, IActividadLogic actividad)
+        {
+            _catalogos = catalogos;
+            _actividad = actividad;
+        }
+
+        private readonly ICatalogo _catalogos;
+        private readonly IActividadLogic _actividad;
         // GET: Actividad
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public async Task<ActionResult> CrearActividad()
         {
             ActividadGeneralViewModel model = new ActividadGeneralViewModel();
-            model.Ejecutores = new SelectList(new List<SelectListItem> {
-                new SelectListItem { Text="Ejecutor 1", Value="1" },
-                new SelectListItem { Text="Ejecutor 2", Value="2" },
-                new SelectListItem { Text="Ejecutor 3", Value="3" }
-            }, "Value", "Text", 1);
 
-            model.Coordinadores = new SelectList(new List<SelectListItem> {
-                new SelectListItem { Text="Coordinador 1", Value="1" },
-                new SelectListItem { Text="Coordinador 2", Value="2" },
-                new SelectListItem { Text="Coordinador 3", Value="3" }
-            }, "Value", "Text", 1);
+            model.Ejecutores = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.Ejecutor), "Value", "Text", 1);
+            model.Coordinadores = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.Coordinador), "Value", "Text", 1);
+            model.Terreno.UnidadesArea = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.UnidadArea), "Value", "Text", 1);
+            model.Construccion.DetallesIncorporacionArea = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.DetalleIncorporacionArea), "Value", "Text", 1);
+
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CrearActividad(ActividadGeneralViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+            else
+            {
+                await _actividad.CrearActividad(model);
+                return RedirectToAction(nameof(Index));
+            }
+            
         }
     }
 }

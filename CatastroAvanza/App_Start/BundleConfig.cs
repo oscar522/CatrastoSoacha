@@ -9,11 +9,30 @@ namespace CatastroAvanza
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                       "~/Scripts/jquery-{version}.js",
+                      "~/Scripts/jquery.validate.min",
+                      "~/Scripts/jquery.validate.unobtrusive.min"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryvalidation").Include(                      
+                      "~/Scripts/jquery.validate.min.js",
+                      "~/Scripts/jquery.validate.unobtrusive.min.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(                      
                       "~/Scripts/popper.min.js",
                       "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/mdb.min.js",
+                      "~/Scripts/bootstrap.bundle.min.js",
+                      //"~/Scripts/mdb.min.js",
                       "~/Scripts/ScriptConceptos/Validaciones.js",
                       "~/Scripts/addons/datatables.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-fileinput").Include(
+                      "~/Scripts/plugins/piexif.min.js",
+                      "~/Scripts/plugins/sortable.min.js",                      
+                      "~/Scripts/fileinput.min.js",
+                      "~/Scripts/locales/es.js",
+                      "~/Content/bootstrap-fileinput/themes/explorer-fa/theme.min.js",
+                      "~/Content/bootstrap-fileinput/themes/fa/theme.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryLogin").Include(
                         "~/Content/login/vendor/jquery/jquery-{version}.min.js",
@@ -29,9 +48,13 @@ namespace CatastroAvanza
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
-                      "~/Content/mdb.min.css",
+                      //"~/Content/mdb.min.css",
                       "~/Content/style.min.css",
                       "~/Content/addons/datatables.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap-fileinput").Include(
+                    "~/Content/bootstrap-fileinput/css/fileinput.min.css",
+                    "~/Content/bootstrap-fileinput/themes/explorer-fa/theme.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/cssLogin").Include(
                       "~/Content/login/vendor/bootstrap/css/bootstrap.min.css",
