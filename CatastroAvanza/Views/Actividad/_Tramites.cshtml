@@ -1,0 +1,80 @@
+﻿@model ActividadGeneralViewModel
+<div class="card">
+    <div class="card-header"><h5>Tramites</h5>  </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tramite.Englobe, new { @class = "form-check-label" }) &nbsp; &nbsp;
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Tramite.Englobe, true, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            Si
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Tramite.Englobe, false, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            No
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Tramite.Englobe, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tramite.Desenglobe, new { @class = "form-check-label" }) &nbsp; &nbsp;
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Tramite.Desenglobe, true, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            Si
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Tramite.Desenglobe, false, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            No
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Tramite.Desenglobe, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tramite.ReglamentoPH, new { @class = "form-check-label" }) &nbsp; &nbsp;
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Tramite.ReglamentoPH, true, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            Si
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Tramite.ReglamentoPH, false, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            No
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Tramite.ReglamentoPH, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tramite.Unidadestramite)
+                    @Html.EditorFor(m => m.Tramite.Unidadestramite, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.Tramite.Unidadestramite, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Tramite.UnidadesReglamento)
+                    @Html.EditorFor(m => m.Tramite.UnidadesReglamento, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.Tramite.UnidadesReglamento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

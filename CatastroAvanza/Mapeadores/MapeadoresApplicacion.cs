@@ -1,6 +1,7 @@
-﻿using CatastroAvanza.Models.Dashboard;
+﻿using CatastroAvanza.Models;
+using CatastroAvanza.Models.ActividadViewModels;
+using CatastroAvanza.Models.Dashboard;
 using CatastroAvanza.Repositorio.DBContexto.Entidades;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -87,6 +88,97 @@ namespace CatastroAvanza.Mapeadores
             };
 
             return result;
+        }
+
+        public ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctcatalogo> catalogos)
+        {
+            ICollection<CatalogoViewModel> result = catalogos
+                .Select(m => new CatalogoViewModel { Value = m.Id, Text = m.Nombre })
+                .ToList();
+
+            return result;
+        }
+
+        public Actividad MapModelAData(ActividadGeneralViewModel model)
+        {
+            Actividad result = new Actividad();
+
+            if (model != null)
+            {
+                result.NumeroPredial = model.NumeroPredial;
+                result.Ejecutor = model.Ejecutor.ToString();
+                result.Coordinador = model.Coordinador.ToString();
+                result.Fecha = model.Fecha;
+                result.PropietariosCorrectos = model.PropietariosCorrectos;
+            }
+
+            if (model.Geografica != null)
+            {
+                result.Omision = model.Geografica.Omision;
+                result.DuplicadoGeograficamente = model.Geografica.DuplicadoGeograficamente;
+                result.NumeroDuplicados = model.Geografica.NumeroDuplicados;
+                result.RequiereVisitaGeografica = model.Geografica.RequiereVisitaGeografica;
+                result.Observacion = model.Geografica.Observacion;
+                
+            }
+
+            if (model.Construccion != null)
+            {
+                result.FotoFachada = model.Construccion.FotoFachada.FileName;
+                result.IncorporacioArea = model.Construccion.IncorporacioArea;
+                result.DetalleIncorporacionArea = model.Construccion.DetalleIncorporacionArea;
+                result.Uso = model.Construccion.Uso;
+                result.Destino = model.Construccion.Destino;
+                result.ObservacionUsosDestino = model.Construccion.ObservacionUsosDestino;
+                result.RequiereVisitaConstruccion = model.Construccion.RequiereVisitaConstruccion;
+            }
+
+
+            if (model.Folio != null)
+            {
+                result.Fmi = model.Folio.Fmi.FileName;
+                result.FmiDuplicados = model.Folio.FmiDuplicados;
+                result.NumeroFmiDuplicados = model.Folio.NumeroFmiDuplicados;
+                result.VerificacionFmi = model.Folio.VerificacionFmi;
+                result.FmiCorrecto = model.Folio.FmiCorrecto;
+            }
+
+            if (model.Nomenclatura != null)
+            {
+                result.CertificadoNomenclatura = model.Nomenclatura.CertificadoNomenclatura.FileName;
+                result.NomenclaturaPredio = model.Nomenclatura.NomenclaturaPredio;
+                result.NomenclaturaAActualizar = model.Nomenclatura.NomenclaturaAActualizar;
+            }
+
+            if (model.Tramite != null)
+            {
+                result.Englobe = model.Tramite.Englobe;
+                result.Desenglobe = model.Tramite.Desenglobe;
+                result.Unidadestramite = model.Tramite.Unidadestramite;
+                result.ReglamentoPH = model.Tramite.ReglamentoPH;
+                result.UnidadesReglamento = model.Tramite.UnidadesReglamento;
+            }
+
+            if(model.Terreno != null)
+            {
+                result.AreaTerreno = model.Terreno.AreaTerreno;
+                result.Linderos = model.Terreno.Linderos;
+                result.LinderosFmi = model.Terreno.LinderosFmi;
+                result.LinderosArcifinios = model.Terreno.LinderosArcifinios;
+                result.LinderosVerificablesTerreno = model.Terreno.LinderosVerificablesTerreno;
+                result.EscrituraLinderos = model.Terreno.EscrituraLinderos;
+                result.TieneArea = model.Terreno.TieneArea;
+                result.AreaTerreno = model.Terreno.AreaTerreno;
+                result.UnidadArea = model.Terreno.UnidadArea.ToString();
+                result.AreaTerrenoEnMetros = model.Terreno.AreaTerrenoEnMetros;
+                result.PorcentajeAreaJudicialAreaCatastral = model.Terreno.PorcentajeAreaJudicialAreaCatastral;
+                result.IdentificacionPredio = model.Terreno.IdentificacionPredio;
+                result.RequiereVisita = model.Terreno.RequiereVisita;
+                result.ObservacionVisita = model.Terreno.ObservacionVisita;
+            }
+
+            return result;
+
         }
     }
 }

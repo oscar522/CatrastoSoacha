@@ -1,0 +1,68 @@
+﻿@model ActividadGeneralViewModel
+
+<div class="card">
+    <div class="card-header"><h5>Folio</h5></div>
+    <div class="card-body">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Folio.Fmi)
+            @Html.TextBoxFor(m => m.Folio.Fmi, new { @type = "file" })
+            @Html.ValidationMessageFor(m => m.Folio.Fmi, "", new { @class = "text-danger" })
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Folio.VerificacionFmi, new { @class = "form-check-label" }) &nbsp; &nbsp;
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Folio.VerificacionFmi, true, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            Si
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Folio.VerificacionFmi, false, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            No
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Folio.VerificacionFmi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Folio.FmiCorrecto)
+                    @Html.EditorFor(m => m.Folio.FmiCorrecto, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.Folio.FmiCorrecto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Folio.FmiDuplicados, new { @class = "form-check-label" }) &nbsp; &nbsp;
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Folio.FmiDuplicados, true, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            Si
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Folio.FmiDuplicados, false, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            No
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Folio.FmiDuplicados, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Folio.NumeroFmiDuplicados)
+                    @Html.EditorFor(m => m.Folio.NumeroFmiDuplicados, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.Folio.NumeroFmiDuplicados, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

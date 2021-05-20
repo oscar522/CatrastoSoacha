@@ -1,0 +1,39 @@
+﻿@model ActividadGeneralViewModel
+
+<div class="card">
+    <div class="card-header"><h5>Nomenclatura</h5>  </div>
+    <div class="card-body">
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Nomenclatura.CertificadoNomenclatura)
+            @Html.TextBoxFor(m => m.Nomenclatura.CertificadoNomenclatura, new { @type = "file" })
+            @Html.ValidationMessageFor(m => m.Nomenclatura.CertificadoNomenclatura, "", new { @class = "text-danger" })
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Nomenclatura.NomenclaturaPredio, new { @class = "form-check-label" }) &nbsp; &nbsp;
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Nomenclatura.NomenclaturaPredio, true, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            Si
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(m => m.Nomenclatura.NomenclaturaPredio, false, new { @class = "form-check-input" })
+                        <label class="form-check-label">
+                            No
+                        </label>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Nomenclatura.NomenclaturaPredio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Nomenclatura.NomenclaturaAActualizar)
+                    @Html.EditorFor(m => m.Nomenclatura.NomenclaturaAActualizar, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.Nomenclatura.NomenclaturaAActualizar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

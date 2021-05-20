@@ -1,7 +1,6 @@
 ﻿using CatastroAvanza.Mapeadores;
 using CatastroAvanza.Models.Dashboard;
 using CatastroAvanza.Negocio.Contratos;
-using CatastroAvanza.Repositorio.DBContexto.Entidades;
 using CatastroAvanza.Repositorio.DBContexto.Interface;
 using System;
 using System.Linq;
