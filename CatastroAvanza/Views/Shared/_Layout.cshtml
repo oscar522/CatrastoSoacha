@@ -23,7 +23,7 @@
         @{ Html.RenderAction("Navbar", "Layout"); }
         <!-- Navbar -->
         <!-- Sidebar -->
-        @*@{ Html.RenderAction("Sidebar", "Layout"); }*@
+        @{ Html.RenderAction("Sidebar", "Layout"); }
         @*<div id="DivBarrido" style="display:none">
                 @{ Html.RenderAction("SidebarBarrido", "Layout"); }
             </div>*@
@@ -156,12 +156,9 @@
                 $("#Sidebar").hide();
             });
 
-            $(".navbar-brand").click(function () {
-                if (custStr == "2") {
-                    $("#Sidebar").show(); return false;
-                } else if (custStr == "3") {
-                    $("#Sidebar").show(); return false;
-                }
+
+            $("#LogoCatastro").click(function () {
+                $("#Sidebar").show(); return false;
             });
 
             $('.modalUser').click(function () {

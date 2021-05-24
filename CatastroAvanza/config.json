@@ -1,120 +1,29 @@
 {
   "menus": [
     {
-      "role": "Abogados",
-      "links": [
-        {
-          "order": 1,
-          "controllerName": "Ba_Memorando",
-          "actionName": "Index",
-          "linkText": "Soacha",
-          "iconText": "fa fa-book  mr-3",
-          "sub": null
-        }
-      ]
-    },
-    {
       "role": "Administrator",
       "links": [
         {
           "order": 1,
-          "controllerName": "Ba_Memorando",
-          "actionName": "Index",
-          "linkText": "Soacha",
-          "iconText": "fa fa-book  mr-3",
+          "controllerName": "Account",
+          "actionName": "register",
+          "linkText": "Crear Usuario",
+          "iconText": "fa fa-user-circle mr-3",
           "sub": null
-        }
-      ]
-    },
-    {
-      "role": "Agronomo",
-      "links": [
+        },
         {
           "order": 1,
-          "controllerName": "Ba_Memorando",
-          "actionName": "Index",
-          "linkText": "Soacha",
-          "iconText": "fa fa-book  mr-3",
+          "controllerName": "actividad",
+          "actionName": "crearactividad",
+          "linkText": "Crear Actividad",
+          "iconText": "fa fa-map-marker  mr-3",
           "sub": null
-        }
-      ]
-    },
-    {
-      "role": "Catastral",
-      "links": [
+        },
         {
           "order": 1,
-          "controllerName": "Ba_Memorando",
+          "controllerName": "dashboard",
           "actionName": "Index",
-          "linkText": "Soacha",
-          "iconText": "fa fa-book  mr-3",
-          "sub": null
-        }
-      ]
-    },
-    {
-      "role": "Social",
-      "links": [
-        {
-          "order": 1,
-          "controllerName": "Ba_Memorando",
-          "actionName": "Index",
-          "linkText": "Soacha",
-          "iconText": "fa fa-book  mr-3",
-          "sub": null
-        }
-      ]
-
-    },
-    {
-      "role": "Invitado",
-      "links": [
-        {
-          "order": 1,
-          "controllerName": "HomeUsuarios",
-          "actionName": "BuscarExpedientes",
-          "linkText": "Buscar Expedientes",
-          "iconText": "fa fa-search mr-3",
-          "sub": null
-        }
-      ]
-    },
-    {
-      "role": "Gestion Documental",
-      "links": [
-        {
-          "order": 1,
-          "controllerName": "Ba_Memorando",
-          "actionName": "Index",
-          "linkText": "Soacha",
-          "iconText": "fa fa-book  mr-3",
-          "sub": null
-        }
-      ]
-
-    },
-    {
-      "role": "User",
-      "links": [
-        {
-          "order": 1,
-          "controllerName": "Ba_Memorando",
-          "actionName": "Index",
-          "linkText": "Soacha",
-          "iconText": "fa fa-book  mr-3",
-          "sub": null
-        }
-      ]
-
-    },
-    {
-      "role": "Lider",
-      "links": [
-        {
-          "order": 1,
-          "controllerName": "Ba_Memorando",
-          "actionName": "Index",
-          "linkText": "Soacha",
+          "linkText": "Consultar",
           "iconText": "fa fa-book  mr-3",
           "sub": null
         }
