@@ -61,5 +61,12 @@ namespace CatastroAvanza.Controllers
             return Json(municipios, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public async Task<JsonResult> ObtenerActividades()
+        {
+            var actividades = _actividad.ConsultarActividades();
+            return Json(actividades, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

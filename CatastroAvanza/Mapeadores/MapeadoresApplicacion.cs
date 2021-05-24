@@ -117,6 +117,22 @@ namespace CatastroAvanza.Mapeadores
             return result;
         }
 
+        public List<ActividadConsultaViewModel> MapDataAModel(List<Actividad> actividades, List<ctciudad> ciudad, List<ctdepto> dpto)
+        {             
+            List<ActividadConsultaViewModel> aaData = actividades.Select(m => new ActividadConsultaViewModel
+            {
+                Coordinador = m.General_Coordinador,
+                Departamento = dpto.Where(d=> d.id_ct_depto == m.General_Departamento).FirstOrDefault().nombre,
+                Ejecutor =m.General_Ejecutor,
+                Fecha = m.General_Fecha,
+                Id = m.Id,
+                Municipio =ciudad.Where(c=> c.id ==  m.General_Municipio).FirstOrDefault().nombre,
+                NumeroPredial = m.General_NumeroPredial
+            }).ToList();
+
+            return aaData;
+        }
+
         public Actividad MapModelAData(ActividadPredioViewModel model)
         {
             Actividad result = new Actividad();

@@ -21,8 +21,7 @@ namespace CatastroAvanza
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(                      
                       "~/Scripts/popper.min.js",
                       "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/bootstrap.bundle.min.js",
-                      //"~/Scripts/mdb.min.js",
+                      "~/Scripts/bootstrap.bundle.min.js",                      
                       "~/Scripts/ScriptConceptos/Validaciones.js",
                       "~/Scripts/addons/datatables.min.js"));
 
@@ -47,8 +46,7 @@ namespace CatastroAvanza
 
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.min.css",
-                      //"~/Content/mdb.min.css",
+                      "~/Content/bootstrap.min.css",                      
                       "~/Content/style.css",
                       "~/Content/addons/datatables.min.css"));
 

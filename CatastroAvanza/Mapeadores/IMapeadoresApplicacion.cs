@@ -21,5 +21,8 @@ namespace CatastroAvanza.Mapeadores
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctciudad> ciudades);
 
         Actividad MapModelAData(ActividadPredioViewModel model);
+
+        List<ActividadConsultaViewModel> MapDataAModel(List<Actividad> actividades, List<ctciudad> ciudad, List<ctdepto> dpto);
+
     }
 }
