@@ -7,13 +7,13 @@ namespace CatastroAvanza.Repositorio.DBContexto.Migraciones
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Agregadas_tablas_actividades_y_catalogos : IMigrationMetadata
+    public sealed partial class crea_tabla_actividad : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Agregadas_tablas_actividades_y_catalogos));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(crea_tabla_actividad));
         
         string IMigrationMetadata.Id
         {
-            get { return "202105150620051_Agregadas_tablas_actividades_y_catalogos"; }
+            get { return "202105240254145_crea_tabla_actividad"; }
         }
         
         string IMigrationMetadata.Source

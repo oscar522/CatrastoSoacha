@@ -1,0 +1,95 @@
+﻿@model ActividadPredioViewModel
+@{
+    ViewBag.Title = "_InformacionGeneral";
+}
+
+<div class="row">    
+    <div class="col-md-6">
+        <h5><u>Informacion General</u></h5>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.Departamento)
+            @Html.DropDownListFor(m => m.Informacion.Departamento, Model.Informacion.Departamentos, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Informacion.Departamento, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.Municipio)
+            @Html.DropDownListFor(m => m.Informacion.Municipio,Model.Informacion.Municipios , new { @class = "form-control" })            
+            @Html.ValidationMessageFor(m => m.Informacion.Municipio, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.Comuna)
+            @Html.EditorFor(m => m.Informacion.Comuna, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(m => m.Informacion.Comuna, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.Vereda)
+            @Html.EditorFor(m => m.Informacion.Vereda, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(m => m.Informacion.Vereda, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.Barrio)
+            @Html.EditorFor(m => m.Informacion.Barrio, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(m => m.Informacion.Barrio, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.Direccion)
+            @Html.EditorFor(m => m.Informacion.Direccion, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(m => m.Informacion.Direccion, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.Direccion2)
+            @Html.EditorFor(m => m.Informacion.Direccion2, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(m => m.Informacion.Direccion2, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <h5>&nbsp;&nbsp;&nbsp;</h5>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.TipoDireccion)
+            @Html.DropDownListFor(m => m.Informacion.TipoDireccion, Model.Informacion.TiposDireccion, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Informacion.TipoDireccion, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.Condicion)
+            @Html.EditorFor(m => m.Informacion.Condicion, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(m => m.Informacion.Condicion, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group row">            
+            <div class="col-md-6">
+                @Html.LabelFor(m => m.Informacion.Mejoras, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m=> m.Informacion.Mejoras, new List<SelectListItem>
+                       {
+                         new SelectListItem { Text = "Si", Value = "true"},
+                         new SelectListItem { Text = "No", Value = "false"}
+                      }, new { @class = "form-control" })                
+                @Html.ValidationMessageFor(m => m.Informacion.Mejoras, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <label>Numero</label>
+                <input type="text" name="name" value="" class="form-control" />
+            </div>            
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Informacion.Destino)
+            @Html.EditorFor(m => m.Informacion.Destino, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(m => m.Informacion.Destino, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.AreaTerreno)
+            @Html.EditorFor(m => m.Informacion.AreaTerreno, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(m => m.Informacion.AreaTerreno, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.AreaConstruida)
+            @Html.EditorFor(m => m.Informacion.AreaConstruida, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(m => m.Informacion.AreaConstruida, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.Informacion.Avaluo)
+            @Html.EditorFor(m => m.Informacion.Avaluo, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(m => m.Informacion.Avaluo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+

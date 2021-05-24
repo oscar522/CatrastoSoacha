@@ -5,16 +5,17 @@ using System.Web.Mvc;
 
 namespace CatastroAvanza.Models.ActividadViewModels
 {
-    public class ActividadGeneralViewModel
+    public class ActividadPredioViewModel
     {
-        public ActividadGeneralViewModel()
+        public ActividadPredioViewModel()
         {
-            Geografica = new GeograficaViewModel();
-            Folio = new FolioViewModel();
+            Geografica = new GeograficaViewModel();            
             Nomenclatura = new NomenclaturaViewModel();
             Tramite = new TramiteViewModel();
             Terreno = new TerrenoViewModel();
             Construccion = new ConstruccionViewModel();
+            //Files = new FileViewModel();
+            Informacion = new InformacionGeneral();
         }
 
         [DisplayName("Numero Predial")]
@@ -30,17 +31,11 @@ namespace CatastroAvanza.Models.ActividadViewModels
         [Required(ErrorMessage = "Coordinador es requerido.")]
         public int Coordinador { get; set; }
 
-        [DisplayName("¿Requiere actualizacion de propietarios?")]
-        [Required(ErrorMessage = "Indicar si los propietarios son correctos requerido.")]
-        public bool PropietariosCorrectos { get; set; }
-
         [DisplayName("Fecha")]
         [Required(ErrorMessage = "Fecha es requerido.")]
         public DateTime Fecha { get; set; }
 
         public GeograficaViewModel Geografica { get; set; }
-
-        public FolioViewModel Folio { get; set; }
 
         public NomenclaturaViewModel Nomenclatura { get; set; }
         
@@ -49,9 +44,13 @@ namespace CatastroAvanza.Models.ActividadViewModels
         public TerrenoViewModel Terreno { get; set; }
 
         public ConstruccionViewModel Construccion { get; set; }
+        
+        public InformacionGeneral Informacion { get; set; }
 
         public SelectList Ejecutores { get; set; }
 
         public SelectList Coordinadores { get; set; }
+
+        public FileViewModel Files { get; set; }
     }
 }

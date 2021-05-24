@@ -5,7 +5,7 @@ namespace CatastroAvanza.Negocio.Contratos
 {
     public interface IActividadLogic
     {
-        Task<int> CrearActividad(ActividadGeneralViewModel model);
+        Task<int> CrearActividad(ActividadPredioViewModel model);
 
     }
 }

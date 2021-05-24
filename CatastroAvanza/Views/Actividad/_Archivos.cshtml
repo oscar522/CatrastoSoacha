@@ -1,0 +1,5 @@
+﻿<div class="form-group ">
+    @Html.LabelFor(m => m.Construccion.FotoFachada)
+    @Html.TextBoxFor(m => m.Construccion.FotoFachada, new { @type = "file" })
+    @Html.ValidationMessageFor(m => m.Construccion.FotoFachada, "", new { @class = "text-danger" })
+</div>

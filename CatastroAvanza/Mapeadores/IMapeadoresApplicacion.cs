@@ -16,6 +16,10 @@ namespace CatastroAvanza.Mapeadores
 
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctcatalogo> catalogos);
 
-        Actividad MapModelAData(ActividadGeneralViewModel model);
+        ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctdepto> departamento);
+
+        ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctciudad> ciudades);
+
+        Actividad MapModelAData(ActividadPredioViewModel model);
     }
 }

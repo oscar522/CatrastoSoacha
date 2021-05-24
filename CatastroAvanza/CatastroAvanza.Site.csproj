@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>true</Use64BitIISExpress>
     <IISExpressSSLPort>44340</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -230,10 +230,11 @@
     <Compile Include="Models\AccountViewModels\SendCodeViewModel.cs" />
     <Compile Include="Models\AccountViewModels\VerifyCodeViewModel.cs" />
     <Compile Include="Models\AccountViewModels\LoginViewModel.cs" />
-    <Compile Include="Models\ActividadViewModels\ActividadGeneralViewModel.cs" />
+    <Compile Include="Models\ActividadViewModels\ActividadPredioViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\ConstruccionViewModel.cs" />
-    <Compile Include="Models\ActividadViewModels\FolioViewModel.cs" />
+    <Compile Include="Models\ActividadViewModels\FileViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\GeograficaViewModel.cs" />
+    <Compile Include="Models\ActividadViewModels\InformacionGeneral.cs" />
     <Compile Include="Models\ActividadViewModels\NomenclaturaViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\TerrenoViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\TramiteViewModel.cs" />
@@ -278,9 +279,9 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202105120530063_Add_tbls_pais_departamento_ciudad.designer.cs">
       <DependentUpon>202105120530063_Add_tbls_pais_departamento_ciudad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Repositorio\DBContexto\Migraciones\202105150620051_Agregadas_tablas_actividades_y_catalogos.cs" />
-    <Compile Include="Repositorio\DBContexto\Migraciones\202105150620051_Agregadas_tablas_actividades_y_catalogos.designer.cs">
-      <DependentUpon>202105150620051_Agregadas_tablas_actividades_y_catalogos.cs</DependentUpon>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202105240254145_crea_tabla_actividad.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202105240254145_crea_tabla_actividad.designer.cs">
+      <DependentUpon>202105240254145_crea_tabla_actividad.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
@@ -379,6 +380,7 @@
     <Content Include="font\roboto\Roboto-Thin.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\casas_imgs\casa_1.png" />
     <Content Include="Images\cover\1-1.jpg" />
     <Content Include="Images\cover\16-9.jpg" />
     <Content Include="Images\cover\bg_profile.jpg" />
@@ -1242,10 +1244,11 @@
     <Content Include="Views\Actividad\_Geograficas.cshtml" />
     <Content Include="Views\Actividad\_Tramites.cshtml" />
     <Content Include="Views\Actividad\_Nomenclatura.cshtml" />
-    <Content Include="Views\Actividad\_Folio.cshtml" />
     <Content Include="Views\Actividad\_Construccion.cshtml" />
     <Content Include="Views\Actividad\_Terreno.cshtml" />
     <Content Include="Views\Actividad\Index.cshtml" />
+    <Content Include="Views\Actividad\_InformacionGeneral.cshtml" />
+    <Content Include="Views\Actividad\_Archivos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1278,8 +1281,8 @@
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202105120530063_Add_tbls_pais_departamento_ciudad.resx">
       <DependentUpon>202105120530063_Add_tbls_pais_departamento_ciudad.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202105150620051_Agregadas_tablas_actividades_y_catalogos.resx">
-      <DependentUpon>202105150620051_Agregadas_tablas_actividades_y_catalogos.cs</DependentUpon>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202105240254145_crea_tabla_actividad.resx">
+      <DependentUpon>202105240254145_crea_tabla_actividad.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -1301,7 +1304,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59761</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44340/</IISUrl>
+          <IISUrl>http://localhost:59762/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

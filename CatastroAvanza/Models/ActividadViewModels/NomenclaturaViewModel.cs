@@ -6,9 +6,6 @@ namespace CatastroAvanza.Models.ActividadViewModels
 {
     public class NomenclaturaViewModel
     {
-        [DisplayName("Certificado de la Nomenclatura")]
-        [Required(ErrorMessage = "Certificado de la Nomenclatura es requerido.")]
-        public HttpPostedFileBase CertificadoNomenclatura { get; set; }
 
         [DisplayName("¿Requiere actualizacion de nomenclatura?")]
         [Required(ErrorMessage = "¿Requiere actualizacion de nomenclatura? es requerido.")]

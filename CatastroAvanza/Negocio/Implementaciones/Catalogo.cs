@@ -36,5 +36,39 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 return new List<CatalogoViewModel>();
             }
         }
+
+        public ICollection<CatalogoViewModel> ObtenerDepartamentosPorIdPais(int idPais)
+        {
+            try
+            {
+                var catalogo = _contexto.Departamento.Where(m => m.estado == 1 && m.id_ct_pais == idPais).ToList();
+
+                ICollection<CatalogoViewModel> result = _mapper.MapDataAModel(catalogo);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new List<CatalogoViewModel>();
+            }
+        }
+
+        public ICollection<CatalogoViewModel> ObtenerMunicipiosPorIdDepartamento(int IdDepartamento)
+        {
+            try
+            {
+                var catalogo = _contexto.Ciudad.Where(m => m.estado == 1 && m.idctdepto == IdDepartamento).ToList();
+
+                ICollection<CatalogoViewModel> result = _mapper.MapDataAModel(catalogo);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new List<CatalogoViewModel>();
+            }
+        }
     }
 }

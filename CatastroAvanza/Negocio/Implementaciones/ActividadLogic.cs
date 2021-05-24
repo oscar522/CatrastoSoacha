@@ -23,7 +23,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
         private readonly IAlmacenamientoArchivos _almacenamiento;
 
 
-        public async Task<int> CrearActividad(ActividadGeneralViewModel model)
+        public async Task<int> CrearActividad(ActividadPredioViewModel model)
         {
             try
             {
@@ -31,9 +31,13 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
                 _contexto.Actividad.Add(actividad);
 
-                _almacenamiento.GuardarArchivoFisico(model.Folio.Fmi);
-                _almacenamiento.GuardarArchivoFisico(model.Nomenclatura.CertificadoNomenclatura);
-                _almacenamiento.GuardarArchivoFisico(model.Construccion.FotoFachada);
+                if(model.Files != null)
+                {
+                    _almacenamiento.GuardarArchivoFisico(model.Files.Fmi);
+                    _almacenamiento.GuardarArchivoFisico(model.Files.CertificadoNomenclatura);
+                    _almacenamiento.GuardarArchivoFisico(model.Files.FotoFachada);
+                }
+                
 
                 await _contexto.SaveChangesAsync();
 

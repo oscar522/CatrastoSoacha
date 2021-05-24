@@ -10,8 +10,12 @@ namespace CatastroAvanza.Repositorio.DBContexto.Migraciones
     /// Add-Migration {Nombre de la nueva migracion} -ConfigurationTypeName CatastroAvanza.Repositorio.DBContexto.Migraciones.Configuration -ProjectName CatastroAvanza.Site
     /// Para actualizar la estructura de la base de datos
     /// Update-Database -ConfigurationTypeName CatastroAvanza.Repositorio.DBContexto.Migraciones.Configuration
+    /// Para retornar al punto de las migraciones ejecutar  Update-Database  -ConfigurationTypeName CatastroAvanza.Repositorio.DBContexto.Migraciones.Configuration –TargetMigration 0
+    /// para retornar a una migracio  precisa ejecutar 
+    /// Update-Database -ConfigurationTypeName CatastroAvanza.Repositorio.DBContexto.Migraciones.Configuration {nombre migracion} 
+    /// por ejemplo Update-Database -ConfigurationTypeName CatastroAvanza.Repositorio.DBContexto.Migraciones.Configuration  –TargetMigration 20161012160749_AddedOrderToCourse
     /// </summary>
-    internal sealed class Configuration : DbMigrationsConfiguration<CatastroAvanza.Repositorio.DBContexto.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
@@ -19,7 +23,7 @@ namespace CatastroAvanza.Repositorio.DBContexto.Migraciones
             MigrationsDirectory = @"Repositorio\DBContexto\Migraciones";
         }
 
-        protected override void Seed(CatastroAvanza.Repositorio.DBContexto.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

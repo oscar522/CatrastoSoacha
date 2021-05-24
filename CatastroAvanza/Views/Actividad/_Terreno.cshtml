@@ -1,160 +1,78 @@
-﻿@model ActividadGeneralViewModel
+﻿@model ActividadPredioViewModel
 
-<div class="col-md-6">
-    <div class="card">
-        <div class="card-header"><h5>Terreno</h5>  </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Terreno.AreaTerreno)
-                        @Html.EditorFor(m => m.Terreno.AreaTerreno, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(m => m.Terreno.AreaTerreno, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Terreno.AreaTerrenoEnMetros)
-                        @Html.EditorFor(m => m.Terreno.AreaTerrenoEnMetros, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(m => m.Terreno.AreaTerrenoEnMetros, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+  
+    <h5>Terreno</h5>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Terreno.TieneArea, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Terreno.TieneArea, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Terreno.TieneArea, "", new { @class = "text-danger" })
+              
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Terreno.IdentificacionPredio, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Terreno.IdentificacionPredio, true, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                Si
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Terreno.IdentificacionPredio, false, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                No
-                            </label>
-                        </div>
-                        @Html.ValidationMessageFor(m => m.Terreno.IdentificacionPredio, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Terreno.Linderos, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Terreno.Linderos, true, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                Si
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Terreno.Linderos, false, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                No
-                            </label>
-                        </div>
-                        @Html.ValidationMessageFor(m => m.Terreno.Linderos, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Terreno.LinderosArcifinios, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Terreno.LinderosArcifinios, true, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                Si
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Terreno.LinderosArcifinios, false, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                No
-                            </label>
-                        </div>
-                        @Html.ValidationMessageFor(m => m.Terreno.LinderosArcifinios, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Terreno.AreaTerreno)
+                @Html.EditorFor(m => m.Terreno.AreaTerreno, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Terreno.AreaTerreno, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group ">
-                @Html.LabelFor(m => m.Terreno.EscrituraLinderos)
-                @Html.TextAreaFor(m => m.Terreno.EscrituraLinderos, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Terreno.EscrituraLinderos, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Terreno.UnidadArea)
+                @Html.DropDownListFor(m => m.Terreno.UnidadArea, Model.Terreno.UnidadesArea, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Terreno.UnidadesArea, "", new { @class = "text-danger" })
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Terreno.LinderosVerificablesTerreno, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Terreno.LinderosVerificablesTerreno, true, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                Si
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Terreno.LinderosVerificablesTerreno, false, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                No
-                            </label>
-                        </div>
-                        @Html.ValidationMessageFor(m => m.Terreno.LinderosVerificablesTerreno, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Terreno.LinderosFmi)
-                        @Html.TextAreaFor(m => m.Terreno.LinderosFmi, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Terreno.LinderosFmi, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+        </div>
+    </div>    
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Terreno.AreaTerrenoEnMetros)
+                @Html.EditorFor(m => m.Terreno.AreaTerrenoEnMetros, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Terreno.AreaTerrenoEnMetros, "", new { @class = "text-danger" })
             </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Terreno.PorcentajeAreaJudicialAreaCatastral)
+                @Html.EditorFor(m => m.Terreno.PorcentajeAreaJudicialAreaCatastral, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Terreno.PorcentajeAreaJudicialAreaCatastral, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Terreno.IdentificacionPredio, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Terreno.IdentificacionPredio, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Terreno.IdentificacionPredio, "", new { @class = "text-danger" })                
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Terreno.RequiereVisita)
+                @Html.EditorFor(m => m.Terreno.RequiereVisita, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Terreno.RequiereVisita, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="form-group ">
                 @Html.LabelFor(m => m.Terreno.ObservacionVisita)
                 @Html.TextAreaFor(m => m.Terreno.ObservacionVisita, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Terreno.ObservacionVisita, "", new { @class = "text-danger" })
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Terreno.PorcentajeAreaJudicialAreaCatastral)
-                        @Html.EditorFor(m => m.Terreno.PorcentajeAreaJudicialAreaCatastral, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Terreno.RequiereVisita)
-                        @Html.EditorFor(m => m.Terreno.RequiereVisita, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(m => m.Terreno.RequiereVisita, "", new { @class = "text-danger" })
-                    </div>
-                </div>                
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Terreno.TieneArea, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Terreno.TieneArea, true, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                Si
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Terreno.TieneArea, false, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                No
-                            </label>
-                        </div>
-                        @Html.ValidationMessageFor(m => m.Terreno.TieneArea, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Terreno.UnidadArea)
-                        @Html.DropDownListFor(m => m.Terreno.UnidadArea, Model.Terreno.UnidadesArea, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Terreno.UnidadesArea, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-</div>

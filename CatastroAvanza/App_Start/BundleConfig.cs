@@ -49,7 +49,7 @@ namespace CatastroAvanza
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       //"~/Content/mdb.min.css",
-                      "~/Content/style.min.css",
+                      "~/Content/style.css",
                       "~/Content/addons/datatables.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap-fileinput").Include(

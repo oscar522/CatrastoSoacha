@@ -7,5 +7,10 @@ namespace CatastroAvanza.Negocio.Contratos
     public interface ICatalogo
     {
         ICollection<CatalogoViewModel> ObtenerCatalogoPorTipo(CatalogosEnum tipo);
+
+        ICollection<CatalogoViewModel> ObtenerDepartamentosPorIdPais(int idPais);
+
+        ICollection<CatalogoViewModel> ObtenerMunicipiosPorIdDepartamento(int IdDepartamento);
+
     }
 }

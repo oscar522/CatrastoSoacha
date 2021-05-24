@@ -24,5 +24,23 @@ namespace CatastroAvanza.Models.ActividadViewModels
         [DisplayName("Observacion")]
         [Required(ErrorMessage = "Observacion geografica es requerido.")]
         public string Observacion { get; set; }
+
+        [DisplayName("¿El FMI esta asigando correctamente al predio?")]
+        [Required(ErrorMessage = "¿El FMI esta asigando correctamente al predio? es requerido.")]
+        public bool VerificacionFmi { get; set; }
+
+        [DisplayName("Duplicados de FMI")]
+        [Required(ErrorMessage = "Duplicados de FMI es requerido.")]
+        public bool FmiDuplicados { get; set; }
+
+        [DisplayName("Numero de Duplicados del FMI")]
+        [Required(ErrorMessage = "Numero de Duplicados del FMI es requerido.")]
+        public int NumeroFmiDuplicados { get; set; }
+
+
+        [DisplayName("FMI correcto")]
+        [Required(ErrorMessage = "FMI correcto es requerido.")]
+        public string FmiCorrecto { get; set; }
+
     }
 }

@@ -1,23 +1,11 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CatastroAvanza.Models.ActividadViewModels
 {
     public class ConstruccionViewModel
     {
-        [DisplayName("Foto de la fachada")]
-        [Required(ErrorMessage = "Foto de la fachada es requerido.")]
-        public HttpPostedFileBase FotoFachada { get; set; }
-
-        [DisplayName("Area Incorporada?")]
-        [Required(ErrorMessage = "Area Incorporada? es requerido.")]
-        public bool IncorporacioArea { get; set; }
-
-        [DisplayName("Detalle de la incorporacion")]
-        [Required(ErrorMessage = "Detalle de la incorporacion es requerido.")]
-        public string DetalleIncorporacionArea { get; set; }
 
         [DisplayName("El uso es correcto?")]
         [Required(ErrorMessage = "El uso es correcto? es requerido.")]
@@ -34,6 +22,33 @@ namespace CatastroAvanza.Models.ActividadViewModels
         [DisplayName("Requiere visita?")]
         [Required(ErrorMessage = "Requiere visita? es requerido.")]
         public bool RequiereVisitaConstruccion { get; set; }
+
+        [DisplayName("Tiene construcciones?")]
+        [Required(ErrorMessage = "Tiene construcciones? es requerido.")]
+        public bool TieneConstrucciones { get; set; }
+
+        [DisplayName("La construccion esta correctamente determinada?")]
+        [Required(ErrorMessage = "La construccion esta correctamente determinada? es requerido.")]
+        public bool ConstruccionEsCorrecta { get; set; }
+
+        [DisplayName("Se debe adicionar o cancelar unidades?")]
+        [Required(ErrorMessage = "Se debe adicionar o cancelar unidades? es requerido.")]
+        public bool AdicionaCancelaUnidades { get; set; }
+
+        [DisplayName("Adicionar construcciones")]
+        [Required(ErrorMessage = "Adicionar construcciones es requerido.")]
+        public bool AdicionarConstrucciones { get; set; }
+        [DisplayName("Eliminar construcciones")]
+        [Required(ErrorMessage = "Eliminar construcciones es requerido.")]
+        public bool ElminarConstrucciones { get; set; }
+
+        [DisplayName("Adicionar anexos")]
+        [Required(ErrorMessage = "Adicionar anexos es requerido.")]
+        public bool AdicionarAnexos { get; set; }
+
+        [DisplayName("Elminar anexos")]
+        [Required(ErrorMessage = "Elminar anexos es requerido.")]
+        public bool ElminarAnexos { get; set; }
 
         public SelectList DetallesIncorporacionArea { get; set; }
     }

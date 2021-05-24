@@ -99,82 +99,128 @@ namespace CatastroAvanza.Mapeadores
             return result;
         }
 
-        public Actividad MapModelAData(ActividadGeneralViewModel model)
+        public ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctdepto> departamento)
+        {
+            ICollection<CatalogoViewModel> result = departamento
+               .Select(m => new CatalogoViewModel { Value = m.id_ct_depto, Text = m.nombre })
+               .ToList();
+
+            return result;
+        }
+
+        public ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctciudad> ciudades)
+        {
+            ICollection<CatalogoViewModel> result = ciudades
+               .Select(m => new CatalogoViewModel { Value = m.id, Text = m.nombre })
+               .ToList();
+
+            return result;
+        }
+
+        public Actividad MapModelAData(ActividadPredioViewModel model)
         {
             Actividad result = new Actividad();
 
             if (model != null)
             {
-                result.NumeroPredial = model.NumeroPredial;
-                result.Ejecutor = model.Ejecutor.ToString();
-                result.Coordinador = model.Coordinador.ToString();
-                result.Fecha = model.Fecha;
-                result.PropietariosCorrectos = model.PropietariosCorrectos;
+                result.General_NumeroPredial = model.NumeroPredial;
+                result.General_Ejecutor = model.Ejecutor.ToString();
+                result.General_Coordinador = model.Coordinador.ToString();
+                result.General_Fecha = model.Fecha;                
             }
 
             if (model.Geografica != null)
             {
-                result.Omision = model.Geografica.Omision;
-                result.DuplicadoGeograficamente = model.Geografica.DuplicadoGeograficamente;
-                result.NumeroDuplicados = model.Geografica.NumeroDuplicados;
-                result.RequiereVisitaGeografica = model.Geografica.RequiereVisitaGeografica;
-                result.Observacion = model.Geografica.Observacion;
-                
+                result.Geografica_Omision = model.Geografica.Omision;
+                result.Geografica_DuplicadoGeograficamente = model.Geografica.DuplicadoGeograficamente;
+                result.Geografica_NumeroDuplicados = model.Geografica.NumeroDuplicados;
+                result.Geografica_RequiereVisitaGeografica = model.Geografica.RequiereVisitaGeografica;
+                result.Geografica_Observacion = model.Geografica.Observacion;
+                result.Geografica_FmiDuplicados = model.Geografica.FmiDuplicados;
+                result.Geografica_NumeroFmiDuplicados = model.Geografica.NumeroFmiDuplicados;
+                result.Geografica_VerificacionFmi = model.Geografica.VerificacionFmi;
+                result.Geografica_FmiCorrecto = model.Geografica.FmiCorrecto;
+
             }
 
             if (model.Construccion != null)
-            {
-                result.FotoFachada = model.Construccion.FotoFachada.FileName;
-                result.IncorporacioArea = model.Construccion.IncorporacioArea;
-                result.DetalleIncorporacionArea = model.Construccion.DetalleIncorporacionArea;
-                result.Uso = model.Construccion.Uso;
-                result.Destino = model.Construccion.Destino;
-                result.ObservacionUsosDestino = model.Construccion.ObservacionUsosDestino;
-                result.RequiereVisitaConstruccion = model.Construccion.RequiereVisitaConstruccion;
+            {                
+                //result.Construccion_IncorporacioArea = model.Construccion.IncorporacioArea;
+                //result.Construccion_DetalleIncorporacionArea = model.Construccion.DetalleIncorporacionArea;
+                result.Construccion_Uso = model.Construccion.Uso;
+                result.Construccion_Destino = model.Construccion.Destino;
+                result.Construccion_ObservacionUsosDestino = model.Construccion.ObservacionUsosDestino;
+                result.Construccion_RequiereVisitaConstruccion = model.Construccion.RequiereVisitaConstruccion;
+                result.Construccion_TieneConstrucciones = model.Construccion.TieneConstrucciones;
+                result.Construccion_ConstruccionEsCorrecta = model.Construccion.ConstruccionEsCorrecta;
+                result.Construccion_AdicionaCancelaUnidades = model.Construccion.AdicionaCancelaUnidades;
+                result.Construccion_AdicionarConstrucciones = model.Construccion.AdicionarConstrucciones;
+                result.Construccion_ElminarConstrucciones = model.Construccion.ElminarConstrucciones;
+                result.Construccion_AdicionarAnexos = model.Construccion.AdicionarAnexos;
+                result.Construccion_ElminarAnexos = model.Construccion.ElminarAnexos;
             }
 
 
-            if (model.Folio != null)
+            if (model.Files != null)
             {
-                result.Fmi = model.Folio.Fmi.FileName;
-                result.FmiDuplicados = model.Folio.FmiDuplicados;
-                result.NumeroFmiDuplicados = model.Folio.NumeroFmiDuplicados;
-                result.VerificacionFmi = model.Folio.VerificacionFmi;
-                result.FmiCorrecto = model.Folio.FmiCorrecto;
+                result.Arcvhivo_Fmi = model.Files.Fmi.FileName;
+                result.Arcvhivo_CertificadoNomenclatura = model.Files.CertificadoNomenclatura.FileName;
+                result.Arcvhivo_FotoFachada = model.Files.FotoFachada.FileName;
             }
 
             if (model.Nomenclatura != null)
-            {
-                result.CertificadoNomenclatura = model.Nomenclatura.CertificadoNomenclatura.FileName;
-                result.NomenclaturaPredio = model.Nomenclatura.NomenclaturaPredio;
-                result.NomenclaturaAActualizar = model.Nomenclatura.NomenclaturaAActualizar;
+            {                
+                result.Nomenclatura_NomenclaturaPredio = model.Nomenclatura.NomenclaturaPredio;
+                result.Nomenclatura_NomenclaturaAActualizar = model.Nomenclatura.NomenclaturaAActualizar;
             }
 
             if (model.Tramite != null)
             {
-                result.Englobe = model.Tramite.Englobe;
-                result.Desenglobe = model.Tramite.Desenglobe;
-                result.Unidadestramite = model.Tramite.Unidadestramite;
-                result.ReglamentoPH = model.Tramite.ReglamentoPH;
-                result.UnidadesReglamento = model.Tramite.UnidadesReglamento;
+                result.Tramite_Englobe = model.Tramite.Englobe;
+                result.Tramite_Desenglobe = model.Tramite.Desenglobe;
+                result.Tramite_Unidadestramite = model.Tramite.Unidadestramite;
+                result.Tramite_ReglamentoPH = model.Tramite.ReglamentoPH;
+                result.Tramite_UnidadesReglamento = model.Tramite.UnidadesReglamento;
+                result.Tramite_LinderosFmi = model.Tramite.LinderosFmi;
+                result.Tramite_LinderosArcifinios = model.Tramite.LinderosArcifinios;
+                result.Tramite_LinderosVerificablesTerreno = model.Tramite.LinderosVerificablesTerreno;
+                result.Tramite_LinderosEnEscritura = model.Tramite.LinderosEnEscritura;
+                result.Tramite_NumeroEscritura = model.Tramite.NumeroEscritura;
+                result.Tramite_PropietariosCorrectos = model.Tramite.PropietariosCorrectos;
+                result.Tramite_Linderos = model.Tramite.Linderos;
             }
 
             if(model.Terreno != null)
+            {                               
+                //result.Terreno_EscrituraLinderos = model.Terreno.EscrituraLinderos;
+                result.Terreno_TieneArea = model.Terreno.TieneArea;
+                result.Terreno_AreaTerreno = model.Terreno.AreaTerreno;
+                result.Terreno_UnidadArea = model.Terreno.UnidadArea.ToString();
+                result.Terreno_AreaTerrenoEnMetros = model.Terreno.AreaTerrenoEnMetros;
+                result.Terreno_PorcentajeAreaJudicialAreaCatastral = model.Terreno.PorcentajeAreaJudicialAreaCatastral;
+                result.Terreno_IdentificacionPredio = model.Terreno.IdentificacionPredio;
+                result.Terreno_RequiereVisita = model.Terreno.RequiereVisita;
+                result.Terreno_ObservacionVisita = model.Terreno.ObservacionVisita;
+            }
+
+            if (model.Informacion != null)
             {
-                result.AreaTerreno = model.Terreno.AreaTerreno;
-                result.Linderos = model.Terreno.Linderos;
-                result.LinderosFmi = model.Terreno.LinderosFmi;
-                result.LinderosArcifinios = model.Terreno.LinderosArcifinios;
-                result.LinderosVerificablesTerreno = model.Terreno.LinderosVerificablesTerreno;
-                result.EscrituraLinderos = model.Terreno.EscrituraLinderos;
-                result.TieneArea = model.Terreno.TieneArea;
-                result.AreaTerreno = model.Terreno.AreaTerreno;
-                result.UnidadArea = model.Terreno.UnidadArea.ToString();
-                result.AreaTerrenoEnMetros = model.Terreno.AreaTerrenoEnMetros;
-                result.PorcentajeAreaJudicialAreaCatastral = model.Terreno.PorcentajeAreaJudicialAreaCatastral;
-                result.IdentificacionPredio = model.Terreno.IdentificacionPredio;
-                result.RequiereVisita = model.Terreno.RequiereVisita;
-                result.ObservacionVisita = model.Terreno.ObservacionVisita;
+                result.General_AreaConstruida = model.Informacion.AreaConstruida;
+                result.General_AreaTerreno = model.Informacion.AreaTerreno;
+                result.General_Avaluo = model.Informacion.Avaluo;
+                result.General_Barrio = model.Informacion.Barrio;
+                result.General_Comuna = model.Informacion.Comuna;
+                result.General_Condicion = model.Informacion.Condicion;
+                result.General_Departamento = model.Informacion.Departamento;
+                result.General_Destino = model.Informacion.Destino;
+                result.General_Direccion = model.Informacion.Direccion;
+                result.General_Direccion2 = model.Informacion.Direccion2;
+                result.General_Mejoras = model.Informacion.Mejoras;
+                result.General_Municipio = model.Informacion.Municipio;
+                result.General_Numero_Mejoras = model.Informacion.NumeroMejoras;
+                result.General_TipoDireccion = model.Informacion.TipoDireccion;
+                result.General_Vereda = model.Informacion.Vereda;                
+
             }
 
             return result;
