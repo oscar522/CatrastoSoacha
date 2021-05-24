@@ -15,32 +15,29 @@ namespace CatastroAvanza.Repositorio.DBContexto.ConfiguracionEntidades
                 .IsRequired()
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
-            Property(s => s.NumeroPredial)
+            Property(s => s.General_NumeroPredial)
                 .HasMaxLength(30)
                 .IsRequired();
 
-            Property(s => s.Observacion)
+            Property(s => s.Geografica_Observacion)
                 .HasMaxLength(300);
 
-            Property(s => s.LinderosFmi)
+            Property(s => s.Tramite_LinderosFmi)
                 .HasMaxLength(300);
 
-            Property(s => s.LinderosFmi)
+            Property(s => s.Geografica_FmiCorrecto)
                 .HasMaxLength(300);
 
-            Property(s => s.FmiCorrecto)
+            Property(s => s.Nomenclatura_NomenclaturaAActualizar)
                 .HasMaxLength(300);
 
-            Property(s => s.NomenclaturaAActualizar)
+            Property(s => s.Terreno_EscrituraLinderos)
                 .HasMaxLength(300);
 
-            Property(s => s.EscrituraLinderos)
+            Property(s => s.Terreno_RequiereVisita)
                 .HasMaxLength(300);
 
-            Property(s => s.RequiereVisita)
-                .HasMaxLength(300);
-
-            Property(s => s.ObservacionUsosDestino)
+            Property(s => s.Construccion_ObservacionUsosDestino)
                 .HasMaxLength(300);
         }
     }

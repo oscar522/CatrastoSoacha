@@ -1,4 +1,4 @@
-﻿@model ActividadGeneralViewModel
+﻿@model ActividadPredioViewModel
 @{
     ViewBag.Title = "CrearActividad";
 }
@@ -14,98 +14,99 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
             <div class="col-md-12 text-right">
+                <a class="btn btn-primary" href="@Url.Action("Index")">Regresar al listado de actividades</a>
                 <input type="submit" name="name" value="Salvar Actividad" class="btn btn-primary" id="saveUpBtn" />
                 <br />
             </div>
         </div>
         <div class="">
-            <hr />            
+            <hr />
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header"><h5>General</h5>  </div>
-                    <div class="card-body">
-                        <div class="form-group ">
-                            @Html.LabelFor(m => m.NumeroPredial)
-                            @Html.EditorFor(m => m.NumeroPredial, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                            @Html.ValidationMessageFor(m => m.NumeroPredial, "", new { @class = "text-danger" })
+                <h5><u>Predio</u></h5>
+                <div class="form-group ">
+                    @Html.LabelFor(m => m.NumeroPredial)
+                    @Html.EditorFor(m => m.NumeroPredial, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    @Html.ValidationMessageFor(m => m.NumeroPredial, "", new { @class = "text-danger" })
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Ejecutor)
+                            @Html.DropDownListFor(m => m.Ejecutor, Model.Ejecutores, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Ejecutor, "", new { @class = "text-danger" })
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Ejecutor)
-                                    @Html.DropDownListFor(m => m.Ejecutor, Model.Ejecutores, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Ejecutor, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Coordinador)
-                                    @Html.DropDownListFor(m => m.Coordinador, Model.Coordinadores, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Coordinador, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Coordinador)
+                            @Html.DropDownListFor(m => m.Coordinador, Model.Coordinadores, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Coordinador, "", new { @class = "text-danger" })
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.PropietariosCorrectos, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                                    <div class="form-check">
-                                        @Html.RadioButtonFor(m => m.PropietariosCorrectos, true, new { @class = "form-check-input" })
-                                        <label class="form-check-label">
-                                            Si
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        @Html.RadioButtonFor(m => m.PropietariosCorrectos, false, new { @class = "form-check-input" })
-                                        <label class="form-check-label">
-                                            No
-                                        </label>
-                                    </div>
-                                    @Html.ValidationMessageFor(m => m.PropietariosCorrectos, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Fecha)
-                                    @Html.EditorFor(m => m.Fecha, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
-                                    @Html.ValidationMessageFor(m => m.Fecha, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Fecha)
+                            @Html.EditorFor(m => m.Fecha, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                            @Html.ValidationMessageFor(m => m.Fecha, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
             </div>
-
+            <div class="col-md-4 text-center align-items-center align-content-center">
+                <figure class="figure">
+                    <img src="~/Images/casas_imgs/casa_1.png" height="200px" width="300px" class="figure-img img-fluid rounded" alt="...">
+                    <figcaption class="figure-caption text-right">Demo image.</figcaption>
+                </figure>
+            </div>
+            <div class="col-md-2">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Ficha Predial</a>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Plano</a>
+                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Escrituras</a>
+                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">FMI</a>
+                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">C. Nomenclatura</a>
+                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Croquis</a>
+                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Foto fachada</a>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
             <div class="col-md-6">
+                @Html.Partial("_InformacionGeneral", Model)
+            </div>            
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
                 @Html.Partial("_Geograficas", Model)
             </div>
         </div>
         <hr />
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 @Html.Partial("_Tramites", Model)
+            </div>           
+        </div> 
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("_Terreno", Model)                
             </div>
 
-            <div class="col-md-6">
-                @Html.Partial("_Nomenclatura", Model)
-            </div>
         </div>
         <hr />
         <div class="row">
-            <div class="col-md-6">
-                @Html.Partial("_Folio", Model)
-            </div>
-
-            <div class="col-md-6">
+            <div class="col-md-12">
                 @Html.Partial("_Construccion", Model)
             </div>
-
-        </div>
-        <hr />
-        <div class="row">
-            @Html.Partial("_Terreno", Model)
+            @*<div class="col-md-6">
+                @Html.Partial("_Nomenclatura", Model)
+            </div>*@
         </div>
         <hr />
         <div class="row">
@@ -133,6 +134,12 @@
 @section Scripts
 {
     @Scripts.Render("~/bundles/bootstrap-fileinput")
-    @Scripts.Render("~/Scripts/Paginas/Actividades.js")
+    @Scripts.Render("~/Scripts/Paginas/CrearActividad.js")
 
+<script>
+        $(document).ready(function () {
+            ActividadJs.urlObtenerMunicipios ='@Url.Action("ObternerMunicipios")';
+            ActividadJs.Inicializar();
+        });
+</script>
 }

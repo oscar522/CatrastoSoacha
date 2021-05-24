@@ -1,99 +1,137 @@
-﻿@model ActividadGeneralViewModel
+﻿@model ActividadPredioViewModel
 
-<div class="card">
-    <div class="card-header"><h5>Construccion</h5>  </div>
-    <div class="card-body">
-        <div class="form-group ">
-            @Html.LabelFor(m => m.Construccion.DetalleIncorporacionArea)
-            @Html.DropDownListFor(m => m.Construccion.DetalleIncorporacionArea, Model.Construccion.DetallesIncorporacionArea, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Construccion.DetalleIncorporacionArea, "", new { @class = "text-danger" })
+<h5>Construccion</h5> 
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Construccion.TieneConstrucciones, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Construccion.TieneConstrucciones, new List<SelectListItem>
+                     {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Construccion.TieneConstrucciones, "", new { @class = "text-danger" })            
         </div>
-        <div class="form-group ">
-            @Html.LabelFor(m => m.Construccion.FotoFachada)
-            @Html.TextBoxFor(m => m.Construccion.FotoFachada, new { @type = "file" })
-            @Html.ValidationMessageFor(m => m.Construccion.FotoFachada, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Construccion.ConstruccionEsCorrecta, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Construccion.ConstruccionEsCorrecta, new List<SelectListItem>
+                     {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Construccion.ConstruccionEsCorrecta, "", new { @class = "text-danger" })            
         </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Construccion.AdicionaCancelaUnidades, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Construccion.AdicionaCancelaUnidades, new List<SelectListItem>
+                     {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Construccion.AdicionaCancelaUnidades, "", new { @class = "text-danger" })           
+        </div>
+    </div>
+    <div class="col-md-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>.</th>
+                    <th scope="col"><label class="form-check-label">Si</label></th>
+                    <th scope="col"><label class="form-check-label">No</label></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Construccion.AdicionarConstrucciones, new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(m => m.Construccion.TieneConstrucciones, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="text-center">
+                        @Html.RadioButtonFor(m => m.Construccion.TieneConstrucciones, true, new { @class = "form-check-input" })
+                    </td>
+                    <td class="text-center">
+                        @Html.RadioButtonFor(m => m.Construccion.TieneConstrucciones, false, new { @class = "form-check-input" })
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        @Html.LabelFor(m => m.Construccion.ElminarConstrucciones, new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(m => m.Construccion.ElminarConstrucciones, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="text-center">
+                        @Html.RadioButtonFor(m => m.Construccion.ElminarConstrucciones, true, new { @class = "form-check-input" })
+                    </td>
+                    <td class="text-center">
+                        @Html.RadioButtonFor(m => m.Construccion.ElminarConstrucciones, false, new { @class = "form-check-input" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Construccion.AdicionarAnexos, new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(m => m.Construccion.AdicionarAnexos, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="text-center">
+                        @Html.RadioButtonFor(m => m.Construccion.AdicionarAnexos, true, new { @class = "form-check-input" })
+                    </td>
+                    <td class="text-center">
+                        @Html.RadioButtonFor(m => m.Construccion.AdicionarAnexos, false, new { @class = "form-check-input" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(m => m.Construccion.ElminarAnexos, new { @class = "form-check-label" })
+                        @Html.ValidationMessageFor(m => m.Construccion.ElminarAnexos, "", new { @class = "text-danger" })
+                    </td>
+                    <td class="text-center">
+                        @Html.RadioButtonFor(m => m.Construccion.ElminarAnexos, true, new { @class = "form-check-input" })
+                    </td>
+                    <td class="text-center">
+                        @Html.RadioButtonFor(m => m.Construccion.ElminarAnexos, false, new { @class = "form-check-input" })
+                    </td>
+                </tr>
+            </tbody>
+
+
+        </table>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Construccion.Uso, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Construccion.Uso, new List<SelectListItem>
+                     {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Construccion.Uso, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Construccion.Destino, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Construccion.Destino, new List<SelectListItem>
+                     {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Construccion.Destino, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Construccion.RequiereVisitaConstruccion, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Construccion.RequiereVisitaConstruccion, new List<SelectListItem>
+                     {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Construccion.RequiereVisitaConstruccion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-12">
         <div class="form-group ">
             @Html.LabelFor(m => m.Construccion.ObservacionUsosDestino)
             @Html.TextAreaFor(m => m.Construccion.ObservacionUsosDestino, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.Construccion.ObservacionUsosDestino, "", new { @class = "text-danger" })
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Construccion.Destino, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Construccion.Destino, true, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            Si
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Construccion.Destino, false, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            No
-                        </label>
-                    </div>
-                    @Html.ValidationMessageFor(m => m.Construccion.Destino, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Construccion.IncorporacioArea, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Construccion.IncorporacioArea, true, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            Si
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Construccion.IncorporacioArea, false, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            No
-                        </label>
-                    </div>
-                    @Html.ValidationMessageFor(m => m.Construccion.IncorporacioArea, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Construccion.RequiereVisitaConstruccion, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Construccion.RequiereVisitaConstruccion, true, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            Si
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Construccion.RequiereVisitaConstruccion, false, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            No
-                        </label>
-                    </div>
-                    @Html.ValidationMessageFor(m => m.Construccion.RequiereVisitaConstruccion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Construccion.Uso, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Construccion.Uso, true, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            Si
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Construccion.Uso, false, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            No
-                        </label>
-                    </div>
-                    @Html.ValidationMessageFor(m => m.Construccion.Uso, "", new { @class = "text-danger" })
-                </div>
-            </div>
         </div>
     </div>
 </div>

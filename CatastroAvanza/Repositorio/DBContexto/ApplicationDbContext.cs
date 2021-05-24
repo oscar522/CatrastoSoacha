@@ -25,6 +25,7 @@ namespace CatastroAvanza.Repositorio.DBContexto
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new Actividad_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new ctpais_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new ctdepto_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new ctciudad_ConfiguracionEntidad());

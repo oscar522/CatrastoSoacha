@@ -5,6 +5,8 @@ using CatastroAvanza.Negocio.Contratos;
 using CatastroAvanza.Repositorio.DBContexto.Entidades;
 using CatastroAvanza.Repositorio.DBContexto.Interface;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CatastroAvanza.Negocio.Implementaciones
@@ -23,7 +25,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
         private readonly IAlmacenamientoArchivos _almacenamiento;
 
 
-        public async Task<int> CrearActividad(ActividadGeneralViewModel model)
+        public async Task<int> CrearActividad(ActividadPredioViewModel model)
         {
             try
             {
@@ -31,9 +33,13 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
                 _contexto.Actividad.Add(actividad);
 
-                _almacenamiento.GuardarArchivoFisico(model.Folio.Fmi);
-                _almacenamiento.GuardarArchivoFisico(model.Nomenclatura.CertificadoNomenclatura);
-                _almacenamiento.GuardarArchivoFisico(model.Construccion.FotoFachada);
+                if(model.Files != null)
+                {
+                    _almacenamiento.GuardarArchivoFisico(model.Files.Fmi);
+                    _almacenamiento.GuardarArchivoFisico(model.Files.CertificadoNomenclatura);
+                    _almacenamiento.GuardarArchivoFisico(model.Files.FotoFachada);
+                }
+                
 
                 await _contexto.SaveChangesAsync();
 
@@ -44,6 +50,24 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 string message = ex.Message;
                 return 0;
             }            
+        }
+
+        public async Task<List<ActividadConsultaViewModel>> ConsultarActividades()
+        {
+            try
+            {
+                var actividades = _contexto.Actividad.ToList();
+
+                var listaActividades = _mapper.MapDataAModel(actividades, _contexto.Ciudad.ToList(), _contexto.Departamento.ToList());
+
+                return listaActividades;
+
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new List<ActividadConsultaViewModel>();
+            }
         }
     }
 }

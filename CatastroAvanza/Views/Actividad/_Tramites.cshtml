@@ -1,80 +1,120 @@
-﻿@model ActividadGeneralViewModel
-<div class="card">
-    <div class="card-header"><h5>Tramites</h5>  </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Tramite.Englobe, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Tramite.Englobe, true, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            Si
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Tramite.Englobe, false, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            No
-                        </label>
-                    </div>
-                    @Html.ValidationMessageFor(m => m.Tramite.Englobe, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Tramite.Desenglobe, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Tramite.Desenglobe, true, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            Si
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Tramite.Desenglobe, false, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            No
-                        </label>
-                    </div>
-                    @Html.ValidationMessageFor(m => m.Tramite.Desenglobe, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Tramite.ReglamentoPH, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Tramite.ReglamentoPH, true, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            Si
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Tramite.ReglamentoPH, false, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            No
-                        </label>
-                    </div>
-                    @Html.ValidationMessageFor(m => m.Tramite.ReglamentoPH, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+﻿@model ActividadPredioViewModel
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Tramite.Unidadestramite)
-                    @Html.EditorFor(m => m.Tramite.Unidadestramite, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(m => m.Tramite.Unidadestramite, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Tramite.UnidadesReglamento)
-                    @Html.EditorFor(m => m.Tramite.UnidadesReglamento, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(m => m.Tramite.UnidadesReglamento, "", new { @class = "text-danger" })
-                </div>
+    <h5>Informacion Juridica</h5>     
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.PropietariosCorrectos, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Tramite.PropietariosCorrectos, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Tramite.PropietariosCorrectos, "", new { @class = "text-danger" })                
             </div>
 
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.Englobe, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Tramite.Englobe, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Tramite.Englobe, "", new { @class = "text-danger" })                      
+            </div>
         </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.Desenglobe, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Tramite.Desenglobe, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Tramite.Desenglobe, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.ReglamentoPH, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Tramite.ReglamentoPH, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Tramite.ReglamentoPH, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.Linderos, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Tramite.Linderos, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Tramite.Linderos, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.Unidadestramite)
+                @Html.EditorFor(m => m.Tramite.Unidadestramite, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Tramite.Unidadestramite, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.UnidadesReglamento)
+                @Html.EditorFor(m => m.Tramite.UnidadesReglamento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Tramite.UnidadesReglamento, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">            
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.LinderosFmi)
+                @Html.TextAreaFor(m => m.Tramite.LinderosFmi, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Tramite.LinderosFmi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.LinderosEnEscritura, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Tramite.LinderosEnEscritura, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Tramite.LinderosEnEscritura, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.LinderosArcifinios, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Tramite.LinderosArcifinios, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Tramite.LinderosArcifinios, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.LinderosVerificablesTerreno, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Tramite.LinderosVerificablesTerreno, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Tramite.LinderosVerificablesTerreno, "", new { @class = "text-danger" })
+            </div>           
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.NumeroEscritura)
+                @Html.EditorFor(m => m.Tramite.NumeroEscritura, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Tramite.NumeroEscritura, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+ 

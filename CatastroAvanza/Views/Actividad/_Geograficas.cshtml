@@ -1,78 +1,77 @@
-﻿@model ActividadGeneralViewModel
-<div class="card">
-    <div class="card-header"><h5>Geograficas</h5>  </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Geografica.Omision, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Geografica.Omision, true, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            Si
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Geografica.Omision, false, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            No
-                        </label>
-                    </div>
-                    @Html.ValidationMessageFor(m => m.Geografica.Omision, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Geografica.RequiereVisitaGeografica, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Geografica.RequiereVisitaGeografica, true, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            Si
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        @Html.RadioButtonFor(m => m.Geografica.RequiereVisitaGeografica, false, new { @class = "form-check-input" })
-                        <label class="form-check-label">
-                            No
-                        </label>
-                    </div>
-                    @Html.ValidationMessageFor(m => m.Geografica.RequiereVisitaGeografica, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+﻿@model ActividadPredioViewModel
 
+<h5><u>Depuracion</u></h5>
+<div class="row">
+    <div class="col-md-4">
         <div class="form-group">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Geografica.DuplicadoGeograficamente, new { @class = "form-check-label" }) &nbsp; &nbsp;
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Geografica.DuplicadoGeograficamente, true, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                Si
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            @Html.RadioButtonFor(m => m.Geografica.DuplicadoGeograficamente, false, new { @class = "form-check-input" })
-                            <label class="form-check-label">
-                                No
-                            </label>
-                        </div>
-                        @Html.ValidationMessageFor(m => m.Geografica.DuplicadoGeograficamente, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    @Html.LabelFor(m => m.Geografica.NumeroDuplicados)
-                    @Html.EditorFor(m => m.Geografica.NumeroDuplicados, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(m => m.Geografica.NumeroDuplicados, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
+            @Html.LabelFor(m => m.Geografica.Omision, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Geografica.Omision, new List<SelectListItem>
+                     {
+                        new SelectListItem { Text = "Si", Value = "true"},
+                        new SelectListItem { Text = "No", Value = "false"}
+                    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Geografica.Omision, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.Geografica.Observacion)
-            @Html.TextAreaFor(m => m.Geografica.Observacion, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Geografica.Observacion, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.Geografica.DuplicadoGeograficamente, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Geografica.DuplicadoGeograficamente, new List<SelectListItem>
+                     {
+                        new SelectListItem { Text = "Si", Value = "true"},
+                        new SelectListItem { Text = "No", Value = "false"}
+                    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Geografica.DuplicadoGeograficamente, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Geografica.NumeroDuplicados)
+            @Html.EditorFor(m => m.Geografica.NumeroDuplicados, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Geografica.NumeroDuplicados, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Geografica.RequiereVisitaGeografica, new { @class = "form-check-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Geografica.RequiereVisitaGeografica, new List<SelectListItem>
+                     {
+                        new SelectListItem { Text = "Si", Value = "true"},
+                        new SelectListItem { Text = "No", Value = "false"}
+                    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Geografica.RequiereVisitaGeografica, "", new { @class = "text-danger" })
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Geografica.VerificacionFmi, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Geografica.VerificacionFmi, new List<SelectListItem>
+                     {
+                        new SelectListItem { Text = "Si", Value = "true"},
+                        new SelectListItem { Text = "No", Value = "false"}
+                    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Geografica.VerificacionFmi, "", new { @class = "text-danger" })            
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Geografica.FmiDuplicados, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Geografica.FmiDuplicados, new List<SelectListItem>
+                     {
+                        new SelectListItem { Text = "Si", Value = "true"},
+                        new SelectListItem { Text = "No", Value = "false"}
+                    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Geografica.FmiDuplicados, "", new { @class = "text-danger" })           
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Geografica.NumeroFmiDuplicados)
+            @Html.EditorFor(m => m.Geografica.NumeroFmiDuplicados, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Geografica.NumeroFmiDuplicados, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Geografica.FmiCorrecto)
+            @Html.EditorFor(m => m.Geografica.FmiCorrecto, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Geografica.FmiCorrecto, "", new { @class = "text-danger" })
+        </div>        
+    </div>
 </div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Geografica.Observacion)
+    @Html.TextAreaFor(m => m.Geografica.Observacion, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Geografica.Observacion, "", new { @class = "text-danger" })
+</div>    

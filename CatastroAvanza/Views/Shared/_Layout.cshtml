@@ -10,6 +10,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap4.min.css">
 
     <link rel="shortcut icon" href="images/favicon.png" />
     @RenderSection("styles", required: false)
@@ -69,13 +71,13 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <div class="text-center">                            
+                        <div class="text-center">
                             <div class="spinner-border text-primary" role="status">
                                 <span class="sr-only">Cargando...</span>
                             </div>
                             Cargando
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,6 +101,9 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryvalidation")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src=" ~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src=" ~/Scripts/DataTables/dataTables.bootstrap4.min.js"></script>
+    <script src=" ~/Scripts/moment.min.js"></script>
     @RenderSection("scripts", required: false)
 
     <script type="text/javascript">
@@ -133,20 +138,20 @@
             });
             console.log("ready!");
 
-            $('.tableData').DataTable({
-                dom: "B<'row'<'col-sm-6'l><'col-sm-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-5'i><'col-sm-7'<'#colvis'>p>>",
-                buttons: [
-                    { "extend": 'pdf', "text": 'Pdf', "className": 'btn-outline-success' },
-                    { "extend": 'excel', "text": 'Exc', "className": ' btn-outline-success ' },
-                    { "extend": 'print', "text": 'Imp', "className": ' btn-outline-success ' }
-                ],
-                "order": [[1, "desc"]],
-                "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
-                "pageLength": 10,
-                "paging": true
-            });
+            //$('.tableData').DataTable({
+            //    dom: "B<'row'<'col-sm-6'l><'col-sm-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-5'i><'col-sm-7'<'#colvis'>p>>",
+            //    buttons: [
+            //        { "extend": 'pdf', "text": 'Pdf', "className": 'btn-outline-success' },
+            //        { "extend": 'excel', "text": 'Exc', "className": ' btn-outline-success ' },
+            //        { "extend": 'print', "text": 'Imp', "className": ' btn-outline-success ' }
+            //    ],
+            //    "order": [[1, "desc"]],
+            //    "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json" },
+            //    "pageLength": 10,
+            //    "paging": true
+            //});
 
-            $('.dataTables_length').addClass('bs-select');
+            //$('.dataTables_length').addClass('bs-select');
 
             $("#MenuClose").click(function () {
                 $("#Sidebar").hide();
@@ -189,12 +194,11 @@
             });
         });
 
-        function loadingModal()
-        {
+        function loadingModal() {
             $('#loadingModal').modal('show')
         }
-            //// Animations initialization
-            //new WOW().init();
+                                //// Animations initialization
+                                //new WOW().init();
     </script>
 
 
