@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace CatastroAvanza.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : BaseController
     {
         public AccountController()
@@ -78,7 +78,7 @@ namespace CatastroAvanza.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Dashboard");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -136,7 +136,7 @@ namespace CatastroAvanza.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult Register()
         {
             return View();

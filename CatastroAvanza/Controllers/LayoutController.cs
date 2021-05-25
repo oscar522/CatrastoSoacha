@@ -21,10 +21,9 @@ namespace CatastroAvanza.Controllers
         [Authorize]
         public ActionResult Navbar()
         {
-            //ViewBag.FullName = GetTokenObject().FullName;// 
-            ViewBag.FullName = "Oscar Ballesteros";// 
-            //ViewBag.IdU = GetTokenObject().FullName;
-            ViewBag.IdU = "Oscar Ballesteros";
+            var userName = HttpContext.User;
+            ViewBag.FullName = userName.Identity.Name;// 
+            ViewBag.IdU = userName.Identity.Name;
 
             return PartialView();
         }
