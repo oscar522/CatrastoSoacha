@@ -4,32 +4,41 @@
         $("#Informacion_Departamento").change(ObtenerMunicipios);
         $("#saveUpBtn").click(saveForm);
         $("#saveDownBtn").click(saveForm);
+        InicializarFileInputs();
     },   
 }
 
 function InicializarFileInputs() {
-    $("#Folio_Fmi").fileinput({
+    $(".archivosClass").fileinput({
         theme: "explorer-fa",
         language: "es",
         showUpload: false,
         dropZoneEnabled: false,
-        mainClass: "input-group"
-    });
+        mainClass: "input-group",
+        //filedeleted: function () {
+        //    alert('Hola mundo');
+        //    setTimeout(function () {
+        //        window.alert('File deletion was successful! ' + krajeeGetCount('file-5'));
+        //    }, 900);
+        //}
+    }).on('fileloaded', function (event, file, previewId, fileId, index, reader) {
+        $('#' + $(this).attr('data-externalid') + 'I').addClass('fa-folder-o');
+        $('#' + $(this).attr('data-externalid') + 'I').removeClass('fa-folder-open-o');
 
-    $("#Nomenclatura_CertificadoNomenclatura").fileinput({
-        theme: "explorer-fa",
-        language: "es",
-        showUpload: false,
-        dropZoneEnabled: false,
-        mainClass: "input-group"
-    });
+        $('#' + $(this).attr('data-externalid') + 'Tab').addClass('text-success');
 
-    $("#Construccion_FotoFachada").fileinput({
-        theme: "explorer-fa",
-        language: "es",
-        showUpload: false,
-        dropZoneEnabled: false,
-        mainClass: "input-group"
+        $('#' + $(this).attr('data-externalid') + 'Archivo').html($(this)[0].files[0].name);
+
+        $('#' + $(this).attr('data-externalid') + 'Estado').html('<span class="badge badge-success">Si</span>');
+    }).on('fileclear', function () {
+        $('#' + $(this).attr('data-externalid') + 'I').addClass('fa-folder-open-o');
+        $('#' + $(this).attr('data-externalid') + 'I').removeClass('fa-folder-o');
+
+        $('#' + $(this).attr('data-externalid') + 'Tab').removeClass('text-success');
+
+        $('#' + $(this).attr('data-externalid') + 'Archivo').html('');
+
+        $('#' + $(this).attr('data-externalid') + 'Estado').html('<span class="badge badge-dark">No</span>');
     });
 }
 

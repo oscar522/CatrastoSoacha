@@ -6,103 +6,103 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
     {
         public int Id { get; set; }
 
-        public string General_NumeroPredial { get; set; }//ok
+        public string General_NumeroPredial { get; set; }
 
-        public string General_Ejecutor { get; set; }//ok
+        public string General_Ejecutor { get; set; }
 
-        public string General_Coordinador { get; set; }//ok
+        public string General_Coordinador { get; set; }
 
-        public DateTime General_Fecha { get; set; }//ok
+        public DateTime General_Fecha { get; set; }
 
-        public bool Geografica_Omision { get; set; }//ok
+        public bool Geografica_Omision { get; set; }
 
-        public bool Geografica_DuplicadoGeograficamente { get; set; }//ok
+        public bool Geografica_DuplicadoGeograficamente { get; set; }
 
-        public int Geografica_NumeroDuplicados { get; set; }//ok
+        public int Geografica_NumeroDuplicados { get; set; }
 
-        public bool Geografica_RequiereVisitaGeografica { get; set; }//ok
+        public bool Geografica_RequiereVisitaGeografica { get; set; }
 
-        public string Geografica_Observacion { get; set; }//ok        
+        public string Geografica_Observacion { get; set; } 
 
-        public bool Geografica_FmiDuplicados { get; set; }//ok
+        public bool Geografica_FmiDuplicados { get; set; }
 
-        public int Geografica_NumeroFmiDuplicados { get; set; }//ok
+        public int Geografica_NumeroFmiDuplicados { get; set; }
 
-        public bool Geografica_VerificacionFmi { get; set; }//ok
+        public bool Geografica_VerificacionFmi { get; set; }
 
-        public string Geografica_FmiCorrecto { get; set; }//ok
+        public string Geografica_FmiCorrecto { get; set; }
        
-        public bool Nomenclatura_NomenclaturaPredio { get; set; }//ok
+        public bool Nomenclatura_NomenclaturaPredio { get; set; }
 
-        public string Nomenclatura_NomenclaturaAActualizar { get; set; }//ok
+        public string Nomenclatura_NomenclaturaAActualizar { get; set; }
 
-        public bool Tramite_PropietariosCorrectos { get; set; }//ok
+        public bool Tramite_PropietariosCorrectos { get; set; }
 
-        public bool Tramite_Englobe { get; set; }//ok
+        public bool Tramite_Englobe { get; set; }
 
-        public bool Tramite_Desenglobe { get; set; }//ok
+        public bool Tramite_Desenglobe { get; set; }
 
-        public int Tramite_Unidadestramite { get; set; }//ok
+        public int Tramite_Unidadestramite { get; set; }
 
-        public bool Tramite_ReglamentoPH { get; set; }//ok
+        public bool Tramite_ReglamentoPH { get; set; }
 
-        public int Tramite_UnidadesReglamento { get; set; }//ok
+        public int Tramite_UnidadesReglamento { get; set; }
 
-        public bool Tramite_Linderos { get; set; }//ok
+        public bool Tramite_Linderos { get; set; }
 
-        public string Tramite_LinderosFmi { get; set; }//ok
+        public string Tramite_LinderosFmi { get; set; }
 
-        public bool Tramite_LinderosArcifinios { get; set; }//ok
+        public bool Tramite_LinderosArcifinios { get; set; }
 
-        public bool Tramite_LinderosEnEscritura { get; set; }//ok
+        public bool Tramite_LinderosEnEscritura { get; set; }
 
-        public string Tramite_NumeroEscritura { get; set; }//ok
+        public string Tramite_NumeroEscritura { get; set; }
 
-        public bool Tramite_LinderosVerificablesTerreno { get; set; }//ok
+        public bool Tramite_LinderosVerificablesTerreno { get; set; }
 
-        public string Terreno_EscrituraLinderos { get; set; }//ok
+        public string Terreno_EscrituraLinderos { get; set; }
 
-        public bool Terreno_TieneArea { get; set; }//ok
+        public bool Terreno_TieneArea { get; set; }
 
-        public int Terreno_AreaTerreno { get; set; }//ok
+        public int Terreno_AreaTerreno { get; set; }
 
-        public string Terreno_UnidadArea { get; set; }//ok
+        public string Terreno_UnidadArea { get; set; }
 
-        public int Terreno_AreaTerrenoEnMetros { get; set; }//ok
+        public int Terreno_AreaTerrenoEnMetros { get; set; }
 
-        public int Terreno_PorcentajeAreaJudicialAreaCatastral { get; set; }//ok
+        public int Terreno_PorcentajeAreaJudicialAreaCatastral { get; set; }
 
-        public bool Terreno_IdentificacionPredio { get; set; }//ok
+        public bool Terreno_IdentificacionPredio { get; set; }
 
-        public string Terreno_RequiereVisita { get; set; }//ok
+        public string Terreno_RequiereVisita { get; set; }
 
-        public string Terreno_ObservacionVisita { get; set; }//ok
+        public string Terreno_ObservacionVisita { get; set; }
 
-        public bool Construccion_IncorporacioArea { get; set; }//ok
+        public bool Construccion_IncorporacioArea { get; set; }
 
-        public string Construccion_DetalleIncorporacionArea { get; set; }//ok
+        public string Construccion_DetalleIncorporacionArea { get; set; }
 
-        public bool Construccion_Uso { get; set; }//ok
+        public bool Construccion_Uso { get; set; }
 
-        public bool Construccion_Destino { get; set; }//ok
+        public bool Construccion_Destino { get; set; }
 
-        public string Construccion_ObservacionUsosDestino { get; set; }//ok
+        public string Construccion_ObservacionUsosDestino { get; set; }
 
-        public bool Construccion_RequiereVisitaConstruccion { get; set; }//ok
+        public bool Construccion_RequiereVisitaConstruccion { get; set; }
 
-        public bool Construccion_TieneConstrucciones { get; set; }//ok
+        public bool Construccion_TieneConstrucciones { get; set; }
 
-        public bool Construccion_ConstruccionEsCorrecta { get; set; }//ok
+        public bool Construccion_ConstruccionEsCorrecta { get; set; }
 
-        public bool Construccion_AdicionaCancelaUnidades { get; set; }//ok
+        public bool Construccion_AdicionaCancelaUnidades { get; set; }
 
-        public bool Construccion_AdicionarConstrucciones { get; set; }//ok
+        public bool Construccion_AdicionarConstrucciones { get; set; }
 
-        public bool Construccion_ElminarConstrucciones { get; set; }//ok
+        public bool Construccion_ElminarConstrucciones { get; set; }
 
-        public bool Construccion_AdicionarAnexos { get; set; }//ok
+        public bool Construccion_AdicionarAnexos { get; set; }
 
-        public bool Construccion_ElminarAnexos { get; set; }//ok
+        public bool Construccion_ElminarAnexos { get; set; }
 
         public int General_Departamento { get; set; }
 
@@ -134,10 +134,20 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
 
         public decimal General_Avaluo { get; set; }
 
-        public string Arcvhivo_FotoFachada { get; set; }//ok
+        public string Arcvhivo_FotoFachada { get; set; }
 
-        public string Arcvhivo_Fmi { get; set; }//ok
+        public string Arcvhivo_Fmi { get; set; }
 
-        public string Arcvhivo_CertificadoNomenclatura { get; set; }//ok
+        public string Arcvhivo_CertificadoNomenclatura { get; set; }
+
+        public string Arcvhivo_FichaPredial { get; set; }
+
+        public string Arcvhivo_Plano { get; set; }
+
+        public string Arcvhivo_Escrituras { get; set; }
+
+        public string Arcvhivo_Croquis { get; set; }
+        
+
     }
 }

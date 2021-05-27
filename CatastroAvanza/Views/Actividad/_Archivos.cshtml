@@ -1,5 +1,210 @@
-﻿<div class="form-group ">
-    @Html.LabelFor(m => m.Construccion.FotoFachada)
-    @Html.TextBoxFor(m => m.Construccion.FotoFachada, new { @type = "file" })
-    @Html.ValidationMessageFor(m => m.Construccion.FotoFachada, "", new { @class = "text-danger" })
+﻿@model ActividadPredioViewModel
+
+@*//Predial*@
+<div class="modal fade " tabindex="-1" id="predialModal" aria-labelledby="Predial" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cargar Predial</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group ">
+                    @Html.LabelFor(m => m.Files.FichaPredial)
+                    @Html.TextBoxFor(m => m.Files.FichaPredial, new { @type = "file", @class = "archivosClass", data_externalid = "FP" })
+                    @Html.ValidationMessageFor(m => m.Files.FichaPredial, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
 </div>
+@*//Plano*@
+<div class="modal fade" tabindex="-1" id="PlanoModal" aria-labelledby="Plano" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cargar Plano</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group ">
+                    @Html.LabelFor(m => m.Files.Plano)
+                    @Html.TextBoxFor(m => m.Files.Plano, new { @type = "file", @class = "archivosClass", data_externalid = "Plano" })
+                    @Html.ValidationMessageFor(m => m.Files.Plano, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*//Escrituras*@
+<div class="modal fade " tabindex="-1" id="EscriturasModal" aria-labelledby="Escrituras" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cargar Escritura</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group ">
+                    @Html.LabelFor(m => m.Files.Escrituras)
+                    @Html.TextBoxFor(m => m.Files.Escrituras, new { @type = "file", @class = "archivosClass", data_externalid = "Esc" })
+                    @Html.ValidationMessageFor(m => m.Files.Escrituras, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*//Fmi*@
+<div class="modal fade " tabindex="-1" id="FmiModal" aria-labelledby="Fmi" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cargar Fmi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group ">
+                    @Html.LabelFor(m => m.Files.Fmi)
+                    @Html.TextBoxFor(m => m.Files.Fmi, new { @type = "file", @class = "archivosClass", data_externalid = "Fmi" })
+                    @Html.ValidationMessageFor(m => m.Files.Fmi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*//Certificado Nomenclatura*@
+<div class="modal fade " tabindex="-1" id="CertificadoNomenclaturaModal" aria-labelledby="Certificado Nomenclatura" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cargar Certificado Nomenclatura</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group ">
+                    @Html.LabelFor(m => m.Files.CertificadoNomenclatura)
+                    @Html.TextBoxFor(m => m.Files.CertificadoNomenclatura, new { @type = "file", @class = "archivosClass", data_externalid = "Cn" })
+                    @Html.ValidationMessageFor(m => m.Files.CertificadoNomenclatura, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*//Croquis*@
+<div class="modal fade " tabindex="-1" id="CroquisModal" aria-labelledby="Croquis" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cargar Croquis</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group ">
+                    @Html.LabelFor(m => m.Files.Croquis)
+                    @Html.TextBoxFor(m => m.Files.Croquis, new { @type = "file", @class = "archivosClass", data_externalid = "Crq" })
+                    @Html.ValidationMessageFor(m => m.Files.Croquis, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*//Foto*@
+<div class="modal fade" tabindex="-1" id="fotoModal" aria-labelledby="Foto fachada" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cargar Foto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group ">
+                    @Html.LabelFor(m => m.Files.FotoFachada)
+                    @Html.TextBoxFor(m => m.Files.FotoFachada, new { @type = "file", @class = "archivosClass", data_externalid = "Foto" })
+                    @Html.ValidationMessageFor(m => m.Files.FotoFachada, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-fixed" >
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Archivo</th>
+            <th>Cargada</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Ficha Predial</td>
+            <td><span id="FPArchivo"></span></td>
+            <td><span id="FPEstado"><span class="badge badge-dark">No</span></span></td>
+        </tr>
+        <tr>
+            <td>Plano</td>
+            <td><span id="PlanoArchivo"></span></td>
+            <td><span id="PlanoEstado"><span class="badge badge-dark">No</span></span></td>
+        </tr>
+        <tr>
+            <td>Escrituras</td>
+            <td><span id="EscArchivo"></span></td>
+            <td><span id="EscEstado"><span class="badge badge-dark">No</span></span></td>
+        </tr>
+        <tr>
+            <td>Fmi</td>
+            <td><span id="FmiArchivo"></span></td>
+            <td><span id="FmiEstado"><span class="badge badge-dark">No</span></span></td>
+        </tr>
+        <tr>
+            <td>Certificado Nomenclatura</td>
+            <td><span id="CnArchivo"></span></td>
+            <td><span id="CnEstado"><span class="badge badge-dark">No</span></span></td>
+        </tr>
+        <tr>
+            <td>Croquis</td>
+            <td><span id="CrqArchivo"></span></td>
+            <td><span id="CrqEstado"><span class="badge badge-dark">No</span></span></td>
+        </tr>
+        <tr>
+            <td>Foto</td>
+            <td><span id="FotoArchivo"></span></td>
+            <td><span id="FotoEstado"><span class="badge badge-dark">No</span></span></td>
+        </tr>
+    </tbody>
+</table>

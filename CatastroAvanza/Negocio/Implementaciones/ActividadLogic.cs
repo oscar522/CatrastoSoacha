@@ -1,4 +1,5 @@
-﻿using CatastroAvanza.Infraestructura.ContratosServicios;
+﻿using CatastroAvanza.Infraestructura;
+using CatastroAvanza.Infraestructura.ContratosServicios;
 using CatastroAvanza.Mapeadores;
 using CatastroAvanza.Models.ActividadViewModels;
 using CatastroAvanza.Negocio.Contratos;
@@ -35,11 +36,14 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
                 if(model.Files != null)
                 {
-                    _almacenamiento.GuardarArchivoFisico(model.Files.Fmi);
-                    _almacenamiento.GuardarArchivoFisico(model.Files.CertificadoNomenclatura);
-                    _almacenamiento.GuardarArchivoFisico(model.Files.FotoFachada);
-                }
-                
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.Fmi, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.CertificadoNomenclatura, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.FotoFachada, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.Croquis, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.Escrituras, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.FichaPredial, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.Plano, actividad.General_NumeroPredial));                    
+                }                
 
                 await _contexto.SaveChangesAsync();
 

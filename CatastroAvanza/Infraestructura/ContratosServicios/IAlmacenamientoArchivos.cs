@@ -1,9 +1,9 @@
-﻿using System.Web;
-
-namespace CatastroAvanza.Infraestructura.ContratosServicios
+﻿namespace CatastroAvanza.Infraestructura.ContratosServicios
 {
     public interface IAlmacenamientoArchivos
     {
-        string GuardarArchivoFisico(HttpPostedFileBase archivo);
+        void GuardarArchivoFisico(InformationDocumento archivo);
+
+        byte[] TraerArchivoFisico(InformationDocumento archivo);
     }
 }
