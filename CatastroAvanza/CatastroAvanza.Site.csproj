@@ -208,10 +208,19 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Enumerations\ActividadesColumnasOrdenables.cs" />
     <Compile Include="Enumerations\CatalogosEnum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DataTableHelper\Column.cs" />
+    <Compile Include="Helpers\DataTableHelper\ColumnCollection.cs" />
+    <Compile Include="Helpers\DataTableHelper\DataTablesBinder.cs" />
+    <Compile Include="Helpers\DataTableHelper\DataTablesResponse.cs" />
+    <Compile Include="Helpers\DataTableHelper\DefaultDataTablesRequest.cs" />
+    <Compile Include="Helpers\DataTableHelper\IDataTablesRequest.cs" />
+    <Compile Include="Helpers\DataTableHelper\NameValueCollectionExtensions.cs" />
+    <Compile Include="Helpers\DataTableHelper\Search.cs" />
     <Compile Include="Identity\DbContext\ApplicationIdentityDbContext.cs" />
     <Compile Include="Identity\DbContext\Configuration.cs" />
     <Compile Include="Identity\DbContext\Migraciones\202105050434313_Inicial.cs" />

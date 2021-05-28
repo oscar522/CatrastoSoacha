@@ -1,4 +1,5 @@
-﻿using CatastroAvanza.Models.ActividadViewModels;
+﻿using CatastroAvanza.Helpers.DataTableHelper;
+using CatastroAvanza.Models.ActividadViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace CatastroAvanza.Negocio.Contratos
     {
         Task<int> CrearActividad(ActividadPredioViewModel model);
 
-        Task<List<ActividadConsultaViewModel>> ConsultarActividades();
+        Task<DataTablesResponse> ConsultarActividades(IDataTablesRequest modelo);
 
 
     }

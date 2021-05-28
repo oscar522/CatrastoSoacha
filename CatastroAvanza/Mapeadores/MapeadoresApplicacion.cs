@@ -123,11 +123,11 @@ namespace CatastroAvanza.Mapeadores
             List<ActividadConsultaViewModel> aaData = actividades.Select(m => new ActividadConsultaViewModel
             {
                 Coordinador = m.General_Coordinador,
-                Departamento = dpto.Where(d=> d.id_ct_depto == m.General_Departamento).FirstOrDefault().nombre,
+                Departamento = dpto.Where(d=> d.id_ct_depto == m.General_Departamento).DefaultIfEmpty(new ctdepto()).FirstOrDefault().nombre,
                 Ejecutor =m.General_Ejecutor,
                 Fecha = m.General_Fecha,
                 Id = m.Id,
-                Municipio =ciudad.Where(c=> c.id ==  m.General_Municipio).FirstOrDefault().nombre,
+                Municipio =ciudad.Where(c=> c.id ==  m.General_Municipio).DefaultIfEmpty(new ctciudad()).FirstOrDefault().nombre,
                 NumeroPredial = m.General_NumeroPredial
             }).ToList();
 

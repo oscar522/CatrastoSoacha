@@ -1,4 +1,6 @@
-﻿using CatastroAvanza.Infraestructura;
+﻿using CatastroAvanza.Enumerations;
+using CatastroAvanza.Helpers.DataTableHelper;
+using CatastroAvanza.Infraestructura;
 using CatastroAvanza.Infraestructura.ContratosServicios;
 using CatastroAvanza.Mapeadores;
 using CatastroAvanza.Models.ActividadViewModels;
@@ -56,21 +58,44 @@ namespace CatastroAvanza.Negocio.Implementaciones
             }            
         }
 
-        public async Task<List<ActividadConsultaViewModel>> ConsultarActividades()
+        public async Task<DataTablesResponse> ConsultarActividades(IDataTablesRequest modelo)
         {
             try
             {
-                var actividades = _contexto.Actividad.ToList();
+                var sortedColumn = modelo.Columns.GetSortedColumns().Where(x => x.OrderNumber == 0).FirstOrDefault();
+                ActividadesColumnasOrdenables? columnaOrdenar = null;
+                bool orderByDescending = false;
+                if (sortedColumn != null && Enum.GetNames(typeof(ActividadesColumnasOrdenables)).Contains(sortedColumn.Name))
+                {
+                    columnaOrdenar = (ActividadesColumnasOrdenables)Enum.Parse(typeof(ActividadesColumnasOrdenables), sortedColumn.Name);
+                    orderByDescending = sortedColumn.SortDirection == Column.OrderDirection.Descendant;
+                }
 
-                var listaActividades = _mapper.MapDataAModel(actividades, _contexto.Ciudad.ToList(), _contexto.Departamento.ToList());
+                var actividades = _contexto.Actividad.AsQueryable();
 
-                return listaActividades;
+                if (!string.IsNullOrEmpty(modelo.Search.Value))
+                {
+                    actividades = actividades.Where(m => m.General_NumeroPredial == modelo.Search.Value);
+                }
+
+                if (orderByDescending)
+                    actividades = actividades.OrderBy(m=> columnaOrdenar);
+                else
+                    actividades = actividades.OrderByDescending(m => columnaOrdenar);
+
+                var listadoActividades= actividades.Skip(modelo.Start).Take(modelo.Length).ToList();
+
+                var listaActividades = _mapper.MapDataAModel(listadoActividades, _contexto.Ciudad.ToList(), _contexto.Departamento.ToList());
+
+                var tabla = new DataTablesResponse(modelo.Draw, listaActividades, _contexto.Actividad.Count(), listadoActividades.Count);
+
+                return tabla;
 
             }
             catch (Exception ex)
             {
-                string message = ex.Message;
-                return new List<ActividadConsultaViewModel>();
+                string message = ex.Message;                
+                return new DataTablesResponse(modelo.Draw, new List<ActividadConsultaViewModel>(), 0, 0); 
             }
         }
     }
