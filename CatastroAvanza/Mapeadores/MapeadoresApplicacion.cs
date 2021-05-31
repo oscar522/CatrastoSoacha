@@ -4,6 +4,7 @@ using CatastroAvanza.Models.Dashboard;
 using CatastroAvanza.Repositorio.DBContexto.Entidades;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 
 namespace CatastroAvanza.Mapeadores
 {
@@ -122,11 +123,11 @@ namespace CatastroAvanza.Mapeadores
             List<ActividadConsultaViewModel> aaData = actividades.Select(m => new ActividadConsultaViewModel
             {
                 Coordinador = m.General_Coordinador,
-                Departamento = dpto.Where(d=> d.id_ct_depto == m.General_Departamento).FirstOrDefault().nombre,
+                Departamento = dpto.Where(d=> d.id_ct_depto == m.General_Departamento).DefaultIfEmpty(new ctdepto()).FirstOrDefault().nombre,
                 Ejecutor =m.General_Ejecutor,
                 Fecha = m.General_Fecha,
                 Id = m.Id,
-                Municipio =ciudad.Where(c=> c.id ==  m.General_Municipio).FirstOrDefault().nombre,
+                Municipio =ciudad.Where(c=> c.id ==  m.General_Municipio).DefaultIfEmpty(new ctciudad()).FirstOrDefault().nombre,
                 NumeroPredial = m.General_NumeroPredial
             }).ToList();
 
@@ -179,9 +180,14 @@ namespace CatastroAvanza.Mapeadores
 
             if (model.Files != null)
             {
-                result.Arcvhivo_Fmi = model.Files.Fmi.FileName;
-                result.Arcvhivo_CertificadoNomenclatura = model.Files.CertificadoNomenclatura.FileName;
-                result.Arcvhivo_FotoFachada = model.Files.FotoFachada.FileName;
+                result.Arcvhivo_FichaPredial = MapeaNombreDelArchivo(model.Files.FichaPredial);
+                result.Arcvhivo_Plano = MapeaNombreDelArchivo(model.Files.Plano);
+                result.Arcvhivo_Escrituras = MapeaNombreDelArchivo(model.Files.Escrituras);
+                result.Arcvhivo_Fmi = MapeaNombreDelArchivo(model.Files.Fmi);
+                result.Arcvhivo_CertificadoNomenclatura = MapeaNombreDelArchivo(model.Files.CertificadoNomenclatura);
+                result.Arcvhivo_Croquis = MapeaNombreDelArchivo(model.Files.Croquis);
+                result.Arcvhivo_FotoFachada = MapeaNombreDelArchivo(model.Files.FotoFachada);
+                
             }
 
             if (model.Nomenclatura != null)
@@ -240,7 +246,14 @@ namespace CatastroAvanza.Mapeadores
             }
 
             return result;
+        }
 
+        private string MapeaNombreDelArchivo(HttpPostedFileBase archivo)
+        {
+            if (archivo == null)
+                return string.Empty;
+            else
+                return string.IsNullOrEmpty(archivo.FileName) ? string.Empty : archivo.FileName;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CatastroAvanza.Enumerations;
+using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Models;
 using CatastroAvanza.Models.ActividadViewModels;
 using CatastroAvanza.Negocio.Contratos;
@@ -62,9 +63,9 @@ namespace CatastroAvanza.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> ObtenerActividades()
+        public async Task<ActionResult> ObtenerActividades([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest modelo)
         {
-            var actividades = _actividad.ConsultarActividades();
+            var actividades = await _actividad.ConsultarActividades(modelo);
             return Json(actividades, JsonRequestBehavior.AllowGet);
         }
 

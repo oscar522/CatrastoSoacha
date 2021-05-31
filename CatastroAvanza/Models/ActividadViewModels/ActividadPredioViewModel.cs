@@ -14,7 +14,7 @@ namespace CatastroAvanza.Models.ActividadViewModels
             Tramite = new TramiteViewModel();
             Terreno = new TerrenoViewModel();
             Construccion = new ConstruccionViewModel();
-            //Files = new FileViewModel();
+            Files = new FileViewModel();
             Informacion = new InformacionGeneral();
         }
 

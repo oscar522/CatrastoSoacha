@@ -208,10 +208,19 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Enumerations\ActividadesColumnasOrdenables.cs" />
     <Compile Include="Enumerations\CatalogosEnum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DataTableHelper\Column.cs" />
+    <Compile Include="Helpers\DataTableHelper\ColumnCollection.cs" />
+    <Compile Include="Helpers\DataTableHelper\DataTablesBinder.cs" />
+    <Compile Include="Helpers\DataTableHelper\DataTablesResponse.cs" />
+    <Compile Include="Helpers\DataTableHelper\DefaultDataTablesRequest.cs" />
+    <Compile Include="Helpers\DataTableHelper\IDataTablesRequest.cs" />
+    <Compile Include="Helpers\DataTableHelper\NameValueCollectionExtensions.cs" />
+    <Compile Include="Helpers\DataTableHelper\Search.cs" />
     <Compile Include="Identity\DbContext\ApplicationIdentityDbContext.cs" />
     <Compile Include="Identity\DbContext\Configuration.cs" />
     <Compile Include="Identity\DbContext\Migraciones\202105050434313_Inicial.cs" />
@@ -221,6 +230,7 @@
     <Compile Include="Identity\Model\ApplicationUser.cs" />
     <Compile Include="Infraestructura\ContratosServicios\IAlmacenamientoArchivos.cs" />
     <Compile Include="Infraestructura\ImplementacionesServicios\AlmacenamientoArchivos.cs" />
+    <Compile Include="Infraestructura\InformationDocumento.cs" />
     <Compile Include="Mapeadores\IMapeadoresApplicacion.cs" />
     <Compile Include="Mapeadores\MapeadoresApplicacion.cs" />
     <Compile Include="Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs" />
@@ -285,6 +295,10 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202105240254145_crea_tabla_actividad.designer.cs">
       <DependentUpon>202105240254145_crea_tabla_actividad.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202105262255321_Agregadas_columnas_para_nombre_archivos.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202105262255321_Agregadas_columnas_para_nombre_archivos.designer.cs">
+      <DependentUpon>202105262255321_Agregadas_columnas_para_nombre_archivos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -322,6 +336,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CatastroAvanza.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -970,160 +985,6 @@
     <Content Include="Content\login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Content\login\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\login\vendor\bootstrap\css\bootstrap.min.css.map" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_2-4-2020-11-40-15-373.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_2-4-2020-12-58-9-537.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_2-4-2020-13-6-25-182.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_2-4-2020-16-10-46-124.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_2-4-2020-16-12-19-184.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_2-4-2020-16-5-18-314.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_2-4-2020-16-8-14-951.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_2-4-2020-16-9-1-334.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_3-4-2020-8-54-42-979.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_3-4-2020-9-22-57-994.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_3-4-2020-9-26-48-872.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_3-4-2020-9-29-35-926.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_3-4-2020-9-31-18-751.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_7-4-2020-21-15-4-399.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_123_F_7-4-2020-22-10-23-789.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_12_F_30-3-2020-17-13-14-378.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_12_F_31-3-2020-14-18-47-737.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_2552_F_30-3-2020-15-13-2-708.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O_2552_F_30-3-2020-16-40-32-672.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O__F_2-4-2020-12-57-14-797.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O__F_2-4-2020-15-27-27-533.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O__F_2-4-2020-15-28-38-357.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O__F_2-4-2020-15-30-4-182.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O__F_2-4-2020-17-3-30-184.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\A_E__O__F_2-4-2020-17-3-9-693.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-14-11-39-874.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-14-41-21-88.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-14-45-40-445.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-15-24-25-862.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-15-25-48-737.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-15-27-43-872.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-15-28-15-25.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-15-29-29-500.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-15-52-0-498.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-15-57-37-234.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-12-13-55.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-13-5-243.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-13-50-776.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-14-8-889.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-17-52-460.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-23-39-201.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-25-58-648.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-27-47-475.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-28-22-966.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-28-46-342.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-30-27-449.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-31-45-347.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-16-4-9-608.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-18-1-32-999.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-18-10-13-419.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-18-3-34-539.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_54_F_6-4-2020-18-7-32-477.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_55_F_6-4-2020-17-1-27-228.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_55_F_6-4-2020-17-5-26-626.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_73_F_17-4-2020-16-7-54-100.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_73_F_27-4-2020-14-58-30-694.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Concepto_C_73_F_27-4-2020-15-8-51-829.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Escrituras_C_54_F_6-4-2020-15-53-12-559.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Escrituras_C_54_F_6-4-2020-16-15-54-418.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\FMI_C_54_F_6-4-2020-14-38-49-44.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\FMI_C_54_F_6-4-2020-15-50-0-833.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\FMI_C_54_F_6-4-2020-15-50-56-25.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\FMI_C_54_F_6-4-2020-16-4-55-282.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\FMI_C_54_F_6-4-2020-18-9-11-146.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\N_A_C_54_F_6-4-2020-12-21-29-432.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Oficios, Memorandos_C_54_F_6-4-2020-12-34-55-540.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Oficios, Memorandos_C_54_F_6-4-2020-12-36-16-222.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Plano_C_54_F_6-4-2020-12-33-25-285.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Plano_C_54_F_6-4-2020-14-36-58-509.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Plano_C_54_F_6-4-2020-15-39-31-724.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Plano_C_54_F_6-4-2020-15-58-11-792.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Plano_C_54_F_6-4-2020-15-59-38-282.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Plano_C_54_F_6-4-2020-16-17-3-475.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Plano_C_55_F_6-4-2020-17-0-4-802.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Plano_C_55_F_6-4-2020-17-2-57-302.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Plano_C_55_F_6-4-2020-17-3-37-773.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Plano_C_73_F_13-4-2020-11-11-14-911.docx" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Plano_C_73_F_27-4-2020-15-34-53-730.docx" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Shp_C_54_F_6-4-2020-14-12-17-734.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Shp_C_54_F_6-4-2020-16-20-0-941.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\Gestion\Shp_C_54_F_6-4-2020-18-2-11-357.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_111_F_8-4-2020-9-52-44-434.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_13-4-2020-11-2-43-384.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_2-4-2020-11-40-10-81.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_2-4-2020-13-6-18-297.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_2-4-2020-16-10-42-16.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_2-4-2020-16-12-14-301.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_2-4-2020-16-5-13-103.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_2-4-2020-16-8-11-599.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_2-4-2020-16-8-58-169.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_3-4-2020-8-54-38-369.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_3-4-2020-9-22-52-387.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_3-4-2020-9-26-42-811.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_3-4-2020-9-29-26-739.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_3-4-2020-9-31-15-854.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_7-4-2020-21-12-34-612.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_7-4-2020-21-15-0-711.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_7-4-2020-22-10-15-512.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_8-4-2020-9-2-11-662.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_8-4-2020-9-29-35-306.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_123_F_8-4-2020-9-41-36-465.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_12_F_30-3-2020-17-13-8-797.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_12_F_31-3-2020-14-18-39-324.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_20206200263742_F_16-4-2020-17-5-12-837.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_2552_F_30-3-2020-15-12-55-860.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_2552_F_30-3-2020-16-40-28-403.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_32_F_8-4-2020-9-32-0-638.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_666_F_8-4-2020-9-51-42-413.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O_69_F_8-4-2020-9-34-15-801.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-11-13-55-170.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-11-15-3-887.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-11-16-20-744.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-11-17-50-410.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-11-34-55-36.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-11-39-25-197.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-11-52-53-315.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-11-54-43-463.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-11-56-12-492.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-11-56-45-623.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-11-57-24-149.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-0-21-525.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-1-2-713.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-1-48-228.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-29-55-856.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-3-49-946.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-31-38-820.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-32-19-580.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-33-56-231.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-36-34-897.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-37-11-204.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-37-44-151.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-37-51-968.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-4-20-683.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-57-51-831.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-12-57-9-415.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-15-27-22-828.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-17-10-38-970.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-17-10-59-985.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-17-11-11-134.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-17-11-43-420.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-17-11-52-806.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-17-11-58-119.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-17-6-45-493.pdf" />
-    <Content Include="Content\Pdfs\Conceptos\S_E__O__F_2-4-2020-17-7-39-469.pdf" />
-    <Content Include="Content\Pdfs\Deptos\47\0189\B47018901962009.PDF" />
-    <Content Include="Content\Pdfs\Muestras\Leerasignar.xlsx" />
-    <Content Include="Content\Pdfs\Muestras\LeerLeerInsertarBaldios.xlsx" />
-    <Content Include="Content\Pdfs\Solicitantes\A_3_S_F_21-5-2020-11-43-24-33.pdf" />
-    <Content Include="Content\Pdfs\Solicitantes\C_3_S_F_21-5-2020-11-42-9-851.pdf" />
-    <Content Include="Content\Pdfs\Solicitantes\P_3_S_F_21-5-2020-11-40-12-68.pdf" />
-    <Content Include="Content\Pdfs\Solicitantes\P_9_S_F_25-5-2020-20-42-23-757.pdf" />
-    <Content Include="Content\Pdfs\Solicitantes\V_11_S_F_25-5-2020-21-1-50-173.pdf" />
-    <Content Include="Content\Pdfs\Solicitantes\V_3_S_F_21-5-2020-11-35-47-81.pdf" />
-    <Content Include="Content\Pdfs\Solicitantes\V_7384_S_F_15-3-2021-12-13-55-920.pdf" />
     <Content Include="Content\ConfigPdfUri.json" />
     <Content Include="font\material-icons\MaterialIcons-Regular.eot" />
     <Content Include="font\material-icons\MaterialIcons-Regular.ttf" />
@@ -1349,11 +1210,6 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\ScriptConceptos\ConsultaTablas.js" />
-    <Content Include="Scripts\ScriptConceptos\CreacionTablas.js" />
-    <Content Include="Scripts\ScriptConceptos\CrearEnTablas.js" />
-    <Content Include="Scripts\ScriptConceptos\EliminarTabla.js" />
-    <Content Include="Scripts\ScriptConceptos\Validaciones.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -1746,6 +1602,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="UploadFiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -1776,6 +1633,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202105240254145_crea_tabla_actividad.resx">
       <DependentUpon>202105240254145_crea_tabla_actividad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202105262255321_Agregadas_columnas_para_nombre_archivos.resx">
+      <DependentUpon>202105262255321_Agregadas_columnas_para_nombre_archivos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
