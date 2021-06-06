@@ -34,11 +34,14 @@ namespace CatastroAvanza.Repositorio.DBContexto.ConfiguracionEntidades
             Property(s => s.Terreno_EscrituraLinderos)
                 .HasMaxLength(300);
 
-            Property(s => s.Terreno_RequiereVisita)
-                .HasMaxLength(300);
-
             Property(s => s.Construccion_ObservacionUsosDestino)
                 .HasMaxLength(300);
+
+            Property(s => s.Construccion_Destino_Detalle)
+                .HasMaxLength(300);
+
+            Property(s => s.Construccion_Uso_Detalle)
+            .HasMaxLength(300);
         }
     }
 }

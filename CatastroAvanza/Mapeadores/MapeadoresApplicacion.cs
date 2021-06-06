@@ -112,7 +112,7 @@ namespace CatastroAvanza.Mapeadores
         public ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctciudad> ciudades)
         {
             ICollection<CatalogoViewModel> result = ciudades
-               .Select(m => new CatalogoViewModel { Value = m.id, Text = m.nombre })
+               .Select(m => new CatalogoViewModel { Value = m.idctmuncipio, Text = m.nombre })
                .ToList();
 
             return result;
@@ -175,6 +175,9 @@ namespace CatastroAvanza.Mapeadores
                 result.Construccion_ElminarConstrucciones = model.Construccion.ElminarConstrucciones;
                 result.Construccion_AdicionarAnexos = model.Construccion.AdicionarAnexos;
                 result.Construccion_ElminarAnexos = model.Construccion.ElminarAnexos;
+                result.Construccion_Uso_Detalle = model.Construccion.UsoDetalle;
+                result.Construccion_Destino_Detalle = model.Construccion.DestinoDetalle;
+
             }
 
 

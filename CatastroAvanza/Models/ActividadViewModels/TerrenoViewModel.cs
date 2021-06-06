@@ -7,8 +7,8 @@ namespace CatastroAvanza.Models.ActividadViewModels
     public class TerrenoViewModel
     {
 
-        [DisplayName("Tiene Area?")]
-        [Required(ErrorMessage = "Tiene Area? es requerido.")]
+        [DisplayName("Tiene Area juridica?")]
+        [Required(ErrorMessage = "Tiene Area juridica? es requerido.")]
         public bool TieneArea { get; set; }
 
         [DisplayName("Area del terreno")]
@@ -33,7 +33,7 @@ namespace CatastroAvanza.Models.ActividadViewModels
 
         [DisplayName("Requiere visita")]
         [Required(ErrorMessage = "Requiere visita es requerido.")]
-        public string RequiereVisita { get; set; }
+        public bool RequiereVisita { get; set; }
 
         [DisplayName("Observacion de la visita")]
         [Required(ErrorMessage = "Observacion de la visita es requerido.")]

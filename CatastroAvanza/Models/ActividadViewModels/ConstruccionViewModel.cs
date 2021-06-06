@@ -11,9 +11,17 @@ namespace CatastroAvanza.Models.ActividadViewModels
         [Required(ErrorMessage = "El uso es correcto? es requerido.")]
         public bool Uso { get; set; }
 
+        [DisplayName("Uso")]
+        [Required(ErrorMessage = "Uso es requerido.")]
+        public string UsoDetalle { get; set; }
+
         [DisplayName("El destino es correcto?")]
         [Required(ErrorMessage = "El destino es correcto? es requerido.")]
         public bool Destino { get; set; }
+
+        [DisplayName("Destino")]
+        [Required(ErrorMessage = "Destino es requerido.")]
+        public string DestinoDetalle { get; set; }
 
         [DisplayName("Observacion")]
         [Required(ErrorMessage = "Observacion del uso del destino es requerido.")]

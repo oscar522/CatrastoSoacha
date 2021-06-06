@@ -10,7 +10,7 @@
                          {
                             new SelectListItem { Text = "Si", Value = "true"},
                             new SelectListItem { Text = "No", Value = "false"}
-                        }, new { @class = "form-control" })
+                        }, "", new { @class = "form-control listas" })
                 @Html.ValidationMessageFor(m => m.Terreno.TieneArea, "", new { @class = "text-danger" })
               
             </div>
@@ -18,14 +18,14 @@
         <div class="col-md-4">
             <div class="form-group">
                 @Html.LabelFor(m => m.Terreno.AreaTerreno)
-                @Html.EditorFor(m => m.Terreno.AreaTerreno, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(m => m.Terreno.AreaTerreno, new { htmlAttributes = new { @class = "form-control bloqueado", @Value = "" } })
                 @Html.ValidationMessageFor(m => m.Terreno.AreaTerreno, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 @Html.LabelFor(m => m.Terreno.UnidadArea)
-                @Html.DropDownListFor(m => m.Terreno.UnidadArea, Model.Terreno.UnidadesArea, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Terreno.UnidadArea, Model.Terreno.UnidadesArea, "", new { @class = "form-control bloqueado" })
                 @Html.ValidationMessageFor(m => m.Terreno.UnidadesArea, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -35,12 +35,12 @@
         <div class="col-md-4">
             <div class="form-group">
                 @Html.LabelFor(m => m.Terreno.AreaTerrenoEnMetros)
-                @Html.EditorFor(m => m.Terreno.AreaTerrenoEnMetros, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(m => m.Terreno.AreaTerrenoEnMetros, new { htmlAttributes = new { @class = "form-control bloqueado", @Value = "" } })
                 @Html.ValidationMessageFor(m => m.Terreno.AreaTerrenoEnMetros, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Terreno.PorcentajeAreaJudicialAreaCatastral)
-                @Html.EditorFor(m => m.Terreno.PorcentajeAreaJudicialAreaCatastral, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(m => m.Terreno.PorcentajeAreaJudicialAreaCatastral, new { htmlAttributes = new { @class = "form-control bloqueado", @Value = "" } })
                 @Html.ValidationMessageFor(m => m.Terreno.PorcentajeAreaJudicialAreaCatastral, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -55,14 +55,18 @@
                          {
                             new SelectListItem { Text = "Si", Value = "true"},
                             new SelectListItem { Text = "No", Value = "false"}
-                        }, new { @class = "form-control" })
+                        }, "", new { @class = "form-control listas" })
                 @Html.ValidationMessageFor(m => m.Terreno.IdentificacionPredio, "", new { @class = "text-danger" })                
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                @Html.LabelFor(m => m.Terreno.RequiereVisita)
-                @Html.EditorFor(m => m.Terreno.RequiereVisita, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(m => m.Terreno.RequiereVisita)                
+                @Html.DropDownListFor(m => m.Terreno.RequiereVisita, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, "", new { @class = "form-control listas" })
                 @Html.ValidationMessageFor(m => m.Terreno.RequiereVisita, "", new { @class = "text-danger" })
             </div>
         </div>

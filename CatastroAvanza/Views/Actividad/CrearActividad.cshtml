@@ -3,7 +3,8 @@
     ViewBag.Title = "CrearActividad";
 }
 @section Styles{
-    @Styles.Render("~/Content/bootstrap-fileinput")
+    <link rel="stylesheet" href="~/Content/bootstrap-fileinput/css/fileinput.min.css">
+    <link rel="stylesheet" href="~/Content/bootstrap-fileinput/themes/explorer-fa/theme.min.css">
 }
 
 <h2>Crear Actividad</h2>
@@ -15,7 +16,7 @@
         <div class="row">
             <div class="col-md-12 text-right">
                 <a class="btn btn-primary" href="@Url.Action("Index")">Regresar al listado de actividades</a>
-                <input type="submit" name="name" value="Salvar Actividad" class="btn btn-primary" id="saveUpBtn" />
+                <input type="submit" name="name" value="Salvar Actividad" class="btn btn-primary" id="saveUpBtn" disabled/>
                 <br />
             </div>
         </div>
@@ -26,22 +27,30 @@
             <div class="col-md-6">
                 <h5><u>Predio</u></h5>
                 <div class="form-group ">
-                    @Html.LabelFor(m => m.NumeroPredial)
-                    @Html.EditorFor(m => m.NumeroPredial, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                    @Html.ValidationMessageFor(m => m.NumeroPredial, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-md-8">
+                            @Html.LabelFor(m => m.NumeroPredial)
+                            @Html.EditorFor(m => m.NumeroPredial, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.ValidationMessageFor(m => m.NumeroPredial, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">                            
+                            <label class="form-control-label">&nbsp;</label>
+                            <button class="form-control btn btn-primary" style="background-color: #007bff !important" id="btnBuscar"><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             @Html.LabelFor(m => m.Ejecutor)
-                            @Html.DropDownListFor(m => m.Ejecutor, Model.Ejecutores, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.Ejecutor, Model.Ejecutores,"", new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Ejecutor, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             @Html.LabelFor(m => m.Coordinador)
-                            @Html.DropDownListFor(m => m.Coordinador, Model.Coordinadores, new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.Coordinador, Model.Coordinadores, "", new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Coordinador, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -58,16 +67,16 @@
             </div>
             <div class="col-md-4 text-center align-items-center align-content-center">
                 <figure class="figure">
-                    <img src="~/Images/casas_imgs/casa_1.png" height="200px" width="250px" class="figure-img img-fluid rounded" alt="...">
+                    <img src="~/Images/casas_imgs/casa_1.png" height="200px" width="250px" class="figure-img img-fluid rounded" alt="..." id="fotofachadaPreview">
                     <figcaption class="figure-caption text-right">Demo image.</figcaption>
                 </figure>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 invisible sectionToShow">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link" id="FPTab" data-toggle="modal" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false" data-target="#predialModal" ><i class="fa fa-folder-o" id="FPI"></i> Cargar Ficha Predial</a>
+                    <a class="nav-link" id="FPTab" data-toggle="modal" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false" data-target="#predialModal"><i class="fa fa-folder-open-o" id="FPI"></i> Cargar Ficha Predial</a>
                     <a class="nav-link" id="PlanoTab" data-toggle="modal" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" data-target="#PlanoModal"><i class="fa fa-folder-open-o" id="PlanoI"></i> Cargar Plano</a>
                     <a class="nav-link" id="EscTab" data-toggle="modal" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false" data-target="#EscriturasModal"><i class="fa fa-folder-open-o" id="EscI"></i> Cargar Escrituras</a>
-                    <a class="nav-link" id="FmiTab" data-toggle="modal" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false" data-target="#FmiModal"><i class="fa fa-folder-open-o" id="FmiI" ></i> Cargar FMI</a>
+                    <a class="nav-link" id="FmiTab" data-toggle="modal" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false" data-target="#FmiModal"><i class="fa fa-folder-open-o" id="FmiI"></i> Cargar FMI</a>
                     <a class="nav-link" id="CnTab" data-toggle="modal" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false" data-target="#CertificadoNomenclaturaModal"><i class="fa fa-folder-open-o" id="CnI"></i> Cargar C. Nomenclatura</a>
                     <a class="nav-link" id="CrqTab" data-toggle="modal" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false" data-target="#CroquisModal"><i class="fa fa-folder-open-o" id="CrqI"></i> Cargar Croquis</a>
                     <a class="nav-link" id="FotoTab" data-toggle="modal" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false" data-target="#fotoModal"><i class="fa fa-folder-open-o " id="FotoI"></i> Cargar Foto fachada</a>
@@ -76,45 +85,45 @@
         </div>
         <br />
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 invisible sectionToShow">
                 @Html.Partial("_InformacionGeneral", Model)
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 invisible sectionToShow">
                 @Html.Partial("_Archivos", Model)
             </div>
         </div>
         <hr />
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 invisible sectionToShow">
                 @Html.Partial("_Geograficas", Model)
             </div>
         </div>
         <hr />
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 invisible sectionToShow">
                 @Html.Partial("_Tramites", Model)
-            </div>           
-        </div> 
+            </div>
+        </div>
         <hr />
         <div class="row">
-            <div class="col-md-12">
-                @Html.Partial("_Terreno", Model)                
+            <div class="col-md-12 invisible sectionToShow">
+                @Html.Partial("_Terreno", Model)
             </div>
 
         </div>
         <hr />
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 invisible sectionToShow">
                 @Html.Partial("_Construccion", Model)
             </div>
             @*<div class="col-md-6">
-                @Html.Partial("_Nomenclatura", Model)
-            </div>*@
+                    @Html.Partial("_Nomenclatura", Model)
+                </div>*@
         </div>
         <hr />
         <div class="row">
             <div class="col-md-12 text-right">
-                <input type="submit" name="name" value="Salvar Actividad" class="btn btn-primary" id="saveDownBtn" />
+                <input type="submit" name="name" value="Salvar Actividad" class="btn btn-primary" id="saveDownBtn" disabled/>
             </div>
 
         </div>
@@ -122,8 +131,8 @@
     <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
             <div class="toast-header">
-                <img src="..." class="rounded mr-2" alt="...">
-                <strong class="mr-auto">Lista de errores - Creacion actividad</strong>                
+                <i class="fa fa-support"></i>
+                <strong class="mr-auto">Lista de errores - Creacion actividad</strong>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -136,12 +145,18 @@
 </form>
 @section Scripts
 {
-    @Scripts.Render("~/bundles/bootstrap-fileinput")
+    <script src=" ~/Scripts/plugins/piexif.min.js"></script>
+    <script src=" ~/Scripts/plugins/sortable.min.js"></script>
+    <script src=" ~/Scripts/fileinput.min.js"></script>
+    <script src=" ~/Scripts/locales/es.js"></script>
+    <script src=" ~/Content/bootstrap-fileinput/themes/explorer-fa/theme.min.js"></script>
+    <script src=" ~/Content/bootstrap-fileinput/themes/fa/theme.min.js"></script>
     @Scripts.Render("~/Scripts/Paginas/CrearActividad.js")
 
 <script>
         $(document).ready(function () {
-            ActividadJs.urlObtenerMunicipios ='@Url.Action("ObternerMunicipios")';
+            ActividadJs.urlObtenerMunicipios = '@Url.Action("ObternerMunicipios")';
+            ActividadJs.urlObtenerPredial = '@Url.Action("ObtenerPredial")';
             ActividadJs.Inicializar();
         });
 </script>

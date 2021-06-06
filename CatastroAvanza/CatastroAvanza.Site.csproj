@@ -202,6 +202,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Constantes\UnidadesArea.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActividadController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -298,6 +299,14 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202105262255321_Agregadas_columnas_para_nombre_archivos.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202105262255321_Agregadas_columnas_para_nombre_archivos.designer.cs">
       <DependentUpon>202105262255321_Agregadas_columnas_para_nombre_archivos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106060444548_Elimina_Columna_Requiere_Visita_Tabla_Actividad.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106060444548_Elimina_Columna_Requiere_Visita_Tabla_Actividad.designer.cs">
+      <DependentUpon>202106060444548_Elimina_Columna_Requiere_Visita_Tabla_Actividad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106060446572_Agrega_Nuevas_Columnas_Tabla_Actividad.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106060446572_Agrega_Nuevas_Columnas_Tabla_Actividad.designer.cs">
+      <DependentUpon>202106060446572_Agrega_Nuevas_Columnas_Tabla_Actividad.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
@@ -1636,6 +1645,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202105262255321_Agregadas_columnas_para_nombre_archivos.resx">
       <DependentUpon>202105262255321_Agregadas_columnas_para_nombre_archivos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106060444548_Elimina_Columna_Requiere_Visita_Tabla_Actividad.resx">
+      <DependentUpon>202106060444548_Elimina_Columna_Requiere_Visita_Tabla_Actividad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106060446572_Agrega_Nuevas_Columnas_Tabla_Actividad.resx">
+      <DependentUpon>202106060446572_Agrega_Nuevas_Columnas_Tabla_Actividad.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

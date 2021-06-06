@@ -21,9 +21,7 @@ namespace CatastroAvanza
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(                      
                       "~/Scripts/popper.min.js",
                       "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/bootstrap.bundle.min.js",                      
-                      "~/Scripts/ScriptConceptos/Validaciones.js",
-                      "~/Scripts/addons/datatables.min.js"));
+                      "~/Scripts/bootstrap.bundle.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-fileinput").Include(
                       "~/Scripts/plugins/piexif.min.js",

@@ -9,7 +9,7 @@
                      {
                             new SelectListItem { Text = "Si", Value = "true"},
                             new SelectListItem { Text = "No", Value = "false"}
-                    }, new { @class = "form-control" })
+                    }, "", new { @class = "form-control listas" })
             @Html.ValidationMessageFor(m => m.Construccion.TieneConstrucciones, "", new { @class = "text-danger" })            
         </div>
         <div class="form-group">
@@ -18,7 +18,7 @@
                      {
                             new SelectListItem { Text = "Si", Value = "true"},
                             new SelectListItem { Text = "No", Value = "false"}
-                    }, new { @class = "form-control" })
+                    }, "", new { @class = "form-control listas" })
             @Html.ValidationMessageFor(m => m.Construccion.ConstruccionEsCorrecta, "", new { @class = "text-danger" })            
         </div>
         <div class="form-group">
@@ -27,7 +27,7 @@
                      {
                             new SelectListItem { Text = "Si", Value = "true"},
                             new SelectListItem { Text = "No", Value = "false"}
-                    }, new { @class = "form-control" })
+                    }, "", new { @class = "form-control listas" })
             @Html.ValidationMessageFor(m => m.Construccion.AdicionaCancelaUnidades, "", new { @class = "text-danger" })           
         </div>
     </div>
@@ -47,10 +47,10 @@
                         @Html.ValidationMessageFor(m => m.Construccion.TieneConstrucciones, "", new { @class = "text-danger" })
                     </td>
                     <td class="text-center">
-                        @Html.RadioButtonFor(m => m.Construccion.TieneConstrucciones, true, new { @class = "form-check-input" })
+                        @Html.RadioButtonFor(m => m.Construccion.TieneConstrucciones, true, new { @class = "form-check-input bloqueado Construccion_AdicionaCancelaUnidades" })
                     </td>
                     <td class="text-center">
-                        @Html.RadioButtonFor(m => m.Construccion.TieneConstrucciones, false, new { @class = "form-check-input" })
+                        @Html.RadioButtonFor(m => m.Construccion.TieneConstrucciones, false, new { @class = "form-check-input bloqueado Construccion_AdicionaCancelaUnidades" })
                     </td>
                 </tr>
                 <tr>
@@ -59,10 +59,10 @@
                         @Html.ValidationMessageFor(m => m.Construccion.ElminarConstrucciones, "", new { @class = "text-danger" })
                     </td>
                     <td class="text-center">
-                        @Html.RadioButtonFor(m => m.Construccion.ElminarConstrucciones, true, new { @class = "form-check-input" })
+                        @Html.RadioButtonFor(m => m.Construccion.ElminarConstrucciones, true, new { @class = "form-check-input bloqueado Construccion_AdicionaCancelaUnidades" })
                     </td>
                     <td class="text-center">
-                        @Html.RadioButtonFor(m => m.Construccion.ElminarConstrucciones, false, new { @class = "form-check-input" })
+                        @Html.RadioButtonFor(m => m.Construccion.ElminarConstrucciones, false, new { @class = "form-check-input bloqueado Construccion_AdicionaCancelaUnidades" })
                     </td>
                 </tr>
                 <tr>
@@ -71,10 +71,10 @@
                         @Html.ValidationMessageFor(m => m.Construccion.AdicionarAnexos, "", new { @class = "text-danger" })
                     </td>
                     <td class="text-center">
-                        @Html.RadioButtonFor(m => m.Construccion.AdicionarAnexos, true, new { @class = "form-check-input" })
+                        @Html.RadioButtonFor(m => m.Construccion.AdicionarAnexos, true, new { @class = "form-check-input bloqueado Construccion_AdicionaCancelaUnidades" })
                     </td>
                     <td class="text-center">
-                        @Html.RadioButtonFor(m => m.Construccion.AdicionarAnexos, false, new { @class = "form-check-input" })
+                        @Html.RadioButtonFor(m => m.Construccion.AdicionarAnexos, false, new { @class = "form-check-input bloqueado Construccion_AdicionaCancelaUnidades" })
                     </td>
                 </tr>
                 <tr>
@@ -83,10 +83,10 @@
                         @Html.ValidationMessageFor(m => m.Construccion.ElminarAnexos, "", new { @class = "text-danger" })
                     </td>
                     <td class="text-center">
-                        @Html.RadioButtonFor(m => m.Construccion.ElminarAnexos, true, new { @class = "form-check-input" })
+                        @Html.RadioButtonFor(m => m.Construccion.ElminarAnexos, true, new { @class = "form-check-input bloqueado Construccion_AdicionaCancelaUnidades" })
                     </td>
                     <td class="text-center">
-                        @Html.RadioButtonFor(m => m.Construccion.ElminarAnexos, false, new { @class = "form-check-input" })
+                        @Html.RadioButtonFor(m => m.Construccion.ElminarAnexos, false, new { @class = "form-check-input bloqueado Construccion_AdicionaCancelaUnidades" })
                     </td>
                 </tr>
             </tbody>
@@ -105,7 +105,7 @@
                      {
                             new SelectListItem { Text = "Si", Value = "true"},
                             new SelectListItem { Text = "No", Value = "false"}
-                    }, new { @class = "form-control" })
+                    }, "", new { @class = "form-control listas" })
             @Html.ValidationMessageFor(m => m.Construccion.Uso, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
@@ -114,7 +114,7 @@
                      {
                             new SelectListItem { Text = "Si", Value = "true"},
                             new SelectListItem { Text = "No", Value = "false"}
-                    }, new { @class = "form-control" })
+                    }, "", new { @class = "form-control listas" })
             @Html.ValidationMessageFor(m => m.Construccion.Destino, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
@@ -123,8 +123,20 @@
                      {
                             new SelectListItem { Text = "Si", Value = "true"},
                             new SelectListItem { Text = "No", Value = "false"}
-                    }, new { @class = "form-control" })
+                    }, "", new { @class = "form-control listas" })
             @Html.ValidationMessageFor(m => m.Construccion.RequiereVisitaConstruccion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Construccion.UsoDetalle, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.EditorFor(m => m.Construccion.UsoDetalle, new { htmlAttributes = new { @class = "form-control bloqueado", @Value = "" } })
+            @Html.ValidationMessageFor(m => m.Construccion.UsoDetalle, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Construccion.DestinoDetalle, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.EditorFor(m => m.Construccion.DestinoDetalle, new { htmlAttributes = new { @class = "form-control bloqueado", @Value = "" } })
+            @Html.ValidationMessageFor(m => m.Construccion.DestinoDetalle, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="col-md-12">
