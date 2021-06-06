@@ -7,7 +7,7 @@
 
 
 function ListarActividades() {
-    $('#actividadesTbl').DataTable({
+    $('#table_User').DataTable({
         serverSide: true,
         processing: true,
         ajax: {
@@ -52,19 +52,5 @@ function ListarActividades() {
                 }
             }
         ],
-
     });
-
-        //    'aoColumns': [
-    //        { mDataProp: 'Id', title: 'Id' },
-    //        { mDataProp: 'NumeroPredial', title: 'Numero Predial' },
-    //        { mDataProp: 'Departamento', title: 'Departamento' },
-    //        { mDataProp: 'Municipio', title: 'Municipio' },
-    //        {
-    //            mDataProp: 'Fecha', title: 'Fecha', render: function (data, type, full) {
-    //                var mDate = moment(data);
-    //                return (mDate && mDate.isValid()) ? mDate.format('YYYY-MM-DD') : '';
-    //            }
-    //        },
-    //    ]
 }

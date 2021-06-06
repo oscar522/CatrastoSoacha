@@ -205,6 +205,7 @@
     <Compile Include="Constantes\UnidadesArea.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActividadController.cs" />
+    <Compile Include="Controllers\ActividadesDiariasController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -241,6 +242,8 @@
     <Compile Include="Models\AccountViewModels\SendCodeViewModel.cs" />
     <Compile Include="Models\AccountViewModels\VerifyCodeViewModel.cs" />
     <Compile Include="Models\AccountViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ActividadesDiarias\ActividadesDiariasTablaModel.cs" />
+    <Compile Include="Models\ActividadesDiarias\ActividadesDiariasModel.cs" />
     <Compile Include="Models\ActividadViewModels\ActividadConsultaViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\ActividadPredioViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\ConstruccionViewModel.cs" />
@@ -1120,8 +1123,9 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
-    <Content Include="Scripts\Paginas\ConsultarActividad.js" />
-    <Content Include="Scripts\Paginas\CrearActividad.js" />
+    <Content Include="Scripts\Paginas\Actividad\ConsultarActividad.js" />
+    <Content Include="Scripts\Paginas\Actividad\CrearActividad.js" />
+    <Content Include="Scripts\Paginas\ActividadesDiarias\CrearActividadDiaria.js" />
     <Content Include="Scripts\PdfVisualize.js" />
     <Content Include="Scripts\pdf\example.html" />
     <Content Include="Scripts\pdf\pdfjs-dist\build\pdf.js" />
@@ -1607,6 +1611,7 @@
     <Content Include="Views\Actividad\_Archivos.cshtml" />
     <Content Include="Scripts\moment.min.js.map" />
     <Content Include="Scripts\moment-with-locales.min.js.map" />
+    <Content Include="Views\ActividadesDiarias\CrearActividad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
