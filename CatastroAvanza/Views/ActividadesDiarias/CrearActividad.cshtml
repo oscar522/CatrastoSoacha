@@ -1,4 +1,4 @@
-﻿@model ActividadesDiariasModel
+﻿@model ActividadesDiariasViewModel
 
 <div class="card mb-4 wow fadeIn">
 
@@ -16,7 +16,7 @@
     </div>
 </div>
 <div class="wow fadeIn">
-    @using (Html.BeginForm("Crear", "ActividadesDiarias", FormMethod.Post))
+    @using (Html.BeginForm("CrearActividad", "ActividadesDiarias", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
@@ -92,7 +92,7 @@
                                             <label class="control-label col-md-12">Departamento</label>
                                         </div>
                                         <div class="col-md-7">
-                                            <select id="IdDepto" name="IdDepto" class="form-control col-md-6 bool CLASSIdDepto">
+                                            <select id="IdDepto" name="IdDepto" class="form-control bool CLASSIdDepto">
                                                 <option value="">Seleccione</option>
                                                 <option value="0">No Aplica</option>
                                             </select>
@@ -104,7 +104,7 @@
                                             <label class="control-label col-md-12">Municipio</label>
                                         </div>
                                         <div class="col-md-7">
-                                            <select id="IdMuni" name="IdMuni" class="form-control col-md-6 bool CLASSIdMuni ">
+                                            <select id="IdMuni" name="IdMuni" class="form-control bool CLASSIdMuni ">
                                                 <option value="">Seleccione</option>
                                                 <option value="0">No Aplica</option>
                                             </select>
@@ -148,7 +148,7 @@
                                     <h5> <label class="control-label col-md-12">Resumen Actividades</label> </h5>
                                     <hr />
                                     <div class="table-responsive ">
-                                        <table class="table table-striped cell-border compact stripe" id="table_User">
+                                        <table class="table table-striped cell-border stripe" id="table_User">
                                         </table>
                                     </div>
                                 </div>

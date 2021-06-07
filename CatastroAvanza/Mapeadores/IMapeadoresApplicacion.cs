@@ -1,4 +1,5 @@
 ﻿using CatastroAvanza.Models;
+using CatastroAvanza.Models.ActividadesDiarias;
 using CatastroAvanza.Models.ActividadViewModels;
 using CatastroAvanza.Models.Dashboard;
 using CatastroAvanza.Repositorio.DBContexto.Entidades;
@@ -14,15 +15,19 @@ namespace CatastroAvanza.Mapeadores
             ICollection<R2_2021_69295_CONSTRUCCIONES> construcciones2021, 
             ICollection<R1_2020_66069_PREDIOS> predios2020);
 
+        Actividad MapModelAData(ActividadPredioViewModel model);
+        ActividadDiaria MapModelAData(ActividadesDiariasViewModel modelo);
+
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctcatalogo> catalogos);
 
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctdepto> departamento);
 
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctciudad> ciudades);
 
-        Actividad MapModelAData(ActividadPredioViewModel model);
+        ICollection<CatalogoViewModel> MapDataAModel(ICollection<TipoActividad> tipoActividad);
 
         List<ActividadConsultaViewModel> MapDataAModel(List<Actividad> actividades, List<ctciudad> ciudad, List<ctdepto> dpto);
 
+        List<ActividadesDiariasTablaModel> MapDataAModel(List<ActividadDiaria> actividades);
     }
 }

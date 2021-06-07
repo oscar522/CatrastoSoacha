@@ -140,6 +140,7 @@ function GetDataInfo()
     $('#table_User').DataTable({
         serverSide: true,
         processing: true,
+        responsive: true,
         ajax: {
             dataType: 'json',
             type: "POST",

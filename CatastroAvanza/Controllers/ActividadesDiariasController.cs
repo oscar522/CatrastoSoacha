@@ -1,88 +1,85 @@
-﻿using CatastroAvanza.Helpers.DataTableHelper;
-using CatastroAvanza.Models;
+﻿using CatastroAvanza.Enumerations;
+using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Models.ActividadesDiarias;
 using CatastroAvanza.Negocio.Contratos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CatastroAvanza.Controllers
 {
     public class ActividadesDiariasController : Controller
     {
-
-        public ActividadesDiariasController(ICatalogo catalogos)
+        
+        public ActividadesDiariasController(ICatalogo catalogos,ISecurityLogic securityManager, IActividadDiariaLogic actividadDiaria)
         {
             _catalogos = catalogos;
+            _securityManager = securityManager;
+            _actividadDiaria = actividadDiaria;
         }
 
         private readonly ICatalogo _catalogos;
+        private readonly ISecurityLogic _securityManager;
+        private readonly IActividadDiariaLogic _actividadDiaria;
+
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         public async Task<ActionResult> CrearActividad()
         {
-            return View(new ActividadesDiariasModel());
+            return View(new ActividadesDiariasViewModel 
+            { 
+                NombreUsuario= HttpContext.User.Identity.Name,                                  
+                RolUsuario = "Administrador" 
+            });
         }
 
+        [HttpPost]
+        public async Task<ActionResult> CrearActividad(ActividadesDiariasViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(nameof(CrearActividad), model);
+            else
+            {
+                model.IdApsNetUser = HttpContext.User.Identity.Name;
+                model.RolUsuario = "5a53a3a6-9edd-4d18-8728-afdf427d2ead";
+                model.Id = await _actividadDiaria.CrearActividad(model);
+                return View(nameof(CrearActividad), new ActividadesDiariasViewModel());
+            }            
+        }
+
+        [HttpPost]
         public async Task<ActionResult> TipoActividadList(string RolId)
-        {
-
-            var actividades = new List<CatalogoViewModel> {
-                new CatalogoViewModel { Text = "Act 1", Value=1 },
-                new CatalogoViewModel { Text = "Act 2", Value=2 },
-                new CatalogoViewModel { Text = "Act 3", Value=3 }
-            };
-            
-            return Json(new SelectList(actividades, "Value", "Text", 1));
+        {                       
+            return Json(new SelectList(_catalogos.ObtenerActividadesPorRol(RolId), "Value", "Text", 1));
         }
-
+        [HttpPost]
         public async Task<ActionResult> GetRoles()
-        {
-
-            var roles = new List<CatalogoViewModel> {
-                new CatalogoViewModel { Text = "Rol 1", Value=1 },
-                new CatalogoViewModel { Text = "Rol 2", Value=2 },
-                new CatalogoViewModel { Text = "Rol 3", Value=3 }
-            };
-
-            return Json(new SelectList(roles, "Value", "Text", 1));
+        {            
+            var roles = _securityManager.GetRoles();
+            return Json(new SelectList(roles, "Id", "Name", 1));
         }
-
+        [HttpPost]
         public async Task<ActionResult> GetProcess()
         {
-
-            var roles = new List<CatalogoViewModel> {
-                new CatalogoViewModel { Text = "Process 1", Value=1 },
-                new CatalogoViewModel { Text = "Process 2", Value=2 },
-                new CatalogoViewModel { Text = "Process 3", Value=3 }
-            };
-
-            return Json(new SelectList(roles, "Value", "Text", 1));
+            return Json(new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.Proceso), "Value", "Text", 1));
         }
-
+        [HttpPost]
         public async Task<ActionResult> GetModalidades()
         {
-
-            var roles = new List<CatalogoViewModel> {
-                new CatalogoViewModel { Text = "Modalidad 1", Value=1 },
-                new CatalogoViewModel { Text = "Modalidad 2", Value=2 },
-                new CatalogoViewModel { Text = "Modalidad 3", Value=3 }
-            };
-
-            return Json(new SelectList(roles, "Value", "Text", 1));
+            return Json(new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.Modalidad), "Value", "Text", 1));
         }
-
+        [HttpPost]
         public async Task<ActionResult> GetDepartamentos()
         {            
             return Json(new SelectList(_catalogos.ObtenerDepartamentosPorIdPais(1), "Value", "Text", 1));
         }
-
+        [HttpPost]
         public async Task<ActionResult> GetMunicipios(int IdDepartamento)
         {
             var municipios = new SelectList(_catalogos.ObtenerMunicipiosPorIdDepartamento(IdDepartamento), "Value", "Text", 1);
@@ -93,22 +90,7 @@ namespace CatastroAvanza.Controllers
         public async Task<ActionResult> ObtenerActividades([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest modelo)
         {
 
-            var actividadesDiarias = new List<ActividadesDiariasTablaModel>();
-            actividadesDiarias.Add(new ActividadesDiariasTablaModel
-            {
-                FechaActividadS = DateTime.Now,
-                Cantidad = 2,
-                Id = 1,
-                NombreActividad = "Actividad 1",
-                NombreModalidad = "Modalidad 1",
-                NombreProceso = "Proceso 1",
-                NombreRolActividad = "Rol 1",
-                NombreUsuario = "oscarmorales1@msn.com",
-                Observacion = "Observacion",
-                RolUsuario = "Rol usuario"
-
-            });
-            var tabla = new DataTablesResponse(modelo.Draw, actividadesDiarias, actividadesDiarias.Count(), actividadesDiarias.Count);
+            var tabla = await _actividadDiaria.GetActividadesCreadas(modelo);
 
             return Json(tabla, JsonRequestBehavior.AllowGet);
         }

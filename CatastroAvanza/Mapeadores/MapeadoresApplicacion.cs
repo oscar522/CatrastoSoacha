@@ -1,7 +1,9 @@
 ﻿using CatastroAvanza.Models;
+using CatastroAvanza.Models.ActividadesDiarias;
 using CatastroAvanza.Models.ActividadViewModels;
 using CatastroAvanza.Models.Dashboard;
 using CatastroAvanza.Repositorio.DBContexto.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -113,6 +115,15 @@ namespace CatastroAvanza.Mapeadores
         {
             ICollection<CatalogoViewModel> result = ciudades
                .Select(m => new CatalogoViewModel { Value = m.idctmuncipio, Text = m.nombre })
+               .ToList();
+
+            return result;
+        }
+
+        public ICollection<CatalogoViewModel> MapDataAModel(ICollection<TipoActividad> tipoActividad)
+        {
+            ICollection<CatalogoViewModel> result = tipoActividad
+               .Select(m => new CatalogoViewModel { Value = m.Id, Text = m.Actividad })
                .ToList();
 
             return result;
@@ -251,6 +262,40 @@ namespace CatastroAvanza.Mapeadores
             return result;
         }
 
+        public ActividadDiaria MapModelAData(ActividadesDiariasViewModel modelo)
+        {
+            ActividadDiaria result = new ActividadDiaria
+            {
+                IdActividad = modelo.IdActividad,
+                IdApsNetUser = modelo.IdApsNetUser,
+                Cantidad = modelo.Cantidad,
+                Estado = true,
+                FechaActividad = DateTime.Now,
+                FInsercion = DateTime.Now.Ticks,
+                IdDepartamento = modelo.IdDepto,
+                IdModalidad = modelo.IdModalidad,
+                IdMunicipio = modelo.IdMuni,
+                IdProceso = modelo.IdProceso,
+                IdRol = modelo.IdRolActividad,
+                Observacion = modelo.Observacion,
+            };
+
+            return result;
+        }
+
+        public List<ActividadesDiariasTablaModel> MapDataAModel(List<ActividadDiaria> actividades)
+        {
+            List<ActividadesDiariasTablaModel> result = actividades.Select(n=> new ActividadesDiariasTablaModel { 
+                FechaActividadS = n.FechaActividad,
+                Cantidad = n.Cantidad,
+                Observacion = n.Observacion,
+                NombreUsuario = n.IdApsNetUser,
+                Id = n.Id,
+            }).ToList();
+
+            return result;
+        }
+
         private string MapeaNombreDelArchivo(HttpPostedFileBase archivo)
         {
             if (archivo == null)
@@ -258,5 +303,7 @@ namespace CatastroAvanza.Mapeadores
             else
                 return string.IsNullOrEmpty(archivo.FileName) ? string.Empty : archivo.FileName;
         }
+
+       
     }
 }
