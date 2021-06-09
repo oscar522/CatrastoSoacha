@@ -54,6 +54,16 @@ namespace CatastroAvanza
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
+            builder.RegisterType<ActividadDiariaLogic>()
+                .As<IActividadDiariaLogic>()
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+
+            builder.RegisterType<SecurityLogic>()
+                .As<ISecurityLogic>()
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+
             //Mappers
             builder.RegisterType<MapeadoresApplicacion>()
                 .As<IMapeadoresApplicacion>()

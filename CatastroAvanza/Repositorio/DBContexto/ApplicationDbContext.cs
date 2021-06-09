@@ -19,13 +19,16 @@ namespace CatastroAvanza.Repositorio.DBContexto
         public DbSet<ctciudad> Ciudad { get; set; }
         public DbSet<ctcatalogo> Catalogo { get; set; }
         public DbSet<Actividad> Actividad { get; set; }
+        public DbSet<ActividadDiaria> ActividadDiaria { get; set; }
         public DbSet<R1_2020_66069_PREDIOS> R1202066069Predios { get; set; }
         public DbSet<R1_2021_69295_PREDIOS> R1202169295Predios { get; set; }
         public DbSet<R2_2021_69295_CONSTRUCCIONES> R2202169295Construcciones { get; set; }
-
+        public DbSet<TipoActividad> TipoActividad { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new Actividad_ConfiguracionEntidad());
+            modelBuilder.Configurations.Add(new TipoActividad_ConfiguracionEntidad());
+            modelBuilder.Configurations.Add(new ActividadDiaria_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new ctpais_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new ctdepto_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new ctciudad_ConfiguracionEntidad());

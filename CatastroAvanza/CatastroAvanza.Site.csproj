@@ -202,8 +202,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Constantes\UnidadesArea.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActividadController.cs" />
+    <Compile Include="Controllers\ActividadesDiariasController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -240,6 +242,8 @@
     <Compile Include="Models\AccountViewModels\SendCodeViewModel.cs" />
     <Compile Include="Models\AccountViewModels\VerifyCodeViewModel.cs" />
     <Compile Include="Models\AccountViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ActividadesDiarias\ActividadesDiariasTablaModel.cs" />
+    <Compile Include="Models\ActividadesDiarias\ActividadesDiariasViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\ActividadConsultaViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\ActividadPredioViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\ConstruccionViewModel.cs" />
@@ -255,16 +259,22 @@
     <Compile Include="Models\Dashboard\R1_2020_66069_PREDIOSModel.cs" />
     <Compile Include="Models\Dashboard\R2_2021_69295_CONSTRUCCIONESModel.cs" />
     <Compile Include="Models\GeneralConfigurations.cs" />
+    <Compile Include="Models\Security\RoleViewModel.cs" />
     <Compile Include="Models\SidebarItem.cs" />
     <Compile Include="Models\SidebarUserLevel.cs" />
+    <Compile Include="Negocio\Contratos\IActividadDiariaLogic.cs" />
     <Compile Include="Negocio\Contratos\IActividadLogic.cs" />
     <Compile Include="Negocio\Contratos\ICatalogo.cs" />
     <Compile Include="Negocio\Contratos\IDataForm1Logic.cs" />
+    <Compile Include="Negocio\Contratos\ISecurityLogic.cs" />
+    <Compile Include="Negocio\Implementaciones\ActividadDiariaLogic.cs" />
     <Compile Include="Negocio\Implementaciones\ActividadLogic.cs" />
     <Compile Include="Negocio\Implementaciones\Catalogo.cs" />
     <Compile Include="Negocio\Implementaciones\DataForm1Logic.cs" />
+    <Compile Include="Negocio\Implementaciones\SecurityLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\NpgSqlConfiguration.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ActividadDiaria_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\Actividad_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctcatalogo_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctciudad_ConfiguracionEntidad.cs" />
@@ -274,7 +284,9 @@
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\R1_2021_69295_PREDIOS_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\R2_2021_69295_CONSTRUCCIONES_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ApplicationDbContext.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\TipoActividad_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\Actividad.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\ActividadDiaria.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctcatalogo.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctciudad.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctdepto.cs" />
@@ -282,6 +294,7 @@
     <Compile Include="Repositorio\DBContexto\Entidades\R1_2020_66069_PREDIOS.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\R1_2021_69295_PREDIOS.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\R2_2021_69295_CONSTRUCCIONES.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\TipoActividad.cs" />
     <Compile Include="Repositorio\DBContexto\Interface\IApplicationDbContext.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202105120406305_Inicial.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202105120406305_Inicial.designer.cs">
@@ -298,6 +311,18 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202105262255321_Agregadas_columnas_para_nombre_archivos.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202105262255321_Agregadas_columnas_para_nombre_archivos.designer.cs">
       <DependentUpon>202105262255321_Agregadas_columnas_para_nombre_archivos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106060444548_Elimina_Columna_Requiere_Visita_Tabla_Actividad.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106060444548_Elimina_Columna_Requiere_Visita_Tabla_Actividad.designer.cs">
+      <DependentUpon>202106060444548_Elimina_Columna_Requiere_Visita_Tabla_Actividad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106060446572_Agrega_Nuevas_Columnas_Tabla_Actividad.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106060446572_Agrega_Nuevas_Columnas_Tabla_Actividad.designer.cs">
+      <DependentUpon>202106060446572_Agrega_Nuevas_Columnas_Tabla_Actividad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106070311102_Agregadas_Tablas_ActividadDiaria_TipoActividad.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106070311102_Agregadas_Tablas_ActividadDiaria_TipoActividad.designer.cs">
+      <DependentUpon>202106070311102_Agregadas_Tablas_ActividadDiaria_TipoActividad.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
@@ -1111,8 +1136,9 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
-    <Content Include="Scripts\Paginas\ConsultarActividad.js" />
-    <Content Include="Scripts\Paginas\CrearActividad.js" />
+    <Content Include="Scripts\Paginas\Actividad\ConsultarActividad.js" />
+    <Content Include="Scripts\Paginas\Actividad\CrearActividad.js" />
+    <Content Include="Scripts\Paginas\ActividadesDiarias\CrearActividadDiaria.js" />
     <Content Include="Scripts\PdfVisualize.js" />
     <Content Include="Scripts\pdf\example.html" />
     <Content Include="Scripts\pdf\pdfjs-dist\build\pdf.js" />
@@ -1598,6 +1624,7 @@
     <Content Include="Views\Actividad\_Archivos.cshtml" />
     <Content Include="Scripts\moment.min.js.map" />
     <Content Include="Scripts\moment-with-locales.min.js.map" />
+    <Content Include="Views\ActividadesDiarias\CrearActividad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1636,6 +1663,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202105262255321_Agregadas_columnas_para_nombre_archivos.resx">
       <DependentUpon>202105262255321_Agregadas_columnas_para_nombre_archivos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106060444548_Elimina_Columna_Requiere_Visita_Tabla_Actividad.resx">
+      <DependentUpon>202106060444548_Elimina_Columna_Requiere_Visita_Tabla_Actividad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106060446572_Agrega_Nuevas_Columnas_Tabla_Actividad.resx">
+      <DependentUpon>202106060446572_Agrega_Nuevas_Columnas_Tabla_Actividad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106070311102_Agregadas_Tablas_ActividadDiaria_TipoActividad.resx">
+      <DependentUpon>202106070311102_Agregadas_Tablas_ActividadDiaria_TipoActividad.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

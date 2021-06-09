@@ -1,10 +1,6 @@
 ﻿using CatastroAvanza.Identity.Model;
-using Npgsql;
 using PostgreSQL.AspNet.Identity.EntityFramework;
-using System;
 using System.Data.Entity;
-using System.Data.Entity.Migrations.Model;
-using System.Linq;
 
 namespace CatastroAvanza.Identity.DbContext
 {
@@ -33,24 +29,4 @@ namespace CatastroAvanza.Identity.DbContext
         }
 
     }
-    ////internal class Configuration : DbConfiguration
-    ////{
-    ////    public Configuration()
-    ////    {
-    ////        SetMigrationSqlGenerator("Npgsql", () => new SqlGenerator());
-    ////    }
-    ////}
-
-    //public class SqlGenerator : NpgsqlMigrationSqlGenerator
-    //{
-    //    private readonly string[] systemColumnNames = { "oid", "tableoid", "xmin", "cmin", "xmax", "cmax", "ctid" };
-
-    //    protected override void Convert(CreateTableOperation createTableOperation)
-    //    {
-    //        var systemColumns = createTableOperation.Columns.Where(x => systemColumnNames.Contains(x.Name)).ToArray();
-    //        foreach (var systemColumn in systemColumns)
-    //            createTableOperation.Columns.Remove(systemColumn);
-    //        base.Convert(createTableOperation);
-    //    }
-    //}
 }

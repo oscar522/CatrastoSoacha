@@ -1,0 +1,181 @@
+﻿@model ActividadesDiariasViewModel
+
+<div class="card mb-4 wow fadeIn">
+
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            <span>Seguimiento</span>
+        </h4>
+        <h5 class="mb-2 mb-sm-0 pt-1">
+            <span>Usuario : @Model.NombreUsuario</span>
+            <br />
+            <span>Rol : @Model.RolUsuario</span>
+            <br />
+        </h5>
+    </div>
+</div>
+<div class="wow fadeIn">
+    @using (Html.BeginForm("CrearActividad", "ActividadesDiarias", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Actividades</h5>
+                                    <hr />
+                                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.EditorFor(model => model.IdApsNetUser, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @value = Model.IdApsNetUser } })
+                                        @Html.EditorFor(model => model.NombreUsuario, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @value = Model.NombreUsuario } })
+                                        @Html.EditorFor(model => model.RolUsuario, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @value = Model.RolUsuario } })
+                                        @Html.EditorFor(model => model.NombreActividad, new { htmlAttributes = new { @style = "display:none", @Value = "N_A" } })
+                                        @Html.EditorFor(model => model.FechaActividadS, new { htmlAttributes = new { @style = "display:none", @Value = "N_A" } })
+                                        @Html.EditorFor(model => model.NombreModalidad, new { htmlAttributes = new { @style = "display:none", @Value = "N_A" } })
+                                        @Html.EditorFor(model => model.NombreProceso, new { htmlAttributes = new { @style = "display:none", @Value = "N_A" } })
+                                        @Html.EditorFor(model => model.NombreRolActividad, new { htmlAttributes = new { @style = "display:none", @Value = "N_A" } })
+                                        @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @value = true } })*@
+
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Fecha</label>
+                                        </div>
+
+                                        <div class="col-md-7">
+                                            @Html.EditorFor(model => model.FechaActividad, new { htmlAttributes = new { @class = "form-control", @Type = "date" } })
+                                            @Html.ValidationMessageFor(model => model.FechaActividad, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Proceso</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.DropDownList("IdProceso", new SelectList(string.Empty, "Value", "Text"), "Seleccione", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.IdProceso, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Modalidad</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.DropDownList("IdModalidad", new SelectList(string.Empty, "Value", "Text"), "Seleccione", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.IdModalidad, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Rol</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.DropDownList("IdRolActividad", new SelectList(string.Empty, "Value", "Text"), "Seleccione", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.IdRolActividad, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Actividad</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.DropDownList("IdActividad", new SelectList(string.Empty, "Value", "Text"), "Seleccione", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.IdActividad, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Departamento</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <select id="IdDepto" name="IdDepto" class="form-control bool CLASSIdDepto">
+                                                <option value="">Seleccione</option>
+                                                <option value="0">No Aplica</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.IdDepto, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Municipio</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <select id="IdMuni" name="IdMuni" class="form-control bool CLASSIdMuni ">
+                                                <option value="">Seleccione</option>
+                                                <option value="0">No Aplica</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.IdMuni, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-12" })
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            @Html.LabelFor(model => model.Observacion, htmlAttributes: new { @class = "control-label col-md-12" })
+                                        </div>
+                                        <div class="col-md-7">
+                                            <textarea id="Observacion" name="Observacion" class="form-control col-md-12"></textarea>
+                                            @Html.ValidationMessageFor(model => model.Observacion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="justify-content-center text-right">
+                                            <input type="submit" value="Crear Actividad" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5> <label class="control-label col-md-12">Resumen Actividades</label> </h5>
+                                    <hr />
+                                    <div class="table-responsive ">
+                                        <table class="table table-striped cell-border stripe" id="table_User">
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/ModalControl.js")
+    @Scripts.Render("~/Scripts/Paginas/ActividadesDiarias/CrearActividadDiaria.js")
+<script>
+        $(document).ready(function () {
+            ActividadDiariaJs.urlRolActividad = '@Url.Action("TipoActividadList")';
+            ActividadDiariaJs.urlRolList = '@Url.Action("GetRoles")';
+            ActividadDiariaJs.urlProcesoList = '@Url.Action("GetProcess")';
+            ActividadDiariaJs.urlModalidadList = '@Url.Action("GetModalidades")';
+            ActividadDiariaJs.urlListDepto = '@Url.Action("GetDepartamentos")';
+            ActividadDiariaJs.urlListMunicipios = '@Url.Action("GetMunicipios")';
+            ActividadDiariaJs.urlObtenerActividades = '@Url.Action("ObtenerActividades")';
+            ActividadDiariaJs.Inicializar();
+        });
+</script>
+
+}

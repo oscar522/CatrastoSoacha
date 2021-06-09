@@ -2,6 +2,7 @@
 using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Models;
 using CatastroAvanza.Models.ActividadViewModels;
+using CatastroAvanza.Models.Dashboard;
 using CatastroAvanza.Negocio.Contratos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,14 +12,16 @@ namespace CatastroAvanza.Controllers
 {
     public class ActividadController : BaseController
     {
-        public ActividadController(ICatalogo catalogos, IActividadLogic actividad)
+        public ActividadController(ICatalogo catalogos, IActividadLogic actividad, IDataForm1Logic dataFormLogicService)
         {
             _catalogos = catalogos;
             _actividad = actividad;
+            _dataFormLogicService = dataFormLogicService;
         }
 
         private readonly ICatalogo _catalogos;
         private readonly IActividadLogic _actividad;
+        private readonly IDataForm1Logic _dataFormLogicService;
         // GET: Actividad
         public ActionResult Index()
         {
@@ -44,15 +47,9 @@ namespace CatastroAvanza.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CrearActividad(ActividadPredioViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-            else
-            {
-                await _actividad.CrearActividad(model);
-                return RedirectToAction(nameof(Index));
-            }
-            
+        {            
+            await _actividad.CrearActividad(model);
+            return RedirectToAction(nameof(Index));                     
         }
 
         [HttpPost]
@@ -67,6 +64,12 @@ namespace CatastroAvanza.Controllers
         {
             var actividades = await _actividad.ConsultarActividades(modelo);
             return Json(actividades, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> ObtenerPredial(string noPredial)
+        {
+            DataForm1Model processModel = _dataFormLogicService.GetUsersById(noPredial);
+            return Json(processModel, JsonRequestBehavior.AllowGet);
         }
 
     }

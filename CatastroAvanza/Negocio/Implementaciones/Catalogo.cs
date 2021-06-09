@@ -70,5 +70,22 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 return new List<CatalogoViewModel>();
             }
         }
+
+        public ICollection<CatalogoViewModel> ObtenerActividadesPorRol(string IdRol)
+        {
+            try
+            {
+                var catalogo = _contexto.TipoActividad.Where(m => m.Estado == true && m.IdRol == IdRol).ToList();
+
+                ICollection<CatalogoViewModel> result = _mapper.MapDataAModel(catalogo);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new List<CatalogoViewModel>();
+            }
+        }
     }
 }

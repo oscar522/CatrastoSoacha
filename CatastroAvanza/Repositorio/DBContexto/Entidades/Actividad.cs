@@ -74,7 +74,7 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
 
         public bool Terreno_IdentificacionPredio { get; set; }
 
-        public string Terreno_RequiereVisita { get; set; }
+        public bool Terreno_RequiereVisita { get; set; }
 
         public string Terreno_ObservacionVisita { get; set; }
 
@@ -103,6 +103,10 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
         public bool Construccion_AdicionarAnexos { get; set; }
 
         public bool Construccion_ElminarAnexos { get; set; }
+
+        public string Construccion_Uso_Detalle { get; set; }
+
+        public string Construccion_Destino_Detalle { get; set; }
 
         public int General_Departamento { get; set; }
 
