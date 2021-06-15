@@ -8,12 +8,13 @@
 <table id="actividadesTbl" class="table table-striped cell-border compact stripe" style="width:100%">
 </table>
 
-<a class="btn btn-primary" href="@Url.Action("CrearActividad")">Agregar nueva actividad</a>
+<a class="btn btn-primary"  href="@Url.Action("CrearActividad")">Agregar nueva actividad</a>
 @section Scripts{
     @Scripts.Render("~/Scripts/Paginas/Actividad/ConsultarActividad.js")
 <script>
     $(document).ready(function () {
         ConsultarActividadJs.urlObtenerActividades = '@Url.Action("ObtenerActividades")';
+        ConsultarActividadJs.urlActualizarActividad = '@Url.Action("ActualizarActividad")';
         ConsultarActividadJs.Inicializar();
     });
 </script>

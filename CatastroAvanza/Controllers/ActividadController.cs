@@ -56,6 +56,34 @@ namespace CatastroAvanza.Controllers
             return RedirectToAction(nameof(Index));                     
         }
 
+        [HttpGet]
+        public async Task<ActionResult> ActualizarActividad(int actividadId)
+        {
+            ActividadPredioViewModel model = await _actividad.ConsultarActividadPorId(actividadId);
+
+            model.Coordinadores = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.Coordinador), "Value", "Text", model.Coordinador);
+            model.Terreno.UnidadesArea = new SelectList(_catalogos.ObtenerUnidadArea(), "Value", "Text", model.Terreno.UnidadArea);
+            model.Terreno.UnidadesAreaList = _catalogos.ObtenerUnidadArea();
+            model.Informacion.TiposDireccion = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.TipoDireccion), "Value", "Text", model.Informacion.TipoDireccion);
+            model.Informacion.Departamentos = new SelectList(_catalogos.ObtenerDepartamentosPorIdPais(1), "Value", "Text", model.Informacion.Departamento);
+            model.Informacion.Municipios = new SelectList(new List<CatalogoViewModel>(), "Value", "Text", model.Informacion.Municipio);
+            model.Construccion.DetallesIncorporacionArea = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.DetalleIncorporacionArea), "Value", "Text", model.Construccion.DestinoDetalle);
+            model.Construccion.Destinos = new SelectList(_catalogos.ObtenerDestino(), "Value", "Text", model.Construccion.Destino);
+            model.Construccion.Usos = new SelectList(_catalogos.ObtenerUso(), "Value", "Text", model.Construccion.Uso);
+            model.Ejecutor = model.Ejecutor;
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ActualizarActividad(ActividadPredioViewModel model)
+        {
+            var result = _actividad.ActualizarActividad(model);
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpPost]
         public async Task<JsonResult> ObternerMunicipios(int IdDepartamento)
         {

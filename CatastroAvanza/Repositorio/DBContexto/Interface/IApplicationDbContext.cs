@@ -24,5 +24,6 @@ namespace CatastroAvanza.Repositorio.DBContexto.Interface
         int SaveChanges();
         
         Task<int> SaveChangesAsync( CancellationToken cancellationToken = default);
+        
     }
 }

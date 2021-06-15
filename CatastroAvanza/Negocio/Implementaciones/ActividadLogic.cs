@@ -9,6 +9,7 @@ using CatastroAvanza.Repositorio.DBContexto.Entidades;
 using CatastroAvanza.Repositorio.DBContexto.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,7 +17,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
 {
     public class ActividadLogic : IActividadLogic
     {
-        public ActividadLogic(IApplicationDbContext contexto, IMapeadoresApplicacion mapper, IAlmacenamientoArchivos almacenamiento)
+        public ActividadLogic(IApplicationDbContext contexto, IActividadMapper mapper, IAlmacenamientoArchivos almacenamiento)
         {
             _contexto = contexto;
             _mapper = mapper;
@@ -24,7 +25,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
         }
 
         private readonly IApplicationDbContext _contexto;
-        private readonly IMapeadoresApplicacion _mapper;
+        private readonly IActividadMapper _mapper;
         private readonly IAlmacenamientoArchivos _almacenamiento;
 
 
@@ -68,6 +69,71 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 string message = ex.Message;
                 return 0;
             }            
+        }
+
+        public async Task<int> ActualizarActividad(ActividadPredioViewModel model)
+        {
+            try
+            {                
+
+                if (model.Terreno.TieneArea)
+                {
+                    var unidad = _contexto.UnidadArea.Where(m => m.Id == model.Terreno.UnidadArea).FirstOrDefault();
+                    if (unidad == null)
+                        return 0;
+
+                    model.Terreno.AreaTerrenoEnMetros = unidad.Valor * model.Terreno.AreaTerreno;
+                    decimal areaTerrenoInformacion = 0;
+                    model.Terreno.PorcentajeAreaJudicialAreaCatastral = (model.Terreno.AreaTerrenoEnMetros * 100) / model.Informacion.AreaTerreno;
+                }
+
+                Actividad actividad = await _contexto.Actividad.FirstOrDefaultAsync(m => m.Id == model.Id);
+
+                if (actividad == null)
+                    return 0;
+
+                _mapper.MapModelAData(model, actividad);
+
+                var resultado = await _contexto.SaveChangesAsync();
+
+                if (model.Files != null)
+                {
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.Fmi, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.CertificadoNomenclatura, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.FotoFachada, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.Croquis, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.Escrituras, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.FichaPredial, actividad.General_NumeroPredial));
+                    _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Files.Plano, actividad.General_NumeroPredial));
+                }
+                
+                return actividad.Id;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return 0;
+            }
+        }
+
+
+        public async Task<ActividadPredioViewModel> ConsultarActividadPorId(int Id)
+        {
+            try {
+                var actividad = _contexto.Actividad.Where(m => m.Id == Id)                                        
+                    .FirstOrDefault();
+                
+                if (actividad == null)
+                    return new ActividadPredioViewModel();
+
+                ActividadPredioViewModel result = _mapper.MapDataAModel(actividad);
+
+                return result;
+            } 
+            catch (Exception ex) 
+            {
+                return new ActividadPredioViewModel();
+            }
         }
 
         public async Task<DataTablesResponse> ConsultarActividades(IDataTablesRequest modelo)

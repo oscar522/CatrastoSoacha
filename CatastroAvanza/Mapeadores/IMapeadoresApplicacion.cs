@@ -15,7 +15,7 @@ namespace CatastroAvanza.Mapeadores
             ICollection<R2_2021_69295_CONSTRUCCIONES> construcciones2021, 
             ICollection<R1_2020_66069_PREDIOS> predios2020);
 
-        Actividad MapModelAData(ActividadPredioViewModel model);
+        
         ActividadDiaria MapModelAData(ActividadesDiariasViewModel modelo);
 
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctcatalogo> catalogos);
@@ -29,8 +29,6 @@ namespace CatastroAvanza.Mapeadores
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctciudad> ciudades);
 
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<TipoActividad> tipoActividad);
-
-        List<ActividadConsultaViewModel> MapDataAModel(List<Actividad> actividades, List<ctciudad> ciudad, List<ctdepto> dpto);
 
         List<ActividadesDiariasTablaModel> MapDataAModel(List<ActividadDiaria> actividades);
     }

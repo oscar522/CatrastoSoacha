@@ -233,6 +233,8 @@
     <Compile Include="Infraestructura\ContratosServicios\IAlmacenamientoArchivos.cs" />
     <Compile Include="Infraestructura\ImplementacionesServicios\AlmacenamientoArchivos.cs" />
     <Compile Include="Infraestructura\InformationDocumento.cs" />
+    <Compile Include="Mapeadores\ActividadMapper.cs" />
+    <Compile Include="Mapeadores\IActividadMapper.cs" />
     <Compile Include="Mapeadores\IMapeadoresApplicacion.cs" />
     <Compile Include="Mapeadores\MapeadoresApplicacion.cs" />
     <Compile Include="Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs" />
@@ -246,6 +248,7 @@
     <Compile Include="Models\ActividadesDiarias\ActividadesDiariasViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\ActividadConsultaViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\ActividadPredioViewModel.cs" />
+    <Compile Include="Models\ActividadViewModels\ArchivosCargadosActividadPredioViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\ConstruccionViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\FileViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\GeograficaViewModel.cs" />
@@ -1151,6 +1154,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\Paginas\Actividad\ActualizarActividad.js" />
     <Content Include="Scripts\Paginas\Actividad\ConsultarActividad.js" />
     <Content Include="Scripts\Paginas\Actividad\CrearActividad.js" />
     <Content Include="Scripts\Paginas\ActividadesDiarias\CrearActividadDiaria.js" />
@@ -1640,6 +1644,7 @@
     <Content Include="Scripts\moment.min.js.map" />
     <Content Include="Scripts\moment-with-locales.min.js.map" />
     <Content Include="Views\ActividadesDiarias\CrearActividad.cshtml" />
+    <Content Include="Views\Actividad\ActualizarActividad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
