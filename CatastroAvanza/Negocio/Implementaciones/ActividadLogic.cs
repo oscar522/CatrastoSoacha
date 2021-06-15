@@ -32,7 +32,19 @@ namespace CatastroAvanza.Negocio.Implementaciones
         {
             try
             {
+                if (model.Terreno.TieneArea)
+                {
+                    var unidad = _contexto.UnidadArea.Where(m => m.Id == model.Terreno.UnidadArea).FirstOrDefault();
+                    if (unidad == null)
+                        return 0;
+                    
+                    model.Terreno.AreaTerrenoEnMetros = unidad.Valor * model.Terreno.AreaTerreno;
+                    decimal areaTerrenoInformacion = 0;                    
+                    model.Terreno.PorcentajeAreaJudicialAreaCatastral = (model.Terreno.AreaTerrenoEnMetros * 100) / model.Informacion.AreaTerreno;
+                }
+
                 Actividad actividad = _mapper.MapModelAData(model);
+
 
                 _contexto.Actividad.Add(actividad);
 

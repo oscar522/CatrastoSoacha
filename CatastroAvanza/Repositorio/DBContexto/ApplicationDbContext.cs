@@ -2,8 +2,6 @@
 using CatastroAvanza.Repositorio.DBContexto.Entidades;
 using CatastroAvanza.Repositorio.DBContexto.Interface;
 using System.Data.Entity;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace CatastroAvanza.Repositorio.DBContexto
 {
@@ -24,8 +22,15 @@ namespace CatastroAvanza.Repositorio.DBContexto
         public DbSet<R1_2021_69295_PREDIOS> R1202169295Predios { get; set; }
         public DbSet<R2_2021_69295_CONSTRUCCIONES> R2202169295Construcciones { get; set; }
         public DbSet<TipoActividad> TipoActividad { get; set; }
+        public DbSet<Uso> Uso { get; set; }
+        public DbSet<Destino> Destino { get; set; }
+        public DbSet<UnidadArea> UnidadArea { get; set; }
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new Destino_ConfiguracionEntidad());
+            modelBuilder.Configurations.Add(new Uso_ConfiguracionEntidad());
+            modelBuilder.Configurations.Add(new UnidadArea_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new Actividad_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new TipoActividad_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new ActividadDiaria_ConfiguracionEntidad());
@@ -33,7 +38,6 @@ namespace CatastroAvanza.Repositorio.DBContexto
             modelBuilder.Configurations.Add(new ctdepto_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new ctciudad_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new ctcatalogo_ConfiguracionEntidad());
-
             modelBuilder.Configurations.Add(new R1_2020_66069_PREDIOS_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new R1_2021_69295_PREDIOS_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new R2_2021_69295_CONSTRUCCIONES_ConfiguracionEntidad());

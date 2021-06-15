@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -13,7 +15,7 @@ namespace CatastroAvanza.Models.ActividadViewModels
 
         [DisplayName("Area del terreno")]
         [Required(ErrorMessage = "Area del terreno es requerido.")]
-        public int AreaTerreno { get; set; }
+        public decimal AreaTerreno { get; set; }
 
         [DisplayName("Unidad del area")]
         [Required(ErrorMessage = "Unidad del area es requerido.")]
@@ -21,11 +23,11 @@ namespace CatastroAvanza.Models.ActividadViewModels
 
         [DisplayName("Area del terreno en metros")]
         [Required(ErrorMessage = "Area del terreno en metros es requerido.")]
-        public int AreaTerrenoEnMetros { get; set; }
+        public decimal AreaTerrenoEnMetros { get; set; }
 
         [DisplayName("Porcentaje del area judicial")]
         [Required(ErrorMessage = "Porcentaje del area judicial es requerido.")]
-        public int PorcentajeAreaJudicialAreaCatastral { get; set; }
+        public decimal PorcentajeAreaJudicialAreaCatastral { get; set; }
 
         [DisplayName("¿El predio esta correctamente identificado?")]
         [Required(ErrorMessage = "¿El predio esta correctamente identificado? es requerido.")]
@@ -40,5 +42,7 @@ namespace CatastroAvanza.Models.ActividadViewModels
         public string ObservacionVisita { get; set; }
 
         public SelectList UnidadesArea { get; set; }
+
+        public ICollection<CatalogoExtendidoViewModel> UnidadesAreaList { get; set; }
     }
 }

@@ -35,19 +35,23 @@ namespace CatastroAvanza.Controllers
 
             model.Ejecutores = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.Ejecutor), "Value", "Text", 1);
             model.Coordinadores = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.Coordinador), "Value", "Text", 1);
-            model.Terreno.UnidadesArea = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.UnidadArea), "Value", "Text", 1);
+            model.Terreno.UnidadesArea = new SelectList(_catalogos.ObtenerUnidadArea(), "Value", "Text", 1);
+            model.Terreno.UnidadesAreaList = _catalogos.ObtenerUnidadArea();
             model.Informacion.TiposDireccion = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.TipoDireccion), "Value", "Text", 1);
             model.Informacion.Departamentos = new SelectList(_catalogos.ObtenerDepartamentosPorIdPais(1), "Value", "Text", 1);
             model.Informacion.Municipios = new SelectList(new List<CatalogoViewModel>(), "Value", "Text", 1);
             model.Construccion.DetallesIncorporacionArea = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.DetalleIncorporacionArea), "Value", "Text", 1);
-
+            model.Construccion.Destinos = new SelectList(_catalogos.ObtenerDestino(), "Value", "Text", 1);
+            model.Construccion.Usos = new SelectList(_catalogos.ObtenerUso(), "Value", "Text", 1);
+            model.Ejecutor = HttpContext.User.Identity.Name;
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CrearActividad(ActividadPredioViewModel model)
-        {            
+        {
+            model.Ejecutor = HttpContext.User.Identity.Name;
             await _actividad.CrearActividad(model);
             return RedirectToAction(nameof(Index));                     
         }

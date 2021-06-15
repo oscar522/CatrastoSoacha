@@ -87,5 +87,56 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 return new List<CatalogoViewModel>();
             }
         }
+
+        public ICollection<CatalogoExtendidoViewModel> ObtenerUnidadArea()
+        {
+            try
+            {
+                var catalogo = _contexto.UnidadArea.Where(m => m.Estado == true ).ToList();
+
+                ICollection<CatalogoExtendidoViewModel> result = _mapper.MapDataAModel(catalogo);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new List<CatalogoExtendidoViewModel>();
+            }
+        }
+
+        public ICollection<CatalogoViewModel> ObtenerUso()
+        {
+            try
+            {
+                var catalogo = _contexto.Uso.Where(m => m.Estado == true).ToList();
+
+                ICollection<CatalogoViewModel> result = _mapper.MapDataAModel(catalogo);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new List<CatalogoViewModel>();
+            }
+        }
+
+        public ICollection<CatalogoExtendidoViewModel> ObtenerDestino()
+        {
+            try
+            {
+                var catalogo = _contexto.Destino.Where(m => m.Estado == true).ToList();
+
+                ICollection<CatalogoExtendidoViewModel> result = _mapper.MapDataAModel(catalogo);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new List<CatalogoExtendidoViewModel>();
+            }
+        }
     }
 }

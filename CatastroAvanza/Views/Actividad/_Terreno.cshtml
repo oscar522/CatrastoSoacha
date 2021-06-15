@@ -25,7 +25,15 @@
         <div class="col-md-4">
             <div class="form-group">
                 @Html.LabelFor(m => m.Terreno.UnidadArea)
-                @Html.DropDownListFor(m => m.Terreno.UnidadArea, Model.Terreno.UnidadesArea, "", new { @class = "form-control bloqueado" })
+                <select id="@Html.IdFor(m=>m.Terreno.UnidadArea)" name="@Html.NameFor(m=>m.Terreno.UnidadArea)" class="form-control bloqueado">
+                    <option value="" data-valorunidad="">&nbsp;</option>
+                    @foreach (var elemento in Model.Terreno.UnidadesAreaList)
+                    {
+                        <option value="@elemento.Value" data-valorunidad="@elemento.ValueExtended">@elemento.Text</option>
+                    }
+                </select>
+
+                @*@Html.DropDownListFor(m => m.Terreno.UnidadArea, Model.Terreno.UnidadesArea, "", new { @class = "form-control bloqueado" })*@
                 @Html.ValidationMessageFor(m => m.Terreno.UnidadesArea, "", new { @class = "text-danger" })
             </div>
         </div>

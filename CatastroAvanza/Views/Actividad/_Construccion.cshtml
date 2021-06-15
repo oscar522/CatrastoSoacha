@@ -130,12 +130,12 @@
     <div class="col-md-6">
         <div class="form-group">
             @Html.LabelFor(m => m.Construccion.UsoDetalle, new { @class = "form-label" }) &nbsp; &nbsp;
-            @Html.EditorFor(m => m.Construccion.UsoDetalle, new { htmlAttributes = new { @class = "form-control bloqueado", @Value = "" } })
+            @Html.DropDownListFor(m => m.Construccion.UsoDetalle, Model.Construccion.Usos,"", new { @class = "form-control bloqueado" })            
             @Html.ValidationMessageFor(m => m.Construccion.UsoDetalle, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Construccion.DestinoDetalle, new { @class = "form-label" }) &nbsp; &nbsp;
-            @Html.EditorFor(m => m.Construccion.DestinoDetalle, new { htmlAttributes = new { @class = "form-control bloqueado", @Value = "" } })
+            @Html.DropDownListFor(m => m.Construccion.DestinoDetalle, Model.Construccion.Destinos, "", new { @class = "form-control bloqueado" })            
             @Html.ValidationMessageFor(m => m.Construccion.DestinoDetalle, "", new { @class = "text-danger" })
         </div>
     </div>

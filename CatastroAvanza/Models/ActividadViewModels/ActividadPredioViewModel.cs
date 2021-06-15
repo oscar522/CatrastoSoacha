@@ -25,7 +25,7 @@ namespace CatastroAvanza.Models.ActividadViewModels
 
         [DisplayName("Ejecutor")]
         [Required(ErrorMessage = "Ejecutor es requerido.")]
-        public int Ejecutor { get; set; }
+        public string Ejecutor { get; set; }
 
         [DisplayName("Coordinador")]
         [Required(ErrorMessage = "Coordinador es requerido.")]

@@ -1,6 +1,6 @@
 ﻿var ActividadJs = {
     urlObtenerMunicipios: "",
-    urlObtenerPredial: "",    
+    urlObtenerPredial: "",
     Inicializar: function () {
         $("#Informacion_Departamento").change(ObtenerMunicipios);
         $("#Tramite_Desenglobe").change(DesbloquearUnidadTramite);
@@ -14,6 +14,10 @@
         $("#saveUpBtn").click(SaveForm);
         $("#saveDownBtn").click(SaveForm);
         $("#btnBuscar").click(ObtenerInfoByPredial);
+        $("#Terreno_UnidadArea").change(CalcularTerrenoEnMetros);
+        $("#Terreno_AreaTerreno").change(CalcularTerrenoEnMetros);
+        $("#Terreno_AreaTerrenoEnMetros").change(CalcularPorcentajeJudicial);
+        $("#Informacion_AreaTerreno").change(CalcularPorcentajeJudicial);
         InicializarFileInputs();
         InicializarListas();
         BloqueadosPorDefecto();
@@ -95,20 +99,33 @@ function DesbloquearAreasTerreno() {
     if ($(this).val() == "true")
     {
         $("#Terreno_AreaTerreno").removeAttr('disabled');
-        $("#Terreno_UnidadArea").removeAttr('disabled');
-        $("#Terreno_AreaTerrenoEnMetros").removeAttr('disabled');
-        $("#Terreno_PorcentajeAreaJudicialAreaCatastral").removeAttr('disabled');
+        $("#Terreno_UnidadArea").removeAttr('disabled');        
     }        
     else {
         $("#Terreno_AreaTerreno").attr('disabled', 'disabled');
         $("#Terreno_UnidadArea").attr('disabled', 'disabled');
-        $("#Terreno_AreaTerrenoEnMetros").attr('disabled', 'disabled');
-        $("#Terreno_PorcentajeAreaJudicialAreaCatastral").attr('disabled', 'disabled');
         $("#Terreno_AreaTerreno").val("");        
         $("#Terreno_UnidadArea").val("");
         $("#Terreno_AreaTerrenoEnMetros").val("");
         $("#Terreno_PorcentajeAreaJudicialAreaCatastral").val("");
     }
+}
+
+function CalcularTerrenoEnMetros()
+{
+    var unidadesValor = $("#Terreno_UnidadArea").children("option:selected").attr("data-valorunidad")
+    var areaTerreno = $("#Terreno_AreaTerreno").val();
+    var areaTerrenoMetros = areaTerreno * unidadesValor
+    var porcentajeAreaJudicial = (areaTerreno * unidadesValor) / $("#Informacion_AreaTerreno").val();
+    $("#Terreno_AreaTerrenoEnMetros").val(areaTerrenoMetros);
+    $("#Terreno_PorcentajeAreaJudicialAreaCatastral").val(porcentajeAreaJudicial);
+}
+
+function CalcularPorcentajeJudicial() {
+    var unidadesValor = $("#Terreno_UnidadArea").children("option:selected").attr("data-valorunidad")
+    var areaTerreno = $("#Terreno_AreaTerreno").val();
+    var porcentajeAreaJudicial = (areaTerreno * unidadesValor) / $("#Informacion_AreaTerreno").val();
+    $("#Terreno_PorcentajeAreaJudicialAreaCatastral").val(porcentajeAreaJudicial);
 }
 
 function DesbloquearUso() {
@@ -163,10 +180,19 @@ function ObtenerInfoByPredial()
         $("#Informacion_AreaConstruida").val(data.R1_2020_66069_PREDIOSModel[0].AREA_CONSTRUIDA);
         $("#Informacion_Avaluo").val(data.R1_2020_66069_PREDIOSModel[0].AVALUO);        
         $("#Informacion_NumeroMejoras").val(data.CANTIDAD_MEJORA);
-               
         if (data.CANTIDAD_MEJORA > 0)
             $("#Informacion_Mejoras").val("true");       
 
+        $("#inforGen_Fmi").val(data.R2_2021_69295_CONSTRUCCIONESModel[0].FMI);
+        $("#inforGen_Linderos").val();
+        $("#inforGen_FmiMatriz").val();
+        $("#inforGen_AreaJuridica").val();
+        var PropietariosItem = "";
+        data.CANTIDAD_PROPIETARIOS.forEach(function (item) {
+            PropietariosItem = PropietariosItem + item + "; "
+        });
+        $("#inforGen_Propietarios").val(PropietariosItem);
+                       
         $("#saveUpBtn").removeAttr("disabled");
         $("#saveDownBtn").removeAttr("disabled");
         $(".sectionToShow").removeClass("invisible");

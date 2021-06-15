@@ -13,5 +13,11 @@ namespace CatastroAvanza.Negocio.Contratos
         ICollection<CatalogoViewModel> ObtenerMunicipiosPorIdDepartamento(int IdDepartamento);
 
         ICollection<CatalogoViewModel> ObtenerActividadesPorRol(string IdRol);
+
+        ICollection<CatalogoExtendidoViewModel> ObtenerUnidadArea();
+
+        ICollection<CatalogoViewModel> ObtenerUso();
+
+        ICollection<CatalogoExtendidoViewModel> ObtenerDestino();
     }
 }
