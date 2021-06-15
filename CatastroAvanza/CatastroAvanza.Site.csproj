@@ -254,6 +254,7 @@
     <Compile Include="Models\ActividadViewModels\NomenclaturaViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\TerrenoViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\TramiteViewModel.cs" />
+    <Compile Include="Models\CatalogoExtendidoViewModel.cs" />
     <Compile Include="Models\CatalogoViewModel.cs" />
     <Compile Include="Models\Dashboard\DataForm1Model.cs" />
     <Compile Include="Models\Dashboard\R1_2020_66069_PREDIOSModel.cs" />
@@ -280,21 +281,27 @@
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctciudad_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctdepto_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctpais_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\Destino_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\R1_2020_66069_PREDIOS_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\R1_2021_69295_PREDIOS_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\R2_2021_69295_CONSTRUCCIONES_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ApplicationDbContext.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\TipoActividad_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\UnidadArea_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\Uso_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\Actividad.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ActividadDiaria.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctcatalogo.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctciudad.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctdepto.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctpais.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\Destino.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\R1_2020_66069_PREDIOS.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\R1_2021_69295_PREDIOS.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\R2_2021_69295_CONSTRUCCIONES.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\TipoActividad.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\UnidadArea.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\Uso.cs" />
     <Compile Include="Repositorio\DBContexto\Interface\IApplicationDbContext.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202105120406305_Inicial.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202105120406305_Inicial.designer.cs">
@@ -323,6 +330,14 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202106070311102_Agregadas_Tablas_ActividadDiaria_TipoActividad.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202106070311102_Agregadas_Tablas_ActividadDiaria_TipoActividad.designer.cs">
       <DependentUpon>202106070311102_Agregadas_Tablas_ActividadDiaria_TipoActividad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106090341126_nuevos_catalogos.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106090341126_nuevos_catalogos.designer.cs">
+      <DependentUpon>202106090341126_nuevos_catalogos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106090430416_Modificacion_columnas_areas_de_entero_a_decimal.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106090430416_Modificacion_columnas_areas_de_entero_a_decimal.designer.cs">
+      <DependentUpon>202106090430416_Modificacion_columnas_areas_de_entero_a_decimal.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
@@ -1672,6 +1687,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106070311102_Agregadas_Tablas_ActividadDiaria_TipoActividad.resx">
       <DependentUpon>202106070311102_Agregadas_Tablas_ActividadDiaria_TipoActividad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106090341126_nuevos_catalogos.resx">
+      <DependentUpon>202106090341126_nuevos_catalogos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106090430416_Modificacion_columnas_areas_de_entero_a_decimal.resx">
+      <DependentUpon>202106090430416_Modificacion_columnas_areas_de_entero_a_decimal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

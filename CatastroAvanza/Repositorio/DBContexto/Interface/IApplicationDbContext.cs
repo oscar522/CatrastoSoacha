@@ -17,6 +17,9 @@ namespace CatastroAvanza.Repositorio.DBContexto.Interface
         DbSet<Actividad> Actividad { get; set; }
         DbSet<ActividadDiaria> ActividadDiaria { get; set; }
         DbSet<TipoActividad> TipoActividad { get; set; }
+        DbSet<Uso> Uso { get; set; }
+        DbSet<Destino> Destino { get; set; }
+        DbSet<UnidadArea> UnidadArea { get; set; }
 
         int SaveChanges();
         

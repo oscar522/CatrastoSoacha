@@ -20,6 +20,10 @@ namespace CatastroAvanza.Mapeadores
 
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctcatalogo> catalogos);
 
+        ICollection<CatalogoExtendidoViewModel> MapDataAModel(ICollection<UnidadArea> unidades);
+
+        ICollection<CatalogoExtendidoViewModel> MapDataAModel(ICollection<Destino> destinos);
+        ICollection<CatalogoViewModel> MapDataAModel(ICollection<Uso> usos);
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctdepto> departamento);
 
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<ctciudad> ciudades);

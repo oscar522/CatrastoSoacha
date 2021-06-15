@@ -64,13 +64,13 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
 
         public bool Terreno_TieneArea { get; set; }
 
-        public int Terreno_AreaTerreno { get; set; }
+        public decimal Terreno_AreaTerreno { get; set; }
 
         public string Terreno_UnidadArea { get; set; }
 
-        public int Terreno_AreaTerrenoEnMetros { get; set; }
+        public decimal Terreno_AreaTerrenoEnMetros { get; set; }
 
-        public int Terreno_PorcentajeAreaJudicialAreaCatastral { get; set; }
+        public decimal Terreno_PorcentajeAreaJudicialAreaCatastral { get; set; }
 
         public bool Terreno_IdentificacionPredio { get; set; }
 

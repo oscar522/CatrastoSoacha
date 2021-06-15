@@ -304,6 +304,34 @@ namespace CatastroAvanza.Mapeadores
                 return string.IsNullOrEmpty(archivo.FileName) ? string.Empty : archivo.FileName;
         }
 
-       
+        public ICollection<CatalogoExtendidoViewModel> MapDataAModel(ICollection<UnidadArea> unidades)
+        {
+
+            ICollection<CatalogoExtendidoViewModel> result = unidades
+               .Select(m => new CatalogoExtendidoViewModel { Value = m.Id.ToString(), Text = m.Nombre, ValueExtended = m.Valor  })
+               .ToList();
+
+            return result;
+        }
+
+        public ICollection<CatalogoExtendidoViewModel> MapDataAModel(ICollection<Destino> destinos)
+        {
+
+            ICollection<CatalogoExtendidoViewModel> result = destinos
+               .Select(m => new CatalogoExtendidoViewModel { Value = m.Codigo, Text = m.Nombre })
+               .ToList();
+
+            return result;
+        }
+
+        public ICollection<CatalogoViewModel> MapDataAModel(ICollection<Uso> usos)
+        {
+
+            ICollection<CatalogoViewModel> result = usos
+               .Select(m => new CatalogoViewModel { Value = m.Codigo, Text = m.Nombre })
+               .ToList();
+
+            return result;
+        }
     }
 }

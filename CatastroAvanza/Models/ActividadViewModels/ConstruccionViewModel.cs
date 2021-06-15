@@ -59,5 +59,9 @@ namespace CatastroAvanza.Models.ActividadViewModels
         public bool ElminarAnexos { get; set; }
 
         public SelectList DetallesIncorporacionArea { get; set; }
+
+        public SelectList Destinos { get; set; }
+
+        public SelectList Usos { get; set; }
     }
 }

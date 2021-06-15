@@ -2,8 +2,9 @@
 {
     public static class UnidadesArea
     {
-        public const int Barras = 1;
-        public const int Metros = 2;
-        public const int Hectareas = 3;        
+        public const decimal VarrasCuadradas = 0.7m;
+        public const decimal MetrosCuadrados = 1;
+        public const decimal Hectareas = 10000;
+        public const decimal Fanegada = 10000;
     }
 }

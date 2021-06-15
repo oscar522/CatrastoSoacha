@@ -7,7 +7,7 @@
 
 
 function ListarActividades() {
-    $('#table_User').DataTable({
+    $('#actividadesTbl').DataTable({
         serverSide: true,
         processing: true,
         ajax: {
