@@ -29,18 +29,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5>Actividades</h5>
-                                    <hr />
-                                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        @Html.EditorFor(model => model.IdApsNetUser, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @value = Model.IdApsNetUser } })
-                                        @Html.EditorFor(model => model.NombreUsuario, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @value = Model.NombreUsuario } })
-                                        @Html.EditorFor(model => model.RolUsuario, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @value = Model.RolUsuario } })
-                                        @Html.EditorFor(model => model.NombreActividad, new { htmlAttributes = new { @style = "display:none", @Value = "N_A" } })
-                                        @Html.EditorFor(model => model.FechaActividadS, new { htmlAttributes = new { @style = "display:none", @Value = "N_A" } })
-                                        @Html.EditorFor(model => model.NombreModalidad, new { htmlAttributes = new { @style = "display:none", @Value = "N_A" } })
-                                        @Html.EditorFor(model => model.NombreProceso, new { htmlAttributes = new { @style = "display:none", @Value = "N_A" } })
-                                        @Html.EditorFor(model => model.NombreRolActividad, new { htmlAttributes = new { @style = "display:none", @Value = "N_A" } })
-                                        @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @value = true } })*@
-
+                                    <hr />                                    
                                     <div class="row form-group">
                                         <div class="col-md-5">
                                             <label class="control-label col-md-12">Fecha</label>
@@ -92,10 +81,7 @@
                                             <label class="control-label col-md-12">Departamento</label>
                                         </div>
                                         <div class="col-md-7">
-                                            <select id="IdDepto" name="IdDepto" class="form-control bool CLASSIdDepto">
-                                                <option value="">Seleccione</option>
-                                                <option value="0">No Aplica</option>
-                                            </select>
+                                            @Html.DropDownList("IdDepto", new SelectList(string.Empty, "Value", "Text"), "Seleccione", new { @class = "form-control  bool CLASSIdDepto" })
                                             @Html.ValidationMessageFor(model => model.IdDepto, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -104,10 +90,7 @@
                                             <label class="control-label col-md-12">Municipio</label>
                                         </div>
                                         <div class="col-md-7">
-                                            <select id="IdMuni" name="IdMuni" class="form-control bool CLASSIdMuni ">
-                                                <option value="">Seleccione</option>
-                                                <option value="0">No Aplica</option>
-                                            </select>
+                                            @Html.DropDownList("IdMuni", new SelectList(string.Empty, "Value", "Text"), "Seleccione", new { @class = "form-control  bool CLASSIdDepto" })
                                             @Html.ValidationMessageFor(model => model.IdMuni, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -125,7 +108,8 @@
                                             @Html.LabelFor(model => model.Observacion, htmlAttributes: new { @class = "control-label col-md-12" })
                                         </div>
                                         <div class="col-md-7">
-                                            <textarea id="Observacion" name="Observacion" class="form-control col-md-12"></textarea>
+                                            @*<textarea id="Observacion" name="Observacion" ></textarea>*@
+                                            @Html.TextAreaFor(model=> model.Observacion, new { @class="form-control col-md-12" })
                                             @Html.ValidationMessageFor(model => model.Observacion, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -145,12 +129,15 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5> <label class="control-label col-md-12">Resumen Actividades</label> </h5>
-                                    <hr />
-                                    <div class="table-responsive ">
-                                        <table class="table table-striped cell-border stripe" id="table_User">
-                                        </table>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5> <label class="control-label col-md-12">Resumen Actividades</label> </h5>
+                                            <hr />
+                                            <table class="table table-striped cell-border compact responsive nowrap" id="table_User" width="90%">
+                                            </table>
+                                        </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>

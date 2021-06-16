@@ -16,7 +16,10 @@ namespace CatastroAvanza.Models.ActividadViewModels
             Construccion = new ConstruccionViewModel();
             Files = new FileViewModel();
             Informacion = new InformacionGeneral();
+            ArchivosCargados = new ArchivosCargadosActividadPredioViewModel();
         }
+
+        public int Id { get; set; }
 
         [DisplayName("Numero Predial")]
         [StringLength(30, ErrorMessage = "Numero predial no puede tener mas de 30 digitos")]        
@@ -52,5 +55,7 @@ namespace CatastroAvanza.Models.ActividadViewModels
         public SelectList Coordinadores { get; set; }
 
         public FileViewModel Files { get; set; }
+
+        public ArchivosCargadosActividadPredioViewModel ArchivosCargados { get; set; }
     }
 }

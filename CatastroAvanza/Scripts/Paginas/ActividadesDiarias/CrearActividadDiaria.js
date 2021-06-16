@@ -140,7 +140,7 @@ function GetDataInfo()
     $('#table_User').DataTable({
         serverSide: true,
         processing: true,
-        responsive: true,
+        responsive:true,
         ajax: {
             dataType: 'json',
             type: "POST",
@@ -153,13 +153,17 @@ function GetDataInfo()
                 name: 'Id',
                 data: 'Id',
                 title: 'Id',
-                orderable: true
+                orderable: true,
+                responsivePriority: 1,
+                targets: 0 
             },
             {
                 name: 'FechaActividadS',
                 data: 'FechaActividadS',
                 title: 'Fecha',
                 orderable: true,
+                responsivePriority: 2,
+                targets: -1,
                 render: function (data, type, full) {
                     var mDate = moment(data);
                     return (mDate && mDate.isValid()) ? mDate.format('YYYY-MM-DD') : '';
@@ -170,55 +174,73 @@ function GetDataInfo()
                 data: 'DepartamentoMunicipio',
                 title: 'Dpto - Municipio',
                 orderable: true,
-                searchable: true
+                searchable: true,
+                responsivePriority: 2,
+                targets: -1,
             },
             {
                 name: 'NombreProceso',
                 data: 'NombreProceso',
                 title: 'Nombre Proceso',
                 orderable: true,
-                searchable: true
+                searchable: true,
+                responsivePriority: 2,
+                targets: -1,
             },
             {
                 name: 'NombreModalidad',
                 data: 'NombreModalidad',
                 title: 'Nombre Modalidad',
-                orderable: true
+                orderable: true,
+                responsivePriority: 2,
+                targets: -1,
             },
             {
                 name: 'NombreRolActividad',
                 data: 'NombreRolActividad',
                 title: 'Rol',
-                orderable: true
+                orderable: true,
+                responsivePriority: 2,
+                targets: -1,
             }, {
                 name: 'RolUsuario',
                 data: 'RolUsuario',
                 title: 'Rol Usuario',
-                orderable: true
+                orderable: true,
+                responsivePriority: 2,
+                targets: -1,
             },
             {
                 name: 'NombreUsuario',
                 data: 'NombreUsuario',
                 title: 'nombre Usuario',
-                orderable: true
+                orderable: true,
+                responsivePriority: 2,
+                targets: -1,
             },
             {
                 name: 'NombreActividad',
                 data: 'NombreActividad',
                 title: 'Actividad',
-                orderable: true
+                orderable: true,
+                responsivePriority: 2,
+                targets: -1,
             },
             {
                 name: 'Cantidad',
                 data: 'Cantidad',
                 title: 'Cantidad',
-                orderable: true
+                orderable: true,
+                responsivePriority: 2,
+                targets: -1,
             },
             {
                 name: 'Observacion',
                 data: 'Observacion',
                 title: 'Observacion',
-                orderable: true
+                orderable: true,
+                responsivePriority: 2,
+                targets: -1,
             }
         ],
     });

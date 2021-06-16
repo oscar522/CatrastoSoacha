@@ -1,5 +1,6 @@
 ﻿var ConsultarActividadJs = {
     urlObtenerActividades: "",
+    urlActualizarActividad: "",
     Inicializar: function () {
         ListarActividades();
     }
@@ -17,13 +18,7 @@ function ListarActividades() {
         },
         pageLength: 10,
         lengthMenu: [5, 10, 25],
-        columns: [
-            {
-                name: 'Id',
-                data: 'Id',
-                title: 'Id',
-                orderable: true
-            },
+        columns: [            
             {
                 name: 'NumeroPredial',
                 data: 'NumeroPredial',
@@ -46,9 +41,27 @@ function ListarActividades() {
                 data: 'Fecha',
                 title: 'Fecha',
                 orderable: true,
+                width: "10%",
                 render: function (data, type, full) {
                    var mDate = moment(data);
                    return (mDate && mDate.isValid()) ? mDate.format('YYYY-MM-DD') : '';
+                }
+            }, {
+                name: 'Id',
+                data: 'Id',
+                title: '',
+                width: "5%",
+                render: function (data, type, full) {
+                    return "<a class='btn btn-outline-primary' title='Actualizar' href='" + ConsultarActividadJs.urlActualizarActividad + "?actividadId=" + data + "'><i class='fa fa-edit'></i></a>";
+                }
+            }
+            , {
+                name: 'Id',
+                data: 'Id',
+                title: '',
+                width: "5%",
+                render: function (data, type, full) {
+                    return "<a class='btn btn-outline-danger' title='Eliminar' href='#'><i class='fa fa-trash'></i></a>";
                 }
             }
         ],

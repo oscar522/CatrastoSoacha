@@ -1,0 +1,173 @@
+﻿@model ActividadPredioViewModel
+@{
+    ViewBag.Title = "Diagnostico técnico jurídico - Actualizacion";
+}
+@section Styles{
+    <link rel="stylesheet" href="~/Content/bootstrap-fileinput/css/fileinput.min.css">
+    <link rel="stylesheet" href="~/Content/bootstrap-fileinput/themes/explorer-fa/theme.min.css">
+}
+
+<h2>Diagnostico técnico jurídico</h2>
+<hr />
+<form method="post" enctype="multipart/form-data" id="frmActividad">
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m=> m.Id)
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <a class="btn btn-primary" href="@Url.Action("Index")">Regresar al listado de actividades</a>
+                <input type="submit" name="name" value="Actualizar Actividad" class="btn btn-primary" id="saveUpBtn" disabled />
+                <br />
+            </div>
+        </div>
+        <div class="">
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h5><u>Predio</u></h5>
+                <div class="form-group ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.NumeroPredial)
+                            @Html.EditorFor(m => m.NumeroPredial, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.ValidationMessageFor(m => m.NumeroPredial, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Ejecutor)
+                            @Html.EditorFor(m => m.Ejecutor, new { htmlAttributes = new { @class = "form-control ", disabled = "disabled" } })
+                            @Html.ValidationMessageFor(m => m.Ejecutor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Coordinador)
+                            @Html.DropDownListFor(m => m.Coordinador, Model.Coordinadores, "", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Coordinador, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Fecha)
+                            @Html.TextBoxFor(m => m.Fecha,  new { @class = "form-control",  @Value = Model.Fecha == DateTime.MinValue ? "" : Model.Fecha.ToString() })
+                            @Html.ValidationMessageFor(m => m.Fecha, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center align-items-center align-content-center">
+                <figure class="figure">
+                    <img src="~/Images/casas_imgs/casa_1.png" height="200px" width="250px" class="figure-img img-fluid rounded" alt="..." id="fotofachadaPreview">
+                    <figcaption class="figure-caption text-right">Demo image.</figcaption>
+                </figure>
+            </div>
+            <div class="col-md-2 invisible sectionToShow">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link" id="FPTab" data-toggle="modal" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false" data-target="#predialModal"><i class="fa fa-folder-open-o" id="FPI"></i> Cargar Ficha Predial</a>
+                    <a class="nav-link" id="PlanoTab" data-toggle="modal" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" data-target="#PlanoModal"><i class="fa fa-folder-open-o" id="PlanoI"></i> Cargar Plano</a>
+                    <a class="nav-link" id="EscTab" data-toggle="modal" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false" data-target="#EscriturasModal"><i class="fa fa-folder-open-o" id="EscI"></i> Cargar Escrituras</a>
+                    <a class="nav-link" id="FmiTab" data-toggle="modal" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false" data-target="#FmiModal"><i class="fa fa-folder-open-o" id="FmiI"></i> Cargar FMI</a>
+                    <a class="nav-link" id="CnTab" data-toggle="modal" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false" data-target="#CertificadoNomenclaturaModal"><i class="fa fa-folder-open-o" id="CnI"></i> Cargar C. Nomenclatura</a>
+                    <a class="nav-link" id="CrqTab" data-toggle="modal" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false" data-target="#CroquisModal"><i class="fa fa-folder-open-o" id="CrqI"></i> Cargar Croquis</a>
+                    <a class="nav-link" id="FotoTab" data-toggle="modal" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false" data-target="#fotoModal"><i class="fa fa-folder-open-o " id="FotoI"></i> Cargar Foto fachada</a>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6 invisible sectionToShow">
+                @Html.Partial("_InformacionGeneral", Model)
+            </div>
+            <div class="col-md-6 invisible sectionToShow">
+                @Html.Partial("_Archivos", Model)
+                <br />
+            </div>
+        </div>
+        <hr />
+
+        <hr />
+        <div class="row">
+            <div class="col-md-12 invisible sectionToShow">
+                @Html.Partial("_Geograficas", Model)
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12 invisible sectionToShow">
+                @Html.Partial("_Tramites", Model)
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12 invisible sectionToShow">
+                @Html.Partial("_Terreno", Model)
+            </div>
+
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12 invisible sectionToShow">
+                @Html.Partial("_Construccion", Model)
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <input type="submit" name="name" value="Salvar Actividad" class="btn btn-primary" id="saveDownBtn" disabled />
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+            <div class="toast-header">
+                <i class="fa fa-support"></i>
+                <strong class="mr-auto">Lista de errores - Creacion actividad</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script src=" ~/Scripts/plugins/piexif.min.js"></script>
+    <script src=" ~/Scripts/plugins/sortable.min.js"></script>
+    <script src=" ~/Scripts/fileinput.min.js"></script>
+    <script src=" ~/Scripts/locales/es.js"></script>
+    <script src=" ~/Content/bootstrap-fileinput/themes/explorer-fa/theme.min.js"></script>
+    <script src=" ~/Content/bootstrap-fileinput/themes/fa/theme.min.js"></script>
+    @Scripts.Render("~/Scripts/Paginas/Actividad/ActualizarActividad.js")
+
+<script>
+        $(document).ready(function () {
+            ActualizarActividadJs.urlObtenerMunicipios = '@Url.Action("ObternerMunicipios")';            
+            ActualizarActividadJs.archivosCargados = {
+                FP: '@Model.ArchivosCargados.FichaPredial',
+                Plano: "@Model.ArchivosCargados.Plano",
+                Esc: "@Model.ArchivosCargados.Escrituras",
+                Fmi: "@Model.ArchivosCargados.Fmi",
+                Cn: "@Model.ArchivosCargados.CertificadoNomenclatura",
+                Crq: "@Model.ArchivosCargados.Croquis",
+                Foto: "@Model.ArchivosCargados.FotoFachada"
+            };            
+            ActualizarActividadJs.Inicializar();
+            ActualizarActividadJs.InicializarMunicipio('@Model.Informacion.Departamento', '@Model.Informacion.Municipio')
+        });
+</script>
+}

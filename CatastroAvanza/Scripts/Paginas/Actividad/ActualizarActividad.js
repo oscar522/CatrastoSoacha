@@ -1,38 +1,47 @@
-﻿var ActividadJs = {
-    urlObtenerMunicipios: "",
-    urlObtenerPredial: "",
+﻿ActualizarActividadJs = {    
+    urlObtenerMunicipios: "",    
+    archivosCargados: { FP: "", Plano : "", Esc : "", Fmi : "", Cn : "", Crq : "", Foto : "" },
     Inicializar: function () {
         $("#Informacion_Departamento").change(ObtenerMunicipios);
         $("#Tramite_Desenglobe").change(DesbloquearUnidadTramite);
-        $("#Tramite_ReglamentoPH").change(DesbloquearUnidadReglamento); 
-        $("#Tramite_Linderos").change(DesbloquearLinderosFmi); 
+        $("#Tramite_ReglamentoPH").change(DesbloquearUnidadReglamento);
+        $("#Tramite_Linderos").change(DesbloquearLinderosFmi);
         $("#Tramite_LinderosEnEscritura").change(DesbloquearNumeroEscritura);
         $("#Terreno_TieneArea").change(DesbloquearAreasTerreno);
-        $("#Construccion_Uso").change(DesbloquearUso); 
-        $("#Construccion_Destino").change(DesbloquearDestino); 
+        $("#Construccion_Uso").change(DesbloquearUso);
+        $("#Construccion_Destino").change(DesbloquearDestino);
         $("#Construccion_AdicionaCancelaUnidades").change(DesbloquearAdicionaCancelaUnidades); 
-        $("#saveUpBtn").click(SaveForm);
-        $("#saveDownBtn").click(SaveForm);
-        $("#btnBuscar").click(ObtenerInfoByPredial);
         $("#Terreno_UnidadArea").change(CalcularTerrenoEnMetros);
         $("#Terreno_AreaTerreno").change(CalcularTerrenoEnMetros);
         $("#Terreno_AreaTerrenoEnMetros").change(CalcularPorcentajeJudicial);
         $("#Informacion_AreaTerreno").change(CalcularPorcentajeJudicial);
+
+       
+
+        ActividadEncontrada();
         InicializarFileInputs();
-        InicializarListas();
+        ObtenerMunicipiosYSeleccionarUnValorDeterminado();
         BloqueadosPorDefecto();
-    },   
-}
 
-function InicializarListas()
-{
-    $(".listas").val("");
-}
-
-function BloqueadosPorDefecto()
-{
-    $(".bloqueado").attr('disabled', 'disabled')
-    
+        DesbloquearAdicionaCancelaUnidades();
+        DesbloquearUnidadTramite();
+        DesbloquearUnidadReglamento();
+        DesbloquearLinderosFmi();
+        DesbloquearNumeroEscritura();
+        DesbloquearAreasTerreno();
+        DesbloquearUso();
+        DesbloquearDestino();
+        ArchivosCargados('FP', this.archivosCargados.FP);
+        ArchivosCargados('Plano', this.archivosCargados.Plano);
+        ArchivosCargados('Esc', this.archivosCargados.Esc);
+        ArchivosCargados('Fmi', this.archivosCargados.Fmi);
+        ArchivosCargados('Cn', this.archivosCargados.Cn);
+        ArchivosCargados('Crq', this.archivosCargados.Crq);
+        ArchivosCargados('Foto', this.archivosCargados.Foto);        
+    },
+    InicializarMunicipio: function (dep, mun) {
+        ObtenerMunicipiosYSeleccionarUnValorDeterminado(dep, mun)
+    }
 }
 
 function InicializarFileInputs() {
@@ -48,7 +57,7 @@ function InicializarFileInputs() {
         $('#' + $(this).attr('data-externalid') + 'Tab').addClass('text-success');
         $('#' + $(this).attr('data-externalid') + 'Archivo').html($(this)[0].files[0].name);
         $('#' + $(this).attr('data-externalid') + 'Estado').html('<span class="badge badge-success">Si</span>');
-        if ($(this).attr('id') == 'Files_FotoFachada')
+        if ($(this).attr('id') ==  'Files_FotoFachada')
             $("#fotofachadaPreview").attr("src", reader.result);
     }).on('fileclear', function () {
         $('#' + $(this).attr('data-externalid') + 'I').addClass('fa-folder-open-o');
@@ -58,21 +67,26 @@ function InicializarFileInputs() {
         $('#' + $(this).attr('data-externalid') + 'Estado').html('<span class="badge badge-dark">No</span>');
         if ($(this).attr('id') == 'Files_FotoFachada')
             $("#fotofachadaPreview").attr("src", "/Images/casas_imgs/casa_1.png");
+        
     });
 }
 
-function DesbloquearUnidadTramite()
-{
-    if ($(this).val() == "true")
+function BloqueadosPorDefecto() {
+    $(".bloqueado").attr('disabled', 'disabled')
+
+}
+
+function DesbloquearUnidadTramite() {
+    if ($("#Tramite_Desenglobe").val() == "true")
         $("#Tramite_Unidadestramite").removeAttr('disabled');
     else {
         $("#Tramite_Unidadestramite").val("");
         $("#Tramite_Unidadestramite").attr('disabled', 'disabled');
-    }        
+    }
 }
 
 function DesbloquearUnidadReglamento() {
-    if ($(this).val() == "true")
+    if ($("#Tramite_ReglamentoPH").val() == "true")
         $("#Tramite_UnidadesReglamento").removeAttr('disabled');
     else {
         $("#Tramite_UnidadesReglamento").val("");
@@ -81,7 +95,7 @@ function DesbloquearUnidadReglamento() {
 }
 
 function DesbloquearLinderosFmi() {
-    if ($(this).val() == "true")
+    if ($("#Tramite_Linderos").val() == "true")
         $("#Tramite_LinderosFmi").removeAttr('disabled');
     else {
         $("#Tramite_LinderosFmi").val("");
@@ -90,7 +104,7 @@ function DesbloquearLinderosFmi() {
 }
 
 function DesbloquearNumeroEscritura() {
-    if ($(this).val() == "true")
+    if ($("#Tramite_LinderosEnEscritura").val() == "true")
         $("#Tramite_NumeroEscritura").removeAttr('disabled');
     else {
         $("#Tramite_NumeroEscritura").val("");
@@ -99,23 +113,21 @@ function DesbloquearNumeroEscritura() {
 }
 
 function DesbloquearAreasTerreno() {
-    if ($(this).val() == "true")
-    {
+    if ($("#Terreno_TieneArea").val() == "true") {
         $("#Terreno_AreaTerreno").removeAttr('disabled');
-        $("#Terreno_UnidadArea").removeAttr('disabled');        
-    }        
+        $("#Terreno_UnidadArea").removeAttr('disabled');
+    }
     else {
         $("#Terreno_AreaTerreno").attr('disabled', 'disabled');
         $("#Terreno_UnidadArea").attr('disabled', 'disabled');
-        $("#Terreno_AreaTerreno").val("");        
+        $("#Terreno_AreaTerreno").val("");
         $("#Terreno_UnidadArea").val("");
         $("#Terreno_AreaTerrenoEnMetros").val("");
         $("#Terreno_PorcentajeAreaJudicialAreaCatastral").val("");
     }
 }
 
-function CalcularTerrenoEnMetros()
-{
+function CalcularTerrenoEnMetros() {
     var unidadesValor = $("#Terreno_UnidadArea").children("option:selected").attr("data-valorunidad")
     var areaTerreno = $("#Terreno_AreaTerreno").val();
     var areaTerrenoMetros = areaTerreno * unidadesValor
@@ -132,7 +144,7 @@ function CalcularPorcentajeJudicial() {
 }
 
 function DesbloquearUso() {
-    if ($(this).val() == "true")
+    if ($("#Construccion_Uso").val() == "true")
         $("#Construccion_UsoDetalle").removeAttr('disabled');
     else {
         $("#Construccion_UsoDetalle").val("");
@@ -141,7 +153,7 @@ function DesbloquearUso() {
 }
 
 function DesbloquearDestino() {
-    if ($(this).val() == "true")
+    if ($("#Construccion_Destino").val() == "true")
         $("#Construccion_DestinoDetalle").removeAttr('disabled');
     else {
         $("#Construccion_DestinoDetalle").val("");
@@ -150,7 +162,7 @@ function DesbloquearDestino() {
 }
 
 function DesbloquearAdicionaCancelaUnidades() {
-    if ($(this).val() == "true")
+    if ($("#Construccion_AdicionaCancelaUnidades").val() == "true")
         $(".Construccion_AdicionaCancelaUnidades").removeAttr('disabled');
     else {
         $(".Construccion_AdicionaCancelaUnidades").removeAttr("cheked");
@@ -158,60 +170,22 @@ function DesbloquearAdicionaCancelaUnidades() {
     }
 }
 
-
-function SaveForm() {    
-    if (!$("#frmActividad").valid())
-        $('#liveToast').toast('show');
-    else
-        loadingModal();
-}
-
-function ObtenerInfoByPredial()
+function ActividadEncontrada()
 {
-    $.post(ActividadJs.urlObtenerPredial, { noPredial: $("#NumeroPredial").val() }, function (data) {  
-        if (data.NUMERO_DEL_PREDIO == null) {
-            alert("Registro no encontrado");
-            return false;
-        }
-        $("#NumeroPredial").val(data.NUMERO_DEL_PREDIO) 
-        $("#Informacion_Departamento").val(data.dep)
-        ObtenerMunicipiosYSeleccionarUnValorDeterminado(data.dep, data.mun)        
-        $("#Informacion_Comuna").val(data.R1_2020_66069_PREDIOSModel[0].COMUNA);
-        $("#Informacion_Destino").val(data.R1_2020_66069_PREDIOSModel[0].DESCRIPCION_DESTINO);
-        $("#Informacion_AreaTerreno").val(data.R1_2020_66069_PREDIOSModel[0].AREA_TERRENO);
-        $("#Informacion_Direccion").val(data.R1_2020_66069_PREDIOSModel[0].DIRECCION);
-        $("#Informacion_AreaConstruida").val(data.R1_2020_66069_PREDIOSModel[0].AREA_CONSTRUIDA);
-        $("#Informacion_Avaluo").val(data.R1_2020_66069_PREDIOSModel[0].AVALUO);        
-        $("#Informacion_NumeroMejoras").val(data.CANTIDAD_MEJORA);
-        if (data.CANTIDAD_MEJORA > 0)
-            $("#Informacion_Mejoras").val("true");       
-
-        $("#inforGen_Fmi").val(data.R2_2021_69295_CONSTRUCCIONESModel[0].FMI);
-        $("#inforGen_Linderos").val();
-        $("#inforGen_FmiMatriz").val();
-        $("#inforGen_AreaJuridica").val();
-        var PropietariosItem = "";
-        data.CANTIDAD_PROPIETARIOS.forEach(function (item) {
-            PropietariosItem = PropietariosItem + item + "; "
-        });
-        $("#inforGen_Propietarios").val(PropietariosItem);
-                       
+    if ($('#Id').val() != 0) {
+        $(".sectionToShow").removeClass("invisible");
         $("#saveUpBtn").removeAttr("disabled");
         $("#saveDownBtn").removeAttr("disabled");
-        $(".sectionToShow").removeClass("invisible");
-
-    });
-    return false;
+    }        
 }
 
-function ObtenerMunicipios()
-{    
+function ObtenerMunicipios() {
     ObtenerMunicipiosYSeleccionarUnValorDeterminado($(this).val(), 0);
 }
 
 function ObtenerMunicipiosYSeleccionarUnValorDeterminado(depto, munSeleccionado) {
 
-    $.post(ActividadJs.urlObtenerMunicipios, { IdDepartamento: depto }, function (data) {
+    $.post(ActualizarActividadJs.urlObtenerMunicipios, { IdDepartamento: depto }, function (data) {
         $('#Informacion_Municipio').empty();
         $.each(data, function (index, value) {
             $('#Informacion_Municipio').append($('<option/>', {
@@ -224,3 +198,13 @@ function ObtenerMunicipiosYSeleccionarUnValorDeterminado(depto, munSeleccionado)
     });
 }
 
+function ArchivosCargados(nombre, value) {
+    if (value != "") {
+        $('#' + nombre + 'I').addClass('fa-folder-o');
+        $('#' + nombre + 'I').removeClass('fa-folder-open-o');
+        $('#' + nombre + 'Tab').addClass('text-success');
+        $('#' + nombre + 'Archivo').html(value);
+        $('#' + nombre + 'Estado').html('<span class="badge badge-success">Si</span>');        
+    }
+
+}

@@ -33,5 +33,15 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
             return rolesCatalogo;
         }
+
+        public RoleViewModel GetRolesByUserId(string idUser)
+        {
+            var roles = _roleManager.Users.Where(m => m.UserName == idUser)?.FirstOrDefault()?.Roles?.FirstOrDefault().RoleId;
+
+            RoleViewModel rol = GetRolesById(roles);
+
+            return rol;
+        }
+
     }
 }
