@@ -12,6 +12,8 @@
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Content/DataTables/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/Content/DataTables/css/responsive.bootstrap4.min.css">
 
     <link rel="shortcut icon" href="images/favicon.png" />
     @RenderSection("styles", required: false)
@@ -55,9 +57,11 @@
     <script src=" ~/Scripts/bootstrap.min.js"></script>
     <script src=" ~/Scripts/bootstrap.bundle.min.js"></script>
 
-    <script src=" ~/Scripts/DataTables/jquery.dataTables.min.js"></script>
-    <script src=" ~/Scripts/DataTables/dataTables.bootstrap4.min.js"></script>
-    <script src=" ~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/DataTables/extensions/Responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
     @RenderSection("scripts", required: false)
 
     <script type="text/javascript">

@@ -16,6 +16,8 @@
         $("#Terreno_AreaTerrenoEnMetros").change(CalcularPorcentajeJudicial);
         $("#Informacion_AreaTerreno").change(CalcularPorcentajeJudicial);
 
+       
+
         ActividadEncontrada();
         InicializarFileInputs();
         ObtenerMunicipiosYSeleccionarUnValorDeterminado();
@@ -35,7 +37,7 @@
         ArchivosCargados('Fmi', this.archivosCargados.Fmi);
         ArchivosCargados('Cn', this.archivosCargados.Cn);
         ArchivosCargados('Crq', this.archivosCargados.Crq);
-        ArchivosCargados('Foto', this.archivosCargados.Foto);
+        ArchivosCargados('Foto', this.archivosCargados.Foto);        
     },
     InicializarMunicipio: function (dep, mun) {
         ObtenerMunicipiosYSeleccionarUnValorDeterminado(dep, mun)

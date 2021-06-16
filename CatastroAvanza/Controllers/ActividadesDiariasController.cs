@@ -46,8 +46,7 @@ namespace CatastroAvanza.Controllers
                 return View(nameof(CrearActividad), model);
             else
             {
-                model.IdApsNetUser = HttpContext.User.Identity.Name;
-                model.RolUsuario = "5a53a3a6-9edd-4d18-8728-afdf427d2ead";
+                model.IdApsNetUser = HttpContext.User.Identity.Name;                
                 model.Id = await _actividadDiaria.CrearActividad(model);
                 return View(nameof(CrearActividad), new ActividadesDiariasViewModel());
             }            

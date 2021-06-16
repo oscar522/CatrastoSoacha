@@ -87,12 +87,12 @@ namespace CatastroAvanza.Negocio.Implementaciones
                     model.Terreno.PorcentajeAreaJudicialAreaCatastral = (model.Terreno.AreaTerrenoEnMetros * 100) / model.Informacion.AreaTerreno;
                 }
 
-                Actividad actividad = await _contexto.Actividad.FirstOrDefaultAsync(m => m.Id == model.Id);
+                Actividad actividad = await _contexto.Actividad.Where(m=> m.Id == model.Id).SingleOrDefaultAsync();
 
                 if (actividad == null)
                     return 0;
 
-                _mapper.MapModelAData(model, actividad);
+                actividad = _mapper.MapModelAData(model, actividad);
 
                 var resultado = await _contexto.SaveChangesAsync();
 

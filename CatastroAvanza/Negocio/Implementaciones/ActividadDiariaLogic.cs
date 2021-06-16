@@ -46,8 +46,6 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
         public async Task<DataTablesResponse> GetActividadesCreadas(IDataTablesRequest modelo)
         {
-            try
-            {
                 var sortedColumn = modelo.Columns.GetSortedColumns().Where(x => x.OrderNumber == 0).FirstOrDefault();
                 ActividadesColumnasOrdenables? columnaOrdenar = null;
                 bool orderByDescending = false;
@@ -58,6 +56,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 }
 
                 var actividades = _contexto.ActividadDiaria.AsQueryable();
+                int actividadesTotales = _contexto.ActividadDiaria.Count();
 
                 if (orderByDescending)
                     actividades = actividades.OrderBy(m => columnaOrdenar);
@@ -72,27 +71,20 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
                     var actividad = listadoActividades.FirstOrDefault(la => la.Id == m.Id);
                     var municipio = _contexto.Ciudad.FirstOrDefault(c => c.idctmuncipio == actividad.IdMunicipio);
-                    var departamento = _contexto.Ciudad.FirstOrDefault(c => c.id == actividad.IdDepartamento);
+                    var departamento = _contexto.Departamento.FirstOrDefault(c => c.id_ct_depto == actividad.IdDepartamento);
 
-                    m.NombreActividad = _contexto.TipoActividad.Where(a => a.Id == actividad.IdActividad).FirstOrDefault().Actividad;
-                    m.NombreModalidad = _contexto.Catalogo.Where(a => a.Id == actividad.IdModalidad).FirstOrDefault().Nombre;
-                    m.NombreProceso = _contexto.Catalogo.Where(a => a.Id == actividad.IdProceso).FirstOrDefault().Nombre;
-                    m.NombreRolActividad = _security.GetRolesById(actividad.IdRol).Name;
-
+                    m.NombreActividad = _contexto.TipoActividad.Where(a => a.Id == actividad.IdActividad).FirstOrDefault()?.Actividad;
+                    m.NombreModalidad = _contexto.Catalogo.Where(a => a.Id == actividad.IdModalidad).FirstOrDefault()?.Nombre;
+                    m.NombreProceso = _contexto.Catalogo.Where(a => a.Id == actividad.IdProceso).FirstOrDefault()?.Nombre;
+                    m.NombreRolActividad = _security.GetRolesById(actividad.IdRol)?.Name;
+                    m.RolUsuario = _security.GetRolesByUserId(actividad.IdApsNetUser)?.Name;
                     m.DepartamentoMunicipio = $"{departamento?.nombre}-{municipio?.nombre}";
                     
                 });
 
-                var tabla = new DataTablesResponse(modelo.Draw, listaActividades, _contexto.Actividad.Count(), listadoActividades.Count);
+                var tabla = new DataTablesResponse(modelo.Draw, listaActividades, actividadesTotales, listadoActividades.Count);
 
                 return tabla;
-
-            }
-            catch (Exception ex)
-            {
-                string message = ex.Message;
-                return new DataTablesResponse(modelo.Draw, new List<ActividadesDiariasTablaModel>(), 0, 0);
-            }            
         }
     }
 }

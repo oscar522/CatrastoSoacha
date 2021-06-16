@@ -8,5 +8,7 @@ namespace CatastroAvanza.Negocio.Contratos
         List<RoleViewModel> GetRoles();
 
         RoleViewModel GetRolesById(string idRol);
+
+        RoleViewModel GetRolesByUserId(string idUser);
     }
 }
