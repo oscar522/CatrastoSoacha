@@ -17,6 +17,7 @@ namespace CatastroAvanza.Models.ActividadViewModels
             Files = new FileViewModel();
             Informacion = new InformacionGeneral();
             ArchivosCargados = new ArchivosCargadosActividadPredioViewModel();
+            Economico = new EconomicoViewModel();
         }
 
         public int Id { get; set; }
@@ -49,6 +50,8 @@ namespace CatastroAvanza.Models.ActividadViewModels
         public ConstruccionViewModel Construccion { get; set; }
         
         public InformacionGeneral Informacion { get; set; }
+
+        public EconomicoViewModel Economico { get; set; }
 
         public SelectList Ejecutores { get; set; }
 

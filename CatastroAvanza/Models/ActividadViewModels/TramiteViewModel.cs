@@ -52,5 +52,13 @@ namespace CatastroAvanza.Models.ActividadViewModels
         [DisplayName("Numero de escritura")]
         [Required(ErrorMessage = "Numero de escritura es requerido.")]
         public string NumeroEscritura { get; set; }
+
+        [DisplayName("Existe englobe con mejora?")]
+        [Required(ErrorMessage = "Existe englobe con mejora? es requerido.")]
+        public bool ExisteEnglobeConMejora { get; set; }
+
+        [DisplayName("Requiere actualizacion nomenclatura?")]
+        [Required(ErrorMessage = "Requiere actualizacion nomenclatura? es requerido.")]
+        public bool RequiereActualizacionNomenclatura { get; set; }
     }
 }

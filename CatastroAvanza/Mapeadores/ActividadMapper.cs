@@ -41,6 +41,8 @@ namespace CatastroAvanza.Mapeadores
             result.Construccion.ElminarAnexos=model.Construccion_ElminarAnexos;
             result.Construccion.UsoDetalle= model.Construccion_Uso_Detalle;
             result.Construccion.DestinoDetalle= model.Construccion_Destino_Detalle;
+            result.Construccion.TieneCubrimientoOrto = model.Construccion_Tiene_cubrimiento_orto;
+            result.Construccion.TieneCubrimientoVisor = model.Construccion_Tiene_cubrimiento_visor;
 
             result.ArchivosCargados.FichaPredial = model.Arcvhivo_FichaPredial;
             result.ArchivosCargados.Plano = model.Arcvhivo_Plano;
@@ -65,6 +67,8 @@ namespace CatastroAvanza.Mapeadores
             result.Tramite.NumeroEscritura = model.Tramite_NumeroEscritura;
             result.Tramite.PropietariosCorrectos = model.Tramite_PropietariosCorrectos;
             result.Tramite.Linderos = model.Tramite_Linderos;
+            result.Tramite.ExisteEnglobeConMejora= model.Tramite_Existe_Englobe_Con_Mejora;
+            result.Tramite.RequiereActualizacionNomenclatura = model.Tramite_Requiere_Actualizacion_Nomenclatura;
 
             result.Terreno.TieneArea = model.Terreno_TieneArea;
             result.Terreno.AreaTerreno = model.Terreno_AreaTerreno;
@@ -74,6 +78,7 @@ namespace CatastroAvanza.Mapeadores
             result.Terreno.IdentificacionPredio = model.Terreno_IdentificacionPredio;
             result.Terreno.RequiereVisita = model.Terreno_RequiereVisita;
             result.Terreno.ObservacionVisita = model.Terreno_ObservacionVisita;
+            result.Terreno.PredioRequiereRectificacionArea = model.Terreno_Predio_Requiere_Rectificacion_Area;
 
             result.Informacion.AreaConstruida = model.General_AreaConstruida;
             result.Informacion.AreaTerreno = model.General_AreaTerreno;
@@ -91,6 +96,9 @@ namespace CatastroAvanza.Mapeadores
             result.Informacion.TipoDireccion = model.General_TipoDireccion;
             result.Informacion.Vereda = model.General_Vereda;
 
+            result.Economico.Observaciones = model.Economico_Observaciones;
+            result.Economico.Requiere_Revision_Tipologias = model.Economico_Requiere_Revision_Tipologias;
+            result.Economico.Requiere_Revision_Zonas = model.Economico_Requiere_Revision_Zonas;
             return result;
         }
 
@@ -143,12 +151,24 @@ namespace CatastroAvanza.Mapeadores
                 result.Construccion_TieneConstrucciones = model.Construccion.TieneConstrucciones;
                 result.Construccion_ConstruccionEsCorrecta = model.Construccion.ConstruccionEsCorrecta;
                 result.Construccion_AdicionaCancelaUnidades = model.Construccion.AdicionaCancelaUnidades;
-                result.Construccion_AdicionarConstrucciones = model.Construccion.AdicionarConstrucciones;
-                result.Construccion_ElminarConstrucciones = model.Construccion.ElminarConstrucciones;
-                result.Construccion_AdicionarAnexos = model.Construccion.AdicionarAnexos;
-                result.Construccion_ElminarAnexos = model.Construccion.ElminarAnexos;
+                if (!result.Construccion_AdicionaCancelaUnidades)
+                {
+                    result.Construccion_AdicionarConstrucciones = false;
+                    result.Construccion_ElminarConstrucciones = false;
+                    result.Construccion_AdicionarAnexos = false;
+                    result.Construccion_ElminarAnexos = false;
+                }
+                else
+                {
+                    result.Construccion_AdicionarConstrucciones = model.Construccion.AdicionarConstrucciones;
+                    result.Construccion_ElminarConstrucciones = model.Construccion.ElminarConstrucciones;
+                    result.Construccion_AdicionarAnexos = model.Construccion.AdicionarAnexos;
+                    result.Construccion_ElminarAnexos = model.Construccion.ElminarAnexos;
+                }
                 result.Construccion_Uso_Detalle = model.Construccion.UsoDetalle;
                 result.Construccion_Destino_Detalle = model.Construccion.DestinoDetalle;
+                result.Construccion_Tiene_cubrimiento_orto = model.Construccion.TieneCubrimientoOrto;
+                result.Construccion_Tiene_cubrimiento_visor = model.Construccion.TieneCubrimientoVisor;
 
             }
 
@@ -185,11 +205,12 @@ namespace CatastroAvanza.Mapeadores
                 result.Tramite_NumeroEscritura = model.Tramite.NumeroEscritura;
                 result.Tramite_PropietariosCorrectos = model.Tramite.PropietariosCorrectos;
                 result.Tramite_Linderos = model.Tramite.Linderos;
+                result.Tramite_Existe_Englobe_Con_Mejora = model.Tramite.ExisteEnglobeConMejora;
+                result.Tramite_Requiere_Actualizacion_Nomenclatura= model.Tramite.RequiereActualizacionNomenclatura;
             }
 
             if (model.Terreno != null)
-            {
-                //result.Terreno_EscrituraLinderos = model.Terreno.EscrituraLinderos;
+            {                
                 result.Terreno_TieneArea = model.Terreno.TieneArea;
                 result.Terreno_AreaTerreno = model.Terreno.AreaTerreno;
                 result.Terreno_UnidadArea = model.Terreno.UnidadArea.ToString();
@@ -198,6 +219,7 @@ namespace CatastroAvanza.Mapeadores
                 result.Terreno_IdentificacionPredio = model.Terreno.IdentificacionPredio;
                 result.Terreno_RequiereVisita = model.Terreno.RequiereVisita;
                 result.Terreno_ObservacionVisita = model.Terreno.ObservacionVisita;
+                result.Terreno_Predio_Requiere_Rectificacion_Area = model.Terreno.PredioRequiereRectificacionArea;
             }
 
             if (model.Informacion != null)
@@ -218,6 +240,13 @@ namespace CatastroAvanza.Mapeadores
                 result.General_TipoDireccion = model.Informacion.TipoDireccion;
                 result.General_Vereda = model.Informacion.Vereda;
 
+            }
+
+            if (model.Economico != null)
+            {
+                result.Economico_Observaciones = model.Economico.Observaciones;
+                result.Economico_Requiere_Revision_Tipologias = model.Economico.Requiere_Revision_Tipologias;
+                result.Economico_Requiere_Revision_Zonas = model.Economico.Requiere_Revision_Zonas;
             }
 
             return result;                     
@@ -251,8 +280,6 @@ namespace CatastroAvanza.Mapeadores
 
             if (model.Construccion != null)
             {
-                //result.Construccion_IncorporacioArea = model.Construccion.IncorporacioArea;
-                //result.Construccion_DetalleIncorporacionArea = model.Construccion.DetalleIncorporacionArea;
                 result.Construccion_Uso = model.Construccion.Uso;
                 result.Construccion_Destino = model.Construccion.Destino;
                 result.Construccion_ObservacionUsosDestino = model.Construccion.ObservacionUsosDestino;
@@ -260,13 +287,24 @@ namespace CatastroAvanza.Mapeadores
                 result.Construccion_TieneConstrucciones = model.Construccion.TieneConstrucciones;
                 result.Construccion_ConstruccionEsCorrecta = model.Construccion.ConstruccionEsCorrecta;
                 result.Construccion_AdicionaCancelaUnidades = model.Construccion.AdicionaCancelaUnidades;
-                result.Construccion_AdicionarConstrucciones = model.Construccion.AdicionarConstrucciones;
-                result.Construccion_ElminarConstrucciones = model.Construccion.ElminarConstrucciones;
-                result.Construccion_AdicionarAnexos = model.Construccion.AdicionarAnexos;
-                result.Construccion_ElminarAnexos = model.Construccion.ElminarAnexos;
+                if (!result.Construccion_AdicionaCancelaUnidades)
+                {
+                    result.Construccion_AdicionarConstrucciones = false;
+                    result.Construccion_ElminarConstrucciones = false;
+                    result.Construccion_AdicionarAnexos = false;
+                    result.Construccion_ElminarAnexos = false;
+                }
+                else
+                {
+                    result.Construccion_AdicionarConstrucciones = model.Construccion.AdicionarConstrucciones;
+                    result.Construccion_ElminarConstrucciones = model.Construccion.ElminarConstrucciones;
+                    result.Construccion_AdicionarAnexos = model.Construccion.AdicionarAnexos;
+                    result.Construccion_ElminarAnexos = model.Construccion.ElminarAnexos;
+                }
                 result.Construccion_Uso_Detalle = model.Construccion.UsoDetalle;
                 result.Construccion_Destino_Detalle = model.Construccion.DestinoDetalle;
-
+                result.Construccion_Tiene_cubrimiento_orto = model.Construccion.TieneCubrimientoOrto;
+                result.Construccion_Tiene_cubrimiento_visor = model.Construccion.TieneCubrimientoVisor;
             }
 
 
@@ -302,11 +340,12 @@ namespace CatastroAvanza.Mapeadores
                 result.Tramite_NumeroEscritura = model.Tramite.NumeroEscritura;
                 result.Tramite_PropietariosCorrectos = model.Tramite.PropietariosCorrectos;
                 result.Tramite_Linderos = model.Tramite.Linderos;
+                result.Tramite_Existe_Englobe_Con_Mejora = model.Tramite.ExisteEnglobeConMejora;
+                result.Tramite_Requiere_Actualizacion_Nomenclatura = model.Tramite.RequiereActualizacionNomenclatura;
             }
 
             if (model.Terreno != null)
-            {
-                //result.Terreno_EscrituraLinderos = model.Terreno.EscrituraLinderos;
+            {               
                 result.Terreno_TieneArea = model.Terreno.TieneArea;
                 result.Terreno_AreaTerreno = model.Terreno.AreaTerreno;
                 result.Terreno_UnidadArea = model.Terreno.UnidadArea.ToString();
@@ -315,6 +354,7 @@ namespace CatastroAvanza.Mapeadores
                 result.Terreno_IdentificacionPredio = model.Terreno.IdentificacionPredio;
                 result.Terreno_RequiereVisita = model.Terreno.RequiereVisita;
                 result.Terreno_ObservacionVisita = model.Terreno.ObservacionVisita;
+                result.Terreno_Predio_Requiere_Rectificacion_Area = model.Terreno.PredioRequiereRectificacionArea;
             }
 
             if (model.Informacion != null)
@@ -335,6 +375,13 @@ namespace CatastroAvanza.Mapeadores
                 result.General_TipoDireccion = model.Informacion.TipoDireccion;
                 result.General_Vereda = model.Informacion.Vereda;
 
+            }
+
+            if (model.Economico != null)
+            {
+                result.Economico_Observaciones = model.Economico.Observaciones;
+                result.Economico_Requiere_Revision_Tipologias = model.Economico.Requiere_Revision_Tipologias;
+                result.Economico_Requiere_Revision_Zonas = model.Economico.Requiere_Revision_Zonas;
             }
 
             return result;

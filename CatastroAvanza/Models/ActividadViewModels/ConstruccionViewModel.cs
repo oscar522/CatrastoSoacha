@@ -35,8 +35,8 @@ namespace CatastroAvanza.Models.ActividadViewModels
         [Required(ErrorMessage = "Tiene construcciones? es requerido.")]
         public bool TieneConstrucciones { get; set; }
 
-        [DisplayName("La construccion esta correctamente determinada?")]
-        [Required(ErrorMessage = "La construccion esta correctamente determinada? es requerido.")]
+        [DisplayName("Requiere rectificar area construida?")]
+        [Required(ErrorMessage = "Requiere rectificar area construida? es requerido.")]
         public bool ConstruccionEsCorrecta { get; set; }
 
         [DisplayName("Se debe adicionar o cancelar unidades?")]
@@ -57,6 +57,15 @@ namespace CatastroAvanza.Models.ActividadViewModels
         [DisplayName("Elminar anexos")]
         [Required(ErrorMessage = "Elminar anexos es requerido.")]
         public bool ElminarAnexos { get; set; }
+
+        [DisplayName("Tiene cubrimiento orto?")]
+        [Required(ErrorMessage = "Tiene cubrimiento orto? es requerido.")]
+        public bool TieneCubrimientoOrto { get; set; }
+
+        [DisplayName("Tiene cubrimiento visor 360?")]
+        [Required(ErrorMessage = "Tiene cubrimiento visor 360? es requerido.")]
+        public bool TieneCubrimientoVisor { get; set; }
+
 
         public SelectList DetallesIncorporacionArea { get; set; }
 

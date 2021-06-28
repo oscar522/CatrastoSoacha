@@ -31,13 +31,19 @@
         DesbloquearAreasTerreno();
         DesbloquearUso();
         DesbloquearDestino();
+        PropietariosSetSeleccion();
+        EnglobeSetSeleccion();
+        EnglobeMejoraSetSeleccion();
+        TerrenoSetSeleccion();
+        ConstruccionSetSeleccion();
+        EconomicoSetSeleccion();
         ArchivosCargados('FP', this.archivosCargados.FP);
         ArchivosCargados('Plano', this.archivosCargados.Plano);
         ArchivosCargados('Esc', this.archivosCargados.Esc);
         ArchivosCargados('Fmi', this.archivosCargados.Fmi);
         ArchivosCargados('Cn', this.archivosCargados.Cn);
         ArchivosCargados('Crq', this.archivosCargados.Crq);
-        ArchivosCargados('Foto', this.archivosCargados.Foto);        
+        ArchivosCargados('Foto', this.archivosCargados.Foto);
     },
     InicializarMunicipio: function (dep, mun) {
         ObtenerMunicipiosYSeleccionarUnValorDeterminado(dep, mun)
@@ -83,6 +89,7 @@ function DesbloquearUnidadTramite() {
         $("#Tramite_Unidadestramite").val("");
         $("#Tramite_Unidadestramite").attr('disabled', 'disabled');
     }
+    SetSeleccion('Desenglobe', $('#Tramite_Desenglobe').val());
 }
 
 function DesbloquearUnidadReglamento() {
@@ -92,6 +99,8 @@ function DesbloquearUnidadReglamento() {
         $("#Tramite_UnidadesReglamento").val("");
         $("#Tramite_UnidadesReglamento").attr('disabled', 'disabled');
     }
+
+    SetSeleccion('ReglamentoPH', $('#Tramite_ReglamentoPH').val());
 }
 
 function DesbloquearLinderosFmi() {
@@ -150,6 +159,7 @@ function DesbloquearUso() {
         $("#Construccion_UsoDetalle").val("");
         $("#Construccion_UsoDetalle").attr('disabled', 'disabled');
     }
+    SetSeleccion('Uso', $("#Construccion_Uso").val());
 }
 
 function DesbloquearDestino() {
@@ -159,6 +169,8 @@ function DesbloquearDestino() {
         $("#Construccion_DestinoDetalle").val("");
         $("#Construccion_DestinoDetalle").attr('disabled', 'disabled');
     }
+
+    SetSeleccion('Destino', $("#Construccion_Destino").val());
 }
 
 function DesbloquearAdicionaCancelaUnidades() {
@@ -168,6 +180,8 @@ function DesbloquearAdicionaCancelaUnidades() {
         $(".Construccion_AdicionaCancelaUnidades").removeAttr("cheked");
         $(".Construccion_AdicionaCancelaUnidades").attr('disabled', 'disabled');
     }
+
+    SetSeleccion('UnidadesConstruidas', $("#Construccion_AdicionaCancelaUnidades").val());
 }
 
 function ActividadEncontrada()
@@ -176,6 +190,7 @@ function ActividadEncontrada()
         $(".sectionToShow").removeClass("invisible");
         $("#saveUpBtn").removeAttr("disabled");
         $("#saveDownBtn").removeAttr("disabled");
+        $("#resumen").removeAttr("disabled");
     }        
 }
 
@@ -206,5 +221,48 @@ function ArchivosCargados(nombre, value) {
         $('#' + nombre + 'Archivo').html(value);
         $('#' + nombre + 'Estado').html('<span class="badge badge-success">Si</span>');        
     }
+}
 
+function PropietariosSetSeleccion() {
+    SetSeleccion('Propietarios', $('#Tramite_PropietariosCorrectos').val());
+}
+
+function EnglobeSetSeleccion() {
+    SetSeleccion('Englobe', $('#Tramite_Englobe').val());
+}
+
+function EnglobeMejoraSetSeleccion() {
+    SetSeleccion('EnglobeMejora', $('#Tramite_ExisteEnglobeConMejora').val());
+    SetSeleccion('Nomenclatura', $('#Tramite_ExisteEnglobeConMejora').val());
+}
+
+function TerrenoSetSeleccion() {
+    SetSeleccion('Terreno', $('#Terreno_PredioRequiereRectificacionArea').val());
+}
+
+function ConstruccionSetSeleccion() {
+    SetSeleccion('AreaConstruida', $('#Construccion_ConstruccionEsCorrecta').val());
+}
+
+function EconomicoSetSeleccion() {
+    SetSeleccion('Economico', $('#Economico_Requiere_Revision_Tipologias').val());
+}
+
+function SetSeleccion(id, value) {
+    if (value == '') {
+        $('#row' + id).removeClass('bg-success text-white');
+        $('#row' + id).removeClass('bg-danger text-white');
+        $('#row' + id).addClass('bg-light');
+        $('#td' + id).html('-');
+    } else if (value == 'false') {
+        $('#row' + id).removeClass('bg-success');
+        $('#row' + id).removeClass('bg-light');
+        $('#row' + id).addClass('bg-danger text-white');
+        $('#td' + id).html('No');
+    } else if (value == 'true') {
+        $('#row' + id).removeClass('bg-danger');
+        $('#row' + id).removeClass('bg-light');
+        $('#row' + id).addClass('bg-success text-white');
+        $('#td' + id).html('Si');
+    }
 }

@@ -42,6 +42,9 @@ namespace CatastroAvanza.Repositorio.DBContexto.ConfiguracionEntidades
 
             Property(s => s.Construccion_Uso_Detalle)
             .HasMaxLength(300);
+
+            Property(s => s.Economico_Observaciones)
+            .HasMaxLength(300);
         }
     }
 }

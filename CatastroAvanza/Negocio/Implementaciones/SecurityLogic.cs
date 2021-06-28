@@ -36,7 +36,10 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
         public RoleViewModel GetRolesByUserId(string idUser)
         {
-            var roles = _roleManager.Users.Where(m => m.UserName == idUser)?.FirstOrDefault()?.Roles?.FirstOrDefault().RoleId;
+            var roles = _roleManager.Users.Where(m => m.UserName == idUser)?.FirstOrDefault()?.Roles?.FirstOrDefault()?.RoleId;
+
+            if (roles == null)
+                return new RoleViewModel();
 
             RoleViewModel rol = GetRolesById(roles);
 

@@ -250,6 +250,7 @@
     <Compile Include="Models\ActividadViewModels\ActividadPredioViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\ArchivosCargadosActividadPredioViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\ConstruccionViewModel.cs" />
+    <Compile Include="Models\ActividadViewModels\EconomicoViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\FileViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\GeograficaViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\InformacionGeneral.cs" />
@@ -341,6 +342,14 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202106090430416_Modificacion_columnas_areas_de_entero_a_decimal.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202106090430416_Modificacion_columnas_areas_de_entero_a_decimal.designer.cs">
       <DependentUpon>202106090430416_Modificacion_columnas_areas_de_entero_a_decimal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106220446316_nuevas_columnas_tabla_actividades.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106220446316_nuevas_columnas_tabla_actividades.designer.cs">
+      <DependentUpon>202106220446316_nuevas_columnas_tabla_actividades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106272105135_Columnas_Economico_Agregadas.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106272105135_Columnas_Economico_Agregadas.designer.cs">
+      <DependentUpon>202106272105135_Columnas_Economico_Agregadas.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
@@ -1645,6 +1654,7 @@
     <Content Include="Scripts\moment-with-locales.min.js.map" />
     <Content Include="Views\ActividadesDiarias\CrearActividad.cshtml" />
     <Content Include="Views\Actividad\ActualizarActividad.cshtml" />
+    <Content Include="Views\Actividad\_Economico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1698,6 +1708,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106090430416_Modificacion_columnas_areas_de_entero_a_decimal.resx">
       <DependentUpon>202106090430416_Modificacion_columnas_areas_de_entero_a_decimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106220446316_nuevas_columnas_tabla_actividades.resx">
+      <DependentUpon>202106220446316_nuevas_columnas_tabla_actividades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106272105135_Columnas_Economico_Agregadas.resx">
+      <DependentUpon>202106272105135_Columnas_Economico_Agregadas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

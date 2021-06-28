@@ -2,7 +2,7 @@
     urlObtenerMunicipios: "",
     urlObtenerPredial: "",
     Inicializar: function () {
-        $("#Informacion_Departamento").change(ObtenerMunicipios);
+        $("#Informacion_Departamento").change(ObtenerMunicipios);        
         $("#Tramite_Desenglobe").change(DesbloquearUnidadTramite);
         $("#Tramite_ReglamentoPH").change(DesbloquearUnidadReglamento); 
         $("#Tramite_Linderos").change(DesbloquearLinderosFmi); 
@@ -21,6 +21,12 @@
         InicializarFileInputs();
         InicializarListas();
         BloqueadosPorDefecto();
+        $("#Tramite_ExisteEnglobeConMejora").change(EnglobeMejoraSetSeleccion);
+        $("#Tramite_PropietariosCorrectos").change(PropietariosSetSeleccion);
+        $("#Tramite_Englobe").change(EnglobeSetSeleccion);
+        $("#Terreno_PredioRequiereRectificacionArea").change(TerrenoSetSeleccion);
+        $("#Construccion_ConstruccionEsCorrecta").change(ConstruccionSetSeleccion);
+        $("#Economico_Requiere_Revision_Tipologias").change(EconomicoSetSeleccion);
     },   
 }
 
@@ -68,7 +74,9 @@ function DesbloquearUnidadTramite()
     else {
         $("#Tramite_Unidadestramite").val("");
         $("#Tramite_Unidadestramite").attr('disabled', 'disabled');
-    }        
+    }
+
+    SetSeleccion('Desenglobe', $(this).val());
 }
 
 function DesbloquearUnidadReglamento() {
@@ -78,6 +86,8 @@ function DesbloquearUnidadReglamento() {
         $("#Tramite_UnidadesReglamento").val("");
         $("#Tramite_UnidadesReglamento").attr('disabled', 'disabled');
     }
+
+    SetSeleccion('ReglamentoPH', $(this).val());
 }
 
 function DesbloquearLinderosFmi() {
@@ -138,6 +148,7 @@ function DesbloquearUso() {
         $("#Construccion_UsoDetalle").val("");
         $("#Construccion_UsoDetalle").attr('disabled', 'disabled');
     }
+    SetSeleccion('Uso', $(this).val());
 }
 
 function DesbloquearDestino() {
@@ -147,6 +158,7 @@ function DesbloquearDestino() {
         $("#Construccion_DestinoDetalle").val("");
         $("#Construccion_DestinoDetalle").attr('disabled', 'disabled');
     }
+    SetSeleccion('Destino', $(this).val());
 }
 
 function DesbloquearAdicionaCancelaUnidades() {
@@ -156,6 +168,8 @@ function DesbloquearAdicionaCancelaUnidades() {
         $(".Construccion_AdicionaCancelaUnidades").removeAttr("cheked");
         $(".Construccion_AdicionaCancelaUnidades").attr('disabled', 'disabled');
     }
+
+    SetSeleccion('UnidadesConstruidas', $(this).val());
 }
 
 
@@ -198,6 +212,7 @@ function ObtenerInfoByPredial()
                        
         $("#saveUpBtn").removeAttr("disabled");
         $("#saveDownBtn").removeAttr("disabled");
+        $("#resumen").removeAttr("disabled");
         $(".sectionToShow").removeClass("invisible");
 
     });
@@ -223,4 +238,50 @@ function ObtenerMunicipiosYSeleccionarUnValorDeterminado(depto, munSeleccionado)
             $("#Informacion_Municipio").val(munSeleccionado);
     });
 }
+
+function PropietariosSetSeleccion() {
+    SetSeleccion('Propietarios', $(this).val());
+}
+
+function EnglobeSetSeleccion() {
+    SetSeleccion('Englobe', $(this).val());
+}
+
+function EnglobeMejoraSetSeleccion() {
+    SetSeleccion('EnglobeMejora', $(this).val());
+    SetSeleccion('Nomenclatura', $(this).val());
+}
+
+function TerrenoSetSeleccion()
+{
+    SetSeleccion('Terreno', $(this).val());
+}
+
+function ConstruccionSetSeleccion() {
+    SetSeleccion('AreaConstruida', $(this).val());
+}
+
+function EconomicoSetSeleccion() {
+    SetSeleccion('Economico', $(this).val());
+}
+
+function SetSeleccion(id, value) {
+    if (value == '') {
+        $('#row' + id).removeClass('bg-success text-white');
+        $('#row' + id).removeClass('bg-danger text-white');
+        $('#row' + id).addClass('bg-light');
+        $('#td' + id).html('-');
+    } else if (value == 'false') {
+        $('#row' + id).removeClass('bg-success');
+        $('#row' + id).removeClass('bg-light');
+        $('#row' + id).addClass('bg-danger text-white');
+        $('#td'+ id).html('No');
+    } else if (value == 'true') {
+        $('#row' + id).removeClass('bg-danger');
+        $('#row' + id).removeClass('bg-light');
+        $('#row' + id).addClass('bg-success text-white');
+        $('#td' + id).html('Si');
+    }
+}
+
 

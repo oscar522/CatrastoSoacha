@@ -16,7 +16,8 @@
         <div class="row">
             <div class="col-md-12 text-right">
                 <a class="btn btn-primary" href="@Url.Action("Index")">Regresar al listado de actividades</a>
-                <input type="submit" name="name" value="Salvar Actividad" class="btn btn-primary" id="saveUpBtn" disabled/>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="resumen" disabled>Mostrar Resumen</button>
+                <input type="submit" name="name" value="Salvar Actividad" class="btn btn-primary" id="saveUpBtn" disabled />
                 <br />
             </div>
         </div>
@@ -33,7 +34,7 @@
                             @Html.EditorFor(m => m.NumeroPredial, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                             @Html.ValidationMessageFor(m => m.NumeroPredial, "", new { @class = "text-danger" })
                         </div>
-                        <div class="col-md-4">                            
+                        <div class="col-md-4">
                             <label class="form-control-label">&nbsp;</label>
                             <button class="form-control btn btn-primary" style="background-color: #007bff !important" id="btnBuscar"><i class="fa fa-search"></i> Buscar</button>
                         </div>
@@ -42,8 +43,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Ejecutor)                            
-                            @Html.EditorFor(m => m.Ejecutor, new { htmlAttributes = new { @class = "form-control ", disabled= "disabled" } })
+                            @Html.LabelFor(m => m.Ejecutor)
+                            @Html.EditorFor(m => m.Ejecutor, new { htmlAttributes = new { @class = "form-control ", disabled = "disabled" } })
                             @Html.ValidationMessageFor(m => m.Ejecutor, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -94,22 +95,22 @@
                 <h5>Informacion de referencia</h5>
                 <div class="row">
                     <div class="form-group col-md-6 sectionToShow">
-                        @Html.Label("FMI")                        
+                        @Html.Label("FMI")
                         @Html.Editor("inforGen_Fmi", new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                         @Html.Label("Linderos")
                         @Html.Editor("inforGen_Linderos", new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                         @Html.Label("Propietarios")
-                        @Html.TextArea("inforGen_Propietarios", new { @class = "form-control", disabled = "disabled" } )
+                        @Html.TextArea("inforGen_Propietarios", new { @class = "form-control", disabled = "disabled" })
                     </div>
                     <div class="form-group col-md-6">
-                        @Html.Label("FMI Matriz")                        
+                        @Html.Label("FMI Matriz")
                         @Html.Editor("inforGen_FmiMatriz", new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                         @Html.Label("Area Juridica")
                         @Html.Editor("inforGen_AreaJuridica", new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
                 </div>
-                
-               
+
+
             </div>
         </div>
         <hr />
@@ -139,8 +140,14 @@
         </div>
         <hr />
         <div class="row">
+            <div class="col-md-12 invisible sectionToShow">
+                @Html.Partial("_Economico", Model)
+            </div>
+        </div>
+        <hr />
+        <div class="row">
             <div class="col-md-12 text-right">
-                <input type="submit" name="name" value="Salvar Actividad" class="btn btn-primary" id="saveDownBtn" disabled/>
+                <input type="submit" name="name" value="Salvar Actividad" class="btn btn-primary" id="saveDownBtn" disabled />
             </div>
 
         </div>
@@ -159,7 +166,75 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Resumen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tbody>
+                            <tr id="rowPropietarios" class="bg-light ">
+                                <td>Propietarios</td>
+                                <td id="tdPropietarios">-</td>
+                            </tr>
+                            <tr id="rowEnglobe" class="bg-light">
+                                <td>Englobe</td>
+                                <td id="tdEnglobe">-</td>
+                            </tr>
+                            <tr id="rowEnglobeMejora" class="bg-light">
+                                <td>Englobe Mejora</td>
+                                <td id="tdEnglobeMejora">-</td>
+                            </tr>
+                            <tr id="rowDesenglobe" class="bg-light">
+                                <td>Desenglobe</td>
+                                <td id="tdDesenglobe">-</td>
+                            </tr>
+                            <tr id="rowReglamentoPH" class="bg-light">
+                                <td>Reglamento PH</td>
+                                <td id="tdReglamentoPH">-</td>
+                            </tr>
+                            <tr id="rowTerreno" class="bg-light">
+                                <td>Terreno</td>
+                                <td id="tdTerreno">-</td>
+                            </tr>
+                            <tr id="rowAreaConstruida" class="bg-light">
+                                <td>Area construida</td>
+                                <td id="tdAreaConstruida">-</td>
+                            </tr>
+                            <tr id="rowUnidadesConstruidas" class="bg-light">
+                                <td>Unidades construidas</td>
+                                <td id="tdUnidadesConstruidas">-</td>
+                            </tr>
+                            <tr id="rowUso" class="bg-light">
+                                <td>Uso</td>
+                                <td id="tdUso">-</td>
+                            </tr>
+                            <tr id="rowDestino" class="bg-light">
+                                <td>Destino</td>
+                                <td id="tdDestino">-</td>
+                            </tr>
+                            <tr id="rowNomenclatura" class="bg-light">
+                                <td>Nomenclatura</td>
+                                <td id="tdNomenclatura">-</td>
+                            </tr>
+                            <tr id="rowEconomico"  class="bg-light">
+                                <td>Economico</td>
+                                <td id="tdEconomico">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
+
 @section Scripts
 {
     <script src=" ~/Scripts/plugins/piexif.min.js"></script>
