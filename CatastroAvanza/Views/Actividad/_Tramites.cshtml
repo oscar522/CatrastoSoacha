@@ -9,8 +9,18 @@
                          {
                             new SelectListItem { Text = "Si", Value = "true"},
                             new SelectListItem { Text = "No", Value = "false"}
-                        },"", new { @class = "form-control listas" })
-                @Html.ValidationMessageFor(m => m.Tramite.PropietariosCorrectos, "", new { @class = "text-danger" })                
+                        }, "", new { @class = "form-control listas" })
+                @Html.ValidationMessageFor(m => m.Tramite.PropietariosCorrectos, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.RequiereActualizacionNomenclatura, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Tramite.RequiereActualizacionNomenclatura, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, "", new { @class = "form-control listas" })
+                @Html.ValidationMessageFor(m => m.Tramite.RequiereActualizacionNomenclatura, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
@@ -20,7 +30,17 @@
                             new SelectListItem { Text = "Si", Value = "true"},
                             new SelectListItem { Text = "No", Value = "false"}
                         }, "", new { @class = "form-control listas" })
-                @Html.ValidationMessageFor(m => m.Tramite.Englobe, "", new { @class = "text-danger" })                      
+                @Html.ValidationMessageFor(m => m.Tramite.Englobe, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tramite.ExisteEnglobeConMejora, new { @class = "form-label" }) &nbsp; &nbsp;
+                @Html.DropDownListFor(m => m.Tramite.ExisteEnglobeConMejora, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, "", new { @class = "form-control listas" })
+                @Html.ValidationMessageFor(m => m.Tramite.ExisteEnglobeConMejora, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>

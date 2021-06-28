@@ -1,0 +1,36 @@
+﻿@model ActividadPredioViewModel
+<h5>Economico</h5>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Economico.Requiere_Revision_Tipologias, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Economico.Requiere_Revision_Tipologias, new List<SelectListItem>
+                     {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                    }, "", new { @class = "form-control listas" })
+            @Html.ValidationMessageFor(m => m.Economico.Requiere_Revision_Tipologias, "", new { @class = "text-danger" })
+        </div>
+        
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Economico.Requiere_Revision_Zonas, new { @class = "form-label" }) &nbsp; &nbsp;
+            @Html.DropDownListFor(m => m.Economico.Requiere_Revision_Zonas, new List<SelectListItem>
+                     {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                    }, "", new { @class = "form-control listas" })
+            @Html.ValidationMessageFor(m => m.Economico.Requiere_Revision_Zonas, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Economico.Observaciones)
+            @Html.TextAreaFor(m => m.Economico.Observaciones, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Economico.Observaciones, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>

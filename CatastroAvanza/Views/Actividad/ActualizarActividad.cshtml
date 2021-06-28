@@ -13,10 +13,11 @@
     <div class="form-horizontal">
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(m=> m.Id)
+        @Html.HiddenFor(m => m.Id)
         <div class="row">
             <div class="col-md-12 text-right">
                 <a class="btn btn-primary" href="@Url.Action("Index")">Regresar al listado de actividades</a>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="resumen" disabled>Mostrar Resumen</button>
                 <input type="submit" name="name" value="Actualizar Actividad" class="btn btn-primary" id="saveUpBtn" disabled />
                 <br />
             </div>
@@ -56,7 +57,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             @Html.LabelFor(m => m.Fecha)
-                            @Html.TextBoxFor(m => m.Fecha,  new { @class = "form-control",  @Value = Model.Fecha == DateTime.MinValue ? "" : Model.Fecha.ToString() })
+                            @Html.TextBoxFor(m => m.Fecha, new { @class = "form-control", @Value = Model.Fecha == DateTime.MinValue ? "" : Model.Fecha.ToString() })
                             @Html.ValidationMessageFor(m => m.Fecha, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -119,6 +120,12 @@
         </div>
         <hr />
         <div class="row">
+            <div class="col-md-12 invisible sectionToShow">
+                @Html.Partial("_Economico", Model)
+            </div>
+        </div>
+        <hr />
+        <div class="row">
             <div class="col-md-12 text-right">
                 <input type="submit" name="name" value="Salvar Actividad" class="btn btn-primary" id="saveDownBtn" disabled />
             </div>
@@ -139,6 +146,74 @@
             </div>
             <div class="toast-body">
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Resumen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tbody>
+                            <tr id="rowPropietarios" class="bg-light ">
+                                <td>Propietarios</td>
+                                <td id="tdPropietarios">-</td>
+                            </tr>
+                            <tr id="rowEnglobe" class="bg-light">
+                                <td>Englobe</td>
+                                <td id="tdEnglobe">-</td>
+                            </tr>
+                            <tr id="rowEnglobeMejora" class="bg-light">
+                                <td>Englobe Mejora</td>
+                                <td id="tdEnglobeMejora">-</td>
+                            </tr>
+                            <tr id="rowDesenglobe" class="bg-light">
+                                <td>Desenglobe</td>
+                                <td id="tdDesenglobe">-</td>
+                            </tr>
+                            <tr id="rowReglamentoPH" class="bg-light">
+                                <td>Reglamento PH</td>
+                                <td id="tdReglamentoPH">-</td>
+                            </tr>
+                            <tr id="rowTerreno" class="bg-light">
+                                <td>Terreno</td>
+                                <td id="tdTerreno">-</td>
+                            </tr>
+                            <tr id="rowAreaConstruida" class="bg-light">
+                                <td>Area construida</td>
+                                <td id="tdAreaConstruida">-</td>
+                            </tr>
+                            <tr id="rowUnidadesConstruidas" class="bg-light">
+                                <td>Unidades construidas</td>
+                                <td id="tdUnidadesConstruidas">-</td>
+                            </tr>
+                            <tr id="rowUso" class="bg-light">
+                                <td>Uso</td>
+                                <td id="tdUso">-</td>
+                            </tr>
+                            <tr id="rowDestino" class="bg-light">
+                                <td>Destino</td>
+                                <td id="tdDestino">-</td>
+                            </tr>
+                            <tr id="rowNomenclatura" class="bg-light">
+                                <td>Nomenclatura</td>
+                                <td id="tdNomenclatura">-</td>
+                            </tr>
+                            <tr id="rowEconomico" class="bg-light">
+                                <td>Economico</td>
+                                <td id="tdEconomico">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

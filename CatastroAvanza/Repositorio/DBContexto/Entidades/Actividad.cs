@@ -40,6 +40,10 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
 
         public bool Tramite_Englobe { get; set; }
 
+        public bool Tramite_Existe_Englobe_Con_Mejora { get; set; }
+
+        public bool Tramite_Requiere_Actualizacion_Nomenclatura { get; set; }
+
         public bool Tramite_Desenglobe { get; set; }
 
         public int Tramite_Unidadestramite { get; set; }
@@ -76,7 +80,13 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
 
         public bool Terreno_RequiereVisita { get; set; }
 
+        public bool Terreno_Predio_Requiere_Rectificacion_Area { get; set; }
+
         public string Terreno_ObservacionVisita { get; set; }
+
+        public bool Construccion_Tiene_cubrimiento_orto { get; set; }
+
+        public bool Construccion_Tiene_cubrimiento_visor { get; set; }
 
         public bool Construccion_IncorporacioArea { get; set; }
 
@@ -151,7 +161,12 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
         public string Arcvhivo_Escrituras { get; set; }
 
         public string Arcvhivo_Croquis { get; set; }
-        
+
+        public bool Economico_Requiere_Revision_Tipologias { get; set; }
+
+        public bool Economico_Requiere_Revision_Zonas { get; set; }
+
+        public string Economico_Observaciones { get; set; }
 
     }
 }

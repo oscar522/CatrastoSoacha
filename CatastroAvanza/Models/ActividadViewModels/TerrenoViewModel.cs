@@ -41,6 +41,10 @@ namespace CatastroAvanza.Models.ActividadViewModels
         [Required(ErrorMessage = "Observacion de la visita es requerido.")]
         public string ObservacionVisita { get; set; }
 
+        [DisplayName("Predio requiere rectificacion area?")]
+        [Required(ErrorMessage = "Predio requiere rectificacion area? es requerido.")]
+        public bool PredioRequiereRectificacionArea { get; set; }
+
         public SelectList UnidadesArea { get; set; }
 
         public ICollection<CatalogoExtendidoViewModel> UnidadesAreaList { get; set; }

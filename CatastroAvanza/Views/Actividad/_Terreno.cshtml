@@ -85,7 +85,19 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Terreno.PredioRequiereRectificacionArea)
+                @Html.DropDownListFor(m => m.Terreno.PredioRequiereRectificacionArea, new List<SelectListItem>
+                         {
+                            new SelectListItem { Text = "Si", Value = "true"},
+                            new SelectListItem { Text = "No", Value = "false"}
+                        }, "", new { @class = "form-control listas" })
+                @Html.ValidationMessageFor(m => m.Terreno.PredioRequiereRectificacionArea, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="col-md-12">
+            
             <div class="form-group ">
                 @Html.LabelFor(m => m.Terreno.ObservacionVisita)
                 @Html.TextAreaFor(m => m.Terreno.ObservacionVisita, new { @class = "form-control" })
