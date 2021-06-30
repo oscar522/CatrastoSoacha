@@ -351,6 +351,14 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202106272105135_Columnas_Economico_Agregadas.designer.cs">
       <DependentUpon>202106272105135_Columnas_Economico_Agregadas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106300128412_eliminacion_columna_FInsercion.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106300128412_eliminacion_columna_FInsercion.designer.cs">
+      <DependentUpon>202106300128412_eliminacion_columna_FInsercion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106300129332_adicion_columna_FInsercion.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202106300129332_adicion_columna_FInsercion.designer.cs">
+      <DependentUpon>202106300129332_adicion_columna_FInsercion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1714,6 +1722,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106272105135_Columnas_Economico_Agregadas.resx">
       <DependentUpon>202106272105135_Columnas_Economico_Agregadas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106300128412_eliminacion_columna_FInsercion.resx">
+      <DependentUpon>202106300128412_eliminacion_columna_FInsercion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106300129332_adicion_columna_FInsercion.resx">
+      <DependentUpon>202106300129332_adicion_columna_FInsercion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

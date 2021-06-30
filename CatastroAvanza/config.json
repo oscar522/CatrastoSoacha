@@ -3,20 +3,28 @@
     {
       "role": "Administrator",
       "links": [
-        {
-          "order": 1,
-          "controllerName": "Account",
-          "actionName": "register",
-          "linkText": "Crear Usuario",
-          "iconText": "fa fa-user-circle mr-3",
-          "sub": null
-        },
+        //{
+        //  "order": 1,
+        //  "controllerName": "Account",
+        //  "actionName": "register",
+        //  "linkText": "Crear Usuario",
+        //  "iconText": "fa fa-user-circle mr-3",
+        //  "sub": null
+        //},
         {
           "order": 1,
           "controllerName": "actividad",
           "actionName": "crearactividad",
-          "linkText": "Crear Actividad",
+          "linkText": "Diagnostico técnico jurídico",
           "iconText": "fa fa-map-marker  mr-3",
+          "sub": null
+        },
+        {
+          "order": 1,
+          "controllerName": "actividadesdiarias",
+          "actionName": "crearactividad",
+          "linkText": "Registrar Actividades",
+          "iconText": "fa fa-book  mr-3",
           "sub": null
         },
         {

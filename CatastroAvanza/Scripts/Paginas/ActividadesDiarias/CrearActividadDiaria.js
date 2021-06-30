@@ -146,6 +146,15 @@ function GetDataInfo()
             type: "POST",
             url: ActividadDiariaJs.urlObtenerActividades,
         },
+        dom: 'Blfrtip',
+        buttons: [
+            'excelHtml5',
+            {
+                text: "Oscar dev",
+                action: function () { alert('Go habs')}
+            }
+            
+        ],
         pageLength: 10,
         lengthMenu: [5, 10, 25],
         columns: [
