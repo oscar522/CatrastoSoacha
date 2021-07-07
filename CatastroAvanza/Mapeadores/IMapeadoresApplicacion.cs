@@ -31,5 +31,7 @@ namespace CatastroAvanza.Mapeadores
         ICollection<CatalogoViewModel> MapDataAModel(ICollection<TipoActividad> tipoActividad);
 
         List<ActividadesDiariasTablaModel> MapDataAModel(List<ActividadDiaria> actividades);
+
+        List<ActividadesDiariasExcelModel> MapDataIntoModel(List<ActividadDiaria> actividades);
     }
 }

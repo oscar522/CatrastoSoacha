@@ -13,5 +13,7 @@ namespace CatastroAvanza.Mapeadores
         ActividadPredioViewModel MapDataAModel(Actividad model);
 
         List<ActividadConsultaViewModel> MapDataAModel(List<Actividad> actividades, List<ctciudad> ciudad, List<ctdepto> dpto);
+
+        List<ActividadExcelModel> MapDataIntoModel(List<Actividad> actividades);
     }
 }

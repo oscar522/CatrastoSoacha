@@ -5,7 +5,8 @@
     urlModalidadList: "",
     urlListDepto: "",
     urlListMunicipios: "",
-    urlObtenerActividades:"",
+    urlObtenerActividades: "",
+    urlDescargarActividades: "",
     Inicializar: function () {
         InicializaElementos();
         GetRoles();
@@ -147,13 +148,13 @@ function GetDataInfo()
             url: ActividadDiariaJs.urlObtenerActividades,
         },
         dom: 'Blfrtip',
-        buttons: [
-            'excelHtml5',
+        buttons: [            
             {
-                text: "Oscar dev",
-                action: function () { alert('Go habs')}
-            }
-            
+                text: "<button class='btn btn-light'>Descargar actividades diarias</button>",
+                action: function () {                    
+                    window.location.href = ActividadDiariaJs.urlDescargarActividades;
+                }
+            }            
         ],
         pageLength: 10,
         lengthMenu: [5, 10, 25],

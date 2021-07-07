@@ -192,5 +192,27 @@ namespace CatastroAvanza.Mapeadores
 
             return result;
         }
+
+        public List<ActividadesDiariasExcelModel> MapDataIntoModel(List<ActividadDiaria> actividades)
+        {
+            List<ActividadesDiariasExcelModel> result = actividades.Select(n => new ActividadesDiariasExcelModel
+            {
+                Id = n.Id,
+                NombreUsuario = n.IdApsNetUser,
+                IdProceso = n.IdProceso,
+                IdModalidad = n.IdModalidad,
+                IdRolActividad = n.IdRol,                
+                FechaActividadS = n.FechaActividad,
+                IdActividad = n.IdActividad,
+                Cantidad = n.Cantidad,
+                Observacion = n.Observacion,
+                IdDepartamento = n.IdDepartamento,
+                IdMunicipio = n.IdMunicipio,
+                FechaInsercion = n.FInsercion,
+                Estado = n.Estado  ? "Activa" : "Inactiva"              
+            }).ToList();
+
+            return result;
+        }
     }
 }

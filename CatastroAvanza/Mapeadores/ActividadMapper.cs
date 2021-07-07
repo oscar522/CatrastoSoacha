@@ -118,6 +118,105 @@ namespace CatastroAvanza.Mapeadores
             return aaData;
         }
 
+        public List<ActividadExcelModel> MapDataIntoModel(List<Actividad> actividades)
+        {
+            List<ActividadExcelModel> actividadesLs = new List<ActividadExcelModel>();
+
+            foreach (var model in actividades)
+            {
+                ActividadExcelModel result = new ActividadExcelModel();
+                result.Id = model.Id;
+
+                result.General_NumeroPredial = model.General_NumeroPredial;
+                result.General_Ejecutor = model.General_Ejecutor;
+                result.General_Coordinador = model.General_Coordinador;
+                result.General_Fecha = model.General_Fecha;
+
+                result.Geografica_Omision = model.Geografica_Omision ? "Si" : "No";
+                result.Geografica_DuplicadoGeograficamente = model.Geografica_DuplicadoGeograficamente ? "Si" : "No";
+                result.Geografica_NumeroDuplicados = model.Geografica_NumeroDuplicados;
+                result.Geografica_RequiereVisitaGeografica = model.Geografica_RequiereVisitaGeografica ? "Si" : "No";
+                result.Geografica_Observacion = model.Geografica_Observacion;
+                result.Geografica_FmiDuplicados = model.Geografica_FmiDuplicados ? "Si" : "No";
+                result.Geografica_NumeroFmiDuplicados = model.Geografica_NumeroFmiDuplicados;
+                result.Geografica_VerificacionFmi = model.Geografica_VerificacionFmi ? "Si" : "No";
+                result.Geografica_FmiCorrecto = model.Geografica_FmiCorrecto;
+
+                result.Construccion_Uso = model.Construccion_Uso ? "Si" : "No";
+                result.Construccion_Destino = model.Construccion_Destino ? "Si" : "No";
+                result.Construccion_ObservacionUsosDestino = model.Construccion_ObservacionUsosDestino;
+                result.Construccion_RequiereVisitaConstruccion = model.Construccion_RequiereVisitaConstruccion ? "Si" : "No";
+                result.Construccion_TieneConstrucciones = model.Construccion_TieneConstrucciones ? "Si" : "No";
+                result.Construccion_ConstruccionEsCorrecta = model.Construccion_ConstruccionEsCorrecta ? "Si" : "No";
+                result.Construccion_AdicionaCancelaUnidades = model.Construccion_AdicionaCancelaUnidades ? "Si" : "No";
+                result.Construccion_AdicionarConstrucciones = model.Construccion_AdicionarConstrucciones ? "Si" : "No";
+                result.Construccion_ElminarConstrucciones = model.Construccion_ElminarConstrucciones ? "Si" : "No";
+                result.Construccion_AdicionarAnexos = model.Construccion_AdicionarAnexos ? "Si" : "No";
+                result.Construccion_ElminarAnexos = model.Construccion_ElminarAnexos ? "Si" : "No";
+                result.Construccion_Uso_Detalle = model.Construccion_Uso_Detalle;
+                result.Construccion_Destino_Detalle = model.Construccion_Destino_Detalle;
+                result.Construccion_Tiene_cubrimiento_orto = model.Construccion_Tiene_cubrimiento_orto ? "Si" : "No";
+                result.Construccion_Tiene_cubrimiento_visor = model.Construccion_Tiene_cubrimiento_visor ? "Si" : "No";
+
+                result.Arcvhivo_FichaPredial = model.Arcvhivo_FichaPredial;
+                result.Arcvhivo_Plano = model.Arcvhivo_Plano;
+                result.Arcvhivo_Escrituras = model.Arcvhivo_Escrituras;
+                result.Arcvhivo_Fmi = model.Arcvhivo_Fmi;
+                result.Arcvhivo_CertificadoNomenclatura = model.Arcvhivo_CertificadoNomenclatura;
+                result.Arcvhivo_Croquis = model.Arcvhivo_Croquis;
+                result.Arcvhivo_FotoFachada = model.Arcvhivo_FotoFachada;
+
+                result.Tramite_Englobe = model.Tramite_Englobe ? "Si" : "No";
+                result.Tramite_Desenglobe = model.Tramite_Desenglobe ? "Si" : "No";
+                result.Tramite_Unidadestramite = model.Tramite_Unidadestramite;
+                result.Tramite_ReglamentoPH = model.Tramite_ReglamentoPH ? "Si" : "No";
+                result.Tramite_UnidadesReglamento = model.Tramite_UnidadesReglamento;
+                result.Tramite_LinderosFmi = model.Tramite_LinderosFmi;
+                result.Tramite_LinderosArcifinios = model.Tramite_LinderosArcifinios ? "Si" : "No";
+                result.Tramite_LinderosVerificablesTerreno = model.Tramite_LinderosVerificablesTerreno ? "Si" : "No";
+                result.Tramite_LinderosEnEscritura = model.Tramite_LinderosEnEscritura ? "Si" : "No";
+                result.Tramite_NumeroEscritura = model.Tramite_NumeroEscritura;
+                result.Tramite_PropietariosCorrectos = model.Tramite_PropietariosCorrectos ? "Si" : "No";
+                result.Tramite_Linderos = model.Tramite_Linderos ? "Si" : "No";
+                result.Tramite_Existe_Englobe_Con_Mejora = model.Tramite_Existe_Englobe_Con_Mejora ? "Si" : "No";
+                result.Tramite_Requiere_Actualizacion_Nomenclatura = model.Tramite_Requiere_Actualizacion_Nomenclatura ? "Si" : "No";
+
+                result.Terreno_TieneArea = model.Terreno_TieneArea ? "Si" : "No";
+                result.Terreno_AreaTerreno = model.Terreno_AreaTerreno;
+                result.Terreno_UnidadArea = model.Terreno_UnidadArea;
+                result.Terreno_AreaTerrenoEnMetros = model.Terreno_AreaTerrenoEnMetros;
+                result.Terreno_PorcentajeAreaJudicialAreaCatastral = model.Terreno_PorcentajeAreaJudicialAreaCatastral;
+                result.Terreno_IdentificacionPredio = model.Terreno_IdentificacionPredio ? "Si" : "No";
+                result.Terreno_RequiereVisita = model.Terreno_RequiereVisita ? "Si" : "No";
+                result.Terreno_ObservacionVisita = model.Terreno_ObservacionVisita;
+                result.Terreno_Predio_Requiere_Rectificacion_Area = model.Terreno_Predio_Requiere_Rectificacion_Area ? "Si" : "No";
+
+                result.General_AreaConstruida = model.General_AreaConstruida;
+                result.General_AreaTerreno = model.General_AreaTerreno;
+                result.General_Avaluo = model.General_Avaluo;
+                result.General_Barrio = model.General_Barrio;
+                result.General_Comuna = model.General_Comuna;
+                result.General_Condicion = model.General_Condicion;
+                result.General_Departamento = model.General_Departamento;
+                result.General_Destino = model.General_Destino;
+                result.General_Direccion = model.General_Direccion;
+                result.General_Direccion2 = model.General_Direccion2;
+                result.General_Mejoras = model.General_Mejoras ? "Si" : "No";
+                result.General_Municipio = model.General_Municipio;
+                result.General_Numero_Mejoras = model.General_Numero_Mejoras;
+                result.General_TipoDireccion = model.General_TipoDireccion;
+                result.General_Vereda = model.General_Vereda;
+
+                result.Economico_Observaciones = model.Economico_Observaciones;
+                result.Economico_Requiere_Revision_Tipologias = model.Economico_Requiere_Revision_Tipologias ? "Si" : "No";
+                result.Economico_Requiere_Revision_Zonas = model.Economico_Requiere_Revision_Zonas ? "Si" : "No";
+
+                actividadesLs.Add(result);
+            }
+
+            return actividadesLs;
+        }
+
         public Actividad MapModelAData(ActividadPredioViewModel model, Actividad result)
         {            
             if (model != null)
