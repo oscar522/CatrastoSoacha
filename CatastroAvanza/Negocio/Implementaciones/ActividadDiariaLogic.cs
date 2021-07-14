@@ -86,5 +86,32 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
                 return tabla;
         }
+
+        public async Task<IEnumerable<ActividadesDiariasExcelModel>> GetActividadesDiarias()
+        {
+            var actividades = _contexto.ActividadDiaria.AsQueryable();
+
+            var listadoActividades = actividades.ToList();
+
+            var listaActividadesMapeadas = _mapper.MapDataIntoModel(listadoActividades);
+
+            listaActividadesMapeadas.ForEach(m => {
+
+                var actividad = listadoActividades.FirstOrDefault(la => la.Id == m.Id);
+                var municipio = _contexto.Ciudad.FirstOrDefault(c => c.idctmuncipio == actividad.IdMunicipio);
+                var departamento = _contexto.Departamento.FirstOrDefault(c => c.id_ct_depto == actividad.IdDepartamento);
+
+                m.NombreActividad = _contexto.TipoActividad.Where(a => a.Id == actividad.IdActividad).FirstOrDefault()?.Actividad;
+                m.NombreModalidad = _contexto.Catalogo.Where(a => a.Id == actividad.IdModalidad).FirstOrDefault()?.Nombre;
+                m.NombreProceso = _contexto.Catalogo.Where(a => a.Id == actividad.IdProceso).FirstOrDefault()?.Nombre;
+                m.NombreRolActividad = _security.GetRolesById(actividad.IdRol)?.Name;
+                m.RolUsuario = _security.GetRolesByUserId(actividad.IdApsNetUser)?.Name;
+                m.Departamento = departamento?.nombre;
+                m.Municipio = municipio?.nombre;
+
+            });
+
+            return listaActividadesMapeadas;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Models.ActividadesDiarias;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CatastroAvanza.Negocio.Contratos
@@ -9,5 +10,7 @@ namespace CatastroAvanza.Negocio.Contratos
         Task<int> CrearActividad(ActividadesDiariasViewModel modelo);
 
         Task<DataTablesResponse> GetActividadesCreadas(IDataTablesRequest modelo);
+
+        Task<IEnumerable<ActividadesDiariasExcelModel>> GetActividadesDiarias();
     }
 }

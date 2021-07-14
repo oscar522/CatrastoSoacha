@@ -1,10 +1,14 @@
 ﻿using CatastroAvanza.Enumerations;
 using CatastroAvanza.Helpers.DataTableHelper;
+using CatastroAvanza.Infraestructura;
 using CatastroAvanza.Models;
 using CatastroAvanza.Models.ActividadViewModels;
 using CatastroAvanza.Models.Dashboard;
 using CatastroAvanza.Negocio.Contratos;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -102,6 +106,21 @@ namespace CatastroAvanza.Controllers
         {
             DataForm1Model processModel = _dataFormLogicService.GetUsersById(noPredial);
             return Json(processModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public async Task<FileResult> ObtenerActividadesExcel()
+        {
+            var actividades =await _actividad.ConsultarActividadExcel();
+
+            GeneracionExcel excel = new GeneracionExcel();
+
+            var excelWorkBook = excel.GenerarArchivoExcelDiagnostico(actividades);
+
+            var exportData = new MemoryStream();
+            excelWorkBook.Write(exportData);
+            exportData.Seek(0, SeekOrigin.Begin);
+            return File(exportData, "application/vnd.ms-excel", "Diagnosticos.xls");
         }
 
     }

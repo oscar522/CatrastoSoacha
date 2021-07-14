@@ -137,8 +137,8 @@ namespace CatastroAvanza.Mapeadores
                 IdApsNetUser = modelo.IdApsNetUser,
                 Cantidad = modelo.Cantidad,
                 Estado = true,
-                FechaActividad = DateTime.Now,
-                FInsercion = DateTime.Now.Ticks,
+                FechaActividad = modelo.FechaActividad,
+                FInsercion = DateTime.Now,
                 IdDepartamento = modelo.IdDepto,
                 IdModalidad = modelo.IdModalidad,
                 IdMunicipio = modelo.IdMuni,
@@ -189,6 +189,28 @@ namespace CatastroAvanza.Mapeadores
             ICollection<CatalogoViewModel> result = usos
                .Select(m => new CatalogoViewModel { Value = m.Codigo, Text = m.Nombre })
                .ToList();
+
+            return result;
+        }
+
+        public List<ActividadesDiariasExcelModel> MapDataIntoModel(List<ActividadDiaria> actividades)
+        {
+            List<ActividadesDiariasExcelModel> result = actividades.Select(n => new ActividadesDiariasExcelModel
+            {
+                Id = n.Id,
+                NombreUsuario = n.IdApsNetUser,
+                IdProceso = n.IdProceso,
+                IdModalidad = n.IdModalidad,
+                IdRolActividad = n.IdRol,                
+                FechaActividadS = n.FechaActividad,
+                IdActividad = n.IdActividad,
+                Cantidad = n.Cantidad,
+                Observacion = n.Observacion,
+                IdDepartamento = n.IdDepartamento,
+                IdMunicipio = n.IdMunicipio,
+                FechaInsercion = n.FInsercion,
+                Estado = n.Estado  ? "Activa" : "Inactiva"              
+            }).ToList();
 
             return result;
         }

@@ -176,5 +176,28 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 return new DataTablesResponse(modelo.Draw, new List<ActividadConsultaViewModel>(), 0, 0); 
             }
         }
+
+        public async Task<List<ActividadExcelModel>> ConsultarActividadExcel()
+        {
+            var actividades = _contexto.Actividad.AsQueryable();
+
+            var listadoActividades = actividades.ToList();
+
+            var listadoActividadesExcel = _mapper.MapDataIntoModel(listadoActividades);
+
+            listadoActividadesExcel.ForEach(m => {
+                var municipio = _contexto.Ciudad.FirstOrDefault(c => c.idctmuncipio == m.General_Municipio);
+                var departamento = _contexto.Departamento.FirstOrDefault(c => c.id_ct_depto == m.General_Departamento);
+                int coordinador = 0;
+                int.TryParse(m.General_Coordinador, out coordinador);
+                var coordinadorInfo = _contexto.Catalogo.FirstOrDefault(c => c.Id == coordinador);
+
+                m.General_CoordinadorNombre = coordinadorInfo?.Nombre;
+                m.General_DepartamentoNombre = departamento?.nombre;
+                m.General_MunicipioNombre = municipio?.nombre;
+            });
+
+            return listadoActividadesExcel;
+        }
     }
 }

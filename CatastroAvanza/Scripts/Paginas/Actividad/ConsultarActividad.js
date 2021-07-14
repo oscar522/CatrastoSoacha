@@ -1,6 +1,7 @@
 ﻿var ConsultarActividadJs = {
     urlObtenerActividades: "",
     urlActualizarActividad: "",
+    urlDescargarActividades:"",
     Inicializar: function () {
         ListarActividades();
     }
@@ -16,6 +17,16 @@ function ListarActividades() {
             type: "POST",
             url: ConsultarActividadJs.urlObtenerActividades,                     
         },
+        dom: 'Blfrtip',
+        buttons: [
+            {
+                text: "<button class='btn btn-light'>Diagnostico técnico jurídico</button>",
+                action: function () {                    
+                    window.location.href = ConsultarActividadJs.urlDescargarActividades;
+                }
+            }
+
+        ],
         pageLength: 10,
         lengthMenu: [5, 10, 25],
         columns: [            

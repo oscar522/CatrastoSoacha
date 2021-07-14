@@ -1,10 +1,14 @@
 ﻿using CatastroAvanza.Enumerations;
 using CatastroAvanza.Helpers.DataTableHelper;
+using CatastroAvanza.Infraestructura;
 using CatastroAvanza.Models.ActividadesDiarias;
 using CatastroAvanza.Negocio.Contratos;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -92,6 +96,21 @@ namespace CatastroAvanza.Controllers
             var tabla = await _actividadDiaria.GetActividadesCreadas(modelo);
 
             return Json(tabla, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public async Task<FileResult> ObtenerExcelActividadesDiarias()
+        {
+            var actividades = await _actividadDiaria.GetActividadesDiarias();
+
+            GeneracionExcel excel = new GeneracionExcel();
+
+            var excelWorkBook = excel.GenerarArchivoExcelActividadesDiarias(actividades);
+
+            var exportData = new MemoryStream();
+            excelWorkBook.Write(exportData);
+            exportData.Seek(0, SeekOrigin.Begin);
+            return File(exportData, "application/vnd.ms-excel", "actividades.xls");                        
         }
     }
 }
