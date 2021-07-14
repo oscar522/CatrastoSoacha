@@ -137,5 +137,15 @@ namespace PostgreSQL.AspNet.Identity.EntityFramework
 		/// Tipo de documento del usuario
 		/// </summary>
         public int TipoDocumento { get; set; }
-    }
+
+		/// <summary>
+		/// Nombres del usuario
+		/// </summary>
+		public string Nombres { get; set; }
+
+		/// <summary>
+		/// Apellidos del usuario
+		/// </summary>
+		public string Apellidos { get; set; }
+	}
 }

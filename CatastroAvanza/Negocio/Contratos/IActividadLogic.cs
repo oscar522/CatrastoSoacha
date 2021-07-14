@@ -9,7 +9,7 @@ namespace CatastroAvanza.Negocio.Contratos
     {
         Task<int> CrearActividad(ActividadPredioViewModel model);
 
-        Task<int> ActualizarActividad(ActividadPredioViewModel model);
+        Task<int> ActualizarActividad(ActividadPredioViewModel model, string Umodificacion);
 
         Task<DataTablesResponse> ConsultarActividades(IDataTablesRequest modelo);
 

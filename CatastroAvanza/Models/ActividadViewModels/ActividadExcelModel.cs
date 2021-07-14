@@ -171,5 +171,10 @@ namespace CatastroAvanza.Models.ActividadViewModels
 
         public string Economico_Observaciones { get; set; }
 
+        public DateTime  FechaCreacion { get; set; }
+        public DateTime FechaUltimaModificacion { get; set; }
+
+        public string UsuarioUltimaModificacion { get; set; }
+
     }
 }

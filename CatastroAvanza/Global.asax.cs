@@ -73,6 +73,10 @@ namespace CatastroAvanza
                 .As<IActividadMapper>()
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
+            builder.RegisterType<UserMapper>()
+                .As<IUserMapper>()
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
 
             //Servicios
             builder.RegisterType<AlmacenamientoArchivos>()

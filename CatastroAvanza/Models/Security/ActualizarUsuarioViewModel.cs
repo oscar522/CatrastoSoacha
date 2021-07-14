@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace CatastroAvanza.Models.AccountViewModels
+namespace CatastroAvanza.Models.Security
 {
-    public class RegisterViewModel
-    {        
+    public class ActualizarUsuarioViewModel
+    {
+        [Required(ErrorMessage = "El id de usuario es requerido.")]
+        public string UserId { get; set; }
+
         [EmailAddress(ErrorMessage = "El email es invalido.")]
         [Required(ErrorMessage = "Email es requerido.")]
         [Display(Name = "Email")]
@@ -28,7 +31,7 @@ namespace CatastroAvanza.Models.AccountViewModels
 
         [Required(ErrorMessage = "Tipo Documento es requerido.")]
         [Display(Name = "Tipo Documento")]
-        public int  TipoDocumento { get; set; }
+        public int TipoDocumento { get; set; }
 
         [Required(ErrorMessage = "Nombres es requerido.")]
         [Display(Name = "Nombres")]
@@ -50,5 +53,6 @@ namespace CatastroAvanza.Models.AccountViewModels
 
         public SelectList TiposDocumento { get; set; }
 
+        public string Estado { get; set; }
     }
 }

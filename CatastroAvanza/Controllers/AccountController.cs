@@ -1,6 +1,10 @@
 ﻿using CatastroAvanza.App_Start;
+using CatastroAvanza.Enumerations;
+using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Identity.Model;
 using CatastroAvanza.Models.AccountViewModels;
+using CatastroAvanza.Models.Security;
+using CatastroAvanza.Negocio.Contratos;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -14,18 +18,24 @@ namespace CatastroAvanza.Controllers
     //[Authorize]
     public class AccountController : BaseController
     {
-        public AccountController()
+        public AccountController(ISecurityLogic securityManager, ICatalogo catalogos)
         {
+            _securityManager = securityManager;
+            _catalogos = catalogos;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,ISecurityLogic securityManager, ICatalogo catalogos)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _securityManager = securityManager;
+            _catalogos = catalogos;
         }
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly ISecurityLogic _securityManager;
+        private readonly ICatalogo _catalogos;
 
         public ApplicationSignInManager SignInManager
         {
@@ -139,7 +149,11 @@ namespace CatastroAvanza.Controllers
         //[AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var roles = _securityManager.GetRoles();
+            var model = new RegisterViewModel();
+            model.Roles = new SelectList(roles, "Name", "Name", 1);
+            model.TiposDocumento = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.TipoDocumento), "Value", "Text", 1);
+            return View(model);
         }
 
         //
@@ -151,23 +165,34 @@ namespace CatastroAvanza.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { 
+                    UserName = model.Email, 
+                    Email = model.Email, 
+                    Apellidos = model.Apellidos, 
+                    Nombres = model.Nombres,
+                    PhoneNumber = model.Telefono,
+                    Documento = model.Documento,
+                    TipoDocumento = model.TipoDocumento,
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    var resultPwd = UserManager.AddPassword(user.Id, model.Password);
+                    var resultRol = await UserManager.AddToRoleAsync(user.Id, model.Rol);
+                    if (result.Succeeded && resultRol.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    
                 }
+                                    
                 AddErrors(result);
             }
 
+            var roles = _securityManager.GetRoles();
+            model.Roles = new SelectList(roles, "Name", "Name", 1);
+            model.TiposDocumento = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.TipoDocumento), "Value", "Text", 1);
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -402,6 +427,39 @@ namespace CatastroAvanza.Controllers
         {
             return View();
         }
+
+        public ActionResult ListarUsuarios()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ListarUsuariosJson([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest modelo)
+        {
+            var usuarios = await _securityManager.GetUsuarios(modelo);
+            return Json(usuarios, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> ActualizarUsuario(string userId)
+        {
+            var model = await _securityManager.GetUsuarioParaActualizar(userId);
+            var roles = _securityManager.GetRoles();            
+            model.Roles = new SelectList(roles, "Name", "Name", 1);
+            model.TiposDocumento = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.TipoDocumento), "Value", "Text", 1);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ActualizarUsuario(ActualizarUsuarioViewModel model)
+        {
+            return View();
+            //UserManager.Update();
+            //UserManger.
+            //var usuarios = await _securityManager.GetUsuarios(modelo);
+            //return Json(usuarios, JsonRequestBehavior.AllowGet);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -71,7 +71,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
             }            
         }
 
-        public async Task<int> ActualizarActividad(ActividadPredioViewModel model)
+        public async Task<int> ActualizarActividad(ActividadPredioViewModel model, string Umodificacion)
         {
             try
             {                
@@ -92,7 +92,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 if (actividad == null)
                     return 0;
 
-                actividad = _mapper.MapModelAData(model, actividad);
+                actividad = _mapper.MapModelAData(model, actividad, Umodificacion);
 
                 var resultado = await _contexto.SaveChangesAsync();
 

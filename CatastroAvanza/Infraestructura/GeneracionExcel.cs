@@ -174,6 +174,10 @@ namespace CatastroAvanza.Infraestructura
             row.CreateCell(78).SetCellValue("Economico_Requiere_Revision_Tipologias");
             row.CreateCell(79).SetCellValue("Economico_Requiere_Revision_Zonas");
             row.CreateCell(80).SetCellValue("Economico_Observaciones");
+
+            row.CreateCell(81).SetCellValue("Fecha_Creacion");
+            row.CreateCell(82).SetCellValue("Fecha_Ultima_Modificacion");
+            row.CreateCell(83).SetCellValue("Usuario_Ultima_Modificacion");
             rowIndex++;
 
             foreach (var diagnostico in diagnosticos)
@@ -266,6 +270,14 @@ namespace CatastroAvanza.Infraestructura
                 row.CreateCell(78).SetCellValue(diagnostico.Economico_Requiere_Revision_Tipologias);
                 row.CreateCell(79).SetCellValue(diagnostico.Economico_Requiere_Revision_Zonas);
                 row.CreateCell(80).SetCellValue(diagnostico.Economico_Observaciones);
+
+                if(diagnostico.FechaCreacion != null )
+                    row.CreateCell(81).SetCellValue(diagnostico.FechaCreacion.ToString());
+                if (diagnostico.FechaUltimaModificacion != null)
+                    row.CreateCell(82).SetCellValue(diagnostico.FechaUltimaModificacion.ToString());                
+                row.CreateCell(83).SetCellValue(diagnostico.UsuarioUltimaModificacion);
+
+                rowIndex++;
             }
 
             foreach (var cell in row.Cells)

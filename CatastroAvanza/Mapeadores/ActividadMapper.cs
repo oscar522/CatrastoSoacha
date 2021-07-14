@@ -211,13 +211,17 @@ namespace CatastroAvanza.Mapeadores
                 result.Economico_Requiere_Revision_Tipologias = model.Economico_Requiere_Revision_Tipologias ? "Si" : "No";
                 result.Economico_Requiere_Revision_Zonas = model.Economico_Requiere_Revision_Zonas ? "Si" : "No";
 
+                result.FechaCreacion = model.FInsercion;
+                result.FechaUltimaModificacion = model.FUltimaModificacion;
+                result.UsuarioUltimaModificacion = model.UsuarioUltimaModificacion;
+
                 actividadesLs.Add(result);
             }
 
             return actividadesLs;
         }
 
-        public Actividad MapModelAData(ActividadPredioViewModel model, Actividad result)
+        public Actividad MapModelAData(ActividadPredioViewModel model, Actividad result, string usuarioModificacion)
         {            
             if (model != null)
             {
@@ -347,6 +351,9 @@ namespace CatastroAvanza.Mapeadores
                 result.Economico_Requiere_Revision_Tipologias = model.Economico.Requiere_Revision_Tipologias;
                 result.Economico_Requiere_Revision_Zonas = model.Economico.Requiere_Revision_Zonas;
             }
+
+            result.FUltimaModificacion = System.DateTime.Now;
+            result.UsuarioUltimaModificacion = usuarioModificacion;
 
             return result;                     
         }
@@ -482,6 +489,10 @@ namespace CatastroAvanza.Mapeadores
                 result.Economico_Requiere_Revision_Tipologias = model.Economico.Requiere_Revision_Tipologias;
                 result.Economico_Requiere_Revision_Zonas = model.Economico.Requiere_Revision_Zonas;
             }
+
+            result.FInsercion = System.DateTime.Now;
+            result.FUltimaModificacion = System.DateTime.Now;
+            result.UsuarioUltimaModificacion = model.Ejecutor;
 
             return result;
         }

@@ -84,7 +84,7 @@ namespace CatastroAvanza.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ActualizarActividad(ActividadPredioViewModel model)
         {
-            var result = await _actividad.ActualizarActividad(model);
+            var result = await _actividad.ActualizarActividad(model, HttpContext.User.Identity.Name);
             return RedirectToAction(nameof(Index));
         }
 

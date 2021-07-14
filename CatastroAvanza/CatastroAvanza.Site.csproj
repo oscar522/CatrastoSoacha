@@ -233,6 +233,7 @@
     <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Enumerations\ActividadesColumnasOrdenables.cs" />
     <Compile Include="Enumerations\CatalogosEnum.cs" />
+    <Compile Include="Enumerations\UserColumnasOrdenables.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,6 +255,10 @@
     <Compile Include="Identity\DbContext\Migraciones\202107140006035_Tipo_Y_Documento_Tabla_Usuario.designer.cs">
       <DependentUpon>202107140006035_Tipo_Y_Documento_Tabla_Usuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Identity\DbContext\Migraciones\202107140606543_nombre_apellido_tabla_usuario.cs" />
+    <Compile Include="Identity\DbContext\Migraciones\202107140606543_nombre_apellido_tabla_usuario.designer.cs">
+      <DependentUpon>202107140606543_nombre_apellido_tabla_usuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Identity\Model\ApplicationUser.cs" />
     <Compile Include="Infraestructura\ContratosServicios\IAlmacenamientoArchivos.cs" />
     <Compile Include="Infraestructura\GeneracionExcel.cs" />
@@ -262,7 +267,9 @@
     <Compile Include="Mapeadores\ActividadMapper.cs" />
     <Compile Include="Mapeadores\IActividadMapper.cs" />
     <Compile Include="Mapeadores\IMapeadoresApplicacion.cs" />
+    <Compile Include="Mapeadores\IUserMapper.cs" />
     <Compile Include="Mapeadores\MapeadoresApplicacion.cs" />
+    <Compile Include="Mapeadores\UserMapper.cs" />
     <Compile Include="Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\AccountViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\AccountViewModels\RegisterViewModel.cs" />
@@ -292,7 +299,9 @@
     <Compile Include="Models\Dashboard\R1_2020_66069_PREDIOSModel.cs" />
     <Compile Include="Models\Dashboard\R2_2021_69295_CONSTRUCCIONESModel.cs" />
     <Compile Include="Models\GeneralConfigurations.cs" />
+    <Compile Include="Models\Security\ActualizarUsuarioViewModel.cs" />
     <Compile Include="Models\Security\RoleViewModel.cs" />
+    <Compile Include="Models\Security\UserViewModel.cs" />
     <Compile Include="Models\SidebarItem.cs" />
     <Compile Include="Models\SidebarUserLevel.cs" />
     <Compile Include="Negocio\Contratos\IActividadDiariaLogic.cs" />
@@ -386,6 +395,10 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202106300129332_adicion_columna_FInsercion.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202106300129332_adicion_columna_FInsercion.designer.cs">
       <DependentUpon>202106300129332_adicion_columna_FInsercion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202107140456212_columnas_finsercio_fmodificacion_usuariomodificacion_tabla_actividades.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202107140456212_columnas_finsercio_fmodificacion_usuariomodificacion_tabla_actividades.designer.cs">
+      <DependentUpon>202107140456212_columnas_finsercio_fmodificacion_usuariomodificacion_tabla_actividades.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
@@ -1199,6 +1212,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\Paginas\Account\ConsultarUsuarios.js" />
     <Content Include="Scripts\Paginas\Actividad\ActualizarActividad.js" />
     <Content Include="Scripts\Paginas\Actividad\ConsultarActividad.js" />
     <Content Include="Scripts\Paginas\Actividad\CrearActividad.js" />
@@ -1691,6 +1705,8 @@
     <Content Include="Views\ActividadesDiarias\CrearActividad.cshtml" />
     <Content Include="Views\Actividad\ActualizarActividad.cshtml" />
     <Content Include="Views\Actividad\_Economico.cshtml" />
+    <Content Include="Views\Account\ListarUsuarios.cshtml" />
+    <Content Include="Views\Account\ActualizarUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1720,6 +1736,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Identity\DbContext\Migraciones\202107140006035_Tipo_Y_Documento_Tabla_Usuario.resx">
       <DependentUpon>202107140006035_Tipo_Y_Documento_Tabla_Usuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Identity\DbContext\Migraciones\202107140606543_nombre_apellido_tabla_usuario.resx">
+      <DependentUpon>202107140606543_nombre_apellido_tabla_usuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202105120406305_Inicial.resx">
       <DependentUpon>202105120406305_Inicial.cs</DependentUpon>
@@ -1759,6 +1778,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202106300129332_adicion_columna_FInsercion.resx">
       <DependentUpon>202106300129332_adicion_columna_FInsercion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202107140456212_columnas_finsercio_fmodificacion_usuariomodificacion_tabla_actividades.resx">
+      <DependentUpon>202107140456212_columnas_finsercio_fmodificacion_usuariomodificacion_tabla_actividades.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

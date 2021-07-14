@@ -8,7 +8,7 @@ namespace CatastroAvanza.Mapeadores
     {
         Actividad MapModelAData(ActividadPredioViewModel model);
 
-        Actividad MapModelAData(ActividadPredioViewModel model, Actividad result);
+        Actividad MapModelAData(ActividadPredioViewModel model, Actividad result, string usuarioModificacion);
 
         ActividadPredioViewModel MapDataAModel(Actividad model);
 
