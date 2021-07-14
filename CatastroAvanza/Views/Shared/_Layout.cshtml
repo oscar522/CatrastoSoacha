@@ -11,10 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.min.css">
-    @*<link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap4.min.css">*@
     <link rel="stylesheet" href="~/Content/DataTables/css/responsive.dataTables.min.css">
-    @*<link rel="stylesheet" href="~/Content/DataTables/css/responsive.bootstrap4.min.css">*@
-
     <link rel="shortcut icon" href="images/favicon.png" />
     @RenderSection("styles", required: false)
 </head>
@@ -52,15 +49,14 @@
     <!-- SCRIPTS -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryvalidation")
-    @*@Scripts.Render("~/bundles/bootstrap")*@
-    @*<script src=" ~/Scripts/popper.min.js"></script>*@
     <script src=" ~/Scripts/bootstrap.min.js"></script>
     <script src=" ~/Scripts/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
-    @*<script src="~/Scripts/DataTables/dataTables.bootstrap4.min.js"></script>*@
+    <script src="~/Scripts/DataTables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/DataTables/extensions/Buttons/js/buttons.html5.min.js"></script>    
     <script src="~/Scripts/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
-    @*<script src="~/Scripts/DataTables/extensions/Responsive/js/responsive.bootstrap4.min.js"></script>*@
+
     <script src="~/Scripts/moment.min.js"></script>
     @RenderSection("scripts", required: false)
 

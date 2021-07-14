@@ -24,7 +24,7 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
 
         public bool Estado { get; set; }
 
-        public long FInsercion { get; set; }
+        public DateTime FInsercion { get; set; }
 
         public int IdDepartamento { get; set; }
 
