@@ -13,18 +13,6 @@ namespace CatastroAvanza.Models.Security
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Contraseña es requerido.")]
-        [StringLength(100, ErrorMessage = "La {0} debe tener al menos {2} caracteres.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Contraseña")]
-        public string Password { get; set; }
-
-        [Required(ErrorMessage = "Confirmacion Contraseña es requerido.")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirmacion Contraseña")]
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "La contraseña y su confirmacion no coinciden.")]
-        public string ConfirmPassword { get; set; }
-
         [Required(ErrorMessage = "Documento es requerido.")]
         [Display(Name = "Documento")]
         public string Documento { get; set; }

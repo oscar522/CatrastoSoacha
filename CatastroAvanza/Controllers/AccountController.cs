@@ -90,7 +90,8 @@ namespace CatastroAvanza.Controllers
                 case SignInStatus.Success:
                     return RedirectToAction("Index", "Dashboard");
                 case SignInStatus.LockedOut:
-                    return View("Lockout");
+                    ModelState.AddModelError("", "Usuario bloqueado, por favor comuniquese con el administrador.");
+                    return View(model);
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
@@ -151,7 +152,7 @@ namespace CatastroAvanza.Controllers
         {
             var roles = _securityManager.GetRoles();
             var model = new RegisterViewModel();
-            model.Roles = new SelectList(roles, "Name", "Name", 1);
+            model.Roles = new SelectList(roles, "Id", "Name", 1);
             model.TiposDocumento = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.TipoDocumento), "Value", "Text", 1);
             return View(model);
         }
@@ -178,8 +179,8 @@ namespace CatastroAvanza.Controllers
                 
                 if (result.Succeeded)
                 {
-                    var resultPwd = UserManager.AddPassword(user.Id, model.Password);
-                    var resultRol = await UserManager.AddToRoleAsync(user.Id, model.Rol);
+                    var rol = _securityManager.GetRolesById(model.Rol);
+                    var resultRol = await UserManager.AddToRoleAsync(user.Id, rol.Name);
                     if (result.Succeeded && resultRol.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");
@@ -436,7 +437,7 @@ namespace CatastroAvanza.Controllers
         [HttpPost]
         public async Task<ActionResult> ListarUsuariosJson([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest modelo)
         {
-            var usuarios = await _securityManager.GetUsuarios(modelo);
+            var usuarios = await _securityManager.GetUsuarios(modelo, UserManager);
             return Json(usuarios, JsonRequestBehavior.AllowGet);
         }
 
@@ -444,7 +445,7 @@ namespace CatastroAvanza.Controllers
         {
             var model = await _securityManager.GetUsuarioParaActualizar(userId);
             var roles = _securityManager.GetRoles();            
-            model.Roles = new SelectList(roles, "Name", "Name", 1);
+            model.Roles = new SelectList(roles, "Id", "Name", 1);
             model.TiposDocumento = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.TipoDocumento), "Value", "Text", 1);
 
             return View(model);
@@ -453,11 +454,56 @@ namespace CatastroAvanza.Controllers
         [HttpPost]
         public async Task<ActionResult> ActualizarUsuario(ActualizarUsuarioViewModel model)
         {
-            return View();
-            //UserManager.Update();
-            //UserManger.
-            //var usuarios = await _securityManager.GetUsuarios(modelo);
-            //return Json(usuarios, JsonRequestBehavior.AllowGet);
+            var user = UserManager.FindById(model.UserId);
+
+            user.Id = model.UserId;
+            user.UserName = model.Email;
+            user.Email = model.Email;
+            user.Apellidos = model.Apellidos;
+            user.Nombres = model.Nombres;
+            user.PhoneNumber = model.Telefono;
+            user.Documento = model.Documento;
+            user.TipoDocumento = model.TipoDocumento;            
+
+            var result = await UserManager.UpdateAsync(user);
+
+            if (!UserManager.IsInRole(user.Id, model.Rol))
+            {
+                var rolesUser = UserManager.GetRoles(user.Id);
+                var restulRolEliminacion =await UserManager.RemoveFromRolesAsync(user.Id, rolesUser.ToArray());
+                if(!restulRolEliminacion.Succeeded)
+                    AddErrors(restulRolEliminacion);
+                else {
+                    var rol = _securityManager.GetRolesById(model.Rol);
+                    var restulRol = await UserManager.AddToRoleAsync(user.Id, rol.Name);
+                    if (!restulRol.Succeeded)
+                        AddErrors(restulRol);
+                }
+            }
+
+            if(result.Succeeded)
+                return RedirectToAction("ListarUsuarios");
+
+            AddErrors(result);
+
+            var roles = _securityManager.GetRoles();
+            model.Roles = new SelectList(roles, "Id", "Name", 1);
+            model.TiposDocumento = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.TipoDocumento), "Value", "Text", 1);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> BloquearUsuario(string id)
+        {
+            var user = UserManager.FindById(id);
+            if (!await UserManager.IsLockedOutAsync(user.Id))                
+            {                
+                var result = await UserManager.SetLockoutEndDateAsync(user.Id, System.DateTimeOffset.MaxValue);
+                if (!result.Succeeded)
+                    AddErrors(result);
+            }
+
+            return Json("Ok", JsonRequestBehavior.AllowGet);
         }
 
 

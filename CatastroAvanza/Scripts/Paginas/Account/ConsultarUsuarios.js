@@ -1,8 +1,13 @@
 ﻿ConsultarUsuariosJs = {
     urlListadoUsuarios: "",
     urlActualizarUsuario: "",
+    urlBloquearUsuario: "",
     Inicializar: function () {
         ListarUsuarios();
+        $('#btn-confirm').click(function () {
+            if ($("#Id").val() != '')
+                BloquearUsuario();
+        });
     }
 }
 
@@ -13,7 +18,10 @@ function ListarUsuarios() {
         ajax: {
             dataType: 'json',
             type: "POST",
-            url: ConsultarUsuariosJs.urlListadoUsuarios,
+            url: ConsultarUsuariosJs.urlListadoUsuarios            
+        },
+        initComplete: function () {
+            $(".btnElimnarUsuario").click(EstablecerIdABloquear);
         },
         pageLength: 10,
         lengthMenu: [5, 10, 25],
@@ -26,15 +34,15 @@ function ListarUsuarios() {
                 searchable: true
             },
             {
-                name: 'TipoDocumento',
-                data: 'TipoDocumento',
-                title: 'TipoDocumento',
+                name: 'Email',
+                data: 'Email',
+                title: 'Email',
                 orderable: true
             },
             {
-                name: 'TipoDocumento',
-                data: 'TipoDocumento',
-                title: 'TipoDocumento',
+                name: 'TipoDocumentoNombre',
+                data: 'TipoDocumentoNombre',
+                title: 'Tipo Documento',
                 orderable: true
             }, {
                 name: 'Documento',
@@ -78,9 +86,30 @@ function ListarUsuarios() {
                 title: '',
                 width: "5%",
                 render: function (data, type, full) {
-                    return "<a class='btn btn-outline-danger' title='Eliminar' href='#'><i class='fa fa-trash'></i></a>";
+                    return "<a class='btn btn-outline-danger btnElimnarUsuario' title='Eliminar' href='#' data-toggle='modal' data-target='#confirmacionModal' data-id='" + data + "'><i class='fa fa-trash' ></i></a>";
                 }
             }
         ],
+    });
+}
+
+function EstablecerIdABloquear() {    
+    $("#Id").val($(this).attr("data-id"));
+}
+
+function BloquearUsuario()
+{
+    $.ajax({
+        type: 'POST',
+        url: ConsultarUsuariosJs.urlBloquearUsuario,
+        dataType: 'json',
+        data: { id: $("#Id").val() },
+        success: function (states) {
+            if (states == "Ok")
+                window.location.reload();
+        },
+        error: function (ex) {
+            console.log(ex.responseText);
+        }
     });
 }

@@ -1,4 +1,5 @@
-﻿using CatastroAvanza.Helpers.DataTableHelper;
+﻿using CatastroAvanza.App_Start;
+using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Models.Security;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace CatastroAvanza.Negocio.Contratos
     {
         List<RoleViewModel> GetRoles();
 
-        Task<DataTablesResponse> GetUsuarios(IDataTablesRequest modelo);
+        Task<DataTablesResponse> GetUsuarios(IDataTablesRequest modelo, ApplicationUserManager userManager);
 
         Task<ActualizarUsuarioViewModel> GetUsuarioParaActualizar(string userId);
 

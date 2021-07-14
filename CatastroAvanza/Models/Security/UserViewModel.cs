@@ -12,6 +12,7 @@
 
         public int TipoDocumento { get; set; }
 
+        public string TipoDocumentoNombre { get; set; }
 
         public string Nombres { get; set; }
 

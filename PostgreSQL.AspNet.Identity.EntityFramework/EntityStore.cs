@@ -73,10 +73,10 @@ namespace PostgreSQL.AspNet.Identity.EntityFramework
 		/// <param name="entity"></param>
 		public virtual void Update(TEntity entity)
 		{
-			if (entity != null)
-			{
-				Context.Entry(entity).State = EntityState.Modified;
-			}
-		}
-	}
+            if (entity != null)
+            {
+                Context.Entry(entity).State = EntityState.Modified;
+            }
+        }
+    }
 }

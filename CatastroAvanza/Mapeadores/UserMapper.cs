@@ -23,7 +23,7 @@ namespace CatastroAvanza.Mapeadores
                     TipoDocumento = m.TipoDocumento,
                     Telefono = m.PhoneNumber,
                     Email = m.Email,
-                    Estado = m.LockoutEnabled ? "Activo" : "Inactivo",
+                    Estado = m.LockoutEndDateUtc >= System.DateTime.Now ? "Inactivo" : "Activo",
                     rol = m.Roles.FirstOrDefault()?.RoleId
                 };
 

@@ -6,12 +6,34 @@
 <h2>Listar Usuarios</h2>
 <table id="usersTbl" class="table table-striped cell-border compact stripe" style="width:100%">
 </table>
+
+<div class="modal fade" id="confirmacionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmacion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Esta seguro de querer bloquear el usuario?
+                <input type="hidden" name="Id" id="Id" value="" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="btn-confirm">Si</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts{
     @Scripts.Render("~/Scripts/Paginas/Account/ConsultarUsuarios.js")
 <script>
     $(document).ready(function () {
         ConsultarUsuariosJs.urlListadoUsuarios = '@Url.Action("ListarUsuariosJson")';
         ConsultarUsuariosJs.urlActualizarUsuario = '@Url.Action("ActualizarUsuario")';
+        ConsultarUsuariosJs.urlBloquearUsuario ='@Url.Action("BloquearUsuario")';
         ConsultarUsuariosJs.Inicializar();
     });
 </script>

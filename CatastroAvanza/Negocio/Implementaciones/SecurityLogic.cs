@@ -1,9 +1,11 @@
-﻿using CatastroAvanza.Enumerations;
+﻿using CatastroAvanza.App_Start;
+using CatastroAvanza.Enumerations;
 using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Identity.DbContext;
 using CatastroAvanza.Mapeadores;
 using CatastroAvanza.Models.Security;
 using CatastroAvanza.Negocio.Contratos;
+using CatastroAvanza.Repositorio.DBContexto.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +16,13 @@ namespace CatastroAvanza.Negocio.Implementaciones
     public class SecurityLogic : ISecurityLogic
     {
         private ApplicationIdentityDbContext _securityManager;
-        private readonly IUserMapper _mapper;
+        private readonly IApplicationDbContext _contexto;
+        private readonly IUserMapper _mapper;        
 
-        public SecurityLogic(IUserMapper mapper)
+        public SecurityLogic(IUserMapper mapper, IApplicationDbContext contexto)
         {
+            
+            _contexto = contexto;
             _securityManager = ApplicationIdentityDbContext.Create();
             _mapper = mapper;
         }
@@ -53,7 +58,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
             return rol;
         }
 
-        public async Task<DataTablesResponse> GetUsuarios(IDataTablesRequest modelo)
+        public async Task<DataTablesResponse> GetUsuarios(IDataTablesRequest modelo, ApplicationUserManager userManager)
         {
             try
             {
@@ -85,6 +90,8 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 listadoUsuarios.ForEach(u =>
                 {
                     u.rol = GetRolesById(u.rol)?.Name;
+                    var tipoDocumentoEntity =_contexto.Catalogo.FirstOrDefault(c => c.Id == u.TipoDocumento && c.Tipo == nameof(CatalogosEnum.TipoDocumento));
+                    u.TipoDocumentoNombre = tipoDocumentoEntity?.Nombre;                    
                 });
 
                 var tabla = new DataTablesResponse(modelo.Draw, listadoUsuarios, _securityManager.Users.Count(), listadoUsuarios.Count);
