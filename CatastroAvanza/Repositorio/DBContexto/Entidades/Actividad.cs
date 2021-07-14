@@ -168,5 +168,11 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
 
         public string Economico_Observaciones { get; set; }
 
+        public DateTime FInsercion { get; set; }
+
+        public DateTime FUltimaModificacion { get; set; }
+
+        public string UsuarioUltimaModificacion { get; set; }
+
     }
 }

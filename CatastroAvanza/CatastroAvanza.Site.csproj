@@ -229,6 +229,10 @@
     <Compile Include="Identity\DbContext\Migraciones\202105050434313_Inicial.designer.cs">
       <DependentUpon>202105050434313_Inicial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Identity\DbContext\Migraciones\202107140006035_Tipo_Y_Documento_Tabla_Usuario.cs" />
+    <Compile Include="Identity\DbContext\Migraciones\202107140006035_Tipo_Y_Documento_Tabla_Usuario.designer.cs">
+      <DependentUpon>202107140006035_Tipo_Y_Documento_Tabla_Usuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Identity\Model\ApplicationUser.cs" />
     <Compile Include="Infraestructura\ContratosServicios\IAlmacenamientoArchivos.cs" />
     <Compile Include="Infraestructura\ImplementacionesServicios\AlmacenamientoArchivos.cs" />
@@ -1681,6 +1685,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Identity\DbContext\Migraciones\202105050434313_Inicial.resx">
       <DependentUpon>202105050434313_Inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Identity\DbContext\Migraciones\202107140006035_Tipo_Y_Documento_Tabla_Usuario.resx">
+      <DependentUpon>202107140006035_Tipo_Y_Documento_Tabla_Usuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202105120406305_Inicial.resx">
       <DependentUpon>202105120406305_Inicial.cs</DependentUpon>

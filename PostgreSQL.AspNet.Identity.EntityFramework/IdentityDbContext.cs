@@ -379,6 +379,12 @@ namespace PostgreSQL.AspNet.Identity.EntityFramework
 
 			// CONSIDER: u.Email is Required if set on options?
 			user.Property(u => u.Email).HasMaxLength(256);
+			user.Property(u => u.Documento)
+				.IsOptional()
+				.HasMaxLength(256);
+
+			user.Property(u => u.TipoDocumento)
+				.IsOptional();
 
 			modelBuilder.Entity<TUserRole>()
 				.HasKey(r => new { r.UserId, r.RoleId })

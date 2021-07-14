@@ -127,5 +127,15 @@ namespace PostgreSQL.AspNet.Identity.EntityFramework
 		/// User name
 		/// </summary>
 		public virtual string UserName { get; set; }
-	}
+
+		/// <summary>
+		/// Documento de identificacion del usuario
+		/// </summary>
+        public string Documento { get; set; }
+
+		/// <summary>
+		/// Tipo de documento del usuario
+		/// </summary>
+        public int TipoDocumento { get; set; }
+    }
 }
