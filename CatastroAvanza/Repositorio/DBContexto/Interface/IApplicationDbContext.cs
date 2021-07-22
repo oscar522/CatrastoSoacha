@@ -20,6 +20,9 @@ namespace CatastroAvanza.Repositorio.DBContexto.Interface
         DbSet<Uso> Uso { get; set; }
         DbSet<Destino> Destino { get; set; }
         DbSet<UnidadArea> UnidadArea { get; set; }
+        DbSet<ActividadTrabajo> Trabajo { get; set; }
+        DbSet<ActividadTrabajoGestion> TrabajoGestion { get; set; }
+        DbSet<AsociacionTrabajoActividadGestor> AsociacionTrabajoGestor { get; set; }
 
         int SaveChanges();
         

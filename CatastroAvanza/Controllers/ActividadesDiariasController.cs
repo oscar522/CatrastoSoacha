@@ -3,18 +3,14 @@ using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Infraestructura;
 using CatastroAvanza.Models.ActividadesDiarias;
 using CatastroAvanza.Negocio.Contratos;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace CatastroAvanza.Controllers
 {
-    public class ActividadesDiariasController : Controller
+    [Authorize]
+    public class ActividadesDiariasController : BaseController
     {
         
         public ActividadesDiariasController(ICatalogo catalogos,ISecurityLogic securityManager, IActividadDiariaLogic actividadDiaria)
@@ -38,8 +34,8 @@ namespace CatastroAvanza.Controllers
         {
             return View(new ActividadesDiariasViewModel 
             { 
-                NombreUsuario= HttpContext.User.Identity.Name,                                  
-                RolUsuario = "Administrador" 
+                NombreUsuario= GetUserName(),                                  
+                RolUsuario = GetUserRole() 
             });
         }
 
@@ -50,7 +46,7 @@ namespace CatastroAvanza.Controllers
                 return View(nameof(CrearActividad), model);
             else
             {
-                model.IdApsNetUser = HttpContext.User.Identity.Name;                
+                model.IdApsNetUser = GetUserName();                
                 model.Id = await _actividadDiaria.CrearActividad(model);
                 return View(nameof(CrearActividad), new ActividadesDiariasViewModel());
             }            

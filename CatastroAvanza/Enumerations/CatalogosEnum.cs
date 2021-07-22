@@ -9,6 +9,7 @@
         TipoDireccion = 4,
         Proceso=5,
         Modalidad=6,
-        TipoDocumento=7
+        TipoDocumento=7,
+        EstadoGestion=8
     }
 }

@@ -1,0 +1,106 @@
+﻿@model CrearGestionTrabajoViewModel
+@{
+    ViewBag.Title = "Gestionar Trabajo";
+}
+
+<div class="card mb-4 wow fadeIn">
+
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            <span>Gestionar de trabajo <strong>@Model.NombreTrabajo</strong> </span>
+        </h4>
+    </div>
+</div>
+
+
+<div class="wow fadeIn">
+    @using (Html.BeginForm("GestionarTrabajo", "Trabajo", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.IdAsignacion)
+        @Html.HiddenFor(m => m.IdTrabajo)
+
+        <div class="form-horizontal">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Gestion</h5>
+                                    <hr />
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Nombre</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.DropDownListFor(model => model.EstadoGestion, Model.EstadosGestion, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.EstadoGestion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            @Html.LabelFor(model => model.FechaModificacionGestion, htmlAttributes: new { @class = "control-label col-md-12" })
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.EditorFor(model => model.FechaModificacionGestion, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                            @Html.ValidationMessageFor(model => model.FechaModificacionGestion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            @Html.LabelFor(model => model.Observacion, htmlAttributes: new { @class = "control-label col-md-12" })
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.TextAreaFor(model => model.Observacion, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Observacion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="justify-content-center text-right">
+                                            <input type="submit" value="Crear Actividad" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5> <label class="control-label col-md-12">Gestion</label> </h5>
+                                            <hr />
+                                            <table class="table table-striped cell-border compact responsive nowrap" id="tblgestion" width="90%">
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/ModalControl.js")
+    @Scripts.Render("~/Scripts/Paginas/Trabajo/TrabajoGestion.js")
+    <script>
+        $(document).ready(function () {
+            TrabajoGestionJs.urlObtenerGestiones = '@Url.Action("ConsultarGestion")';            
+            TrabajoGestionJs.Inicializar();
+        });
+    </script>
+
+}

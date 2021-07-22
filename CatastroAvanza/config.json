@@ -50,6 +50,35 @@
           "linkText": "Cerrar sesion",
           "iconText": "fa fa-user-circle mr-3",
           "sub": null
+        },
+        {
+          "order": 1,
+          "controllerName": "Trabajo",
+          "actionName": "CrearTrabajo",
+          "linkText": "Crear trabajo",
+          "iconText": "fa fa-user-circle mr-3",
+          "sub": null
+        }
+      ]
+    },
+    {
+      "role": "sistemas",
+      "links": [
+        {
+          "order": 1,
+          "controllerName": "Trabajo",
+          "actionName": "ListaTrabajos",
+          "linkText": "Listar trabajos",
+          "iconText": "fa fa-user-circle mr-3",
+          "sub": null
+        },
+        {
+          "order": 1,
+          "controllerName": "Account",
+          "actionName": "LogOff",
+          "linkText": "Cerrar sesion",
+          "iconText": "fa fa-user-circle mr-3",
+          "sub": null
         }
       ]
     }

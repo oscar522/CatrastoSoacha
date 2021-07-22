@@ -1,0 +1,113 @@
+﻿@model CrearTrabajoViewModel
+@{
+    ViewBag.Title = "Crear Trabajo";
+}
+
+<div class="card mb-4 wow fadeIn">
+
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            <span>Crear trabajo</span>
+        </h4>
+    </div>
+</div>
+
+<div class="wow fadeIn">
+    @using (Html.BeginForm("CrearTrabajo", "Trabajo", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Nuevo trabajo</h5>
+                                    <hr />
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Nombre</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Rol</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.DropDownList("Rol", Model.Roles, "Seleccione", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Rol, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-12" })
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            @Html.LabelFor(model => model.PuntosEsfuerzo, htmlAttributes: new { @class = "control-label col-md-12" })
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.EditorFor(model => model.PuntosEsfuerzo, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.PuntosEsfuerzo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="justify-content-center text-right">
+                                            <input type="submit" value="Crear Actividad" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5> <label class="control-label col-md-12">Trabajos</label> </h5>
+                                            <hr />
+                                            <table class="table table-striped cell-border compact responsive nowrap" id="tbltrabajos" width="90%">
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/ModalControl.js")
+    @Scripts.Render("~/Scripts/Paginas/Trabajo/Trabajo.js")
+<script>
+        $(document).ready(function () {
+            TrabajoJs.urlObtenerTrabajosAdministrador = '@Url.Action("ConsultarTrabajosAdministrador")';
+            TrabajoJs.urlAsignarTrabajo = '@Url.Action("CrearAsignacionTrabajo")';
+            TrabajoJs.Inicializar();
+        });
+</script>
+
+}

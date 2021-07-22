@@ -25,9 +25,16 @@ namespace CatastroAvanza.Repositorio.DBContexto
         public DbSet<Uso> Uso { get; set; }
         public DbSet<Destino> Destino { get; set; }
         public DbSet<UnidadArea> UnidadArea { get; set; }
-        
+        public DbSet<ActividadTrabajo> Trabajo { get; set; }
+        public DbSet<ActividadTrabajoGestion> TrabajoGestion { get; set; }
+        public DbSet<AsociacionTrabajoActividadGestor> AsociacionTrabajoGestor { get; set; }
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new AsociacionTrabajoActividadGestor_ConfiguracionEntidad());
+            modelBuilder.Configurations.Add(new ActividadTrabajoGestion_ConfiguracionEntidad());
+            modelBuilder.Configurations.Add(new ActividadTrabajo_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new Destino_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new Uso_ConfiguracionEntidad());
             modelBuilder.Configurations.Add(new UnidadArea_ConfiguracionEntidad());

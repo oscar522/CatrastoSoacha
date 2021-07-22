@@ -9,8 +9,8 @@ namespace CatastroAvanza.Controllers
     {
         [Authorize]
         public ActionResult Sidebar()
-        {
-            string role = "Administrator";
+        {            
+            string role = GetUserRole();
             GeneralConfigurations generalConfigurations = GetConfig(1);
             SidebarUserLevel sidebarUserLevel = generalConfigurations.menus.Where(w => w.role.Equals(role, System.StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
             List<SidebarItem> SidebarItemList = sidebarUserLevel.links;

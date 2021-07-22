@@ -7,13 +7,12 @@ using CatastroAvanza.Models.Dashboard;
 using CatastroAvanza.Negocio.Contratos;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace CatastroAvanza.Controllers
 {
+    [Authorize]
     public class ActividadController : BaseController
     {
         public ActividadController(ICatalogo catalogos, IActividadLogic actividad, IDataForm1Logic dataFormLogicService)

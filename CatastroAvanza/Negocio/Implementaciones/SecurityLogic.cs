@@ -102,9 +102,31 @@ namespace CatastroAvanza.Negocio.Implementaciones
             {
                 string message = ex.Message;
                 return new DataTablesResponse(modelo.Draw, new List<UserViewModel>(), 0, 0);
-            }
-            
+            }            
         }
+
+        public async Task<ICollection<UserViewModel>> GetUsuariosByName(string userName)
+        {
+            try
+            {
+                var users = _securityManager.Users.Where(m=> m.UserName.Contains(userName));
+
+                if (!users.Any())
+                    return new List<UserViewModel>();
+
+                var listadoUsuariosDb = users.ToList();
+
+                var listadoUsuarios = _mapper.MapDataAModel(listadoUsuariosDb);
+                
+                return listadoUsuarios;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new List<UserViewModel>();
+            }
+        }
+
 
         public async Task<ActualizarUsuarioViewModel> GetUsuarioParaActualizar(string userId)
         {

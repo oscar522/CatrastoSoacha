@@ -18,7 +18,7 @@ namespace CatastroAvanza.Negocio.Contratos
 
         RoleViewModel GetRolesByUserId(string idUser);
 
-
+        Task<ICollection<UserViewModel>> GetUsuariosByName(string userName);
     }
 
 }

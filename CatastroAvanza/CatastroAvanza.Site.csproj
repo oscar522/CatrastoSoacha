@@ -223,6 +223,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Constantes\ClaimsConstants.cs" />
     <Compile Include="Constantes\UnidadesArea.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActividadController.cs" />
@@ -231,8 +232,12 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Controllers\TrabajoController.cs" />
     <Compile Include="Enumerations\ActividadesColumnasOrdenables.cs" />
     <Compile Include="Enumerations\CatalogosEnum.cs" />
+    <Compile Include="Enumerations\TrabajoAsignacionesColumnasOrdenables.cs" />
+    <Compile Include="Enumerations\TrabajoColumnasOrdenables.cs" />
+    <Compile Include="Enumerations\TrabajoGestionColumnasOrdenables.cs" />
     <Compile Include="Enumerations\UserColumnasOrdenables.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -265,10 +270,12 @@
     <Compile Include="Infraestructura\ImplementacionesServicios\AlmacenamientoArchivos.cs" />
     <Compile Include="Infraestructura\InformationDocumento.cs" />
     <Compile Include="Mapeadores\ActividadMapper.cs" />
-    <Compile Include="Mapeadores\IActividadMapper.cs" />
-    <Compile Include="Mapeadores\IMapeadoresApplicacion.cs" />
-    <Compile Include="Mapeadores\IUserMapper.cs" />
+    <Compile Include="Mapeadores\Interfaces\IActividadMapper.cs" />
+    <Compile Include="Mapeadores\Interfaces\IMapeadoresApplicacion.cs" />
+    <Compile Include="Mapeadores\Interfaces\ITrabajoMapper.cs" />
+    <Compile Include="Mapeadores\Interfaces\IUserMapper.cs" />
     <Compile Include="Mapeadores\MapeadoresApplicacion.cs" />
+    <Compile Include="Mapeadores\TrabajoMapper.cs" />
     <Compile Include="Mapeadores\UserMapper.cs" />
     <Compile Include="Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\AccountViewModels\ForgotPasswordViewModel.cs" />
@@ -293,6 +300,7 @@
     <Compile Include="Models\ActividadViewModels\NomenclaturaViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\TerrenoViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\TramiteViewModel.cs" />
+    <Compile Include="Models\AuditoriaModel.cs" />
     <Compile Include="Models\CatalogoExtendidoViewModel.cs" />
     <Compile Include="Models\CatalogoViewModel.cs" />
     <Compile Include="Models\Dashboard\DataForm1Model.cs" />
@@ -304,20 +312,34 @@
     <Compile Include="Models\Security\UserViewModel.cs" />
     <Compile Include="Models\SidebarItem.cs" />
     <Compile Include="Models\SidebarUserLevel.cs" />
+    <Compile Include="Models\Trabajo\ActualizarAsignacionTrabajoViewModel.cs" />
+    <Compile Include="Models\Trabajo\ActualizarGestionTrabajoViewModel.cs" />
+    <Compile Include="Models\Trabajo\ActualizarTrabajoViewModel.cs" />
+    <Compile Include="Models\Trabajo\AsignacionTrabajoViewModel.cs" />
+    <Compile Include="Models\Trabajo\CreaAsignacionTrabajoViewModel.cs" />
+    <Compile Include="Models\Trabajo\CrearGestionTrabajoViewModel.cs" />
+    <Compile Include="Models\Trabajo\CrearTrabajoViewModel.cs" />
+    <Compile Include="Models\Trabajo\GestionTrabajoViewModel.cs" />
+    <Compile Include="Models\Trabajo\TrabajoViewModel.cs" />
     <Compile Include="Negocio\Contratos\IActividadDiariaLogic.cs" />
     <Compile Include="Negocio\Contratos\IActividadLogic.cs" />
     <Compile Include="Negocio\Contratos\ICatalogo.cs" />
     <Compile Include="Negocio\Contratos\IDataForm1Logic.cs" />
+    <Compile Include="Negocio\Contratos\ITrabajoLogic.cs" />
     <Compile Include="Negocio\Contratos\ISecurityLogic.cs" />
     <Compile Include="Negocio\Implementaciones\ActividadDiariaLogic.cs" />
     <Compile Include="Negocio\Implementaciones\ActividadLogic.cs" />
     <Compile Include="Negocio\Implementaciones\Catalogo.cs" />
     <Compile Include="Negocio\Implementaciones\DataForm1Logic.cs" />
     <Compile Include="Negocio\Implementaciones\SecurityLogic.cs" />
+    <Compile Include="Negocio\Implementaciones\TrabajoLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\NpgSqlConfiguration.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ActividadDiaria_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ActividadTrabajoGestion_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ActividadTrabajo_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\Actividad_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\AsociacionTrabajoActividadGestor_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctcatalogo_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctciudad_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctdepto_ConfiguracionEntidad.cs" />
@@ -332,6 +354,9 @@
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\Uso_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\Actividad.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ActividadDiaria.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\ActividadTrabajo.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\ActividadTrabajoGestion.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\AsociacionTrabajoActividadGestor.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctcatalogo.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctciudad.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctdepto.cs" />
@@ -399,6 +424,10 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202107140456212_columnas_finsercio_fmodificacion_usuariomodificacion_tabla_actividades.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202107140456212_columnas_finsercio_fmodificacion_usuariomodificacion_tabla_actividades.designer.cs">
       <DependentUpon>202107140456212_columnas_finsercio_fmodificacion_usuariomodificacion_tabla_actividades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202107220449267_add_tbl_Trabajo.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202107220449267_add_tbl_Trabajo.designer.cs">
+      <DependentUpon>202107220449267_add_tbl_Trabajo.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
@@ -750,6 +779,15 @@
     <Content Include="Content\DataTables\media\images\sort_desc.png" />
     <Content Include="Content\DataTables\media\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\loader.gif" />
     <Content Include="Content\login\css\main.css" />
     <Content Include="Content\login\css\util.css" />
@@ -1147,6 +1185,7 @@
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1217,6 +1256,10 @@
     <Content Include="Scripts\Paginas\Actividad\ConsultarActividad.js" />
     <Content Include="Scripts\Paginas\Actividad\CrearActividad.js" />
     <Content Include="Scripts\Paginas\ActividadesDiarias\CrearActividadDiaria.js" />
+    <Content Include="Scripts\Paginas\Trabajo\Trabajo.js" />
+    <Content Include="Scripts\Paginas\Trabajo\TrabajoAsignacion.js" />
+    <Content Include="Scripts\Paginas\Trabajo\TrabajoConsulta.js" />
+    <Content Include="Scripts\Paginas\Trabajo\TrabajoGestion.js" />
     <Content Include="Scripts\PdfVisualize.js" />
     <Content Include="Scripts\pdf\example.html" />
     <Content Include="Scripts\pdf\pdfjs-dist\build\pdf.js" />
@@ -1707,6 +1750,10 @@
     <Content Include="Views\Actividad\_Economico.cshtml" />
     <Content Include="Views\Account\ListarUsuarios.cshtml" />
     <Content Include="Views\Account\ActualizarUsuario.cshtml" />
+    <Content Include="Views\Trabajo\CrearTrabajo.cshtml" />
+    <Content Include="Views\Trabajo\CrearAsignacionTrabajo.cshtml" />
+    <Content Include="Views\Trabajo\ListaTrabajos.cshtml" />
+    <Content Include="Views\Trabajo\GestionarTrabajo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1781,6 +1828,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202107140456212_columnas_finsercio_fmodificacion_usuariomodificacion_tabla_actividades.resx">
       <DependentUpon>202107140456212_columnas_finsercio_fmodificacion_usuariomodificacion_tabla_actividades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202107220449267_add_tbl_Trabajo.resx">
+      <DependentUpon>202107220449267_add_tbl_Trabajo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

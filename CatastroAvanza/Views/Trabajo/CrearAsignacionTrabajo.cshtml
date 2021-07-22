@@ -1,0 +1,99 @@
+﻿@model CreaAsignacionTrabajoViewModel
+@{
+    ViewBag.Title = "Crear Asignacion Trabajo";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/Content/jquery-ui.css">
+    <link rel="stylesheet" href="~/Content/bootstrap-fileinput/themes/explorer-fa/theme.min.css">
+}
+<div class="card mb-4 wow fadeIn">
+
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            <span>Crear Asignacion Trabajo para (@Model.NombreActividad)</span>
+        </h4>
+    </div>
+</div>
+<div class="wow fadeIn">
+    @using (Html.BeginForm("CrearAsignacionTrabajo", "Trabajo", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.IdActividad)
+        @Html.HiddenFor(m => m.UserAsignado)
+        <div class="form-horizontal">
+            <div class="row">
+
+                <div class="offset-md-2 col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Nuevo Asignacion</h5>
+                                    <hr />
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Nombre</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.Editor("usuarios", new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.UserAsignado, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Nombre y apellido</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.Editor("usuariosnombres", new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                            @Html.ValidationMessageFor(model => model.UserAsignado, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Usuario que realiza la asignacion</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.EditorFor(m => m.UsuarioQueAsigno, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                            @Html.ValidationMessageFor(model => model.UsuarioQueAsigno, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Fecha asignacion</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.EditorFor(m => m.FechaAsignacion, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                            @Html.ValidationMessageFor(model => model.FechaAsignacion, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="justify-content-center text-right">
+                                            <input type="submit" value="Realizar asignacion" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/jquery-ui.js")
+    @Scripts.Render("~/Scripts/ModalControl.js")
+    @Scripts.Render("~/Scripts/Paginas/Trabajo/TrabajoAsignacion.js")
+    <script>
+        $(document).ready(function () {
+            TrabajoAsignacionJs.urlObtenerListadoUsuarios = '@Url.Action("ConsultarUsuarios")';
+            TrabajoAsignacionJs.Inicializar();
+        });
+    </script>
+
+}
+

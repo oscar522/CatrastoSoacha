@@ -64,17 +64,29 @@ namespace CatastroAvanza
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
+            builder.RegisterType<TrabajoLogic>()
+                .As<ITrabajoLogic>()
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+
             //Mappers
             builder.RegisterType<MapeadoresApplicacion>()
                 .As<IMapeadoresApplicacion>()
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
+
             builder.RegisterType<ActividadMapper>()
                 .As<IActividadMapper>()
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
+
             builder.RegisterType<UserMapper>()
                 .As<IUserMapper>()
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+
+            builder.RegisterType<TrabajoMapper>()
+                .As<ITrabajoMapper>()
                 .AsImplementedInterfaces()
                 .InstancePerRequest();
 
