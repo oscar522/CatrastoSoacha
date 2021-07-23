@@ -5,17 +5,24 @@
     urlAsignarTrabajo:"",
     Inicializar: function () {
         ListarTrabajos();
+        $('#btn-confirm').click(function () {
+            if ($("#IdEliminar").val() != '')
+                EliminarTrabajo();
+        });
     }
 }
 
 function ListarTrabajos() {
-    $('#tbltrabajos').DataTable({
+    var dtable =$('#tbltrabajos').DataTable({
         serverSide: true,
         processing: true,
         ajax: {
             dataType: 'json',
             type: "POST",
             url: TrabajoJs.urlObtenerTrabajosAdministrador,
+        },        
+        initComplete: function () {
+            bindEventlink();
         },
         pageLength: 10,
         lengthMenu: [5, 10, 25],
@@ -89,7 +96,10 @@ function ListarTrabajos() {
                 title: '',
                 width: "5%",
                 render: function (data, type, full) {
-                    return "<a class='btn btn-outline-primary' title='Actualizar' href='" + TrabajoJs.urlActualizarTrabajo + "?actividadId=" + data + "'><i class='fa fa-edit'></i> Actualizar</a>";
+                    if (full.Estado == "Activo")
+                        return "<a class='btn btn-outline-primary' title='Actualizar' href='" + TrabajoJs.urlActualizarTrabajo + "?IdTrabajo=" + data + "'><i class='fa fa-edit'></i> Actualizar</a>";
+                    else
+                        return "-";
                 }
             }
             , {
@@ -98,10 +108,10 @@ function ListarTrabajos() {
                 title: '',
                 width: "5%",
                 render: function (data, type, full) {
-                    if (full.Estado == "Activo")
-                        return "<a class='btn btn-outline-danger' title='Eliminar' href='" + TrabajoJs.urlEliminarTrabajo + "?actividadId=" + data + "'><i class='fa fa-trash'></i> Eliminar</a>";
+                    if (full.Estado == "Activo")                        
+                        return "<a class='btn btn-outline-danger btnElimnarTrabajo' title='Eliminar' href='#' data-toggle='modal' data-target='#confirmacionModal' data-id='" + data + "'><i class='fa fa-trash' ></i> Eliminar</a>";
                     else
-                        return "";
+                        return "-";
                 }
             }, {
                 name: 'Id',
@@ -109,12 +119,44 @@ function ListarTrabajos() {
                 title: '',
                 width: "5%",
                 render: function (data, type, full) {
-                    if (full.Estado == "Activo")
+                    if (full.Estado == "Activo" && full.EstaAsignado == false)
                         return "<a class='btn btn-outline-primary' title='Agregar asignacion' href='" + TrabajoJs.urlAsignarTrabajo + "?idTrabajo=" + data + "'><i class='fa fa-child'></i> Asignar</a>";
+                    else if (full.EstaAsignado == true)
+                        return "Asignado a: " + full.AsignadoA;
                     else
-                        return "";
+                        return "-";
                 }
             }
         ],
+    });
+
+    dtable.on('responsive-display', function (e, datatable, row, showHide, update) {
+        bindEventlink();
+    });
+}
+
+function bindEventlink() {    
+    $('.btnElimnarTrabajo').unbind('click');    
+
+    $('.btnElimnarTrabajo').on('click', EstablecerIdAEliminar);
+}
+
+function EstablecerIdAEliminar() {
+    $("#IdEliminar").val($(this).attr("data-id"));
+}
+
+function EliminarTrabajo() {
+    $.ajax({
+        type: 'POST',
+        url: TrabajoJs.urlEliminarTrabajo,
+        dataType: 'json',
+        data: { idTrabajo: $("#IdEliminar").val() },
+        success: function (states) {
+            if (states == "Ok")
+                window.location.reload();
+        },
+        error: function (ex) {
+            console.log(ex.responseText);
+        }
     });
 }

@@ -65,16 +65,7 @@ function ListarActividades() {
                 render: function (data, type, full) {
                     return "<a class='btn btn-outline-primary' title='Actualizar' href='" + ConsultarActividadJs.urlActualizarActividad + "?actividadId=" + data + "'><i class='fa fa-edit'></i></a>";
                 }
-            }
-            , {
-                name: 'Id',
-                data: 'Id',
-                title: '',
-                width: "5%",
-                render: function (data, type, full) {
-                    return "<a class='btn btn-outline-danger' title='Eliminar' href='#'><i class='fa fa-trash'></i></a>";
-                }
-            }
+            }            
         ],
     });
 }

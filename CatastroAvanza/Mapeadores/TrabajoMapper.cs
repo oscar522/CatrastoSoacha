@@ -9,7 +9,8 @@ namespace CatastroAvanza.Mapeadores
     public class TrabajoMapper : ITrabajoMapper
     {
         public TrabajoViewModel MapEntidadToViewModel(ActividadTrabajo model)
-        {
+        {            
+
             if (model == null)
                 return new TrabajoViewModel();
 
@@ -29,6 +30,24 @@ namespace CatastroAvanza.Mapeadores
 
             return result;
         }
+
+        public ActualizarTrabajoViewModel MapEntidadToActualizacionViewModel(ActividadTrabajo model)
+        {
+            if (model == null)
+                return new ActualizarTrabajoViewModel();
+
+            ActualizarTrabajoViewModel result = new ActualizarTrabajoViewModel
+            {
+                Rol = model.Rol,
+                Cantidad = model.Cantidad,
+                PuntosEsfuerzo = model.PuntosEsfuerzo,
+                Id = model.Id,
+                Nombre = model.Nombre
+            };
+
+            return result;
+        }
+
 
         public AsignacionTrabajoViewModel MapEntidadToViewModel(AsociacionTrabajoActividadGestor model)
         {
@@ -249,6 +268,23 @@ namespace CatastroAvanza.Mapeadores
 
             return entidad;
         }
-      
+
+        public ActualizarGestionTrabajoViewModel MapEntidadToActualizarViewModel(ActividadTrabajoGestion model)
+        {
+            if (model == null)
+                return new ActualizarGestionTrabajoViewModel();
+
+            ActualizarGestionTrabajoViewModel result = new ActualizarGestionTrabajoViewModel
+            {
+                IdAsignacion = model.IdAsignacion,
+                EstadoGestion = model.EstadoGestion,
+                EstadoRegistro = model.EstadoRegistro ? "Activo" : "Inactivo",                
+                FechaModificacionGestion = model.FechaModificacionGestion.Date,                
+                Id = model.Id,
+                Observacion = model.Observacion,                
+            };
+
+            return result;
+        }
     }
 }

@@ -89,21 +89,9 @@ function ListarGestion() {
                 title: '',
                 width: "5%",
                 render: function (data, type, full) {
-                    return "<a class='btn btn-outline-primary' title='Actualizar' href='" + TrabajoGestionJs.urlActualizarGestion + "?actividadId=" + data + "'><i class='fa fa-edit'></i> Actualizar</a>";
+                    return "<a class='btn btn-outline-primary' title='Actualizar' href='" + TrabajoGestionJs.urlActualizarGestion + "?idGestion=" + data + "'><i class='fa fa-edit'></i> Actualizar</a>";
                 }
-            }
-            , {
-                name: 'Id',
-                data: 'Id',
-                title: '',
-                width: "5%",
-                render: function (data, type, full) {
-                    if (full.EstadoRegistro == "Activo")
-                        return "<a class='btn btn-outline-danger' title='Eliminar' href='" + TrabajoGestionJs.urlEliminarGestion + "?actividadId=" + data + "'><i class='fa fa-trash'></i> Eliminar</a>";
-                    else
-                        return "";
-                }
-            }
+            }            
         ],
     });
 }

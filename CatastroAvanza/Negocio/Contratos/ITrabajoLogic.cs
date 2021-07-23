@@ -19,6 +19,8 @@ namespace CatastroAvanza.Negocio.Contratos
 
         Task<TrabajoViewModel> ConsultarTrabajoPorId(int Id);
 
+        Task<ActualizarTrabajoViewModel> ConsultarTrabajoPorIdParaActualizar(int Id);
+
         Task<int> CrearAsignacionTrabajo(CreaAsignacionTrabajoViewModel model, AuditoriaModel auditoriaModel);
 
         Task<int> ActualizarAsignacionTrabajo(ActualizarAsignacionTrabajoViewModel model, AuditoriaModel auditoriaModel);
@@ -40,6 +42,8 @@ namespace CatastroAvanza.Negocio.Contratos
         Task<DataTablesResponse> ConsultarGestiones(IDataTablesRequest modelo, int idAsignacion, string usuario);
 
         Task<GestionTrabajoViewModel> ConsultarGestionPorId(int Id, string usuario);
+
+        Task<ActualizarGestionTrabajoViewModel> ConsultarGestionPorIdparaActualizar(int Id, string usuario);
 
         Task<TrabajoVolumenViewModel> ConsultarVolumenDiario();
 

@@ -261,7 +261,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 if (!trabajo.Estado)
                     return 0;
 
-                trabajo.Estado = false;
+                trabajo.Estado = false;                
 
                 await _contexto.SaveChangesAsync();
 
@@ -411,8 +411,8 @@ namespace CatastroAvanza.Negocio.Implementaciones
         {
             try
             {
-                var trabajo = _contexto.Trabajo.Where(m => m.Id == Id)
-                    .FirstOrDefault();
+                var trabajo = await _contexto.Trabajo.Where(m => m.Id == Id)
+                    .FirstOrDefaultAsync();
 
                 if (trabajo == null)
                     return new TrabajoViewModel();
@@ -475,6 +475,15 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 foreach (var gestion in listaGestiones)
                 {
                     gestion.RolNombre = _security.GetRolesById(gestion.Rol)?.Name;
+                    var asingacionTrabajo = _contexto.AsociacionTrabajoGestor.Where(m => m.IdActividad == gestion.Id);
+                    gestion.EstaAsignado = asingacionTrabajo.Any();
+                    if (gestion.EstaAsignado)
+                    {
+                        var usuarioAsignado = await _security.GetUsuariosByName(asingacionTrabajo.FirstOrDefault()?.UserAsignado);
+                        if(usuarioAsignado.Any())
+                        gestion.AsignadoA =$"{usuarioAsignado.FirstOrDefault()?.Nombres} {usuarioAsignado.FirstOrDefault()?.Apellidos}";
+                    }
+                        
                 }
 
                 var tabla = new DataTablesResponse(modelo.Draw, listaGestiones, _contexto.AsociacionTrabajoGestor.Count(), listadoGestiones.Count);
@@ -520,6 +529,14 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 foreach (var gestion in listaGestiones)
                 {
                     gestion.RolNombre = _security.GetRolesById(gestion.Rol)?.Name;
+                    var asingacionTrabajo = _contexto.AsociacionTrabajoGestor.Where(m => m.IdActividad == gestion.Id);
+                    gestion.EstaAsignado = asingacionTrabajo.Any();
+                    if (gestion.EstaAsignado)
+                    {
+                        var usuarioAsignado = await _security.GetUsuariosByName(asingacionTrabajo.FirstOrDefault()?.UserAsignado);
+                        if (usuarioAsignado.Any())
+                            gestion.AsignadoA = $"{usuarioAsignado.FirstOrDefault()?.Nombres} {usuarioAsignado.FirstOrDefault()?.Apellidos}";
+                    }
                 }
 
                 var tabla = new DataTablesResponse(modelo.Draw, listaGestiones, _contexto.AsociacionTrabajoGestor.Count(), listadoGestiones.Count);
@@ -637,6 +654,60 @@ namespace CatastroAvanza.Negocio.Implementaciones
             {
                 string message = ex.Message;
                 return new DataTablesResponse(modelo.Draw, new List<UsuarioTrabajoViewModel>(), 0, 0);
+            }
+        }
+
+        public async Task<ActualizarTrabajoViewModel> ConsultarTrabajoPorIdParaActualizar(int Id)
+        {
+            try
+            {
+                var trabajo = await _contexto.Trabajo.Where(m => m.Id == Id)
+                    .FirstOrDefaultAsync();
+
+                if (trabajo == null || !trabajo.Estado)
+                    return new ActualizarTrabajoViewModel();
+
+                ActualizarTrabajoViewModel result = _mapper.MapEntidadToActualizacionViewModel(trabajo);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new ActualizarTrabajoViewModel();
+            }
+        }
+
+        public async Task<ActualizarGestionTrabajoViewModel> ConsultarGestionPorIdparaActualizar(int Id, string usuario)
+        {
+            try
+            {
+                
+                var gestion = _contexto.TrabajoGestion.Where(m => m.Id == Id && m.CreadoPor == usuario)
+                    .FirstOrDefault();
+
+                if (gestion == null)
+                    return new ActualizarGestionTrabajoViewModel();
+
+
+                AsociacionTrabajoActividadGestor asignacion = await _contexto.AsociacionTrabajoGestor.Where(m => m.Id == gestion.IdAsignacion).FirstOrDefaultAsync();
+
+                if (asignacion == null)
+                    return new ActualizarGestionTrabajoViewModel();
+
+                if (!asignacion.Estado)
+                    return new ActualizarGestionTrabajoViewModel();
+
+                ActualizarGestionTrabajoViewModel result = _mapper.MapEntidadToActualizarViewModel(gestion);
+
+                result.IdTrabajo = asignacion.IdActividad;
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new ActualizarGestionTrabajoViewModel();
             }
         }
     }

@@ -25,5 +25,10 @@ namespace CatastroAvanza.Models.Trabajo
         public string UltimaModificacionPor { get; set; }
 
         public DateTime FechaUltimaModificacion { get; set; }
+
+        public string AsignadoA { get; set; }
+
+        public bool EstaAsignado { get; set; }
+
     }
 }

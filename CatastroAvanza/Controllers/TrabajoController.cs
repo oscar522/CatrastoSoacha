@@ -54,6 +54,49 @@ namespace CatastroAvanza.Controllers
         }
 
         [Authorize(Roles = "administrator")]
+        [HttpGet]
+        public async Task<ActionResult> ActualizarTrabajo(int idTrabajo)
+        {
+            ActualizarTrabajoViewModel model =await _trabajo.ConsultarTrabajoPorIdParaActualizar(idTrabajo);
+
+            if (model.Id == 0)
+                RedirectToAction(nameof(CrearTrabajo));
+
+            var roles = _securityManager.GetRoles();
+            model.Roles = new SelectList(roles, "Id", "Name", 1);
+            return View(model);
+        }
+
+        [Authorize(Roles = "administrator")]
+        [HttpPost]
+        public async Task<ActionResult> ActualizarTrabajo(ActualizarTrabajoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int result = await _trabajo.ActualizarTrabajo(model, new Models.AuditoriaModel(GetUserName()));
+                if (result != 0)
+                    return RedirectToAction(nameof(CrearTrabajo));
+            }
+
+            var roles = _securityManager.GetRoles();
+            model.Roles = new SelectList(roles, "Id", "Name", 1);
+            return View(nameof(ActualizarTrabajo), model);
+        }
+
+        [Authorize(Roles = "administrator")]
+        [HttpPost]
+        public async Task<ActionResult> EliminarTrabajo(int idTrabajo)
+        {
+            
+            int result = await _trabajo.EliminarTrabajo(idTrabajo, new Models.AuditoriaModel(GetUserName()));
+            if (result != 0)
+                return Json("Ok", JsonRequestBehavior.AllowGet);
+            
+            return Json("Error", JsonRequestBehavior.AllowGet);
+        }
+
+
+        [Authorize(Roles = "administrator")]
         [HttpPost]
         public async Task<ActionResult> ConsultarTrabajosAdministrador([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest modelo)
         {
@@ -177,6 +220,35 @@ namespace CatastroAvanza.Controllers
 
             return View(nameof(GestionarTrabajo), model);
         }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult> ActualizarGestionTrabajo(int idGestion)
+        {
+            ActualizarGestionTrabajoViewModel model = await _trabajo.ConsultarGestionPorIdparaActualizar(idGestion, GetUserName());
+
+            if (model.Id == 0)
+                RedirectToAction(nameof(GestionarTrabajo));
+
+            model.EstadosGestion = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.EstadoGestion), "Value", "Text", 1);
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> ActualizarGestionTrabajo(ActualizarGestionTrabajoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int result = await _trabajo.ActualizarGestionTrabajo(model, new Models.AuditoriaModel(GetUserName()));
+                if (result != 0)
+                    return RedirectToAction(nameof(GestionarTrabajo), new { idTrabajo  = model.IdTrabajo});
+            }
+
+            model.EstadosGestion = new SelectList(_catalogos.ObtenerCatalogoPorTipo(CatalogosEnum.EstadoGestion), "Value", "Text", 1);
+            return View(nameof(ActualizarGestionTrabajo), model);
+        }
+
 
         [Authorize]
         [HttpPost]

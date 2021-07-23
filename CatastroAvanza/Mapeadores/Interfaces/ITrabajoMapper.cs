@@ -15,6 +15,8 @@ namespace CatastroAvanza.Mapeadores
 
         TrabajoViewModel MapEntidadToViewModel(ActividadTrabajo model);
 
+        ActualizarTrabajoViewModel MapEntidadToActualizacionViewModel(ActividadTrabajo model);
+
         AsociacionTrabajoActividadGestor MapViewModelToEntidad(CreaAsignacionTrabajoViewModel model, AuditoriaModel auditoriaModel);
 
         AsociacionTrabajoActividadGestor MapViewModelToEntidad(ActualizarAsignacionTrabajoViewModel model, AuditoriaModel auditoriaModel, AsociacionTrabajoActividadGestor entidad);
@@ -30,5 +32,7 @@ namespace CatastroAvanza.Mapeadores
         ICollection<GestionTrabajoViewModel> MapListaEntidadesToListaViewModel(ICollection<ActividadTrabajoGestion> model);
 
         GestionTrabajoViewModel MapEntidadToViewModel(ActividadTrabajoGestion model);
+
+        ActualizarGestionTrabajoViewModel MapEntidadToActualizarViewModel(ActividadTrabajoGestion model);
     }
 }

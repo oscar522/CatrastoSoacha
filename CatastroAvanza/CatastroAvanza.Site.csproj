@@ -1760,6 +1760,8 @@
     <Content Include="Views\Trabajo\ListaTrabajos.cshtml" />
     <Content Include="Views\Trabajo\GestionarTrabajo.cshtml" />
     <Content Include="Views\Trabajo\Dashboard.cshtml" />
+    <Content Include="Views\Trabajo\ActualizarTrabajo.cshtml" />
+    <Content Include="Views\Trabajo\ActualizarGestionTrabajo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
