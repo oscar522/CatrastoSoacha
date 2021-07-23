@@ -21,7 +21,7 @@ namespace CatastroAvanza.Controllers
         private readonly ISecurityLogic _securityManager;
         private readonly ITrabajoLogic _trabajo;
 
-        public ActionResult Index()
+        public ActionResult Dashboard()
         {
             return View();
         }
@@ -183,6 +183,31 @@ namespace CatastroAvanza.Controllers
         public async Task<ActionResult> ConsultarGestion([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest modelo, int idAsignacion)
         {
             var tabla = await _trabajo.ConsultarGestiones(modelo, idAsignacion, GetUserName());
+            return Json(tabla, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> ConsultarVolumen()
+        {
+            var tabla = await _trabajo.ConsultarVolumenDiario();
+            return Json(tabla, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> ConsultarEstado()
+        {
+            var tabla = await _trabajo.ConsultarEstados();
+            return Json(tabla, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> ConsultarGestionAsignacionUsuarios([ModelBinder(typeof(DataTablesBinder))] IDataTablesRequest modelo)
+        {
+            var tabla = await _trabajo.ConsultarUsuariosAsignaciones(modelo);
             return Json(tabla, JsonRequestBehavior.AllowGet);
         }
     }

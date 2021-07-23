@@ -40,5 +40,11 @@ namespace CatastroAvanza.Negocio.Contratos
         Task<DataTablesResponse> ConsultarGestiones(IDataTablesRequest modelo, int idAsignacion, string usuario);
 
         Task<GestionTrabajoViewModel> ConsultarGestionPorId(int Id, string usuario);
+
+        Task<TrabajoVolumenViewModel> ConsultarVolumenDiario();
+
+        Task<TrabajoEstadoViewModel> ConsultarEstados();
+
+        Task<DataTablesResponse> ConsultarUsuariosAsignaciones(IDataTablesRequest modelo);
     }
 }

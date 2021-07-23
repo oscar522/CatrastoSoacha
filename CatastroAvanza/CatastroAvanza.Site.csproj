@@ -320,7 +320,11 @@
     <Compile Include="Models\Trabajo\CrearGestionTrabajoViewModel.cs" />
     <Compile Include="Models\Trabajo\CrearTrabajoViewModel.cs" />
     <Compile Include="Models\Trabajo\GestionTrabajoViewModel.cs" />
+    <Compile Include="Models\Trabajo\TrabajoEstadoValueViewModel.cs" />
+    <Compile Include="Models\Trabajo\TrabajoEstadoViewModel.cs" />
     <Compile Include="Models\Trabajo\TrabajoViewModel.cs" />
+    <Compile Include="Models\Trabajo\TrabajoVolumenViewModel.cs" />
+    <Compile Include="Models\Trabajo\UsuarioTrabajoViewModel.cs" />
     <Compile Include="Negocio\Contratos\IActividadDiariaLogic.cs" />
     <Compile Include="Negocio\Contratos\IActividadLogic.cs" />
     <Compile Include="Negocio\Contratos\ICatalogo.cs" />
@@ -1259,6 +1263,7 @@
     <Content Include="Scripts\Paginas\Trabajo\Trabajo.js" />
     <Content Include="Scripts\Paginas\Trabajo\TrabajoAsignacion.js" />
     <Content Include="Scripts\Paginas\Trabajo\TrabajoConsulta.js" />
+    <Content Include="Scripts\Paginas\Trabajo\TrabajoDashboard.js" />
     <Content Include="Scripts\Paginas\Trabajo\TrabajoGestion.js" />
     <Content Include="Scripts\PdfVisualize.js" />
     <Content Include="Scripts\pdf\example.html" />
@@ -1754,6 +1759,7 @@
     <Content Include="Views\Trabajo\CrearAsignacionTrabajo.cshtml" />
     <Content Include="Views\Trabajo\ListaTrabajos.cshtml" />
     <Content Include="Views\Trabajo\GestionarTrabajo.cshtml" />
+    <Content Include="Views\Trabajo\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -249,5 +249,6 @@ namespace CatastroAvanza.Mapeadores
 
             return entidad;
         }
+      
     }
 }

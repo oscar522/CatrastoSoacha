@@ -556,5 +556,88 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 return new AsignacionTrabajoViewModel();
             }
         }
+
+        public async Task<TrabajoVolumenViewModel> ConsultarVolumenDiario()
+        {
+            TrabajoVolumenViewModel volumen = new TrabajoVolumenViewModel();
+
+            var fechaHoy = DateTime.Now.Date;
+            
+            volumen.TrabajosCreados = _contexto.Trabajo.Where(m => m.FechaCreacion >= fechaHoy).Count();
+            volumen.TrabajosAsignados = _contexto.AsociacionTrabajoGestor.Where(m => m.Estado == true && m.FechaCreacion >= fechaHoy).Select(t=> t.IdActividad).Distinct().Count();
+            volumen.TrabajosCerrados = _contexto.Trabajo.Where(m => m.Estado == false && m.FechaUltimaModificacion >= fechaHoy).Count();
+            volumen.GestionDiaria = _contexto.TrabajoGestion.Where(m => m.FechaUltimaModificacion >= fechaHoy).Count();
+
+            volumen.SetTotal();
+
+            return volumen;
+        }
+
+        public async Task<TrabajoEstadoViewModel> ConsultarEstados()
+        {
+            try
+            {
+                var estadosGestion = _contexto.Catalogo.Where(m => m.Tipo == CatalogosEnum.EstadoGestion.ToString()).ToList();
+
+                TrabajoEstadoViewModel result = new TrabajoEstadoViewModel();
+
+                foreach (var estado in estadosGestion)
+                {
+                    var cuenta = 0;
+                    string estadoId = estado.Id.ToString();
+                    if (_contexto.TrabajoGestion.Any(m => m.EstadoGestion == estadoId))
+                        cuenta = _contexto.TrabajoGestion.Where(m => m.EstadoGestion == estadoId).Count();
+
+                    result.AddEstado(estado.Nombre, cuenta);                    
+                }
+
+                result.SetTotal();
+
+                return result;
+
+            }catch(Exception ex)
+            {
+                return new TrabajoEstadoViewModel();
+            }
+
+        }
+
+        public async Task<DataTablesResponse> ConsultarUsuariosAsignaciones(IDataTablesRequest modelo)
+        {
+            try
+            {
+                ICollection<UsuarioTrabajoViewModel> asignacionesBoard = new List<UsuarioTrabajoViewModel>();
+                var trabajos = _contexto.AsociacionTrabajoGestor.Select(m=> m.UserAsignado).Distinct().AsQueryable();
+
+                trabajos = trabajos.OrderByDescending(m => m);
+
+                var listadoasignaciones = trabajos.Skip(modelo.Start).Take(modelo.Length).ToList();
+                
+
+                foreach (var asignacion in listadoasignaciones)
+                {
+                    UsuarioTrabajoViewModel usuarioAsig = new UsuarioTrabajoViewModel();
+                    usuarioAsig.NumeroAsignaciones = _contexto.AsociacionTrabajoGestor.Where(m=> m.UserAsignado == asignacion).Count();
+                    usuarioAsig.NumeroGestiones = _contexto.AsociacionTrabajoGestor.Where(m => m.UserAsignado == asignacion).Count();
+                    var usuario = await _security.GetUsuariosByName(asignacion);
+                    if (!usuario.Any())
+                        continue;
+
+                    usuarioAsig.Usuario = usuario.FirstOrDefault().Email;
+                    usuarioAsig.NombreUsuario = $"{usuario.FirstOrDefault().Nombres} {usuario.FirstOrDefault().Apellidos}";
+                    
+                    asignacionesBoard.Add(usuarioAsig);
+                }
+
+                var tabla = new DataTablesResponse(modelo.Draw, asignacionesBoard, _contexto.AsociacionTrabajoGestor.Select(m => m.UserAsignado).Distinct().Count(), asignacionesBoard.Count);
+
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new DataTablesResponse(modelo.Draw, new List<UsuarioTrabajoViewModel>(), 0, 0);
+            }
+        }
     }
 }

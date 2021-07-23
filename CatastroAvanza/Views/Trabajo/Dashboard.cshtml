@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card wow fadeIn">
+            <div class="card-header">
+                <h4 class="mb-2 mb-sm-0 pt-1">
+                    <span>Trabajos</span>
+                </h4>
+            </div>
+            <!--Card content-->
+            <div class="card-body ">
+                <table class="table table-striped cell-border compact responsive nowrap" id="tbltrabajos">
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-4 wow fadeIn">
+            <div class="card-header">
+                <h4 class="mb-2 mb-sm-0 pt-1">
+                    <span>Volumen Diario</span>
+                </h4>
+            </div>
+            <div class="card-body d-sm-flex justify-content-between align-bottom">
+                <div class="text-center">
+                    Trabajos Creados
+                    <br /> <span id="creados"></span>
+                    <div id="brCreados" class="alert alert-primary" role="alert" style="height:300px;">
+                    </div>
+
+                </div>
+                <div class="text-center">
+                    Trabajos Asignados
+                    <br /> <span id="asignados"></span>
+                    <div id="brAsignados" class="alert alert-warning" role="alert" style="height:300px;">
+                    </div>
+                </div>
+                <div class="text-center">
+                    Trabajos Cerrados
+                    <br /> <span id="cerrados"></span>
+                    <div id="brCerrados" class="alert alert-success" role="alert" style="height:300px;">
+                    </div>
+                </div>
+                <div class="text-center">
+                    Gestiones Diarias
+                    <br /> <span id="gestiones"></span>
+                    <div id="brGestiones" class="alert alert-info" role="alert" style="height:300px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4 wow fadeIn">
+            <div class="card-header">
+                <h4 class="mb-2 mb-sm-0 pt-1">
+                    <span>Estado Gestion</span>
+                </h4>
+            </div>
+
+            <div class="card-body d-sm-flex justify-content-between">
+                <ul id="estadosls"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-4 wow fadeIn">
+            <div class="card-header">
+                <h4 class="mb-2 mb-sm-0 pt-1">
+                    <span>Usuarios asignaciones</span>
+                </h4>
+            </div>
+            <!--Card content-->
+            <div class="card-body">
+                <table class="table table-striped cell-border compact responsive nowrap" id="tblusuarios">
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/ModalControl.js")
+    @Scripts.Render("~/Scripts/Paginas/Trabajo/TrabajoDashboard.js")
+<script>
+        $(document).ready(function () {
+            TrabajoDashboardJs.urlObtenerTrabajos = '@Url.Action("ConsultarTrabajosAdministrador")';
+            TrabajoDashboardJs.urlVolumenTrabajo = '@Url.Action("ConsultarVolumen")';
+            TrabajoDashboardJs.urlEstadoGestion = '@Url.Action("ConsultarEstado")';
+            TrabajoDashboardJs.urlUsuarioGestion = '@Url.Action("ConsultarGestionAsignacionUsuarios")';
+
+
+            TrabajoDashboardJs.TrabajoDashboardJs = '@Url.Action("CrearAsignacionTrabajo")';
+            TrabajoDashboardJs.Inicializar();
+        });
+</script>
+
+}
+

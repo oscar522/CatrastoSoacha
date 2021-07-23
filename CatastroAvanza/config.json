@@ -53,11 +53,28 @@
         },
         {
           "order": 1,
-          "controllerName": "Trabajo",
-          "actionName": "CrearTrabajo",
-          "linkText": "Crear trabajo",
+          "controllerName": "",
+          "actionName": "",
+          "linkText": "Trabajo",
           "iconText": "fa fa-user-circle mr-3",
-          "sub": null
+          "sub": [
+            {
+              "order": 1,
+              "controllerName": "Trabajo",
+              "actionName": "Dashboard",
+              "linkText": "Dashboard",
+              "iconText": "fa fa-user-circle mr-3",
+              "sub": null
+            },
+            {
+              "order": 1,
+              "controllerName": "Trabajo",
+              "actionName": "CrearTrabajo",
+              "linkText": "Crear trabajo",
+              "iconText": "fa fa-user-circle mr-3",
+              "sub": null
+            }
+          ]
         }
       ]
     },
