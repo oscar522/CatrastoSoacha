@@ -10,6 +10,7 @@ using CatastroAvanza.Repositorio.DBContexto.Entidades;
 using CatastroAvanza.Repositorio.DBContexto.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -92,6 +93,27 @@ namespace CatastroAvanza.Negocio.Implementaciones
             {
                 string message = ex.Message;
                 return 0;
+            }
+        }
+
+        public async Task<ArchivoDescargaViewModel> DescargarArchivo(int ArchivoId)
+        {
+            try
+            {
+
+                Archivo entidad = await _contexto.Archivos.Where(m => m.Id == ArchivoId).FirstOrDefaultAsync();
+
+                if (entidad == null)
+                    return new ArchivoDescargaViewModel();
+
+                byte[] archivo = _almacenamiento.TraerArchivoFisico(entidad.NombreFisico, "Archivo_General");
+
+                return new ArchivoDescargaViewModel(entidad.NombreFisico, archivo);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new ArchivoDescargaViewModel();
             }
         }
     }

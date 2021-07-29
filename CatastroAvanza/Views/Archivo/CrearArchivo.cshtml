@@ -91,10 +91,11 @@
     <script src=" ~/Content/bootstrap-fileinput/themes/fa/theme.min.js"></script>
     @Scripts.Render("~/Scripts/Paginas/Archivo/CrearArchivo.js")
 
-    <script>
+<script>
         $(document).ready(function () {
             CrearArchivoJs.urlObtenerArchivos = '@Url.Action("ConsultarArchivos")';
+            CrearArchivoJs.urlDescargarArchivo = '@Url.Action("DescargarArchivo")';
             CrearArchivoJs.Inicializar();
         });
-    </script>
+</script>
 }

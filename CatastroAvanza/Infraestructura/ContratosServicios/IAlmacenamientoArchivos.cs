@@ -4,6 +4,6 @@
     {
         void GuardarArchivoFisico(InformationDocumento archivo);
 
-        byte[] TraerArchivoFisico(InformationDocumento archivo);
+        byte[] TraerArchivoFisico(string archivo, string pathAdicional);
     }
 }

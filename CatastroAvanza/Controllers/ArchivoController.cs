@@ -1,6 +1,7 @@
 ﻿using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Models.Archivo;
 using CatastroAvanza.Negocio.Contratos;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -42,6 +43,18 @@ namespace CatastroAvanza.Controllers
         {
             var tabla = await _archivo.ConsultarArchivos(modelo);
             return Json(tabla, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]      
+        public async Task<ActionResult> DescargarArchivo(int archivoId)
+        {
+            var archivo = await _archivo.DescargarArchivo(archivoId);
+            if (archivo?.Archivo != null)
+            {
+                return File(archivo.Archivo, MediaTypeNames.Application.Octet, archivo.Nombre);
+            }
+
+            return RedirectToAction(nameof(CrearArchivo));
         }
     }
 }

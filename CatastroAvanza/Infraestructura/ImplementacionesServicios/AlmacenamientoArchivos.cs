@@ -69,9 +69,9 @@ namespace CatastroAvanza.Infraestructura.ImplementacionesServicios
                 
         }
 
-        public byte[] TraerArchivoFisico(InformationDocumento archivo)
+        public byte[] TraerArchivoFisico(string archivo, string pathAdicional)
         {
-            if (archivo == null)
+            if (string.IsNullOrEmpty(archivo))
             {
                 //TODO: log the error
                 return new byte[0];
@@ -80,7 +80,7 @@ namespace CatastroAvanza.Infraestructura.ImplementacionesServicios
             try
             {
 
-                _directorioTrabajo = Path.Combine(_directorio, archivo.PathAdicional);
+                _directorioTrabajo = Path.Combine(_directorio, pathAdicional,archivo);
                 if (!File.Exists(_directorioTrabajo))
                 {
                     //TODO: log the error

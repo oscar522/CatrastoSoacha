@@ -304,6 +304,7 @@
     <Compile Include="Models\ActividadViewModels\NomenclaturaViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\TerrenoViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\TramiteViewModel.cs" />
+    <Compile Include="Models\Archivo\ArchivoDescargaViewModel.cs" />
     <Compile Include="Models\Archivo\ArchivoViewModel.cs" />
     <Compile Include="Models\Archivo\CrearArchivoViewModel.cs" />
     <Compile Include="Models\AuditoriaModel.cs" />

@@ -10,5 +10,7 @@ namespace CatastroAvanza.Negocio.Contratos
         Task<int> CrearArchivo(CrearArchivoViewModel model, AuditoriaModel auditoriaModel);
 
         Task<DataTablesResponse> ConsultarArchivos(IDataTablesRequest modelo);
+
+        Task<ArchivoDescargaViewModel> DescargarArchivo(int ArchivoId);
     }
 }
