@@ -39,6 +39,10 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 if(!trabajo.Estado)
                     return 0;
 
+
+                if(_contexto.AsociacionTrabajoGestor.Any(m => m.UserAsignado == model.UserAsignado))
+                    return 0;
+
                 AsociacionTrabajoActividadGestor entidad = _mapper.MapViewModelToEntidad(model, auditoriaModel);
 
                 _contexto.AsociacionTrabajoGestor.Add(entidad);

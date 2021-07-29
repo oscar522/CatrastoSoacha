@@ -45,14 +45,6 @@
         },
         {
           "order": 1,
-          "controllerName": "Account",
-          "actionName": "LogOff",
-          "linkText": "Cerrar sesion",
-          "iconText": "fa fa-user-circle mr-3",
-          "sub": null
-        },
-        {
-          "order": 1,
           "controllerName": "",
           "actionName": "",
           "linkText": "Trabajo",
@@ -75,6 +67,22 @@
               "sub": null
             }
           ]
+        },
+        {
+          "order": 1,
+          "controllerName": "Archivo",
+          "actionName": "CrearArchivo",
+          "linkText": "Archivos",
+          "iconText": "fa fa-user-circle mr-3",
+          "sub": null
+        },
+        {
+          "order": 1,
+          "controllerName": "Account",
+          "actionName": "LogOff",
+          "linkText": "Cerrar sesion",
+          "iconText": "fa fa-user-circle mr-3",
+          "sub": null
         }
       ]
     },

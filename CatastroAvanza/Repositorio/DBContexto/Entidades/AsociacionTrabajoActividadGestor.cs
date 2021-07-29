@@ -12,6 +12,8 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
 
         public DateTime FechaAsignacion { get; set; }
 
+        public DateTime FechaEsperadaFinalizacionAsignacion { get; set; }
+
         public string UsuarioQueAsigno { get; set; }
 
         public string CreadoPor { get; set; }

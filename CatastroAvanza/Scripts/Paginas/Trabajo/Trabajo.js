@@ -119,10 +119,8 @@ function ListarTrabajos() {
                 title: '',
                 width: "5%",
                 render: function (data, type, full) {
-                    if (full.Estado == "Activo" && full.EstaAsignado == false)
-                        return "<a class='btn btn-outline-primary' title='Agregar asignacion' href='" + TrabajoJs.urlAsignarTrabajo + "?idTrabajo=" + data + "'><i class='fa fa-child'></i> Asignar</a>";
-                    else if (full.EstaAsignado == true)
-                        return "Asignado a: " + full.AsignadoA;
+                    if (full.Estado == "Activo")
+                        return "<a class='btn btn-outline-primary' title='Agregar asignacion' href='" + TrabajoJs.urlAsignarTrabajo + "?idTrabajo=" + data + "'><i class='fa fa-child'></i> Asignar</a>";                  
                     else
                         return "-";
                 }

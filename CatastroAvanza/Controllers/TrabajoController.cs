@@ -149,7 +149,8 @@ namespace CatastroAvanza.Controllers
                 if (result != 0)
                     return RedirectToAction(nameof(CrearTrabajo));
             }
-            
+
+            model.UsuarioQueAsigno = GetUserName();
             return View(nameof(CrearAsignacionTrabajo), model);
         }
 

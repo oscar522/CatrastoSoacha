@@ -66,7 +66,8 @@ namespace CatastroAvanza.Mapeadores
                 IdActividad = model.IdActividad,
                 UltimaModificacionPor = model.UltimaModificacionPor,
                 UserAsignado = model.UserAsignado,
-                UsuarioQueAsigno = model.UsuarioQueAsigno
+                UsuarioQueAsigno = model.UsuarioQueAsigno,
+                FechaFinalizacionAsignacion = model.FechaEsperadaFinalizacionAsignacion
             };
             return result;
         }
@@ -131,7 +132,8 @@ namespace CatastroAvanza.Mapeadores
                 IdActividad = m.IdActividad,
                 UltimaModificacionPor = m.UltimaModificacionPor,
                 UserAsignado = m.UserAsignado,
-                UsuarioQueAsigno = m.UsuarioQueAsigno
+                UsuarioQueAsigno = m.UsuarioQueAsigno,
+                FechaFinalizacionAsignacion = m.FechaEsperadaFinalizacionAsignacion
             }).ToList();
 
             return result;
@@ -208,9 +210,10 @@ namespace CatastroAvanza.Mapeadores
                 IdActividad = model.IdActividad,
                 UserAsignado = model.UserAsignado,
                 UsuarioQueAsigno = model.UsuarioQueAsigno,
+                FechaEsperadaFinalizacionAsignacion = model.FechaFinalizacionEsperada,
                 CreadoPor = auditoriaModel.CreadoPor,
                 FechaCreacion = auditoriaModel.FechaCreacion,
-                FechaUltimaModificacion = auditoriaModel.FechaUltimaModificacion,
+                FechaUltimaModificacion = auditoriaModel.FechaUltimaModificacion,                
                 UltimaModificacionPor = auditoriaModel.UltimaModificacionPor,
                 Estado = true
             };
@@ -227,6 +230,7 @@ namespace CatastroAvanza.Mapeadores
             entidad.IdActividad = model.IdActividad;
             entidad.UserAsignado = model.UserAsignado;
             entidad.UsuarioQueAsigno = model.UsuarioQueAsigno;
+            entidad.FechaEsperadaFinalizacionAsignacion = model.FechaFinalizacionEsperada;
             entidad.FechaUltimaModificacion = auditoriaModel.FechaUltimaModificacion;
             entidad.UltimaModificacionPor = auditoriaModel.UltimaModificacionPor;
             entidad.Estado = true;

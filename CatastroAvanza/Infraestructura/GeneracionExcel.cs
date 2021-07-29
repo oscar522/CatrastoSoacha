@@ -44,6 +44,7 @@ namespace CatastroAvanza.Infraestructura
             row.CreateCell(16).SetCellValue("Municipio");            
             row.CreateCell(17).SetCellValue("Estado");
             row.CreateCell(18).SetCellValue("FechaInsercion");
+            row.CreateCell(19).SetCellValue("NombreUsuario");
             rowIndex++;           
 
             foreach (var actividad in actividades)
@@ -68,6 +69,7 @@ namespace CatastroAvanza.Infraestructura
                 row.CreateCell(16).SetCellValue(actividad.Municipio);
                 row.CreateCell(17).SetCellValue(actividad.Estado);
                 row.CreateCell(18).SetCellValue(actividad.FechaInsercion.ToString());
+                row.CreateCell(19).SetCellValue(actividad.NombreUsuario.ToString());
                 rowIndex++;
             }
 

@@ -12,6 +12,8 @@ namespace CatastroAvanza.Models.Trabajo
 
         public DateTime FechaAsignacion { get; set; }
 
+        public DateTime FechaFinalizacionEsperada { get; set; }
+
         public string UsuarioQueAsigno { get; set; }
     }
 }

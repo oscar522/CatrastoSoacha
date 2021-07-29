@@ -15,8 +15,13 @@ namespace CatastroAvanza.Models.Trabajo
         public int IdActividad { get; set; }
 
         public string NombreActividad { get; set; }
-        [DisplayName("Fecha asignacion")]
+        
+        [DisplayName("Fecha asignacion")]        
         public DateTime FechaAsignacion { get; set; }
+
+        [DisplayName("Fecha finalizacion")]
+        [Required(ErrorMessage = "Fecha finalizacion es requerido.")]
+        public DateTime FechaFinalizacionEsperada { get; set; }
 
         [DisplayName("Usuario que realiza la asignacion")]        
         public string UsuarioQueAsigno { get; set; }

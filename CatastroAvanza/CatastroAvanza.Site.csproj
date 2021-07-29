@@ -228,12 +228,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActividadController.cs" />
     <Compile Include="Controllers\ActividadesDiariasController.cs" />
+    <Compile Include="Controllers\ArchivoController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Controllers\TrabajoController.cs" />
     <Compile Include="Enumerations\ActividadesColumnasOrdenables.cs" />
+    <Compile Include="Enumerations\ArchivoColumnasOrdenables.cs" />
     <Compile Include="Enumerations\CatalogosEnum.cs" />
     <Compile Include="Enumerations\TrabajoAsignacionesColumnasOrdenables.cs" />
     <Compile Include="Enumerations\TrabajoColumnasOrdenables.cs" />
@@ -270,7 +272,9 @@
     <Compile Include="Infraestructura\ImplementacionesServicios\AlmacenamientoArchivos.cs" />
     <Compile Include="Infraestructura\InformationDocumento.cs" />
     <Compile Include="Mapeadores\ActividadMapper.cs" />
+    <Compile Include="Mapeadores\ArchivoMapper.cs" />
     <Compile Include="Mapeadores\Interfaces\IActividadMapper.cs" />
+    <Compile Include="Mapeadores\Interfaces\IArchivoMapper.cs" />
     <Compile Include="Mapeadores\Interfaces\IMapeadoresApplicacion.cs" />
     <Compile Include="Mapeadores\Interfaces\ITrabajoMapper.cs" />
     <Compile Include="Mapeadores\Interfaces\IUserMapper.cs" />
@@ -300,6 +304,8 @@
     <Compile Include="Models\ActividadViewModels\NomenclaturaViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\TerrenoViewModel.cs" />
     <Compile Include="Models\ActividadViewModels\TramiteViewModel.cs" />
+    <Compile Include="Models\Archivo\ArchivoViewModel.cs" />
+    <Compile Include="Models\Archivo\CrearArchivoViewModel.cs" />
     <Compile Include="Models\AuditoriaModel.cs" />
     <Compile Include="Models\CatalogoExtendidoViewModel.cs" />
     <Compile Include="Models\CatalogoViewModel.cs" />
@@ -327,12 +333,14 @@
     <Compile Include="Models\Trabajo\UsuarioTrabajoViewModel.cs" />
     <Compile Include="Negocio\Contratos\IActividadDiariaLogic.cs" />
     <Compile Include="Negocio\Contratos\IActividadLogic.cs" />
+    <Compile Include="Negocio\Contratos\IArchivoLogic.cs" />
     <Compile Include="Negocio\Contratos\ICatalogo.cs" />
     <Compile Include="Negocio\Contratos\IDataForm1Logic.cs" />
     <Compile Include="Negocio\Contratos\ITrabajoLogic.cs" />
     <Compile Include="Negocio\Contratos\ISecurityLogic.cs" />
     <Compile Include="Negocio\Implementaciones\ActividadDiariaLogic.cs" />
     <Compile Include="Negocio\Implementaciones\ActividadLogic.cs" />
+    <Compile Include="Negocio\Implementaciones\ArchivoLogic.cs" />
     <Compile Include="Negocio\Implementaciones\Catalogo.cs" />
     <Compile Include="Negocio\Implementaciones\DataForm1Logic.cs" />
     <Compile Include="Negocio\Implementaciones\SecurityLogic.cs" />
@@ -343,6 +351,7 @@
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ActividadTrabajoGestion_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ActividadTrabajo_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\Actividad_ConfiguracionEntidad.cs" />
+    <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\Archivo_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\AsociacionTrabajoActividadGestor_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctcatalogo_ConfiguracionEntidad.cs" />
     <Compile Include="Repositorio\DBContexto\ConfiguracionEntidades\ctciudad_ConfiguracionEntidad.cs" />
@@ -360,6 +369,7 @@
     <Compile Include="Repositorio\DBContexto\Entidades\ActividadDiaria.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ActividadTrabajo.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ActividadTrabajoGestion.cs" />
+    <Compile Include="Repositorio\DBContexto\Entidades\Archivo.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\AsociacionTrabajoActividadGestor.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctcatalogo.cs" />
     <Compile Include="Repositorio\DBContexto\Entidades\ctciudad.cs" />
@@ -432,6 +442,10 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202107220449267_add_tbl_Trabajo.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202107220449267_add_tbl_Trabajo.designer.cs">
       <DependentUpon>202107220449267_add_tbl_Trabajo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202107290308004_nueva_tabla_archivo.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202107290308004_nueva_tabla_archivo.designer.cs">
+      <DependentUpon>202107290308004_nueva_tabla_archivo.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
@@ -1260,6 +1274,7 @@
     <Content Include="Scripts\Paginas\Actividad\ConsultarActividad.js" />
     <Content Include="Scripts\Paginas\Actividad\CrearActividad.js" />
     <Content Include="Scripts\Paginas\ActividadesDiarias\CrearActividadDiaria.js" />
+    <Content Include="Scripts\Paginas\Archivo\CrearArchivo.js" />
     <Content Include="Scripts\Paginas\Trabajo\Trabajo.js" />
     <Content Include="Scripts\Paginas\Trabajo\TrabajoAsignacion.js" />
     <Content Include="Scripts\Paginas\Trabajo\TrabajoConsulta.js" />
@@ -1762,6 +1777,7 @@
     <Content Include="Views\Trabajo\Dashboard.cshtml" />
     <Content Include="Views\Trabajo\ActualizarTrabajo.cshtml" />
     <Content Include="Views\Trabajo\ActualizarGestionTrabajo.cshtml" />
+    <Content Include="Views\Archivo\CrearArchivo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1839,6 +1855,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202107220449267_add_tbl_Trabajo.resx">
       <DependentUpon>202107220449267_add_tbl_Trabajo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202107290308004_nueva_tabla_archivo.resx">
+      <DependentUpon>202107290308004_nueva_tabla_archivo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

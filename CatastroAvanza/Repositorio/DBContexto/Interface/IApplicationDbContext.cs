@@ -24,6 +24,8 @@ namespace CatastroAvanza.Repositorio.DBContexto.Interface
         DbSet<ActividadTrabajoGestion> TrabajoGestion { get; set; }
         DbSet<AsociacionTrabajoActividadGestor> AsociacionTrabajoGestor { get; set; }
 
+        DbSet<Archivo> Archivos { get; set; }
+
         int SaveChanges();
         
         Task<int> SaveChangesAsync( CancellationToken cancellationToken = default);
