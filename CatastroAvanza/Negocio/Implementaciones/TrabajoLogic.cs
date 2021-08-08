@@ -583,14 +583,15 @@ namespace CatastroAvanza.Negocio.Implementaciones
             TrabajoVolumenViewModel volumen = new TrabajoVolumenViewModel();
 
             var fechaHoy = DateTime.Now.Date;
+            var fechadehace3dias = DateTime.Now.Date.AddDays(-3);
+            var fechadefutura3dias = DateTime.Now.Date.AddDays(3);
+
+
+            volumen.AsignacionesVencidas = _contexto.AsociacionTrabajoGestor.Where(m => m.Estado == true && m.FechaEsperadaFinalizacionAsignacion <= fechaHoy).Count();
+            volumen.AsignacionesVencidasMasde3Dias = _contexto.AsociacionTrabajoGestor.Where(m => m.Estado == true && m.FechaEsperadaFinalizacionAsignacion >= fechadehace3dias && m.FechaEsperadaFinalizacionAsignacion < fechaHoy).Select(t=> t.IdActividad).Distinct().Count();
+            volumen.AsignacionesProximasAVencerse = _contexto.AsociacionTrabajoGestor.Where(m => m.Estado == true && m.FechaEsperadaFinalizacionAsignacion >= fechaHoy && m.FechaEsperadaFinalizacionAsignacion <= fechadefutura3dias).Count();
+            volumen.AsignacionesFinalizadas = _contexto.AsociacionTrabajoGestor.Where(m => m.Estado == false).Count();
             
-            volumen.TrabajosCreados = _contexto.Trabajo.Where(m => m.FechaCreacion >= fechaHoy).Count();
-            volumen.TrabajosAsignados = _contexto.AsociacionTrabajoGestor.Where(m => m.Estado == true && m.FechaCreacion >= fechaHoy).Select(t=> t.IdActividad).Distinct().Count();
-            volumen.TrabajosCerrados = _contexto.Trabajo.Where(m => m.Estado == false && m.FechaUltimaModificacion >= fechaHoy).Count();
-            volumen.GestionDiaria = _contexto.TrabajoGestion.Where(m => m.FechaUltimaModificacion >= fechaHoy).Count();
-
-            volumen.SetTotal();
-
             return volumen;
         }
 

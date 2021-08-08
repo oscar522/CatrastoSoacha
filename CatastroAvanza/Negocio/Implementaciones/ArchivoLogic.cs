@@ -60,7 +60,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
                 var listaAsignaciones = _mapper.MapListaEntidadesToListaViewModel(listadoAsignaciones);
 
-                var tabla = new DataTablesResponse(modelo.Draw, listaAsignaciones, _contexto.AsociacionTrabajoGestor.Count(), listadoAsignaciones.Count);
+                var tabla = new DataTablesResponse(modelo.Draw, listaAsignaciones, _contexto.Archivos.Count(), listadoAsignaciones.Count);
 
                 return tabla;
             }

@@ -1,83 +1,27 @@
-﻿var TrabajoDashboardJs = {
-    urlObtenerTrabajos: "",
+﻿var TrabajoDashboardJs = {    
     urlVerGestionTrabajo: "",
     urlVolumenTrabajo: "",
     urlEstadoGestion: "",
     urlUsuarioGestion: "",
     Inicializar: function () {
-        TrabajosBoard();
         VolumenBoard();
         EstadoBoard();
         UsuarioBoard();
     }
 }
 
-function TrabajosBoard() {
-    $('#tbltrabajos').DataTable({
-        serverSide: true,
-        processing: true,
-        ajax: {
-            dataType: 'json',
-            type: "POST",
-            url: TrabajoDashboardJs.urlObtenerTrabajos,
-        },
-        dom: 'lfrtip',
-        pageLength: 10,
-        lengthMenu: [5, 10, 25],
-        columns: [
-            {
-                name: 'Nombre',
-                data: 'Nombre',
-                title: 'Nombre',
-                orderable: true
-            }, {
-                name: 'Estado',
-                data: 'Estado',
-                title: 'Estado',
-                orderable: true
-            }, {
-                name: 'FechaUltimaModificacion',
-                data: 'FechaUltimaModificacion',
-                title: 'Fecha modificacion',
-                orderable: true,
-                width: "10%",
-                render: function (data, type, full) {
-                    var mDate = moment(data);
-                    return (mDate && mDate.isValid()) ? mDate.format('YYYY-MM-DD') : '';
-                }
-            }, {
-                name: 'Id',
-                data: 'Id',
-                title: '',
-                width: "5%",
-                render: function (data, type, full) {
-                    if (full.Estado == "Activo")
-                        return "<a class='btn btn-outline-primary btn-sm' title='Agregar gestion' href='" + TrabajoDashboardJs.urlAgregarGestionTrabajo + "?idTrabajo=" + data + "'>Ver <i class='fa fa-chevron-right'></i></a>";
-                    else
-                        return "";
-                }
-            }
-        ],
-    });
-}
-
 function VolumenBoard() {
     $.post(TrabajoDashboardJs.urlVolumenTrabajo, function (data) {
-        $('#creados').empty();
-        $('#asignados').empty();
-        $('#cerrados').empty();
-        $('#gestiones').empty();
+        $('#vencidos').empty();
+        $('#vencidoslargos').empty();
+        $('#proximosavencer').empty();
+        $('#finalizados').empty();
         
-        $('#creados').append(data.TrabajosCreados);
-        $('#asignados').append(data.TrabajosAsignados);
-        $('#cerrados').append(data.TrabajosCerrados);
-        $('#gestiones').append(data.GestionDiaria);
-        
-        $("#brCreados").height(300 * (data.TrabajosCreados / data.Total))
-        $("#brAsignados").height(300 * (data.TrabajosAsignados / data.Total))
-        $("#brCerrados").height(300 * (data.TrabajosCerrados / data.Total))
-        $("#brGestiones").height(300 * (data.GestionDiaria / data.Total))
-
+        $('#vencidos').append(data.AsignacionesVencidas);
+        $('#vencidoslargos').append(data.AsignacionesVencidasMasde3Dias);
+        $('#proximosavencer').append(data.AsignacionesProximasAVencerse);
+        $('#finalizados').append(data.AsignacionesFinalizadas);
+            
     });
 }
 
@@ -113,7 +57,7 @@ function UsuarioBoard() {
             }, {
                 name: 'NombreUsuario',
                 data: 'NombreUsuario',
-                title: 'NombreUsuario',
+                title: 'Nombre Usuario',
                 orderable: true
             }, {
                 name: 'NumeroAsignaciones',
