@@ -51,6 +51,9 @@ namespace CatastroAvanza.Controllers
             var archivo = await _archivo.DescargarArchivo(archivoId);
             if (archivo?.Archivo != null)
             {
+                Response.Clear();                
+                Response.Buffer = false;
+                Response.BufferOutput = false;
                 return File(archivo.Archivo, MediaTypeNames.Application.Octet, archivo.Nombre);
             }
 

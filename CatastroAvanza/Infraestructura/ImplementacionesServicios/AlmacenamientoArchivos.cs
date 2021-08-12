@@ -69,12 +69,12 @@ namespace CatastroAvanza.Infraestructura.ImplementacionesServicios
                 
         }
 
-        public byte[] TraerArchivoFisico(string archivo, string pathAdicional)
+        public FileStream TraerArchivoFisico(string archivo, string pathAdicional)
         {
             if (string.IsNullOrEmpty(archivo))
             {
                 //TODO: log the error
-                return new byte[0];
+                return null;
             }
 
             try
@@ -84,35 +84,17 @@ namespace CatastroAvanza.Infraestructura.ImplementacionesServicios
                 if (!File.Exists(_directorioTrabajo))
                 {
                     //TODO: log the error
-                    return new byte[0];
+                    return null;
                 }
 
-                using (FileStream fsSource = new FileStream(_directorioTrabajo, FileMode.Open, FileAccess.Read))
-                {
-                    // Read the source file into a byte array.
-                    byte[] bytes = new byte[fsSource.Length];
-                    int numBytesToRead = (int)fsSource.Length;
-                    int numBytesRead = 0;
-                    while (numBytesToRead > 0)
-                    {
-                        // Read may return anything from 0 to numBytesToRead.
-                        int n = fsSource.Read(bytes, numBytesRead, numBytesToRead);
+                FileStream fsSource = new FileStream(_directorioTrabajo, FileMode.Open, FileAccess.Read);
 
-                        // Break when the end of the file is reached.
-                        if (n == 0)
-                            break;
-
-                        numBytesRead += n;
-                        numBytesToRead -= n;
-                    }
-                    numBytesToRead = bytes.Length;                    
-                    return bytes;
-                }
+                return fsSource;               
             }
             catch (Exception ioEx)
             {
                 //TODO: log the error
-                return new byte[0];
+                return null;
             }
         }
     }

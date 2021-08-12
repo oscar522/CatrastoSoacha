@@ -1,9 +1,11 @@
-﻿namespace CatastroAvanza.Infraestructura.ContratosServicios
+﻿using System.IO;
+
+namespace CatastroAvanza.Infraestructura.ContratosServicios
 {
     public interface IAlmacenamientoArchivos
     {
         void GuardarArchivoFisico(InformationDocumento archivo);
 
-        byte[] TraerArchivoFisico(string archivo, string pathAdicional);
+        FileStream TraerArchivoFisico(string archivo, string pathAdicional);
     }
 }

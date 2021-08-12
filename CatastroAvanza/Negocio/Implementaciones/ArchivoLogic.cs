@@ -11,6 +11,7 @@ using CatastroAvanza.Repositorio.DBContexto.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -106,7 +107,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 if (entidad == null)
                     return new ArchivoDescargaViewModel();
 
-                byte[] archivo = _almacenamiento.TraerArchivoFisico(entidad.NombreFisico, "Archivo_General");
+                FileStream archivo = _almacenamiento.TraerArchivoFisico(entidad.NombreFisico, "Archivo_General");
 
                 return new ArchivoDescargaViewModel(entidad.NombreFisico, archivo);
             }
