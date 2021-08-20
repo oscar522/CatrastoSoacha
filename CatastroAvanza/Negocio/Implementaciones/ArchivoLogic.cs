@@ -72,19 +72,61 @@ namespace CatastroAvanza.Negocio.Implementaciones
             }
         }
 
+        public async Task<CargarArchivoRespuesta> CrearParteArchivo(CrearArchivoViewModel model)
+        {
+            try {
+
+                var parteArchivo = new InformacionParteArchivo(model.fileRelativePath, model.fileId, model.fileBlob, 
+                    model.fileSize, model.fileName, model.chunkIndex, model.chunkSize, model.chunkSizeStart, model.chunkCount,
+                    model.retryCount, "Archivo_General");
+
+                var result = _almacenamiento.GuardarParteArchivoFisico(parteArchivo);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                CargarArchivoRespuesta result = new CargarArchivoRespuesta();
+                result.Errors.Add("Error al cargar el archivo");
+                return result;
+            }
+        }
+
+        public async Task<int> CompletarCreacionArchivo(string directorio)
+        {            
+            try
+            {                
+                _almacenamiento.CombinarArchivoCargado(directorio, "Archivo_General");
+
+                Archivo entidad = _contexto.Archivos.Where(m => m.NombreFisico == directorio).FirstOrDefault();
+
+                if (entidad != null)
+                {
+                    entidad.EstadoCarga = "Completado";
+                    await _contexto.SaveChangesAsync();
+                }
+
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return 0;
+            }
+        }
+
+
         public async Task<int> CrearArchivo(CrearArchivoViewModel model, AuditoriaModel auditoriaModel)
         {
             try
             {
 
-                if (_contexto.Archivos.Where(m => m.Nombre == model.Nombre).Any())
+                if (_contexto.Archivos.Where(m => m.Nombre == model.fileRelativePath && m.NombreFisico ==  model.fileId).Any())
                     return 0;
 
                 Archivo entidad = _mapper.MapViewModelToEntidad(model, auditoriaModel);                
 
-                _contexto.Archivos.Add(entidad);
-
-                _almacenamiento.GuardarArchivoFisico(new InformationDocumento(model.Archivo,"Archivo_General"));
+                _contexto.Archivos.Add(entidad);                
 
                 await _contexto.SaveChangesAsync();
 

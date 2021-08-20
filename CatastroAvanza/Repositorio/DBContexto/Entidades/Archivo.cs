@@ -13,5 +13,7 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
         public string CreadoPor { get; set; }
 
         public DateTime FechaCreacion { get; set; }
+
+        public string EstadoCarga { get; set; } 
     }
 }

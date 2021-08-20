@@ -26,7 +26,7 @@
         <div class="form-horizontal">
             <div class="row">
 
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -34,22 +34,10 @@
                                     <h5>Nuevo archivo</h5>
                                     <hr />
                                     <div class="row form-group">
-                                        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-12" })
+                                        @Html.LabelFor(model => model.Archivo, htmlAttributes: new {  @class = "control-label col-md-12" })
                                         <div class="col-md-12">
-                                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        @Html.LabelFor(model => model.Archivo, htmlAttributes: new { @class = "control-label col-md-12" })
-                                        <div class="col-md-12">
-                                            @Html.TextBoxFor(m => m.Archivo, new { @type = "file", @class = "archivosClass" })
+                                            @Html.TextBoxFor(m => m.Archivo, new { @type = "file", multiple = "multiple", webkitdirectory = "webkitdirectory ", @class = "archivosClass" })
                                             @Html.ValidationMessageFor(model => model.Archivo, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="justify-content-center text-right">
-                                            <input type="submit" value="Crear Archivo" class="btn btn-primary" />
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +45,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
+                
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -95,6 +87,9 @@
         $(document).ready(function () {
             CrearArchivoJs.urlObtenerArchivos = '@Url.Action("ConsultarArchivos")';
             CrearArchivoJs.urlDescargarArchivo = '@Url.Action("DescargarArchivo")';
+            CrearArchivoJs.urlCargarArchivo = '@Url.Action("CrearArchivo")';
+            CrearArchivoJs.urlComplertarCargarArchivo = '@Url.Action("CompletarCargaArchivo")';
+            
             CrearArchivoJs.Inicializar();
         });
 </script>

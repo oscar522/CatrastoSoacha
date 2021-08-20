@@ -1,6 +1,8 @@
 ﻿var CrearArchivoJs = {
     urlObtenerArchivos: "",
     urlDescargarArchivo: "",
+    urlCargarArchivo: "",
+    urlComplertarCargarArchivo: "",
     Inicializar: function () {
         InicializarFileInputs();
         ListarArchivos();
@@ -9,11 +11,34 @@
 
 function InicializarFileInputs() {
     $(".archivosClass").fileinput({
-        theme: "explorer-fa",
+        theme: "fa",
         language: "es",
-        showUpload: false,
+        showUpload: true,
         dropZoneEnabled: false,
+        hideThumbnailContent: true,
         mainClass: "input-group",
+        uploadUrl: CrearArchivoJs.urlCargarArchivo,
+        enableResumableUpload: true
+    }).on('fileuploaded', function (event, previewId, index, fileId, data) {        
+        console.log('File Uploaded', 'ID: ' + fileId + ', Thumb ID: ' + previewId);
+        $.ajax({
+            type: 'POST',
+            url: CrearArchivoJs.urlComplertarCargarArchivo,
+            dataType: 'json',
+            data: { fileId: fileId },
+            success: function (states) {
+            },
+            error: function (ex) {
+                console.log(ex.responseText);
+            }
+        });
+
+    }).on('fileuploaderror', function (event, previewId, index, fileId) {
+        console.log('File Upload Error', 'ID: ' + fileId + ', Thumb ID: ' + previewId);
+    }).on('filebatchuploadcomplete', function (event, preview, config, tags, extraData) {        
+        console.log('File Batch Uploaded', preview, config, tags, extraData);
+        alert("Todos los archivos fueron cargados");        
+        window.location.reload();
     });
 }
 

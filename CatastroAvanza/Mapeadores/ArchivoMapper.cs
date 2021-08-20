@@ -14,15 +14,16 @@ namespace CatastroAvanza.Mapeadores
             if (model == null)
                 return new Archivo();
 
-            if(model.Archivo == null)
+            if(model.fileBlob == null)
                 return new Archivo();
 
             Archivo result = new Archivo
             {
-                Nombre = model.Nombre,
-                NombreFisico = model.Archivo.FileName,
+                Nombre = model.fileRelativePath,
+                NombreFisico = model.fileId,
                 CreadoPor = auditoriaModel.CreadoPor,
                 FechaCreacion = auditoriaModel.FechaCreacion,
+                EstadoCarga = "NoCompletado"
             };            
 
             return result;

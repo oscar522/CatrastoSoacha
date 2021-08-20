@@ -26,14 +26,25 @@ namespace CatastroAvanza.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> CrearArchivo(CrearArchivoViewModel model)
+        public  async Task<ActionResult> CrearArchivo(CrearArchivoViewModel model)
+        {            
+            var result = await _archivo.CrearParteArchivo(model);
+
+            var resultCreactionFile = await _archivo.CrearArchivo(model, new Models.AuditoriaModel(GetUserName()));
+
+            return Json(result, JsonRequestBehavior.AllowGet);           
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> CompletarCargaArchivo(string fileId)
         {
-            int result =await _archivo.CrearArchivo(model, new Models.AuditoriaModel(GetUserName()));
+            var result = await _archivo.CompletarCreacionArchivo(fileId);
 
             if (result != 0)
-                return RedirectToAction(nameof(CrearArchivo));
+                return Json("ok", JsonRequestBehavior.AllowGet);
 
-            return View();
+            return Json("error", JsonRequestBehavior.AllowGet);
         }
 
 

@@ -267,10 +267,13 @@
       <DependentUpon>202107140606543_nombre_apellido_tabla_usuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Identity\Model\ApplicationUser.cs" />
+    <Compile Include="Infraestructura\CargarArchivoRespuesta.cs" />
     <Compile Include="Infraestructura\ContratosServicios\IAlmacenamientoArchivos.cs" />
     <Compile Include="Infraestructura\GeneracionExcel.cs" />
     <Compile Include="Infraestructura\ImplementacionesServicios\AlmacenamientoArchivos.cs" />
+    <Compile Include="Infraestructura\InformacionParteArchivo.cs" />
     <Compile Include="Infraestructura\InformationDocumento.cs" />
+    <Compile Include="Infraestructura\InitialPreviewConfig.cs" />
     <Compile Include="Mapeadores\ActividadMapper.cs" />
     <Compile Include="Mapeadores\ArchivoMapper.cs" />
     <Compile Include="Mapeadores\Interfaces\IActividadMapper.cs" />
@@ -447,6 +450,10 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202107290308004_nueva_tabla_archivo.cs" />
     <Compile Include="Repositorio\DBContexto\Migraciones\202107290308004_nueva_tabla_archivo.designer.cs">
       <DependentUpon>202107290308004_nueva_tabla_archivo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202108200245185_columna_estado_carga_archivo_tabla_archivo.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202108200245185_columna_estado_carga_archivo_tabla_archivo.designer.cs">
+      <DependentUpon>202108200245185_columna_estado_carga_archivo_tabla_archivo.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
@@ -1859,6 +1866,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202107290308004_nueva_tabla_archivo.resx">
       <DependentUpon>202107290308004_nueva_tabla_archivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202108200245185_columna_estado_carga_archivo_tabla_archivo.resx">
+      <DependentUpon>202108200245185_columna_estado_carga_archivo_tabla_archivo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
