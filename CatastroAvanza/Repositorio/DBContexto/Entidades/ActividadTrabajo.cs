@@ -6,6 +6,8 @@ namespace CatastroAvanza.Repositorio.DBContexto.Entidades
     {
         public int Id { get; set; }
 
+        public int? IdTrabajoPadre { get; set; }
+
         public string Nombre { get; set; }
 
         public string  Rol { get; set; }

@@ -2,7 +2,10 @@
 @{
     ViewBag.Title = "Crear Trabajo";
 }
-
+@section Styles{
+    <link rel="stylesheet" href="~/Content/jquery-ui.css">
+    <link rel="stylesheet" href="~/Content/bootstrap-fileinput/themes/explorer-fa/theme.min.css">
+}
 <div class="card mb-4 wow fadeIn">
 
     <!--Card content-->
@@ -28,6 +31,16 @@
                                 <div class="card-body">
                                     <h5>Nuevo trabajo</h5>
                                     <hr />
+                                    <div class="row form-group">
+                                        <div class="col-md-5">
+                                            <label class="control-label col-md-12">Trabajo padre</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            @Html.HiddenFor(model => model.IdTrabajoPadre, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.IdTrabajoPadre, "", new { @class = "text-danger" })
+                                            <input type="text" id="lsTrabajos" name="lsTrabajos" value="" class="form-control" />
+                                        </div>
+                                    </div>
                                     <div class="row form-group">
                                         <div class="col-md-5">
                                             <label class="control-label col-md-12">Nombre</label>
@@ -80,11 +93,77 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <h5> <label class="control-label col-md-12">Trabajos</label> </h5>
                                             <hr />
-                                            <table class="table table-striped cell-border compact responsive nowrap" id="tbltrabajos" width="90%">
-                                            </table>
+                                            <div id="tree"></div>                                            
+                                            @*<table class="table table-striped cell-border compact responsive nowrap" id="tbltrabajos" width="90%"></table>*@
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5> <label class="control-label col-md-12">Informacion trabajo seleccionado</label> </h5>
+                                            <hr />
+                                            <div class="form-group invisible" id="btn_accion" >
+                                                <a class="btn btn-outline-primary btn-sm" id="btn_actualizar"><i class='fa fa-edit'></i> Actualizar</a>&nbsp;
+                                                <a class="btn btn-outline-primary btn-sm" id="btn_asignar"><i class='fa fa-child'></i> Asignar</a>&nbsp;
+                                                <a class="btn btn-outline-danger btn-sm " id="btn_eliminar" data-toggle='modal' data-target='#confirmacionModal' ><i class='fa fa-trash'></i> Eliminar</a>
+                                            </div>
+                                            <hr />
+                                            <div class="row form-group">
+                                                <div class="col-md-5">
+                                                    <label class="control-label col-md-12">Nombre:</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <span id="NombreTrabajoTexto"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-md-5">
+                                                    <label class="control-label col-md-12">Rol:</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <span id="RolTrabajoTexto"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-md-5">
+                                                    <label class="control-label col-md-12">Cantidad:</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <span id="CantidadTrabajoTexto"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-md-5">
+                                                    <label class="control-label col-md-12">Puntos Esfuerzo:</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <span id="PuntosTrabajoTexto"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-md-5">
+                                                    <label class="control-label col-md-12">Estado:</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <span id="EstadoTrabajoTexto"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-md-5">
+                                                    <label class="control-label col-md-12">Fecha esperada finalizacion:</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <span id="FechaTrabajoTexto"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-md-5">
+                                                    <label class="control-label col-md-12">Asignado a:</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <span id="AsignadoTrabajoTexto"></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -121,14 +200,19 @@
 
 @section Scripts
 {
+    @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/Scripts/ModalControl.js")
     @Scripts.Render("~/Scripts/Paginas/Trabajo/Trabajo.js")
+    @Scripts.Render("~/Scripts/bootstrap-treeview.js")    
 <script>
         $(document).ready(function () {
             TrabajoJs.urlObtenerTrabajosAdministrador = '@Url.Action("ConsultarTrabajosAdministrador")';
             TrabajoJs.urlAsignarTrabajo = '@Url.Action("CrearAsignacionTrabajo")';
             TrabajoJs.urlActualizarTrabajo = '@Url.Action("ActualizarTrabajo")';
-            TrabajoJs.urlEliminarTrabajo =  '@Url.Action("EliminarTrabajo")';
+            TrabajoJs.urlEliminarTrabajo = '@Url.Action("EliminarTrabajo")';
+            TrabajoJs.urlObtenerListadoTrabajos = '@Url.Action("ConsultarTrabajosPadres")';
+            TrabajoJs.urlObtenerListadoTrabajosPorId = '@Url.Action("ConsultarTrabajosPorPadre")'; 
+            TrabajoJs.urlObtenerTrabajoPorId = '@Url.Action("ConsultarTrabajosPorId")';
             TrabajoJs.Inicializar();
         });
 </script>

@@ -55,7 +55,85 @@
             </div>
         </div>
     </div>
+    <div class="col-md-6">
+        <div class="card mb-4 wow fadeIn">
+            <div class="card-header">
+                <h4 class="mb-2 mb-sm-0 pt-1">
+                    <span>Actividades</span>
+                </h4>
+            </div>
 
+            <div class="card-body justify-content-between">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5> <label class="control-label col-md-12">Trabajos</label> </h5>
+                        <hr />
+                        <div id="tree"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5> <label class="control-label col-md-12">Trabajo seleccionado</label> </h5>
+                        <hr />
+                        <div class="row form-group">
+                            <div class="col-md-5">
+                                <label class="control-label col-md-12">Nombre:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <span id="NombreTrabajoTexto"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-5">
+                                <label class="control-label col-md-12">Rol:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <span id="RolTrabajoTexto"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-5">
+                                <label class="control-label col-md-12">Cantidad:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <span id="CantidadTrabajoTexto"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-5">
+                                <label class="control-label col-md-12">Puntos Esfuerzo:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <span id="PuntosTrabajoTexto"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-5">
+                                <label class="control-label col-md-12">Estado:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <span id="EstadoTrabajoTexto"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-5">
+                                <label class="control-label col-md-12">Fecha esperada finalizacion:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <span id="FechaTrabajoTexto"></span>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-5">
+                                <label class="control-label col-md-12">Asignado a:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <span id="AsignadoTrabajoTexto"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -63,6 +141,7 @@
 {
     @Scripts.Render("~/Scripts/ModalControl.js")
     @Scripts.Render("~/Scripts/Paginas/Trabajo/TrabajoDashboard.js")
+    @Scripts.Render("~/Scripts/bootstrap-treeview.js")
 <script>
         $(document).ready(function () {
             TrabajoDashboardJs.urlVolumenTrabajo = '@Url.Action("ConsultarVolumen")';
@@ -71,6 +150,8 @@
 
 
             TrabajoDashboardJs.TrabajoDashboardJs = '@Url.Action("CrearAsignacionTrabajo")';
+            TrabajoDashboardJs.urlObtenerListadoTrabajosPorId = '@Url.Action("ConsultarTrabajosPorPadre")';
+            TrabajoDashboardJs.urlObtenerTrabajoPorId = '@Url.Action("ConsultarTrabajosPorId")';
             TrabajoDashboardJs.Inicializar();
         });
 </script>

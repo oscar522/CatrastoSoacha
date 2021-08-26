@@ -168,6 +168,7 @@ namespace CatastroAvanza.Mapeadores
 
             ActividadTrabajo result = new ActividadTrabajo
             {
+                IdTrabajoPadre = model.IdTrabajoPadre,
                 Cantidad = model.Cantidad,
                 PuntosEsfuerzo = model.PuntosEsfuerzo,
                 Nombre = model.Nombre,
@@ -175,7 +176,7 @@ namespace CatastroAvanza.Mapeadores
                 CreadoPor = auditoriaModel.CreadoPor,
                 FechaCreacion = auditoriaModel.FechaCreacion,
                 FechaUltimaModificacion = auditoriaModel.FechaUltimaModificacion,
-                UltimaModificacionPor = auditoriaModel.UltimaModificacionPor,
+                UltimaModificacionPor = auditoriaModel.UltimaModificacionPor,                
                 Estado = true
             };
 

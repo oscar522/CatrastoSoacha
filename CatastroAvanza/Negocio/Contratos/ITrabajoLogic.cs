@@ -1,6 +1,7 @@
 ﻿using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Models;
 using CatastroAvanza.Models.Trabajo;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CatastroAvanza.Negocio.Contratos
@@ -50,5 +51,9 @@ namespace CatastroAvanza.Negocio.Contratos
         Task<TrabajoEstadoViewModel> ConsultarEstados();
 
         Task<DataTablesResponse> ConsultarUsuariosAsignaciones(IDataTablesRequest modelo);
+
+        Task<ICollection<TrabajoViewModel>> ConsultarTrabajosPadres(string term);
+
+        Task<ICollection<TrabajoJerarquia>> ConsultarTrabajosPorIdPadres(int IdPadre);
     }
 }

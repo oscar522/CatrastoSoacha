@@ -40,7 +40,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
                     return 0;
 
 
-                if(_contexto.AsociacionTrabajoGestor.Any(m => m.UserAsignado == model.UserAsignado))
+                if(_contexto.AsociacionTrabajoGestor.Any(m => m.UserAsignado == model.UserAsignado && m.IdActividad == model.IdActividad))
                     return 0;
 
                 AsociacionTrabajoActividadGestor entidad = _mapper.MapViewModelToEntidad(model, auditoriaModel);
@@ -425,6 +425,15 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
                 result.RolNombre = _security.GetRolesById(result.Rol)?.Name;
 
+                var asignaciones = _contexto.AsociacionTrabajoGestor.Where(m => m.IdActividad == result.Id).ToList();
+                asignaciones.ForEach(m =>
+                {
+                    var usuarioAsignado = _security.GetUsuariosByName(m?.UserAsignado);
+                    usuarioAsignado.Wait();
+                    if (usuarioAsignado.Result.Any())
+                        result.AsignadoA.Add($"{usuarioAsignado.Result.FirstOrDefault()?.Nombres} {usuarioAsignado.Result.FirstOrDefault()?.Apellidos}");
+                });                
+
                 return result;
             }
             catch (Exception ex)
@@ -483,9 +492,12 @@ namespace CatastroAvanza.Negocio.Implementaciones
                     gestion.EstaAsignado = asingacionTrabajo.Any();
                     if (gestion.EstaAsignado)
                     {
-                        var usuarioAsignado = await _security.GetUsuariosByName(asingacionTrabajo.FirstOrDefault()?.UserAsignado);
-                        if(usuarioAsignado.Any())
-                        gestion.AsignadoA =$"{usuarioAsignado.FirstOrDefault()?.Nombres} {usuarioAsignado.FirstOrDefault()?.Apellidos}";
+                        foreach (var asignacion in asingacionTrabajo)
+                        {
+                            var usuarioAsignado = await _security.GetUsuariosByName(asignacion?.UserAsignado);
+                            if (usuarioAsignado.Any())
+                                gestion.AsignadoA.Add($"{usuarioAsignado.FirstOrDefault()?.Nombres} {usuarioAsignado.FirstOrDefault()?.Apellidos}");
+                        }
                     }
                         
                 }
@@ -537,9 +549,14 @@ namespace CatastroAvanza.Negocio.Implementaciones
                     gestion.EstaAsignado = asingacionTrabajo.Any();
                     if (gestion.EstaAsignado)
                     {
-                        var usuarioAsignado = await _security.GetUsuariosByName(asingacionTrabajo.FirstOrDefault()?.UserAsignado);
-                        if (usuarioAsignado.Any())
-                            gestion.AsignadoA = $"{usuarioAsignado.FirstOrDefault()?.Nombres} {usuarioAsignado.FirstOrDefault()?.Apellidos}";
+                        foreach (var asignacion in asingacionTrabajo)
+                        {
+                            var usuarioAsignado = await _security.GetUsuariosByName(asignacion?.UserAsignado);
+                            if (usuarioAsignado.Any())
+                                gestion.AsignadoA.Add($"{usuarioAsignado.FirstOrDefault()?.Nombres} {usuarioAsignado.FirstOrDefault()?.Apellidos}");
+                        }
+                        
+                        
                     }
                 }
 
@@ -714,6 +731,82 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 string message = ex.Message;
                 return new ActualizarGestionTrabajoViewModel();
             }
+        }
+
+        public async Task<ICollection<TrabajoViewModel>> ConsultarTrabajosPadres(string term)
+        {
+            try
+            {
+                var trabajos = _contexto.Trabajo.Where(m => m.Nombre.ToUpper().Contains(term.ToUpper()));
+
+                if (!trabajos.Any())
+                    return new List<TrabajoViewModel>();
+
+                var listadoTrabajosDb = trabajos.ToList();
+
+                var listadoTrabajos = _mapper.MapListaEntidadesToListaViewModel(listadoTrabajosDb);
+
+                return listadoTrabajos;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new List<TrabajoViewModel>();
+            }
+        }
+
+        public async Task<ICollection<TrabajoJerarquia>> ConsultarTrabajosPorIdPadres(int IdPadre)
+        {
+            try
+            {
+
+                var trabajos = _contexto.Trabajo.Where(m=> m.IdTrabajoPadre == 0).ToList();
+
+                if (!trabajos.Any())
+                    return new List<TrabajoJerarquia>();
+
+                ICollection<TrabajoJerarquia> trabajosArbol = new List<TrabajoJerarquia>();
+                trabajos.ForEach(m =>
+                {
+                    TrabajoJerarquia jerarquia = new TrabajoJerarquia
+                    {
+                        text = m.Nombre,
+                        IdTrabajo = m.Id,
+                        nodes = ConsultarTrabajosHijos(m.Id)
+                    };
+
+                    trabajosArbol.Add(jerarquia);
+                });
+
+                return trabajosArbol;
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                return new List<TrabajoJerarquia>();
+            }
+        }
+
+        private ICollection<TrabajoHijos> ConsultarTrabajosHijos(int IdPadre)
+        {
+            var trabajos = _contexto.Trabajo.Where(m => m.IdTrabajoPadre == IdPadre).ToList();
+            if (!trabajos.Any())
+                return new List<TrabajoHijos>();
+
+            ICollection<TrabajoHijos> trabajosArbol = new List<TrabajoHijos>();
+            trabajos.ForEach(m =>
+            {
+                TrabajoHijos jerarquia = new TrabajoHijos
+                {
+                    text = m.Nombre,
+                    IdTrabajo = m.Id,
+                    nodes = ConsultarTrabajosHijos(m.Id)
+                };
+
+                trabajosArbol.Add(jerarquia);
+            });
+
+            return trabajosArbol;
         }
     }
 }

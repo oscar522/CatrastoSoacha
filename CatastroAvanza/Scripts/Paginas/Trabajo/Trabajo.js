@@ -2,13 +2,19 @@
     urlObtenerTrabajosAdministrador: "",
     urlActualizarTrabajo: "",
     urlEliminarTrabajo: "",
-    urlAsignarTrabajo:"",
+    urlAsignarTrabajo: "",
+    urlObtenerListadoTrabajos: "",
+    urlObtenerListadoTrabajosPorId: "",
+    urlObtenerTrabajoPorId: "",
     Inicializar: function () {
-        ListarTrabajos();
+        /*ListarTrabajos();*/
+        ListarTrabajosPadres();
         $('#btn-confirm').click(function () {
             if ($("#IdEliminar").val() != '')
                 EliminarTrabajo();
         });
+        ListarTrabajosPorIdPadres(0);
+
     }
 }
 
@@ -152,6 +158,111 @@ function EliminarTrabajo() {
         success: function (states) {
             if (states == "Ok")
                 window.location.reload();
+        },
+        error: function (ex) {
+            console.log(ex.responseText);
+        }
+    });
+}
+
+function ListarTrabajosPadres() {
+    $('#lsTrabajos').autocomplete(
+        {
+            minLength: 3,
+            select: function (event, ui) {
+                $('#IdTrabajoPadre').val(ui.item.Id);
+                $('#lsTrabajos').val(ui.item.Nombre);
+                return false;
+            },
+            source: function (request, response) {
+                $.ajax({
+                    url: TrabajoJs.urlObtenerListadoTrabajos,
+                    dataType: "json",
+                    method: "Post",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            }
+        }
+    ).autocomplete("instance")._renderItem = function (ul, item) {
+        return $("<li>")
+            .append("<div>Trabajo :" + item.Nombre)
+            .appendTo(ul);
+    };
+
+}
+
+function ListarTrabajosPorIdPadres(idPadre) {
+    $.ajax({
+        type: 'POST',
+        url: TrabajoJs.urlObtenerListadoTrabajosPorId,
+        dataType: 'json',
+        data: { IdPadre: idPadre },
+        success: function (data) {
+            $('#tree').treeview({
+                data: data,
+                levels: 1000,
+                expandIcon: "fa fa-plus",
+                collapseIcon: "fa fa-minus",                
+                highlightSelected: true,
+                showTags: true,
+                onNodeSelected: function (event, data) {
+                    VerTrabajo(data.IdTrabajo)
+                }
+            });
+        },
+        error: function (ex) {
+            console.log(ex.responseText);
+        }
+    });    
+}
+
+function VerTrabajo(id) {
+    $.ajax({
+        type: 'POST',
+        url: TrabajoJs.urlObtenerTrabajoPorId,
+        dataType: 'json',
+        data: { id: id },
+        success: function (data) {
+            $('#NombreTrabajoTexto').empty();
+            $('#NombreTrabajoTexto').html(data.Nombre);
+
+            $('#RolTrabajoTexto').empty();
+            $('#RolTrabajoTexto').html(data.RolNombre);
+
+            $('#CantidadTrabajoTexto').empty();
+            $('#CantidadTrabajoTexto').html(data.Cantidad);
+
+            $('#PuntosTrabajoTexto').empty();
+            $('#PuntosTrabajoTexto').html(data.PuntosEsfuerzo);
+
+            $('#EstadoTrabajoTexto').empty();
+            $('#EstadoTrabajoTexto').html(data.Estado);
+            
+            $('#FechaTrabajoTexto').empty();
+            $('#FechaTrabajoTexto').html(data.Estado);
+
+            $('#AsignadoTrabajoTexto').empty();
+            $(data.AsignadoA).each(function (i) {
+                $('#AsignadoTrabajoTexto').append(" - "+  data.AsignadoA[i] + "<br />");
+            });
+            if (data.Estado == 'Activo') {
+                $('#btn_asignar').attr('href', TrabajoJs.urlAsignarTrabajo + "?idTrabajo=" + data.Id);
+                $('#btn_actualizar').attr('href', TrabajoJs.urlActualizarTrabajo + "?idTrabajo=" + data.Id);
+                $('#btn_accion').removeClass('invisible');
+                $("#IdEliminar").val(data.Id);
+            } else {
+                $('#btn_asignar').removeAttr('href');
+                $('#btn_actualizar').removeAttr('href');
+                $('#btn_eliminar').attr('disabled', 'disabled');
+                $("#IdEliminar").val('');
+                $('#btn_accion').addClass('invisible');
+            }
+            
         },
         error: function (ex) {
             console.log(ex.responseText);

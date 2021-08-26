@@ -21,5 +21,7 @@ namespace CatastroAvanza.Models.Trabajo
         public int PuntosEsfuerzo { get; set; }
 
         public SelectList Roles { get; set; }
+
+        public int IdTrabajoPadre { get; set; }        
     }
 }

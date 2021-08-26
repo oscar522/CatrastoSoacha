@@ -283,5 +283,26 @@ namespace CatastroAvanza.Controllers
             var tabla = await _trabajo.ConsultarUsuariosAsignaciones(modelo);
             return Json(tabla, JsonRequestBehavior.AllowGet);
         }
+
+        public async Task<ActionResult> ConsultarTrabajosPadres(string term)
+        {
+            var trabajos = await _trabajo.ConsultarTrabajosPadres(term);
+
+            return Json(trabajos, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> ConsultarTrabajosPorPadre(int IdPadre)
+        {
+            var trabajos = await _trabajo.ConsultarTrabajosPorIdPadres(IdPadre);
+
+            return Json(trabajos, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> ConsultarTrabajosPorId(int id)
+        {
+            var trabajo = await _trabajo.ConsultarTrabajoPorId(id);
+
+            return Json(trabajo, JsonRequestBehavior.AllowGet);
+        }
     }
 }

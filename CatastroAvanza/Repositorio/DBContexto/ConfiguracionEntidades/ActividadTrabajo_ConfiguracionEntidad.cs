@@ -15,6 +15,9 @@ namespace CatastroAvanza.Repositorio.DBContexto.ConfiguracionEntidades
                .IsRequired()
                .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
+            Property(s => s.IdTrabajoPadre)
+                .IsOptional();
+
             Property(s => s.Nombre)
                 .HasMaxLength(256)
                 .IsRequired();

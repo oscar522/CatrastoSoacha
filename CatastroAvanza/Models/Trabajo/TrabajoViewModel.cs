@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CatastroAvanza.Models.Trabajo
 {
     public class TrabajoViewModel
     {
+
+        public TrabajoViewModel()
+        {
+            AsignadoA = new List<string>();
+        }
         public int Id { get; set; }
 
         public string Nombre { get; set; }
@@ -26,7 +32,8 @@ namespace CatastroAvanza.Models.Trabajo
 
         public DateTime FechaUltimaModificacion { get; set; }
 
-        public string AsignadoA { get; set; }
+
+        public ICollection<string> AsignadoA { get; set; }
 
         public bool EstaAsignado { get; set; }
 

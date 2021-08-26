@@ -332,6 +332,8 @@
     <Compile Include="Models\Trabajo\GestionTrabajoViewModel.cs" />
     <Compile Include="Models\Trabajo\TrabajoEstadoValueViewModel.cs" />
     <Compile Include="Models\Trabajo\TrabajoEstadoViewModel.cs" />
+    <Compile Include="Models\Trabajo\TrabajoHijos.cs" />
+    <Compile Include="Models\Trabajo\TrabajoJerarquia.cs" />
     <Compile Include="Models\Trabajo\TrabajoViewModel.cs" />
     <Compile Include="Models\Trabajo\TrabajoVolumenViewModel.cs" />
     <Compile Include="Models\Trabajo\UsuarioTrabajoViewModel.cs" />
@@ -455,6 +457,10 @@
     <Compile Include="Repositorio\DBContexto\Migraciones\202108200245185_columna_estado_carga_archivo_tabla_archivo.designer.cs">
       <DependentUpon>202108200245185_columna_estado_carga_archivo_tabla_archivo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositorio\DBContexto\Migraciones\202108260142028_Add_IdtrabajoParent_trabajo.cs" />
+    <Compile Include="Repositorio\DBContexto\Migraciones\202108260142028_Add_IdtrabajoParent_trabajo.designer.cs">
+      <DependentUpon>202108260142028_Add_IdtrabajoParent_trabajo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositorio\DBContexto\Migraciones\Configuration.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -490,6 +496,8 @@
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-treeview.css" />
+    <Content Include="Content\bootstrap-treeview.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CatastroAvanza.css" />
@@ -906,6 +914,8 @@
     <Content Include="Scripts\addons\datatables.js" />
     <Content Include="Scripts\addons\datatables.min.js" />
     <Content Include="Scripts\addons\jquery.dataTables.min.js" />
+    <Content Include="Scripts\bootstrap-treeview.js" />
+    <Content Include="Scripts\bootstrap-treeview.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1205,6 +1215,7 @@
     <Content Include="Content\DataTables\extensions\RowReorder\css\semanticui.scss" />
     <Content Include="Content\DataTables\extensions\Buttons\css\mixins.scss" />
     <Content Include="Content\DataTables\extensions\Buttons\css\common.scss" />
+    <Content Include="App_Code\GlyphIcon.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -1869,6 +1880,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202108200245185_columna_estado_carga_archivo_tabla_archivo.resx">
       <DependentUpon>202108200245185_columna_estado_carga_archivo_tabla_archivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositorio\DBContexto\Migraciones\202108260142028_Add_IdtrabajoParent_trabajo.resx">
+      <DependentUpon>202108260142028_Add_IdtrabajoParent_trabajo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
