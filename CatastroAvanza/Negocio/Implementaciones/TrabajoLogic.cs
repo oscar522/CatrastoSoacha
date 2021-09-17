@@ -808,5 +808,184 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
             return trabajosArbol;
         }
+
+        public async Task<GraficaTrabajoViewModel> TraerConteoActividadesPorEstado(int IdPadre)
+        {
+            var ConteoAsignacionesEstados = new GraficaTrabajoViewModel ();
+            var DiccionarioConteos = new Dictionary<string, int>();
+
+            var estados = _contexto.Catalogo.Where(m => m.Tipo == nameof(CatalogosEnum.EstadoGestion)).ToList();
+
+            var trabajos = _contexto.Trabajo.Where(m => m.Id == IdPadre).ToList();
+            if (!trabajos.Any())
+                return ConteoAsignacionesEstados;
+
+            var trabajo =trabajos.FirstOrDefault();
+            if (trabajo == null)
+                return ConteoAsignacionesEstados;
+
+            ConteoAsignacionesEstados.name = trabajo.Nombre;            
+
+            var asignaciones = _contexto.AsociacionTrabajoGestor.Where(m => m.IdActividad == trabajo.Id).ToList();
+
+            if (!asignaciones.Any())
+                return ConteoAsignacionesEstados;            
+            
+            asignaciones.ForEach(n =>
+            {
+                var UltimaGestion = _contexto.TrabajoGestion.Where(m => m.IdAsignacion == n.Id && m.UltimaModificacionPor == n.UserAsignado  ).OrderByDescending(m=> m.FechaUltimaModificacion).FirstOrDefault();
+                if(UltimaGestion == null)
+                {                    
+                    if (!DiccionarioConteos.Any(dc => dc.Key == "No Iniciado"))
+                        DiccionarioConteos.Add("No Iniciado", 1);
+                    else
+                        DiccionarioConteos["No Iniciado"] += 1;
+                }
+                else
+                {
+                    int.TryParse(UltimaGestion.EstadoGestion, out int estadoId);
+                    var estado = estados.FirstOrDefault(e => e.Id == estadoId);
+                    if (!DiccionarioConteos.Any(dc => dc.Key == estado.Nombre))
+                        DiccionarioConteos.Add(estado.Nombre, 1);
+                    else
+                        DiccionarioConteos[estado.Nombre] += 1;
+                }                   
+            });
+
+            ConteoAsignacionesEstados.data = DiccionarioConteos.Select(m => new GraficaTrabajoDataViewModel { name = m.Key, y = m.Value }).ToList();
+
+            return ConteoAsignacionesEstados;
+        }
+
+        public async Task<GraficaTrabajoViewModel> TraerConteoActividadesPorEstadoYFecha(int IdPadre, DateTime fecha)
+        {
+            var ConteoAsignacionesEstados = new GraficaTrabajoViewModel();
+            var DiccionarioConteos = new Dictionary<string, int>();
+
+            var estados = _contexto.Catalogo.Where(m => m.Tipo == nameof(CatalogosEnum.EstadoGestion)).ToList();
+
+            var trabajos = _contexto.Trabajo.Where(m => m.Id == IdPadre).ToList();
+            if (!trabajos.Any())
+                return ConteoAsignacionesEstados;
+
+            var trabajo = trabajos.FirstOrDefault();
+            if (trabajo == null)
+                return ConteoAsignacionesEstados;
+
+            ConteoAsignacionesEstados.name = trabajo.Nombre;
+
+            var asignaciones = _contexto.AsociacionTrabajoGestor.Where(m => m.IdActividad == trabajo.Id).ToList();
+
+            if (!asignaciones.Any())
+                return ConteoAsignacionesEstados;
+
+            asignaciones.ForEach(n =>
+            {
+                var UltimaGestion = _contexto.TrabajoGestion.Where(m => m.IdAsignacion == n.Id && m.UltimaModificacionPor == n.UserAsignado && m.FechaUltimaModificacion <= fecha).OrderByDescending(m => m.FechaUltimaModificacion).FirstOrDefault();
+                if (UltimaGestion == null)
+                {
+                    if (!DiccionarioConteos.Any(dc => dc.Key == "No Iniciado"))
+                        DiccionarioConteos.Add("No Iniciado", 1);
+                    else
+                        DiccionarioConteos["No Iniciado"] += 1;
+                }
+                else
+                {
+                    int.TryParse(UltimaGestion.EstadoGestion, out int estadoId);
+                    var estado = estados.FirstOrDefault(e => e.Id == estadoId);
+                    if (!DiccionarioConteos.Any(dc => dc.Key == estado.Nombre))
+                        DiccionarioConteos.Add(estado.Nombre, 1);
+                    else
+                        DiccionarioConteos[estado.Nombre] += 1;
+                }
+            });
+
+            ConteoAsignacionesEstados.data = DiccionarioConteos.Select(m => new GraficaTrabajoDataViewModel { name = m.Key, y = m.Value }).ToList();
+
+            return ConteoAsignacionesEstados;
+        }
+
+        public async Task<GraficaTrabajoViewModel> TraerConteoUsuariosAsignadosActividad()
+        {
+            var ConteoAsignacionesEstados = new GraficaTrabajoViewModel();
+            var DiccionarioConteos = new Dictionary<string, int>();
+
+            var estados = _contexto.Catalogo.Where(m => m.Tipo == nameof(CatalogosEnum.EstadoGestion)).ToList();
+
+            var trabajos = _contexto.Trabajo.Where(m => m.IdTrabajoPadre == 0).ToList();
+
+            var trabajo = trabajos.FirstOrDefault();
+            if (trabajo == null)
+                return ConteoAsignacionesEstados;
+
+            ConteoAsignacionesEstados.name = trabajo.Nombre;
+
+            var asignacionesCount = _contexto.AsociacionTrabajoGestor                
+                .GroupBy(m => m.IdActividad)
+                .Select(t => new { actividadId = t.Key, totalUsers = t.Count() }).ToList();
+
+            if (!asignacionesCount.Any())
+                return ConteoAsignacionesEstados;
+
+            var trabajosTotales = _contexto.Trabajo.ToList();
+
+            foreach (var item in asignacionesCount)
+            {
+                var trabajoDef = trabajosTotales.Where(m => m.Id == item.actividadId).FirstOrDefault();
+                if (trabajoDef != null)
+                {
+                    ConteoAsignacionesEstados.data.Add(new GraficaTrabajoDataViewModel { name = trabajoDef.Nombre, y = item.totalUsers });
+                }
+            }
+
+            return ConteoAsignacionesEstados;
+        }
+
+        public async Task<GraficaTrabajoViewModel> TraerConteoTotalProyecto()
+        {
+            var ConteoAsignacionesEstados = new GraficaTrabajoViewModel();
+            var DiccionarioConteos = new Dictionary<string, int>();
+
+            var estados = _contexto.Catalogo.Where(m => m.Tipo == nameof(CatalogosEnum.EstadoGestion)).ToList();
+
+            var trabajos = _contexto.Trabajo.Where(m => m.IdTrabajoPadre == 0).ToList();
+            if (!trabajos.Any())
+                return ConteoAsignacionesEstados;
+
+            var trabajo = trabajos.FirstOrDefault();
+            if (trabajo == null)
+                return ConteoAsignacionesEstados;
+
+            ConteoAsignacionesEstados.name = trabajo.Nombre;            
+
+            var asignaciones = _contexto.AsociacionTrabajoGestor.ToList();
+
+            var gestiones = _contexto.TrabajoGestion.ToList();            
+
+            asignaciones.ForEach(n =>
+            {
+                var UltimaGestion = gestiones.LastOrDefault(m => m.IdAsignacion == n.Id && m.UltimaModificacionPor == n.UserAsignado);
+                if (UltimaGestion == null)
+                {
+                    if (!DiccionarioConteos.Any(dc => dc.Key == "No Iniciado"))
+                        DiccionarioConteos.Add("No Iniciado", 1);
+                    else
+                        DiccionarioConteos["No Iniciado"] += 1;
+                }
+                else
+                {
+                    int.TryParse(UltimaGestion.EstadoGestion, out int estadoId);
+                    var estado = estados.FirstOrDefault(e => e.Id == estadoId);
+                    if (!DiccionarioConteos.Any(dc => dc.Key == estado.Nombre.Trim()))
+                        DiccionarioConteos.Add(estado.Nombre.Trim(), 1);
+                    else
+                        DiccionarioConteos[estado.Nombre.Trim()] += 1;
+                }
+            });
+
+            ConteoAsignacionesEstados.data = DiccionarioConteos.Select(m => new GraficaTrabajoDataViewModel { name = m.Key, y = m.Value }).ToList();
+
+            return ConteoAsignacionesEstados;
+        }
     }
 }

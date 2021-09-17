@@ -2,6 +2,8 @@
 using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Models.Trabajo;
 using CatastroAvanza.Negocio.Contratos;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -284,6 +286,7 @@ namespace CatastroAvanza.Controllers
             return Json(tabla, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         public async Task<ActionResult> ConsultarTrabajosPadres(string term)
         {
             var trabajos = await _trabajo.ConsultarTrabajosPadres(term);
@@ -291,6 +294,7 @@ namespace CatastroAvanza.Controllers
             return Json(trabajos, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         public async Task<ActionResult> ConsultarTrabajosPorPadre(int IdPadre)
         {
             var trabajos = await _trabajo.ConsultarTrabajosPorIdPadres(IdPadre);
@@ -298,11 +302,48 @@ namespace CatastroAvanza.Controllers
             return Json(trabajos, JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
         public async Task<ActionResult> ConsultarTrabajosPorId(int id)
         {
             var trabajo = await _trabajo.ConsultarTrabajoPorId(id);
 
             return Json(trabajo, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> ConsultarGraficaActividadesPorEstado(int IdActividadPadre)
+        {
+            var informacion = await _trabajo.TraerConteoActividadesPorEstado(IdActividadPadre);            
+
+            return Json(informacion, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> ConsultarGraficaActividadesPorEstadoYFecha(int IdActividadPadre, DateTime fecha)
+        {
+            var informacion = await _trabajo.TraerConteoActividadesPorEstadoYFecha(IdActividadPadre, fecha);
+
+            return Json(informacion, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> ConsultarAsignacionesProyecto()
+        {
+            var informacion = await _trabajo.TraerConteoUsuariosAsignadosActividad();
+
+            return Json(informacion, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> ConsultarGraficaEstadoProyecto()
+        {            
+            var informacion = await _trabajo.TraerConteoTotalProyecto();
+
+            return Json(informacion, JsonRequestBehavior.AllowGet);                        
         }
     }
 }

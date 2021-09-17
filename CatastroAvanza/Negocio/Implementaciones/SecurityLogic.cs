@@ -109,7 +109,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
         {
             try
             {
-                var users = _securityManager.Users.Where(m=> m.UserName.Contains(userName));
+                var users = _securityManager.Users.Where(m=> m.UserName.Contains(userName) || m.Nombres.Contains(userName) || m.Apellidos.Contains(userName));
 
                 if (!users.Any())
                     return new List<UserViewModel>();

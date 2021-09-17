@@ -4,12 +4,21 @@
     urlEstadoGestion: "",
     urlUsuarioGestion: "",
     urlObtenerTrabajoPorId: "",
-    urlObtenerListadoTrabajosPorId:"",
+    urlObtenerListadoTrabajosPorId: "",
+    urlObtenerActividadesPorEstado: "",
+    urlObtenerActividadesPorEstadoYFecha:"",
+    urlObtenerListadoTrabajos: "",
+    urlObtenerUsuariosAsignadosProyecto: "",
+    urlObtenerEstadoProyecto:"",
     Inicializar: function () {
         VolumenBoard();
         EstadoBoard();
         UsuarioBoard();
         ListarTrabajosPorIdPadres(0);
+        ListarTrabajosPadres();
+        $("#btnCargarGrafica").click(ObternerInformacionEstadoActividadPorFecha);
+        ObternerEstadoProyecto();
+        ObternerUsuariosAsignadosProyecto();
     }
 }
 
@@ -95,6 +104,7 @@ function ListarTrabajosPorIdPadres(idPadre) {
                     VerTrabajo(data.IdTrabajo)
                 }
             });
+            $('#tree').treeview('collapseAll', { silent: true });
         },
         error: function (ex) {
             console.log(ex.responseText);
@@ -148,5 +158,281 @@ function VerTrabajo(id) {
         error: function (ex) {
             console.log(ex.responseText);
         }
+    });
+}
+
+function ObternerInformacionEstadoActividad(idActividad) {
+    $.ajax({
+        type: 'POST',
+        url: TrabajoDashboardJs.urlObtenerActividadesPorEstado,
+        dataType: 'json',
+        data: { IdActividadPadre: idActividad },
+        success: function (data) {
+            ActividadesEstado(data);            
+        },
+        error: function (ex) {
+            console.log(ex.responseText);
+        }
+    });
+}
+
+function ActividadesEstado(dataSerie) {
+    // Create the chart
+    Highcharts.chart('container', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Actividades por estado'
+        },
+        subtitle: {
+            text: 'Seleccione una actividad'
+        },
+
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            },
+            point: {
+                valueSuffix: ''
+            }
+        },
+
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.y}'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> del total<br/>'
+        },
+
+        series: [dataSerie],
+    });
+}
+
+function ListarTrabajosPadres() {
+    $('#lsTrabajos').autocomplete(
+        {
+            minLength: 3,
+            select: function (event, ui) {                
+                $('#lsTrabajos').val(ui.item.Nombre);
+                ObternerInformacionEstadoActividad(ui.item.Id)
+                return false;
+            },
+            source: function (request, response) {
+                $.ajax({
+                    url: TrabajoDashboardJs.urlObtenerListadoTrabajos,
+                    dataType: "json",
+                    method: "Post",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            }
+        }
+    ).autocomplete("instance")._renderItem = function (ul, item) {
+        return $("<li>")
+            .append("<div>Trabajo :" + item.Nombre)
+            .appendTo(ul);
+    };
+
+    $('#lsTrabajos2').autocomplete(
+        {
+            minLength: 3,
+            select: function (event, ui) {
+                $('#lsTrabajos2').val(ui.item.Nombre);
+                $('#lsTrabajos2id').val(ui.item.Id);
+                return false;
+            },
+            source: function (request, response) {
+                $.ajax({
+                    url: TrabajoDashboardJs.urlObtenerListadoTrabajos,
+                    dataType: "json",
+                    method: "Post",
+                    data: {
+                        term: request.term
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            }
+        }
+    ).autocomplete("instance")._renderItem = function (ul, item) {
+        return $("<li>")
+            .append("<div>Trabajo :" + item.Nombre)
+            .appendTo(ul);
+    };1
+}
+
+function ObternerInformacionEstadoActividadPorFecha() {    
+    $.ajax({
+        type: 'POST',
+        url: TrabajoDashboardJs.urlObtenerActividadesPorEstadoYFecha,
+        dataType: 'json',
+        data: { IdActividadPadre: $("#lsTrabajos2id").val(), fecha: $("#fechalsTrabajos2").val() },
+        success: function (data) {
+            ActividadesEstadoYFecha(data);
+        },
+        error: function (ex) {
+            console.log(ex.responseText);
+        }
+    });
+}
+
+function ActividadesEstadoYFecha(dataSerie) {
+    // Create the chart
+    Highcharts.chart('container2', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Actividades por estado y fecha'
+        },
+        subtitle: {
+            text: 'Seleccione una actividad y una fecha'
+        },
+
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            },
+            point: {
+                valueSuffix: ''
+            }
+        },
+
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.y}'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> del total<br/>'
+        },
+
+        series: [dataSerie],
+    });
+}
+
+function ObternerUsuariosAsignadosProyecto() {
+    $.ajax({
+        type: 'POST',
+        url: TrabajoDashboardJs.urlObtenerUsuariosAsignadosProyecto,
+        dataType: 'json',        
+        success: function (data) {
+            UsuariosAsignadosProyecto(data);
+        },
+        error: function (ex) {
+            console.log(ex.responseText);
+        }
+    });
+}
+
+function UsuariosAsignadosProyecto(dataSerie) {
+    // Create the chart
+    Highcharts.chart('container3', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Usuarios asignados a los proyectos'
+        },
+        subtitle: {
+            text: 'Seleccione una actividad'
+        },
+
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            },
+            point: {
+                valueSuffix: ''
+            }
+        },
+
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.y}'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> del total<br/>'
+        },
+
+        series: [dataSerie],
+    });
+}
+
+function ObternerEstadoProyecto() {
+    $.ajax({
+        type: 'POST',
+        url: TrabajoDashboardJs.urlObtenerEstadoProyecto,
+        dataType: 'json',
+        success: function (data) {
+            EstadoProyecto(data);
+        },
+        error: function (ex) {
+            console.log(ex.responseText);
+        }
+    });
+}
+
+function EstadoProyecto(dataSerie) {
+    // Create the chart
+    Highcharts.chart('container4', {
+        chart: {
+            type: 'pie'
+        },
+        title: {
+            text: 'Estado asignaciones actividades proyecto'
+        },
+        subtitle: {
+            text: ''
+        },
+
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            },
+            point: {
+                valueSuffix: ''
+            }
+        },
+
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}: {point.y}'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> del total<br/>'
+        },
+
+        series: [dataSerie],
     });
 }

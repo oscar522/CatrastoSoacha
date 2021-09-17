@@ -330,6 +330,8 @@
     <Compile Include="Models\Trabajo\CrearGestionTrabajoViewModel.cs" />
     <Compile Include="Models\Trabajo\CrearTrabajoViewModel.cs" />
     <Compile Include="Models\Trabajo\GestionTrabajoViewModel.cs" />
+    <Compile Include="Models\Trabajo\GraficaTrabajoDataViewModel.cs" />
+    <Compile Include="Models\Trabajo\GraficaTrabajoViewModel.cs" />
     <Compile Include="Models\Trabajo\TrabajoEstadoValueViewModel.cs" />
     <Compile Include="Models\Trabajo\TrabajoEstadoViewModel.cs" />
     <Compile Include="Models\Trabajo\TrabajoHijos.cs" />

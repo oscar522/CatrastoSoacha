@@ -49,7 +49,7 @@ namespace CatastroAvanza.Negocio.Implementaciones
 
                 if (!string.IsNullOrEmpty(modelo.Search.Value))
                 {
-                    archivos = archivos.Where(m => m.Nombre == modelo.Search.Value);
+                    archivos = archivos.Where(m => m.Nombre.Contains(modelo.Search.Value));
                 }
 
                 if (orderByDescending)

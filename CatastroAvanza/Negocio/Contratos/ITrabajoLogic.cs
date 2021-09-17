@@ -1,6 +1,7 @@
 ﻿using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Models;
 using CatastroAvanza.Models.Trabajo;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -55,5 +56,13 @@ namespace CatastroAvanza.Negocio.Contratos
         Task<ICollection<TrabajoViewModel>> ConsultarTrabajosPadres(string term);
 
         Task<ICollection<TrabajoJerarquia>> ConsultarTrabajosPorIdPadres(int IdPadre);
+
+        Task<GraficaTrabajoViewModel> TraerConteoActividadesPorEstado(int IdPadre);
+
+        Task<GraficaTrabajoViewModel> TraerConteoActividadesPorEstadoYFecha(int IdPadre, DateTime fecha);
+
+        Task<GraficaTrabajoViewModel> TraerConteoUsuariosAsignadosActividad();
+
+        Task<GraficaTrabajoViewModel> TraerConteoTotalProyecto();
     }
 }

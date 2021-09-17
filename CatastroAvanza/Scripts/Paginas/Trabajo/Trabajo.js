@@ -214,6 +214,7 @@ function ListarTrabajosPorIdPadres(idPadre) {
                     VerTrabajo(data.IdTrabajo)
                 }
             });
+            $('#tree').treeview('collapseAll', { silent: true });
         },
         error: function (ex) {
             console.log(ex.responseText);
