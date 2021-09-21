@@ -14,8 +14,7 @@
         VolumenBoard();
         EstadoBoard();
         UsuarioBoard();
-        ListarTrabajosPorIdPadres(0);
-        ListarTrabajosPadres();
+        ListarTrabajosPorIdPadres(0);        
         $("#btnCargarGrafica").click(ObternerInformacionEstadoActividadPorFecha);
         ObternerEstadoProyecto();
         ObternerUsuariosAsignadosProyecto();
@@ -101,7 +100,9 @@ function ListarTrabajosPorIdPadres(idPadre) {
                 highlightSelected: true,
                 showTags: true,
                 onNodeSelected: function (event, data) {
-                    VerTrabajo(data.IdTrabajo)
+                    VerTrabajo(data.IdTrabajo);
+                    ObternerInformacionEstadoActividad(data.IdTrabajo);
+                    ObternerInformacionEstadoActividadPorFecha(data.IdTrabajo);
                 }
             });
             $('#tree').treeview('collapseAll', { silent: true });
@@ -140,19 +141,7 @@ function VerTrabajo(id) {
             $('#AsignadoTrabajoTexto').empty();
             $(data.AsignadoA).each(function (i) {
                 $('#AsignadoTrabajoTexto').append(" - " + data.AsignadoA[i] + "<br />");
-            });
-            if (data.Estado == 'Activo') {
-                $('#btn_asignar').attr('href', TrabajoJs.urlAsignarTrabajo + "?idTrabajo=" + data.Id);
-                $('#btn_actualizar').attr('href', TrabajoJs.urlActualizarTrabajo + "?idTrabajo=" + data.Id);
-                $('#btn_accion').removeClass('invisible');
-                $("#IdEliminar").val(data.Id);
-            } else {
-                $('#btn_asignar').removeAttr('href');
-                $('#btn_actualizar').removeAttr('href');
-                $('#btn_eliminar').attr('disabled', 'disabled');
-                $("#IdEliminar").val('');
-                $('#btn_accion').addClass('invisible');
-            }
+            });           
 
         },
         error: function (ex) {
@@ -186,7 +175,7 @@ function ActividadesEstado(dataSerie) {
             text: 'Actividades por estado'
         },
         subtitle: {
-            text: 'Seleccione una actividad'
+            text: 'Actividad Seleccionada <strong>' + dataSerie.name + '</strong></br > estado de las asignaciones de la actividad'
         },
 
         accessibility: {
@@ -216,70 +205,12 @@ function ActividadesEstado(dataSerie) {
     });
 }
 
-function ListarTrabajosPadres() {
-    $('#lsTrabajos').autocomplete(
-        {
-            minLength: 3,
-            select: function (event, ui) {                
-                $('#lsTrabajos').val(ui.item.Nombre);
-                ObternerInformacionEstadoActividad(ui.item.Id)
-                return false;
-            },
-            source: function (request, response) {
-                $.ajax({
-                    url: TrabajoDashboardJs.urlObtenerListadoTrabajos,
-                    dataType: "json",
-                    method: "Post",
-                    data: {
-                        term: request.term
-                    },
-                    success: function (data) {
-                        response(data);
-                    }
-                });
-            }
-        }
-    ).autocomplete("instance")._renderItem = function (ul, item) {
-        return $("<li>")
-            .append("<div>Trabajo :" + item.Nombre)
-            .appendTo(ul);
-    };
-
-    $('#lsTrabajos2').autocomplete(
-        {
-            minLength: 3,
-            select: function (event, ui) {
-                $('#lsTrabajos2').val(ui.item.Nombre);
-                $('#lsTrabajos2id').val(ui.item.Id);
-                return false;
-            },
-            source: function (request, response) {
-                $.ajax({
-                    url: TrabajoDashboardJs.urlObtenerListadoTrabajos,
-                    dataType: "json",
-                    method: "Post",
-                    data: {
-                        term: request.term
-                    },
-                    success: function (data) {
-                        response(data);
-                    }
-                });
-            }
-        }
-    ).autocomplete("instance")._renderItem = function (ul, item) {
-        return $("<li>")
-            .append("<div>Trabajo :" + item.Nombre)
-            .appendTo(ul);
-    };1
-}
-
-function ObternerInformacionEstadoActividadPorFecha() {    
+function ObternerInformacionEstadoActividadPorFecha(idActividad) {    
     $.ajax({
         type: 'POST',
         url: TrabajoDashboardJs.urlObtenerActividadesPorEstadoYFecha,
         dataType: 'json',
-        data: { IdActividadPadre: $("#lsTrabajos2id").val(), fecha: $("#fechalsTrabajos2").val() },
+        data: { IdActividadPadre: idActividad },
         success: function (data) {
             ActividadesEstadoYFecha(data);
         },
@@ -353,7 +284,7 @@ function UsuariosAsignadosProyecto(dataSerie) {
             text: 'Usuarios asignados a los proyectos'
         },
         subtitle: {
-            text: 'Seleccione una actividad'
+            text: ''
         },
 
         accessibility: {
@@ -369,7 +300,7 @@ function UsuariosAsignadosProyecto(dataSerie) {
             series: {
                 dataLabels: {
                     enabled: true,
-                    format: '{point.name}: {point.y}'
+                    format: '#Usuarios: {point.y}'
                 }
             }
         },

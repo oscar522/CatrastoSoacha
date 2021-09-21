@@ -1,4 +1,4 @@
-﻿using CatastroAvanza.Enumerations;
+﻿ using CatastroAvanza.Enumerations;
 using CatastroAvanza.Helpers.DataTableHelper;
 using CatastroAvanza.Models.Trabajo;
 using CatastroAvanza.Negocio.Contratos;
@@ -321,9 +321,9 @@ namespace CatastroAvanza.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> ConsultarGraficaActividadesPorEstadoYFecha(int IdActividadPadre, DateTime fecha)
+        public async Task<ActionResult> ConsultarGraficaActividadesPorEstadoYFecha(int IdActividadPadre)
         {
-            var informacion = await _trabajo.TraerConteoActividadesPorEstadoYFecha(IdActividadPadre, fecha);
+            var informacion = await _trabajo.TraerConteoActividadesPorEstadoYFecha(IdActividadPadre);
 
             return Json(informacion, JsonRequestBehavior.AllowGet);
         }

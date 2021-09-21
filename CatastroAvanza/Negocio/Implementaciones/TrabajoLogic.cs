@@ -78,6 +78,14 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 if (!trabajo.Estado)
                     return 0;
 
+                if(!int.TryParse(model.EstadoGestion, out int idestado))
+                    return 0;
+
+                var estados = _contexto.Catalogo.Where(m => m.Tipo == nameof(CatalogosEnum.EstadoGestion) && m.Id == idestado).ToList();
+
+                if (estados.Any() && estados.FirstOrDefault()?.Nombre == "Finalizado")
+                    trabajoGestion.Estado = false;
+
                 ActividadTrabajoGestion entidad = _mapper.MapViewModelToEntidad(model, auditoriaModel);
 
                 _contexto.TrabajoGestion.Add(entidad);
@@ -845,10 +853,10 @@ namespace CatastroAvanza.Negocio.Implementaciones
                 {
                     int.TryParse(UltimaGestion.EstadoGestion, out int estadoId);
                     var estado = estados.FirstOrDefault(e => e.Id == estadoId);
-                    if (!DiccionarioConteos.Any(dc => dc.Key == estado.Nombre))
-                        DiccionarioConteos.Add(estado.Nombre, 1);
+                    if (!DiccionarioConteos.Any(dc => dc.Key == estado?.Nombre))
+                        DiccionarioConteos.Add(estado?.Nombre, 1);
                     else
-                        DiccionarioConteos[estado.Nombre] += 1;
+                        DiccionarioConteos[estado?.Nombre] += 1;
                 }                   
             });
 
@@ -857,50 +865,45 @@ namespace CatastroAvanza.Negocio.Implementaciones
             return ConteoAsignacionesEstados;
         }
 
-        public async Task<GraficaTrabajoViewModel> TraerConteoActividadesPorEstadoYFecha(int IdPadre, DateTime fecha)
+        public async Task<GraficaTrabajoViewModel> TraerConteoActividadesPorEstadoYFecha(int IdPadre)
         {
             var ConteoAsignacionesEstados = new GraficaTrabajoViewModel();
             var DiccionarioConteos = new Dictionary<string, int>();
 
-            var estados = _contexto.Catalogo.Where(m => m.Tipo == nameof(CatalogosEnum.EstadoGestion)).ToList();
+            var fechaHoy = DateTime.Now.Date;
+            var fechadehace3dias = DateTime.Now.Date.AddDays(-3);
+            var fechadefutura3dias = DateTime.Now.Date.AddDays(3);
 
-            var trabajos = _contexto.Trabajo.Where(m => m.Id == IdPadre).ToList();
-            if (!trabajos.Any())
-                return ConteoAsignacionesEstados;
+            var asignacionesVencidas = _contexto.AsociacionTrabajoGestor.Where(m=>
+                m.IdActividad == IdPadre &&  
+                m.Estado == true && 
+                m.FechaEsperadaFinalizacionAsignacion <= fechaHoy).Count();
 
-            var trabajo = trabajos.FirstOrDefault();
-            if (trabajo == null)
-                return ConteoAsignacionesEstados;
+            var asignacionesVencidasMasde3Dias = _contexto.AsociacionTrabajoGestor.Where(m => 
+                m.IdActividad == IdPadre && 
+                m.Estado == true && 
+                m.FechaEsperadaFinalizacionAsignacion >= fechadehace3dias && 
+                m.FechaEsperadaFinalizacionAsignacion < fechaHoy)
+                .Select(t => t.IdActividad).Distinct().Count();
 
-            ConteoAsignacionesEstados.name = trabajo.Nombre;
+            var asignacionesProximasAVencerse = _contexto.AsociacionTrabajoGestor.Where(m => 
+                m.IdActividad == IdPadre && 
+                m.Estado == true && 
+                m.FechaEsperadaFinalizacionAsignacion >= fechaHoy && 
+                m.FechaEsperadaFinalizacionAsignacion <= fechadefutura3dias).Count();
 
-            var asignaciones = _contexto.AsociacionTrabajoGestor.Where(m => m.IdActividad == trabajo.Id).ToList();
-
-            if (!asignaciones.Any())
-                return ConteoAsignacionesEstados;
-
-            asignaciones.ForEach(n =>
-            {
-                var UltimaGestion = _contexto.TrabajoGestion.Where(m => m.IdAsignacion == n.Id && m.UltimaModificacionPor == n.UserAsignado && m.FechaUltimaModificacion <= fecha).OrderByDescending(m => m.FechaUltimaModificacion).FirstOrDefault();
-                if (UltimaGestion == null)
-                {
-                    if (!DiccionarioConteos.Any(dc => dc.Key == "No Iniciado"))
-                        DiccionarioConteos.Add("No Iniciado", 1);
-                    else
-                        DiccionarioConteos["No Iniciado"] += 1;
-                }
-                else
-                {
-                    int.TryParse(UltimaGestion.EstadoGestion, out int estadoId);
-                    var estado = estados.FirstOrDefault(e => e.Id == estadoId);
-                    if (!DiccionarioConteos.Any(dc => dc.Key == estado.Nombre))
-                        DiccionarioConteos.Add(estado.Nombre, 1);
-                    else
-                        DiccionarioConteos[estado.Nombre] += 1;
-                }
-            });
-
-            ConteoAsignacionesEstados.data = DiccionarioConteos.Select(m => new GraficaTrabajoDataViewModel { name = m.Key, y = m.Value }).ToList();
+            var asignacionesFinalizadas = _contexto.AsociacionTrabajoGestor.Where(m => 
+                m.IdActividad == IdPadre && 
+                m.Estado == false).Count();
+            
+            if(asignacionesVencidas >0)
+                ConteoAsignacionesEstados.data.Add(new GraficaTrabajoDataViewModel { name = "Asignaciones vencidas", y = asignacionesVencidas });
+            if (asignacionesVencidasMasde3Dias > 0)
+                ConteoAsignacionesEstados.data.Add(new GraficaTrabajoDataViewModel { name = "Asignaciones vencidas mas de 3 dias", y = asignacionesVencidasMasde3Dias });
+            if (asignacionesProximasAVencerse > 0)
+                ConteoAsignacionesEstados.data.Add(new GraficaTrabajoDataViewModel { name = "Asignaciones proximas a vencerse", y = asignacionesProximasAVencerse });
+            if (asignacionesFinalizadas > 0)
+                ConteoAsignacionesEstados.data.Add(new GraficaTrabajoDataViewModel { name = "Asignaciones finalizadas", y = asignacionesFinalizadas });
 
             return ConteoAsignacionesEstados;
         }

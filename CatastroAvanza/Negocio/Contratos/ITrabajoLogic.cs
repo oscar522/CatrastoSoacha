@@ -59,7 +59,7 @@ namespace CatastroAvanza.Negocio.Contratos
 
         Task<GraficaTrabajoViewModel> TraerConteoActividadesPorEstado(int IdPadre);
 
-        Task<GraficaTrabajoViewModel> TraerConteoActividadesPorEstadoYFecha(int IdPadre, DateTime fecha);
+        Task<GraficaTrabajoViewModel> TraerConteoActividadesPorEstadoYFecha(int IdPadre);
 
         Task<GraficaTrabajoViewModel> TraerConteoUsuariosAsignadosActividad();
 
